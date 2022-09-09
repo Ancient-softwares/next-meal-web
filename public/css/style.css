@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Roboto:ital,wght@0,100;0,300;0,400;1,100&display=swap');
+*{
+    padding: 0%;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    
+}
+
+:root{
+    --red: #f40723;
+    --cinza: #F4F4F4;
+    --red-escuro: #c80000;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--cinza);
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+
+}
+
+.atualizacoes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50vh;
+    max-width: 500px;
+    min-height: 100vh;
+    margin-left: auto;
+}
+
+.card{
+    margin-top: 20px;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color:white;
+}
+
+.card h2{
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-direction: column;
+}
+
+.imagem{
+    display: flex;
+    flex-direction: column;
+    width: 60vh;
+    max-width: 100vh;
+    min-height: 100vh;
+    margin-left: 10vh;
+    background-color:#F4F4F4;
+    align-items: left;
+}
+
+.imagem img{
+    display: flex;
+    flex-direction: column;
+    width: 60vh;
+    max-width: 100vh;
+    min-height: 100vh;
+    height: 100vh;
+}
+
+.toggler{
+    display: flex;
+    flex-direction: column;
+    width: 40vh;
+    max-width: 500px;
+    min-height: 100vh;
+    background-color:#F4F4F4;
+}
+
+.scroll{
+    width: 450px;
+    height: 500px;
+    background-color: #ccc;
+}
+
+.conteudo-sidebar{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-icon-header{
+    width: 25vh;
+    height: 13vh;
+}
+
+.img-toggler{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+
+.img-toggler img{
+    width: 100%;
+    height: 100%;
+}
+
+.conteudo-sidebar h1{
+    margin-bottom: 20px;
+}
+.button{
+    left: auto;
+    right: auto;
+    border-radius: 10px;
+    background-color:var(--red);
+    color: white;
+    font-size: 25px;
+    width: 25vh;
+    height: 5vh;
+    text-decoration: none;
+}
+
+.button p{
+    margin-top: 1vh;
+    text-align: center;
+}
+
+.button:hover{
+    background-color: var(--red-escuro);
+
+}
+
+
+
+/*CRUD MESA*/
+

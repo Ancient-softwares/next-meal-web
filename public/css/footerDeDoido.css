@@ -1,0 +1,68 @@
+footer{
+    background: #141414;
+    font-family: Open Sans;
+    padding-top: 10px;
+    color: #FFF;
+}
+
+section.footer{
+    margin-top: 5em;
+    padding-bottom: 4em;
+}
+
+section.footer .Contato{
+    width: 90%;
+    max-width: 1550px;
+    margin: auto;
+    display: flex;
+}
+
+.footer-content{
+    width: 100%;
+    padding-right: 20%;
+    text-align: center;
+    margin-left: 2em;
+}
+.footer-content h3{
+    font-size: 4rem;
+    font-weight: 400;
+    text-transform: capitalize;
+    line-height: 5rem;
+}
+.footer-content p{
+    max-width: 500px;
+    margin: 10px auto;
+    line-height: 28px;
+    font-size: 1.5rem;
+}
+
+.rede{
+    line-height: none;
+    display: flex;
+    list-style: none;
+}
+
+.rede li {
+    margin:auto;
+    margin-top: 4%;
+}
+
+.rede a{
+    color: #fff;
+    font-size: 1.8em;
+    margin: 1px;
+}
+
+.rede a:hover{
+    color: #C80000;
+}
+
+.footer-header {
+    width: 25%;
+    align-items: center;
+    margin-bottom: 1em;
+}
+.footer-header h2{
+    text-transform: capitalize;
+    text-align: center;
+}

@@ -1,0 +1,7 @@
+1 - Vai no terminal e roda o comando composer update, só pra garantir q tudo tá atualizado e pode previnir possíveis erros
+2 - O script do banco está na pasta SCRIPTS_SQL com um nome bem chamativo
+3 - Como o banco tá no local host e não na nuvem vcs vão ter q configurar a conexão dele:
+    - Vai no arquivo .env (se n tiver ai seis me falam pq deu ruim KSKSKSK)
+    - Muda as seguintes linhas 
+    DB_USERNAME=(seu username do mysql)
+    DB_PASSWORD=(sua senha do mysql)

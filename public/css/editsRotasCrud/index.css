@@ -1,0 +1,104 @@
+
+.container-dash{
+    margin: 0;
+    padding: 0;
+    display: grid;
+    box-sizing: border-box
+}
+
+.card-reservas{
+    background-color: #f4f4f4;
+}
+.conteudo{
+  display: flex;
+}
+.menu-side li{
+  padding-bottom: 6vh;
+}
+.coluna{
+    padding-top: 5em;
+    display: flex;
+}
+.numero{
+    padding-left: .5em;
+    font-size: 4em;
+    padding-top: .8em ;
+}
+.txtreserva{
+    font-size: 2em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.icon{
+    padding-top: 3.5em;
+    padding-left: 40%;
+}
+
+.icon img{
+  width: 9vh;
+  height: 9vh;
+}
+
+reservas{
+  background-color: #f4f4f4;
+  grid-area:h;
+    border-radius: 2em;
+    width:100%;
+  }
+  clientes-fieis{
+    background-color: #f4f4f4;
+    grid-area:m;
+    border-radius: 2em;
+    padding: 15px;
+    
+
+  }
+  clientes-recentes{
+    background-color: #f4f4f4;
+    grid-area:a;
+    border-radius: 2em; 
+    padding: 15px;
+    
+
+  }
+  grafico{
+    grid-area:f;
+    border-radius: 2em;
+
+    
+  }
+  
+  .container-dash{
+    padding: 1.9em;
+
+    /*Containers*/
+    display:grid; /*Iniciando grid*/
+    grid-template-columns: 6fr 4fr; /*Separando colunas*/
+    grid-template-rows: 30vh; /*Visão da tela*/
+    grid-template-areas:
+    "m a";
+      
+    /*grid-gap:20px; Atalho*/
+        grid-gap: 18px;
+        /* grid-row-gap: 20px;*/
+        /* grid-column-gap: 230px;  */
+    
+  }
+  .teste{
+    padding: 1.9em;
+    display:grid; /*Iniciando grid*/
+    grid-template-columns: 3fr 6fr; /*Separando colunas*/
+    grid-template-rows: 30vh; /*Visão da tela*/
+    grid-template-areas:
+    "h f";
+    grid-gap: 18px;
+
+  }
+
+td img{
+    width: 4vh;
+    height: 4vh;
+}
+
+.clientes-h3{
+    padding-left: 1.5vh;
+}

@@ -1,0 +1,39 @@
+/*Edit Perfil*/
+.FundoFoto{
+  width: 55vh;
+  height: 20vh;
+  padding-left: 1em;
+  padding-top: 0.1em;
+  background: #f00;
+}
+.fotoPerfil{
+  width:17vh;
+  height:17vh;
+  background: white;
+  border-radius: 7em;
+  border: 3px solid;
+  margin-top: 1vh;
+}
+.container-perfil{
+  background: #F4F4F4;
+  padding: 2.5em;
+  margin: 5vh;
+  box-sizing: border-box;
+}
+.Botao-Editar{
+  width: 150px;
+  height: 60px;
+  border-radius: 1em;
+}
+.a-edit-button{
+  text-decoration: none;
+  font-size: 1.5em;
+  
+}
+
+.foto-perfil {
+  max-height:100%; 
+  max-width:100%;
+  border-radius: 7em;
+
+}

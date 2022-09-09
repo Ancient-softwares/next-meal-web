@@ -1,0 +1,43 @@
+form{
+    align-items: center;
+}
+.form-conteudo
+{
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.container-cadastro{
+    padding: 2em;
+}
+
+form{
+    width: 100%;
+}
+.TitleForm{
+    font-size: 1.2em;
+}
+.TitleRegisterMesa{
+    font-size: 1.8em;
+
+}
+
+.container-form{
+    background-color: #F4F4F4;
+    padding: 2em;
+    padding-left: 24em;
+    padding-right: 24em;
+    margin-right: 0;
+    margin-left: 0;
+    border-radius: 2em;
+    text-align: center;
+}
+
+.text-center{
+    margin-right: auto;
+    margin-left: auto;
+}
+.scroll {
+    max-height: 85%;
+    overflow-y: scroll;
+}

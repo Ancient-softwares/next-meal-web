@@ -1,0 +1,418 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    outline: 0px;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.5rem;
+}
+
+html,
+body {
+    background-color: #F6F6F6;
+    height: auto;
+    font-family: "Source Sans Pro";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+
+    /* background-color: #7159c1; */
+}
+
+header {
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
+
+header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1500px;
+    margin: auto;
+}
+
+header img {
+    width: 150px;
+    margin-left: 20px;
+    padding: 15px 0px;
+}
+
+nav {
+    display: block;
+}
+
+header nav ul {
+    display: flex;
+}
+
+header nav ul li {
+    list-style: none;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    /*rem pode ser diferente para cada elemento, o rem é constante em todo o documento. */
+    padding: 24px;
+    transition: all 250ms linear 0s;
+}
+
+header nav ul li a:hover {
+    color: #f40723;
+}
+
+.back {
+    height: 25em;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+img .back {
+    width: 100%;
+    position: absolute;
+}
+
+section.hero {
+    margin: 0px 0px;
+
+}
+
+section.hero .container {
+    width: 90%;
+    max-width: 1550px;
+    display: flex;
+    margin: auto;
+    padding-top: 8.4em;
+    padding-bottom: 4.8em;
+}
+
+section.hero p {
+    text-align: center;
+    color: #000000;
+    font-size: 2.2rem;
+    font-family: arial;
+    line-height: 3.2rem;
+    margin: 10px 0px 0px;
+}
+
+section.hero h2 {
+    text-align: center;
+    font-family: arial;
+    font-size: 3.14em;
+}
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 185px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 100%;
+    max-width: 555px;
+}
+
+.modal-content h2 {
+    text-align: center;
+    margin-top: 3%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #c80000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.corpin {
+    max-width: 1500px;
+    margin-top: 4%;
+}
+
+.corpin a {
+    font-size: 1.2em;
+    text-decoration: none;
+    float: left;
+    margin-left: 2%;
+    margin-top: 2%;
+}
+
+.corpin a:hover {
+    color: #00aa;
+}
+
+.corpin-baixo {
+    width: auto;
+    height: 45px;
+    margin-top: 4%;
+}
+
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 14px 20px;
+    margin: 8px 0px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.corpin-baixo .butao {
+    background-color: #c80000;
+    width: 5.8em;
+    font-size: 0.9em;
+    color: #FFF;
+    padding: 0.8em;
+    border: none;
+    text-decoration: none;
+    border-radius: 1.6em;
+    cursor: pointer;
+    float: right;
+    margin-top: 0em;
+}
+
+.corpin-baixo .butao:hover {
+    background-color: #bb0404;
+    color: #F6F6F6;
+}
+
+button[type=submit] {
+    background-color: #c80000;
+    color: #FFF;
+    width: 5.8em;
+    padding: 0.9em;
+    border: none;
+    border-radius: 1.6em;
+    cursor: pointer;
+    float: right;
+    margin-right: 1%;
+    margin-left: 1.8%;
+}
+
+button[type=submit]:hover {
+    background-color: #bb0404;
+    color: #F6F6F6;
+}
+
+.btn-login {
+    width: 100%;
+    height: 5vh;
+    padding-top: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.btn-login input {
+    background-color: #c80000;
+    border: none;
+    width: 100%;
+    height: 4vh;
+    font-size: 20px;
+    top: auto;
+    left: auto;
+    justify-content: center;
+
+}
+
+.btn-login input:focus {
+    background-color: #c80000;
+}
+
+.btn-login input:hover {
+    background-color: #bb0404;
+}
+
+.Info {
+    padding-top: 5.8em;
+    margin-right: 5%;
+}
+
+.image {
+    width: 35%;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+#topBtn {
+    position: fixed;
+    bottom: 5rem;
+    right: 4rem;
+    font-size: 3.5rem;
+    width: 5rem;
+    height: 5rem;
+    background: #c80000;
+    color: #fff;
+    border-radius: 3rem;
+    cursor: pointer;
+    display: none;
+    border-width: 0rem;
+}
+
+.Vantagens {
+    background-color: #141414;
+    padding-bottom: 4em;
+}
+
+.Vantagens .container {
+    width: 100%;
+    padding-bottom: 1em;
+    display: flex;
+}
+
+.Vantagens h2 {
+    color: #FFF;
+    font-size: 2.6em;
+    font-family: Arial;
+    text-align: center;
+    padding-top: 1em;
+}
+
+.Vantagens h3 {
+    color: #c80000;
+    text-align: center;
+    font-size: 1.7em;
+    height: 8vh;
+}
+
+.Vantagens p {
+    text-align: center;
+    margin-top: 0.8em;
+    font-size: 1.5em;
+    color: #F6F6F6;
+}
+
+.Vantagens .boxV {
+    width: 26em;
+    border: #c80000;
+    border-style: solid;
+    border-radius: 2em;
+    padding: 2em;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 4%;
+}
+
+.Vantagens .bottonV {
+    width: 100%;
+    padding-top: 4em;
+}
+
+.Vantagens .letsGo {
+    padding-left: 38%;
+}
+
+.Vantagens a {
+    background-color: #c80000;
+    border-radius: 1em;
+    padding: 0.3em;
+    padding-left: 15%;
+    padding-right: 15%;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    color: #F6F6F6;
+    font-size: 1.8em;
+}
+
+.Vantagens a:hover {
+    background-color: #bb0404;
+}
+
+.Download .container {
+    width: 100%;
+    display: flex;
+    padding-top: 4.4em;
+    padding-bottom: 4em;
+    justify-content: center;
+    align-items: center;
+}
+
+.Download .box {
+    width: 45%;
+    color: #fff;
+    align-items: center;
+}
+
+.Download h2 {
+    text-align: center;
+    font-family: arial;
+    color: #000;
+    font-size: 3em;
+    padding-top: 1.6em;
+    padding-bottom: 1.6em;
+}
+
+.Download h5 {
+    color: #FFF;
+    padding-top: 2.2%;
+    text-align: center;
+}
+
+.Download .iOSAndroid {
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.Download button {
+    width: 45%;
+    padding: 0.3%;
+    background-color: #c80000;
+    border: none;
+    border-radius: 1.6em;
+    cursor: pointer;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 3%;
+}
+
+.Download button:hover {
+    background-color: #bb0404;
+}
+
+.boxIMG {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}

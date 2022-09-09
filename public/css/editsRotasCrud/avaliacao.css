@@ -1,0 +1,47 @@
+    .container-avaliacao{
+        padding: 2em;
+    }
+    .card-avalicao{
+        background-color: #F4F4F4;
+        width: 90%;
+        border-radius: 1em;
+        margin: 1em;
+    }
+    .conteudo-avaliacao{
+        display: flex;
+    }
+    .img-perfil img{
+        width: 20vh;
+        height: 20vh;
+        border-radius: 8em;
+    }
+    .row{
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    .nome{
+        width: 100%;
+    }
+    .desc{
+        width: 100%;
+    }
+    .nota{
+        width: 100%;
+        display: flex;
+    }
+
+    .nota img{
+        width: 2.3vh;
+        height: 2.3vh;
+    }
+
+    h3{
+        margin: 0!important;
+    }
+
+
+    .scroll {
+        max-height: 50%;
+        overflow-y: scroll;
+    }
+    

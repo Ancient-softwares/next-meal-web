@@ -1,0 +1,86 @@
+@extends('layouts.sidebar')
+
+@section('titulo', 'Pratos')
+
+@section('css')
+<link href="{{ asset('css/editsRotasCrud/cardapio.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('css/editsRotasCrud/styleTable.css') }}" rel="stylesheet" type="text/css">
+<link href="/website/css/uicons-outline-rounded.css" rel="stylesheet">
+@endsection
+
+@section('conteudo')
+
+@if($errors->any())
+<div class="container-cont">
+
+<div class="alert alert-danger" role="alert">
+    {{ $errors->first() }}
+</div>
+@endif
+        
+<!-- Button trigger modal -->
+<a href="{{ route('cardapio.create') }}" class="btn btn-success">
+    Cadastrar Prato
+</a>
+
+{{-- Tabela --}}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nome do prato</th>
+            <th scope="col">Valor do prato</th>
+            <th scope="col">Ingredientes do prato</th>
+            <th scope="col">Foto do prato</th>
+            <th scope="col">Tipo do prato</th>
+            <th scope="col">Ações</th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach ($pratos as $prato)
+        <tr>
+            <th scope="row">{{ $prato->idPrato }}</th>
+            <td>{{ $prato->nomePrato }}</td>
+            <td>R$ {{ $prato->valorPrato }}</td>
+            <td>{{ $prato->ingredientesPrato }}</td>
+            <td><img src="/img/pratos/{{ $prato->fotoPrato }}" width="65%"></td>
+            <td>{{ $tipos->where('idTipoPrato', $prato->idTipoPrato)->first()->tipoPrato }}</td>
+            <td>
+                <a href="{{ url("cardapio/$prato->idPrato/edit") }}"><img class="botoes-editar" src="{{ asset('img/tabelas/lapis.png') }}" alt=""></a>
+                <a value="{{ $prato->idPrato }}" data-bs-toggle="modal" data-bs-target="#excluir{{ $prato->idPrato }}"><img class="botoes-excluir" src="{{ asset('img/tabelas/lixo.png') }}" alt=""></a>
+            </td>
+
+            <!-- DELETAR MODEL -->
+            <form action="{{ route('cardapio.destroy', $prato->idPrato) }}" method="post">
+                {{ method_field('delete') }}
+                @csrf
+
+                <div class="modal fade" id="excluir{{ $prato->idPrato }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Deletar o Prato {{ $prato->nomePrato }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Tem certeza que deseja deletar o Prato?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-outline-danger">Deletar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+        </tr>
+        @endforeach
+
+    </tbody>
+</table>
+</div>
+@endsection
