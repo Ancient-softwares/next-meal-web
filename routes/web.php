@@ -22,9 +22,9 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 */
 
 Route::get('/', [LoginController::class, 'indexLogin'])->name('login');
-Route::post('autenticar', [LoginController::class, 'autenticar'])->name('autenticar');
-Route::post('registrar', [LoginController::class, 'registrar'])->name('registrar');
-Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/autenticar', [LoginController::class, 'autenticar'])->name('autenticar');
+Route::post('/registrar', [LoginController::class, 'registrar'])->name('registrar');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/index', [LoginController::class, 'dashboard'])->name('index');
 
@@ -42,3 +42,5 @@ Route::resource('cardapio', CrudPrato::class);
 
 // mobile
 Route::get('/mobile/teste', [LoginController::class, 'testeMobile'])->name('testeMobile');
+Route::post('/mobile/soma', [LoginController::class, 'soma'])->name('soma');
+Route::post('/mobile/cadastroCliente', [LoginController::class, 'cadastroCliente'])->name('cadastroCliente');

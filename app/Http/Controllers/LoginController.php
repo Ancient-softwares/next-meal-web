@@ -54,7 +54,14 @@ class LoginController extends Controller
     }
 
     public function testeMobile(Request $request) {
-        return 'Teste31kj3102iodjpq3wd';
+        return 'Gostosun tesntin';
+    }
+
+    public function soma(Request $request) {
+        $n1 = $request->n1;
+        $n2 = $request->n2;
+        
+        return $n1 + $n2;
     }
 
     public function autenticar(Request $request) {
