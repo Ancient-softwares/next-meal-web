@@ -53,6 +53,10 @@ class LoginController extends Controller
         }
     }
 
+    public function testeMobile(Request $request) {
+        return 'Teste31kj3102iodjpq3wd';
+    }
+
     public function autenticar(Request $request) {
         $restaurante = $this->restaurantes->where('nomeRestaurante', '=', $request->login)->first();
 

@@ -39,3 +39,6 @@ Route::post('/editar-perfil', [PerfilPageController::class, 'editou'])->name('ed
 // Cruds
 Route::resource('mesas', CrudMesa::class);
 Route::resource('cardapio', CrudPrato::class);
+
+// mobile
+Route::get('/mobile/teste', [LoginController::class, 'testeMobile'])->name('testeMobile');
