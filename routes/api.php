@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// mobile
+Route::get('/teste', [LoginController::class, 'testeMobile'])->name('testeMobile');
+Route::post('/soma', [LoginController::class, 'soma'])->name('soma');
+Route::post('/cadastroCliente', [LoginController::class, 'cadastroCliente'])->name('cadastroCliente');
