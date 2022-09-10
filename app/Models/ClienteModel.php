@@ -9,7 +9,7 @@ class ClienteModel extends Model
 {
     use HasFactory;
 
-    protected $table;
+    protected $table = 'tbcliente';
 
     protected $fillable = [
         'idCliente',
@@ -21,7 +21,7 @@ class ClienteModel extends Model
         'emailCliente',
         'cepCliente',
         'ruaCliente',
-        'numRuaCliente',
+        'numCasaCliente',
         'bairroCliente',
         'cidadeCliente',
         'estadoCliente',
