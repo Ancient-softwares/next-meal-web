@@ -87,7 +87,7 @@ class LoginController extends Controller
         ]);
 
         if($cad) {
-            return true;
+            return $request.json_encode($cad);
         } else {
             return false;
         }
