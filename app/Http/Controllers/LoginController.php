@@ -80,7 +80,7 @@ class LoginController extends Controller
             "emailCliente" => $request->emailCliente,
             "cepCliente" => $cep,
             "ruaCliente" => $request->ruaCliente,
-            "numRuaCliente" => $request->numRuaCliente,
+            "numRuaCliente" => $request->numCasaCliente,
             "bairroCliente" => $request->bairroCliente,
             "cidadeCliente" => $request->cidadeCliente,
             "estadoCliente" => $request->estadoCliente
