@@ -23,3 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/teste', [LoginController::class, 'testeMobile'])->name('testeMobile');
 Route::post('/soma', [LoginController::class, 'soma'])->name('soma');
 Route::post('/cadastroCliente', [LoginController::class, 'cadastroCliente'])->name('cadastroCliente');
+Route::post('/loginCliente', [LoginController::class, 'loginCliente'])->name('loginCliente');
