@@ -15,6 +15,7 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->restaurantes = new RestauranteModel();
+        $this->clientes = new ClienteModel();
     }
     
     public function indexLogin(Request $request) {
@@ -90,6 +91,25 @@ class LoginController extends Controller
         } else {
             return false;
         }
+    }
+
+    public function a(Request $request) {
+        $cliente = App\Models\ClienteModel::create([
+            'nomeCliente' => $request->nomeCliente,
+            'cpfCliente' => $request->cpfCliente,
+            'celCliente' => $request->celCliente,
+            'senhaCliente' => $request->senhaCliente,
+            'fotoCliente' => $request->fotoCliente,
+            'emailCliente' => $request->emailCliente,
+            'cepCliente' => $request->cepCliente,
+            'ruaCliente' => $request->ruaCliente,
+            'numRuaCliente' => $request->numRuaCliente,
+            'bairroCliente' => $request->bairroCliente,
+            'cidadeCliente' => $request->cidadeCliente,
+            'estadoCliente' => $request->estadoCliente
+        ]);
+
+        $cliente->save();
     }
 
     public function soma(Request $request) {
