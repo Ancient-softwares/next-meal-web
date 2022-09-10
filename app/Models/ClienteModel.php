@@ -10,4 +10,20 @@ class ClienteModel extends Model
     use HasFactory;
 
     protected $table;
+
+    protected $fillable = [
+        'idCliente',
+        'nomeCliente',
+        'cpfCliente',
+        'celCliente',
+        'senhaCliente',
+        'fotoCliente',
+        'emailCliente',
+        'cepCliente',
+        'ruaCliente',
+        'numRuaCliente',
+        'bairroCliente',
+        'cidadeCliente',
+        'estadoCliente',
+    ];
 }
