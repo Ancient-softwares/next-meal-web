@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\RestauranteModel;
+use App\Models\ClienteModel;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
 
     private $restaurantes;
+    private $clientes;
 
     public function __construct()
     {
@@ -55,6 +57,39 @@ class LoginController extends Controller
 
     public function testeMobile(Request $request) {
         return 'Gostosun tesntin';
+    }
+
+    public function cadastroCliente(Request $request) {
+        $senha = $request->senha;
+        $senha = password_hash($senha, PASSWORD_DEFAULT);
+
+        $celCliente = $request->celCliente;
+        $celCliente = preg_replace('/[^A-Za-z0-9\-]/', '', $celCliente);
+        $celCliente = str_replace('-', '', $celCliente);
+        
+        $cep = $request->cep;
+        $cep = str_replace('-', '', $cep);
+
+        $cad = $this->clientes->create([
+            "nomeCliente" => $request->nomeCliente,
+            "cpfCliente" => $request->cpfCliente,
+            "celCliente" => $celCliente,
+            "senhaCliente" => $request->senhaCliente,
+            "fotoCliente" => $request->fotoCliente,
+            "emailCliente" => $request->emailCliente,
+            "cepCliente" => $cep,
+            "ruaCliente" => $request->ruaCliente,
+            "numRuaCliente" => $request->numRuaCliente,
+            "bairroCliente" => $request->bairroCliente,
+            "cidadeCliente" => $request->cidadeCliente,
+            "estadoCliente" => $request->estadoCliente
+        ]);
+
+        if($cad) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function soma(Request $request) {
