@@ -93,6 +93,21 @@ class LoginController extends Controller
         }
     }
 
+    public function loginCliente(Request $request){
+        $cliente = $this->clientes->where('emailCliente', '=', $request->login)->first();
+
+        if($cliente) {
+            if(password_verify($request->senha, $cliente->senhaCliente)) {
+                $request->session()->put('login', $request->login);
+                $request->session()->put('idCliente', $cliente->idCliente);
+
+                return redirect("index");
+            }
+        }
+
+        return redirect()->back()->withErrors('Login inválido!');
+    }
+
     public function a(Request $request) {
         $cliente = App\Models\ClienteModel::create([
             'nomeCliente' => $request->nomeCliente,
