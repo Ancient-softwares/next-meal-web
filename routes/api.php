@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ReservaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,4 @@ Route::get('/teste', [LoginController::class, 'testeMobile'])->name('testeMobile
 Route::post('/soma', [LoginController::class, 'soma'])->name('soma');
 Route::post('/cadastroCliente', [LoginController::class, 'cadastroCliente'])->name('cadastroCliente');
 Route::post('/loginCliente', [LoginController::class, 'loginCliente'])->name('loginCliente');
+Route::post('/reserva', [ReservaController::class, 'reserva'])->name('reserva');
