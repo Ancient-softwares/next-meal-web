@@ -20,5 +20,5 @@ class ReservaModel extends Model
         'idRestaurante',
         'idStatusReserva',
         'idAvaliação',    
-    ]
+    ];
 }
