@@ -67,20 +67,24 @@ class LoginController extends Controller
         $celCliente = $request->celCliente;
         $celCliente = preg_replace('/[^A-Za-z0-9\-]/', '', $celCliente);
         $celCliente = str_replace('-', '', $celCliente);
+
+        $cpf = $request->cpfCliente;
+        $cpf = preg_replace('/[^A-Za-z0-9\-]/', '', $cpf);
+        $cpf = str_replace('-', '', $cpf);
         
-        $cep = $request->cep;
+        $cep = $request->cepCliente;
         $cep = str_replace('-', '', $cep);
 
         $cad = $this->clientes->create([
             "nomeCliente" => $request->nomeCliente,
-            "cpfCliente" => $request->cpfCliente,
+            "cpfCliente" => $cpf,
             "celCliente" => $celCliente,
             "senhaCliente" => $request->senhaCliente,
             "fotoCliente" => $request->fotoCliente,
             "emailCliente" => $request->emailCliente,
             "cepCliente" => $cep,
             "ruaCliente" => $request->ruaCliente,
-            "numRuaCliente" => $request->numCasaCliente,
+            "numCasa" => $request->numCasa,
             "bairroCliente" => $request->bairroCliente,
             "cidadeCliente" => $request->cidadeCliente,
             "estadoCliente" => $request->estadoCliente
@@ -106,25 +110,6 @@ class LoginController extends Controller
         }
 
         return redirect()->back()->withErrors('Login inválido!');
-    }
-
-    public function a(Request $request) {
-        $cliente = App\Models\ClienteModel::create([
-            'nomeCliente' => $request->nomeCliente,
-            'cpfCliente' => $request->cpfCliente,
-            'celCliente' => $request->celCliente,
-            'senhaCliente' => $request->senhaCliente,
-            'fotoCliente' => $request->fotoCliente,
-            'emailCliente' => $request->emailCliente,
-            'cepCliente' => $request->cepCliente,
-            'ruaCliente' => $request->ruaCliente,
-            'numRuaCliente' => $request->numRuaCliente,
-            'bairroCliente' => $request->bairroCliente,
-            'cidadeCliente' => $request->cidadeCliente,
-            'estadoCliente' => $request->estadoCliente
-        ]);
-
-        $cliente->save();
     }
 
     public function soma(Request $request) {
