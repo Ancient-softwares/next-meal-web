@@ -75,6 +75,8 @@ class LoginController extends Controller
         $cep = $request->cepCliente;
         $cep = str_replace('-', '', $cep);
 
+        // dd($request);
+
         $cad = $this->clientes->create([
             "nomeCliente" => $request->nomeCliente,
             "cpfCliente" => $cpf,
@@ -91,7 +93,8 @@ class LoginController extends Controller
         ]);
 
         if($cad) {
-            return $request.json_encode($cad);
+            // return $request.json_encode($cad);
+            return $request;
         } else {
             return false;
         }
