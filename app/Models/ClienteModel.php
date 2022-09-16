@@ -21,7 +21,7 @@ class ClienteModel extends Model
         'emailCliente',
         'cepCliente',
         'ruaCliente',
-        'numCasaCliente',
+        'numCasa',
         'bairroCliente',
         'cidadeCliente',
         'estadoCliente',
