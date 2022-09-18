@@ -2,8 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\ReservaController;
+use App\Http\Controllers\AppController;
+use App\Http\Controllers\WebController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +21,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // mobile
-Route::get('/teste', [LoginController::class, 'testeMobile'])->name('testeMobile');
-Route::post('/soma', [LoginController::class, 'soma'])->name('soma');
-Route::post('/cadastroCliente', [LoginController::class, 'cadastroCliente'])->name('cadastroCliente');
-Route::post('/loginCliente', [LoginController::class, 'loginCliente'])->name('loginCliente');
-Route::post('/reserva', [ReservaController::class, 'reserva'])->name('reserva');
+Route::get('/teste', [AppController::class, 'testeMobile'])->name('testeMobile');
+Route::post('/soma', [AppController::class, 'soma'])->name('soma');
+Route::get('/restaurantes', [AppController::class, 'getRestaurants'])->name('getRestaurants');
+Route::post('/cadastroCliente', [AppController::class, 'cadastroCliente'])->name('cadastroCliente');
+Route::post('/loginCliente', [AppController::class, 'loginCliente'])->name('loginCliente');
+Route::post('/reserva', [AppController::class, 'reserva'])->name('reserva');
+
+// web
+Route::get('/teste', [WebController::class, 'teste'])->name('teste');
