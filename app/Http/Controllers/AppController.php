@@ -33,7 +33,7 @@ class AppController extends Controller
     }
 
     public function getRestaurants(Request $request) {
-        $restaurantes = $this->restaurantes->all();
+        $restaurantes = $this->restaurantes->all('idRestaurante' , 'nomeRestaurante');
         return response()->json($restaurantes);
     }
 
