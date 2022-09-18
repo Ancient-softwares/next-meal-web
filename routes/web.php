@@ -2,13 +2,9 @@
 
 use App\Http\Controllers\CrudMesa;
 use App\Http\Controllers\CrudPrato;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\CrudUsuario;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\WebController;
 use App\Http\Controllers\PerfilPageController;
-use App\Http\Controllers\RegistroController;
 use Illuminate\Support\Facades\Route;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,12 +17,12 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
-Route::get('/', [LoginController::class, 'indexLogin'])->name('login');
-Route::post('/autenticar', [LoginController::class, 'autenticar'])->name('autenticar');
-Route::post('/registrar', [LoginController::class, 'registrar'])->name('registrar');
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/', [WebController::class, 'indexLogin'])->name('login');
+Route::post('/autenticar', [WebController::class, 'autenticar'])->name('autenticar');
+Route::post('/registrar', [WebController::class, 'registrar'])->name('registrar');
+Route::get('/logout', [WebController::class, 'logout'])->name('logout');
 
-Route::get('/index', [LoginController::class, 'dashboard'])->name('index');
+Route::get('/index', [WebController::class, 'dashboard'])->name('index');
 
 
 Route::get('/perfil-page', [PerfilPageController::class, 'index'])->name('perfil-page');
@@ -41,6 +37,6 @@ Route::resource('mesas', CrudMesa::class);
 Route::resource('cardapio', CrudPrato::class);
 
 // mobile
-Route::get('/mobile/teste', [LoginController::class, 'testeMobile'])->name('testeMobile');
-Route::post('/mobile/soma', [LoginController::class, 'soma'])->name('soma');
-Route::post('/mobile/cadastroCliente', [LoginController::class, 'cadastroCliente'])->name('cadastroCliente');
+Route::get('/mobile/teste', [WebController::class, 'testeMobile'])->name('testeMobile');
+Route::post('/mobile/soma', [WebController::class, 'soma'])->name('soma');
+Route::post('/mobile/cadastroCliente', [WebController::class, 'cadastroCliente'])->name('cadastroCliente');
