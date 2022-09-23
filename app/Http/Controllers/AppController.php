@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AvaliacaoModel;
 use Illuminate\Http\Request;
 use App\Models\ReservaModel;
 use App\Models\RestauranteModel;
 use App\Models\ClienteModel;
 use App\Models\TipoRestauranteModel;
-use Illuminate\Support\Facades\DB;
 
 class AppController extends Controller
 {
@@ -15,6 +15,7 @@ class AppController extends Controller
     private $restaurantes;
     private $clientes;
     private $tipoRestaurante;
+    private $avaliacao;
 
     public function __construct()
     {
@@ -22,6 +23,7 @@ class AppController extends Controller
         $this->restaurantes = new RestauranteModel();
         $this->clientes = new ClienteModel();
         $this->tipoRestaurante = new TipoRestauranteModel();
+        $this->avaliacao = new AvaliacaoModel();
     }
 
     public function reserva(Request $request) {
@@ -37,12 +39,13 @@ class AppController extends Controller
     }
 
     public function getRestaurants() {
+        $avaliacao = $this->avaliacao->all();
         $restaurantes = $this->restaurantes->all();
         $tipoRestaurante = TipoRestauranteModel::select('tbtiporestaurante.idTipoRestaurante', 'tbtiporestaurante.tipoRestaurante')
         ->join('tbrestaurante', 'tbtiporestaurante.idTipoRestaurante', '=', 'tbrestaurante.idTipoRestaurante')
-        ->get(); // or first() 
+        ->get(); 
         
-        return response()->json([$restaurantes, $tipoRestaurante]);
+        return response()->json([$restaurantes, $tipoRestaurante, $avaliacao]);
     }
 
     public function testeMobile(Request $request) {
