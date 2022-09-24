@@ -39,13 +39,12 @@ class AppController extends Controller
     }
 
     public function getRestaurants() {
-        $avaliacao = $this->avaliacao->all();
-        $restaurantes = $this->restaurantes->all();
-        $tipoRestaurante = TipoRestauranteModel::select('tbtiporestaurante.idTipoRestaurante', 'tbtiporestaurante.tipoRestaurante')
-        ->join('tbrestaurante', 'tbtiporestaurante.idTipoRestaurante', '=', 'tbrestaurante.idTipoRestaurante')
-        ->get(); 
+        $table = RestauranteModel::select('tbrestaurante.idRestaurante', 'tbrestaurante.nomeRestaurante', 'tbrestaurante.fotoRestaurante', 'tbtiporestaurante.tipoRestaurante', 'tbavaliacao.notaAvaliacao')
+            ->join('tbtiporestaurante', 'tbtiporestaurante.idTipoRestaurante', '=', 'tbrestaurante.idTipoRestaurante')
+            ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbrestaurante.idRestaurante')
+            ->get();
         
-        return response()->json([$restaurantes, $tipoRestaurante, $avaliacao]);
+        return response()->json($table);
     }
 
     public function testeMobile(Request $request) {
