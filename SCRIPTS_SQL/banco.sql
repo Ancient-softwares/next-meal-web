@@ -34,7 +34,7 @@ USE dbNextMeal;
 
 
 CREATE TABLE `tbavaliacao` (
-  `idAvalicao` int(11),
+  `idAvaliacao` int(11),
   `notaAvaliacao` int(5),
   `descAvaliacao` varchar(200),
   `dtAvaliação` date,
@@ -382,6 +382,16 @@ ALTER TABLE `tbreserva`
 --
 ALTER TABLE `tbrestaurante`
   ADD CONSTRAINT `tbrestaurante_ibfk_2` FOREIGN KEY (`idTipoRestaurante`) REFERENCES `tbtiporestaurante` (`idTipoRestaurante`);
+
+--
+-- Limitadores para a tabela 'tbavaliacao'
+--
+ALTER TABLE `tbavaliacao`  
+	ADD COLUMN `idRestaurante` INT(11) NOT NULL
+
+ALTER TABLE `tbavaliacao`
+  ADD CONSTRAINT `tbavaliacao_ibfk_1` FOREIGN KEY (`idRestaurante`) REFERENCES `tbrestaurante` (`idRestaurante`);
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
