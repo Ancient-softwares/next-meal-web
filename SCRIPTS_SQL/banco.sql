@@ -38,6 +38,7 @@ CREATE TABLE `tbavaliacao` (
   `notaAvaliacao` int(5),
   `descAvaliacao` varchar(200),
   `dtAvaliação` date,
+  `idRestaurante` int(11),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -286,7 +287,7 @@ ALTER TABLE `tbtiporestaurante`
 -- AUTO_INCREMENT de tabela `tbavaliacao`
 --
 ALTER TABLE `tbavaliacao`
-  MODIFY `idAvalicao` int(11) AUTO_INCREMENT;
+  MODIFY `idAvaliacao` int(11) AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `tbcliente`
@@ -386,8 +387,6 @@ ALTER TABLE `tbrestaurante`
 --
 -- Limitadores para a tabela 'tbavaliacao'
 --
-ALTER TABLE `tbavaliacao`  
-	ADD COLUMN `idRestaurante` INT(11) NOT NULL
 
 ALTER TABLE `tbavaliacao`
   ADD CONSTRAINT `tbavaliacao_ibfk_1` FOREIGN KEY (`idRestaurante`) REFERENCES `tbrestaurante` (`idRestaurante`);

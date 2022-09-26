@@ -32,7 +32,7 @@ VALUES
 	 ('Ragazzo','12312312312','1112312312','spoleto','$2y$10$hAO9CDA4j/84fHN7xMd71O9VQPEyH8ODCW0au21VjE10EG9Hgkx7a','5959b0e1b2f1b247193e447679f06e32.png','spoleto@email.com','04849333','Rua 9 de Setembro','10','Chácara Gaivotas','São Paulo','SP',60,1),
 	 ('Bar dos amigos','12312312312','1112312312','spoleto','$2y$10$hAO9CDA4j/84fHN7xMd71O9VQPEyH8ODCW0au21VjE10EG9Hgkx7a','5959b0e1b2f1b247193e447679f06e32.png','spoleto@email.com','04849333','Rua 9 de Setembro','10','Chácara Gaivotas','São Paulo','SP',60,2),
 	 ('Mocotó','12312312312','1112312312','spoleto','$2y$10$hAO9CDA4j/84fHN7xMd71O9VQPEyH8ODCW0au21VjE10EG9Hgkx7a','5959b0e1b2f1b247193e447679f06e32.png','spoleto@email.com','04849333','Rua 9 de Setembro','10','Chácara Gaivotas','São Paulo','SP',60,3),
-	 ('McDonalds','12312312312','1112312312','spoleto','$2y$10$hAO9CDA4j/84fHN7xMd71O9VQPEyH8ODCW0au21VjE10EG9Hgkx7a','5959b0e1b2f1b247193e447679f06e32.png','spoleto@email.com','04849333','Rua 9 de Setembro','10','Chácara Gaivotas','São Paulo','SP',60,1)    
+	 ('McDonalds','12312312312','1112312312','spoleto','$2y$10$hAO9CDA4j/84fHN7xMd71O9VQPEyH8ODCW0au21VjE10EG9Hgkx7a','5959b0e1b2f1b247193e447679f06e32.png','spoleto@email.com','04849333','Rua 9 de Setembro','10','Chácara Gaivotas','São Paulo','SP',60,1);
 
 INSERT INTO tbavaliacao (notaAvaliacao, idRestaurante,descAvaliacao,dtAvaliação,created_at,updated_at) VALUES
 	 (5, 8,'teste1','2022-09-18','2022-09-18 21:51:42.0','2022-09-18 21:51:42.0'),
