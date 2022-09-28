@@ -88,20 +88,23 @@ class AppController extends Controller
         }
     }
 
-    public function loginCliente(Request $request){
-        $cliente = $this->clientes->where('emailCliente', '=', $request->login)->first();
+        public function loginCliente(Request $request){
+        $cliente = $this->clientes->where('emailCliente', '=', $request->emailCliente)->first();
+
 
         if($cliente) {
-            if(password_verify($request->senha, $cliente->senhaCliente)) {
-                $request->session()->put('login', $request->login);
-                $request->session()->put('idCliente', $cliente->idCliente);
+            if(password_verify($request->senhaCliente, $cliente->senhaCliente)) {
+                // $request->session()->put('login', $request->login);
+                // $request->session()->put('idCliente', $cliente->idCliente);
 
-                return redirect("index");
+                //return $request.json_encode($cliente);
+                return("Login feito, boy!");
             }
         }
 
-        return redirect()->back()->withErrors('Login inválido!');
+        return ('Login inválido!');
     }
+
 
     public function soma(Request $request) {
         $n1 = $request->n1;
