@@ -53,7 +53,7 @@ CREATE TABLE `tbcliente` (
   `nomeCliente` varchar(300),
   `cpfCliente` char(14),
   `celCliente` char(13),
-  `senhaCliente` varchar(20),
+  `senhaCliente` varchar(255),
   `fotoCliente` blob,
   `emailCliente` varchar(100),
   `cepCliente` char(9),
