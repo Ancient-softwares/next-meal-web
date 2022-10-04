@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RestauranteModel;
 use App\Models\ClienteModel;
+use App\Models\TipoRestauranteModel;
 use Illuminate\Http\Request;
 
 class WebController extends Controller
@@ -22,7 +23,9 @@ class WebController extends Controller
             return redirect('index');
         }
 
-        return view('login');
+        $tipos = TipoRestauranteModel::all();
+
+        return view('login', compact('tipos'));
     }
 
     public function indexRegistro(Request $request)
