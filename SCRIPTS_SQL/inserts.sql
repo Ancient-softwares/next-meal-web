@@ -34,13 +34,13 @@ VALUES
 	 ('Mocotó','12312312312','1112312312','spoleto','$2y$10$hAO9CDA4j/84fHN7xMd71O9VQPEyH8ODCW0au21VjE10EG9Hgkx7a','5959b0e1b2f1b247193e447679f06e32.png','spoleto@email.com','04849333','Rua 9 de Setembro','10','Chácara Gaivotas','São Paulo','SP',60,3),
 	 ('McDonalds','12312312312','1112312312','spoleto','$2y$10$hAO9CDA4j/84fHN7xMd71O9VQPEyH8ODCW0au21VjE10EG9Hgkx7a','5959b0e1b2f1b247193e447679f06e32.png','spoleto@email.com','04849333','Rua 9 de Setembro','10','Chácara Gaivotas','São Paulo','SP',60,1);
 
-INSERT INTO tbavaliacao (notaAvaliacao, idRestaurante,descAvaliacao,dtAvaliação,created_at,updated_at) VALUES
-	 (5, 8,'teste1','2022-09-18','2022-09-18 21:51:42.0','2022-09-18 21:51:42.0'),
-	 (4, 9,'teste2','2022-09-18','2022-09-18 21:51:42.0','2022-09-18 21:51:42.0'),
-	 (1, 10,'teste3','2022-09-18','2022-09-18 21:51:42.0','2022-09-18 21:51:42.0'),
-	 (5, 11,'teste1','2022-09-18','2022-09-18 21:55:56.0','2022-09-18 21:55:56.0'),
-	 (4, 12,'teste2','2022-09-18','2022-09-18 21:55:56.0','2022-09-18 21:55:56.0'),
-	 (1, 13,'teste3','2022-09-18','2022-09-18 21:55:56.0','2022-09-18 21:55:56.0');
+INSERT INTO tbavaliacao (notaAvaliacao, idRestaurante,descAvaliacao,dtAvaliacao,created_at,updated_at) VALUES
+	 (5, 1,'teste1','2022-09-18','2022-09-18 21:51:42.0','2022-09-18 21:51:42.0'),
+	 (4, 2,'teste2','2022-09-18','2022-09-18 21:51:42.0','2022-09-18 21:51:42.0'),
+	 (1, 3,'teste3','2022-09-18','2022-09-18 21:51:42.0','2022-09-18 21:51:42.0'),
+	 (5, 5,'teste1','2022-09-18','2022-09-18 21:55:56.0','2022-09-18 21:55:56.0'),
+	 (4, 2,'teste2','2022-09-18','2022-09-18 21:55:56.0','2022-09-18 21:55:56.0'),
+	 (1, 4,'teste3','2022-09-18','2022-09-18 21:55:56.0','2022-09-18 21:55:56.0');
 
 -- INNER JOIN das tabelas tbrestaurante, tbtiporestaurante e tbavaliacao
 SELECT tbrestaurante.nomeRestaurante, tbtiporestaurante.tipoRestaurante, tbavaliacao.notaAvaliacao FROM tbrestaurante 
