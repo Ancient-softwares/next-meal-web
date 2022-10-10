@@ -22,8 +22,8 @@
 @section('conteudo')
 
 
-<div class="container-cadastro">
-    <div class="container-form">
+<div class="container-cadastro scroll">
+    <div class="container-form ">
         <h1 class="TitleRegisterMesa">Editar perfil</h1>
         <hr>
         <form action="{{ route('editou') }}" method="POST" enctype="multipart/form-data">
@@ -47,7 +47,7 @@
             <label>Cep do restaurante: </label>
             <div class="input-group">
                 <input type="text" class="form-control" name="cepRestaurante" id="cep" required value="{{ $info->cepRestaurante ?? '' }}">
-                <button type="button" class="btn btn-primary" id="validar">Validar</button>
+                <button type="button" class="btn btn-light" id="validar">Validar</button>
             </div>
             <br>
 
@@ -87,7 +87,7 @@
             <input type="file" name="fotoRestaurante" class="form-control">
             <br>
 
-            <input type="submit" class="btn btn-success" value="Editar">
+            <input type="submit" class="btn btn-light" value="Editar">
             <br>
         </form>
     </div>

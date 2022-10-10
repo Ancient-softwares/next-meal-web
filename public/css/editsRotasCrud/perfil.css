@@ -4,7 +4,7 @@
   height: 20vh;
   padding-left: 1em;
   padding-top: 0.1em;
-  background: #f00;
+  background: #ffffff;
 }
 .fotoPerfil{
   width:17vh;
@@ -13,6 +13,11 @@
   border-radius: 7em;
   border: 3px solid;
   margin-top: 1vh;
+}
+
+.foto-perfil{
+  width: 17vh;
+  height: 17vh;
 }
 .container-perfil{
   background: #F4F4F4;
@@ -36,4 +41,15 @@
   max-width:100%;
   border-radius: 7em;
 
+}
+
+.btn-cadastro a{
+  width: 15vh;
+  color: white;
+  background-color: #f50000;
+}
+
+.btn-cadastro a:hover{
+  color: white;
+  background-color: #ff2f48;
 }

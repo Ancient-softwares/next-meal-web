@@ -24,7 +24,7 @@ form{
 
 .container-form{
     background-color: #F4F4F4;
-    padding: 2em;
+    padding: 1.8em;
     padding-left: 24em;
     padding-right: 24em;
     margin-right: 0;
@@ -38,6 +38,17 @@ form{
     margin-left: auto;
 }
 .scroll {
-    max-height: 85%;
+    max-height: 95%;
     overflow-y: scroll;
+}
+
+.btn{
+    color: #f50000!important;
+    border-color: #f50000!important;
+}
+
+.btn:hover{
+    background-color: #ff2f48!important;
+    color: white!important;
+    border-color: #ff2f48!important;
 }
