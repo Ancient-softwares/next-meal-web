@@ -1,0 +1,177 @@
+.BoxContainer{
+  display: flex;
+  background-color: #141414;
+  padding: 3%;
+}
+/* Slideshow container */
+.slideshow-container {
+  width: 95%;
+  position: relative;
+  overflow: hidden;
+  margin: auto;
+}
+
+.mySlides img{
+  width: 100%;
+ height: 35em;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  text-decoration: none;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 10px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  color: #f40723;
+}
+
+.active,
+.dot:hover {
+  background-color: #717171;
+}
+
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+
+/* Banner Carousel */
+
+.slider{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.slides{
+  width: 1900px;
+  height: 100%;
+  display: flex;
+}
+
+.slides input{
+  display: none;
+}
+
+.slide {
+  width: 100%;
+  transition: 2s;
+}
+.slide img{
+ width: 100vw;
+ height: 100%;
+}
+
+@media(max-width:790px){
+.slides{
+  width: 760px;
+  height: 100%;
+  display: flex;
+}
+.slide img{
+  width: 760px;
+  height: 100%;
+}
+}
+
+@media(max-width:1290px){
+.slides{
+  width: 1060px;
+  height: 100%;
+  display: flex;
+}
+.slide img{
+  width: 1060px;
+  height: 100%;
+}
+}
+
+.navigation-manual{
+position: absolute;
+width: 100%;
+margin-top: 57%;
+display: flex;
+justify-content: center;
+}
+
+.manual-btn{
+  border: 2px solid #f40723;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 1s;
+}
+
+.manual-btn:not(:last-child){
+  margin-right: 40px;
+}
+
+.manual-btn:hover{
+  background: #f40723;
+}
+
+#radio1:checked ~ .frist{
+  margin-left: -0%;
+}
+#radio2:checked ~ .frist{
+  margin-left: -100%;
+}
+
+
+.navigation-auto{
+  position: absolute;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 57%;
+}
+
+.navigation-auto div{
+  border: 2px solid #f40723;
+  padding: 8px;
+  border-radius: 15px;
+  transition: 1s;
+}
+
+.navigation-auto div:not(:last-child){
+  margin-right: 40px;
+}
+
+#radio1:checked ~ .navigation-auto .auto-btn1{
+  background: #f40723;
+}
+#radio2:checked ~ .navigation-auto .auto-btn2{
+  background: #f40723;
+}
+

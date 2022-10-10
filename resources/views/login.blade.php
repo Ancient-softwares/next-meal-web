@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NextMeal</title>
+  <link rel="icon" href="{{ asset('img/iconNM.png')}}">
 
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}" defer></script>
@@ -13,23 +14,27 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
   <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+  <script src="{{ asset('js/validarCep.js') }}"></script>
+
   <script>
-      $(document).ready(function($) {
-          $("#telefone").mask("(00) 0000-0000");
-          $("#cep").mask("00000-000");
+    $(document).ready(function($) {
+      $("#telefone").mask("(00) 0000-0000");
+      $("#cep").mask("00000-000");
 
-      });
-
+    });
   </script>
 
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link href="{{ asset('css/utsukushi.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ asset('css/footerDeDoido.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ asset('css/Responsive.css') }}" rel="stylesheet" type="text/css">
+  <!-- Carousel Style -->
+  <link href="{{ asset('css/carousel.css') }}" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -37,7 +42,7 @@
   <!--NavBar-->
   <header>
     <div class="container">
-      <img src="{{ asset('img/NextMeal.png') }}" alt="Rocketseat" />
+      <img src="{{ asset('img/logo-N-M-branco.png') }}" alt="Rocketseat" />
       <div class="menu-section">
         <div class="menu-toggle">
           <div class="one"></div>
@@ -50,13 +55,13 @@
               <a href="#">Home</a>
             </li>
             <li>
-              <a href="#E">Aplicativo</a>
+              <a href="#Download">Aplicativo</a>
             </li>
             <li>
-            <a id="btn-login" href="#Login">Login</a>
+              <a id="btn-login" href="#Login">Login</a>
             </li>
             <li>
-            <a id="btn-registro" href="#Registro">Registro</a>
+              <a id="btn-registro" href="#Registro">Registro</a>
             </li>
             <li>
               <a href="#Contato">Contato</a>
@@ -65,6 +70,7 @@
         </nav>
       </div>
     </div>
+
   </header>
 
   <!-- -->
@@ -94,9 +100,12 @@
     </div>
   </div>
 
-  {{-- Modal de registro --}}
+  <!---->
+
+
+
   <div id="modalRegistro" class="modal">
-    <div class="modal-content">
+    <div class="modal-content" class="conteudo">
       <h2>Registro</h2>
       <div class="corpin">
         @if($errors->any())
@@ -104,92 +113,171 @@
           {{ $errors->first() }}
         </div>
         @endif
+
         <form method="POST" action="{{ route('registrar') }}">
           @csrf
           <label>Nome do restaurante: </label>
-          <input type="text" class="form-control" name="nomeRestaurante" required value="{{ $info->nomeRestaurante ?? '' }}">
-          <br>
-
-          <label>Cpf do restaurante: </label>
-          <input type="text" class="form-control" name="cpfRestaurante" id="cpf" required value="{{ $info->cpfRestaurante ?? '' }}">
+          <input type="text" name="nome">
           <br>
 
           <label>Telefone do restaurante: </label>
-          <input type="text" class="form-control" name="telRestaurante" id="telefone" required value="{{ $info->telRestaurante ?? '' }}">
+          <input type="text" name="telefone" id="telefone">
           <br>
 
-          <label>E-mail do restaurante: </label>
-          <input type="email" class="form-control" name="emailRestaurante" required value="{{ $info->emailRestaurante ?? '' }}">
-          <br>
-
-          <label>Cep do restaurante: </label>
+          <label>CEP do restaurante: </label>
           <div class="input-group">
-              <input type="text" class="form-control" name="cepRestaurante" id="cep" required value="{{ $info->cepRestaurante ?? '' }}">
-              <button type="button" class="btn btn-primary" id="validar">Validar</button>
+            <input type="text" name="cep" id="cep">
+            <button type="button" class="btn btn-light" id="validar">Validar</button>
           </div>
           <br>
 
-          <label>Rua do restaurante: </label>
-          <input type="text" class="form-control" name="ruaRestaurante" id="rua" required value="{{ $info->ruaRestaurante ?? '' }}">
-          <br>
-          
-          <label>Número do restaurante: </label>
-          <input type="text" class="form-control" name="numRestaurante" id="numero" required value="{{ $info->numRestaurante ?? '' }}">
-          <br>
-          
-          <label>Bairro do restaurante: </label>
-          <input type="text" class="form-control" name="bairroRestaurante" id="bairro" required value="{{ $info->bairroRestaurante ?? '' }}">
-          <br>
-          
-          <label>Cidade do restaurante: </label>
-          <input type="text" class="form-control" name="cidadeRestaurante" id="cidade" required value="{{ $info->cidadeRestaurante ?? '' }}">
-          <br>
-          
-          <label>Estado do restaurante: </label>
-          <input type="text" class="form-control" name="estadoRestaurante" id="estado" required value="{{ $info->estadoRestaurante ?? '' }}">
+          <label>Rua: </label>
+          <input type="text" name="rua" id="rua">
           <br>
 
-          <label>capacidade máxima do restaurante: </label>
-          <input type="number" class="form-control" name="capMaximaRestaurante" value="{{ $info->capMaximaRestaurante ?? '' }}">
+          <label>Bairro: </label>
+          <input type="text" name="bairro" id="bairro">
           <br>
 
-          <label>Tipo do restaurante: </label>
-          <select name="tipoRestaurante" class="form-control">
-              @foreach($tipos as $tipo)
-                  <option value="{{ $tipo->idTipoRestaurante }}">{{ $tipo->tipoRestaurante }}</option>
-              @endforeach
-          </select>
+          <label>Cidade: </label>
+          <input type="text" name="cidade" id="cidade">
           <br>
 
-          <label>Foto do restaurante</label>
-          <input type="file" name="fotoRestaurante" class="form-control">
+          <label>Numero: </label>
+          <input type="text" name="numero" id="numero">
           <br>
 
+          <label>Senha: </label>
+          <input type="password" name="senha">
+          <br>
           <div class="btn-login">
             <input type="submit" class="btn btn-success" value="Registrar">
             <a id="btn-abrirLogin">Login</a>
+
           </div>
         </form>
+
+        <!-- <form id="regForm"  method="POST" action="{{ route('registrar') }}">
+          
+           <div class="tab">
+              <label>Nome do restaurante: </label>
+              <input type="text" name="nome">
+
+              <label>Telefone do restaurante: </label>
+              <input type="text" name="telefone" id="telefone">
+          </div>
+          <div class="tab">
+              <label>Nome do restaurante: </label>
+              <input type="text" name="nome">
+
+              <label>Telefone do restaurante: </label>
+              <input type="text" name="telefone" id="telefone">
+          </div> 
+       
+       
+         
+          Já possui login? <a class="edit-entra-registro" href="#">Entrar</a>
+          <div class="d-grid gap-2">
+                    <div style="overflow:auto;">
+                        <div style="float:right;">
+                          <button type="button" class="btn btn-custom" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                          <button type="button" class="btn btn-custom" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                        </div>
+                      </div>
+                </div>
+        </form> -->
+        <!-- <div style="text-align:center;">
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+        </div> -->
+
+
+
+        
+
+
+
       </div>
     </div>
   </div>
-<!---->
 
-  <img class="back" src="{{ URL::asset('img/beck.png') }}">
+  <!---->
+
+
+
+
+
+  <div class="slider">
+    <div class="slides">
+      <input type="radio" name="radio-btn" id="radio1">
+      <input type="radio" name="radio-btn" id="radio2">
+
+      <div class="slide frist">
+        <img src="{{ URL::asset('img/header.png')}}" alt="">
+      </div>
+      <div class="slide">
+        <img src="{{ URL::asset('img/header2.png')}}" alt="">
+      </div>
+
+
+      <div class="navigation-auto">
+        <div class="auto-btn1"></div>
+        <div class="auto-btn2"></div>
+      </div>
+
+      <div class="navigation-manual">
+        <label for="radio1" class="manual-btn"></label>
+        <label for="radio2" class="manual-btn"></label>
+      </div>
+    </div>
+  </div>
+
+
   <!--NavBar-->
   <main>
 
     <section class="hero">
-      <div class="container">
-        <div class="Info">
-          <h2>Next Meal</h2>
-          <p>O Next Meal é uma solução web e mobile para reduzir as filas de restaurantes,
-            ajudando mais de 10mil babacas desinformados por dia.</p>
+      <div class="BoxContainer">
+        <div class="slideshow-container">
+
+          <div class="mySlides">
+            <img src="{{ URL::asset('img/slide1.jpg') }}" style="width:100%">
+          </div>
+
+          <div class="mySlides">
+            <img src="{{ URL::asset('img/slide2.jpg') }}" style="width:100%">
+          </div>
+
+          <div class="mySlides">
+            <img src="{{ URL::asset('img/slide3.jpg') }}" style="width:100%">
+          </div>
+
+          <a class="prev" onclick="plusSlides(-1)">❮</a>
+          <a class="next" onclick="plusSlides(1)">❯</a>
+
         </div>
-        <img class="image" src="{{ URL::asset('img/logoNext.png') }}" />
+        <div class="Info">
+          <img class="image" src="{{ URL::asset('img/logoNextRed.png') }}" />
+          <p>O Next Meal é uma solução web e mobile para reduzir as filas de restaurantes,
+            ajudando mais de 10mil pessoas por dia.</p>
+        </div>
       </div>
       </div>
     </section>
+
+    <div class="BoxVideo">
+      <div class="text">
+        <h2>Aplicativo</h2>
+        <h3>O Next Meal permite você reservar mesas de forma rápida e simples possibilitando também consultas de
+          restaurantes próximos de sua localização.</h3>
+      </div>
+      <video autoplay muted loop class="VideoBack">
+        <source src="{{ URL::asset('img/back.mp4') }}" type="video/mp4">
+      </video>
+    </div>
+
 
     <div class="Vantagens">
       <h2>Vantagens</h2>
@@ -201,25 +289,25 @@
         </div>
         <div class="boxV">
           <h3>Melhorar a logística do seu negócio.</h3>
-          <p>Melhoria em organização, movimentação, vizibilidade, etc.
+          <p>Melhoria em organização, gerando agilidade no atendimento ao seu cliente.
           </p>
         </div>
         <div class="boxV">
           <h3>Experiência que gera fidelidade do cliente.</h3>
           <p>Uma solução perfeita para você construir a fidelidade com seu cliente.
-              O NextMeal é a ponte entre o seu negócio e o público-alvo.
+            O NextMeal é a ponte entre o seu negócio e o público-alvo.
           </p>
         </div>
         <div class="boxV">
           <h3>Optar pelo seu estabelecimento</h3>
           <p>Utilizando o nosso sistema de reservas o seu cliente estará ligado diretamente ao seu restaurante
-             pois poderá escolher você!!
+            pois poderá escolher você!!
           </p>
         </div>
       </div>
       <div class="bottonV">
         <div class="letsGo">
-          <a href="#"> Vamos lá?</a>
+          <a id="btn-registro" href="#"> Vamos lá?</a>
         </div>
       </div>
     </div>
@@ -242,6 +330,7 @@
         </div>
       </div>
     </div>
+
 
   </main>
 
@@ -270,10 +359,13 @@
 
   <button id="topBtn"><i class="fas fa-arrow-up"></i></button>
 
+  <script src="{{ asset('js/carousel.js') }}"></script>
   <script src="{{ asset('js/hamburguer.js') }}"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
   <script src="{{ asset('js/Modal.js') }}"></script>
   <script src="{{ asset('js/back-top.js') }}"></script>
+
 
 </body>
 

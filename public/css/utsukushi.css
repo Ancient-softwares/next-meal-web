@@ -26,7 +26,7 @@ body {
     /* background-color: #7159c1; */
 }
 
-header {
+header {    
     position: absolute;
     width: 100%;
     z-index: 1;
@@ -73,8 +73,16 @@ header nav ul li a:hover {
     color: #f40723;
 }
 
+header h2{
+    width: 23em;
+    margin-top: 5.5em;
+    color: #F6F6F6;
+    font-family: Arial;
+    font-size: 2em;
+    text-align: center;
+}
+
 .back {
-    height: 25em;
     position: relative;
     width: 100%;
     overflow: hidden;
@@ -85,30 +93,68 @@ img .back {
     position: absolute;
 }
 
+.BoxVideo{
+    width: 100%;
+    height: 40em;
+   display: flex;
+}
+
+.BoxVideo .text{
+    width: 100%;
+    height: 38.5em;
+    background-color: #141414;
+    color: #F6F6F6;
+    text-align: center;
+    padding: 2%;
+    margin-left: 0.5%;
+    margin-top: 0.5%;
+}
+
+.BoxVideo .text h2{
+    color: #c80000;
+    font-family: Arial;
+    font-size:2.7em;
+    margin-top: 22%;
+}
+
+.BoxVideo .text h3{
+    font-family: Arial;
+    font-size:1.8em;
+}
+
+.VideoBack{
+    width:65%;
+    height: 40em;
+    margin-left: 1em;
+    float: right;
+}
+
 section.hero {
     margin: 0px 0px;
-
+    position: relative;
 }
 
 section.hero .container {
-    width: 90%;
-    max-width: 1550px;
+    width: 55%;
+    max-width: 1200px;
     display: flex;
     margin: auto;
-    padding-top: 8.4em;
-    padding-bottom: 4.8em;
+    margin-top: 10%;
+    margin-left: 42%;
 }
 
 section.hero p {
     text-align: center;
-    color: #000000;
+    color: #f6F6F6;
     font-size: 2.2rem;
     font-family: arial;
     line-height: 3.2rem;
     margin: 10px 0px 0px;
+    padding: 1%;
 }
 
 section.hero h2 {
+    color: #F6F6F6;
     text-align: center;
     font-family: arial;
     font-size: 3.14em;
@@ -121,7 +167,7 @@ section.hero h2 {
     /* Stay in place */
     z-index: 1;
     /* Sit on top */
-    padding-top: 185px;
+    padding-top: 5vh;
     /* Location of the box */
     left: 0;
     top: 0;
@@ -175,7 +221,6 @@ section.hero h2 {
 .corpin a {
     font-size: 1.2em;
     text-decoration: none;
-    float: left;
     margin-left: 2%;
     margin-top: 2%;
 }
@@ -239,7 +284,7 @@ button[type=submit]:hover {
 
 .btn-login {
     width: 100%;
-    height: 5vh;
+    height: 6vw;
     padding-top: 20px;
     text-align: center;
     cursor: pointer;
@@ -249,7 +294,6 @@ button[type=submit]:hover {
     background-color: #c80000;
     border: none;
     width: 100%;
-    height: 4vh;
     font-size: 20px;
     top: auto;
     left: auto;
@@ -257,23 +301,23 @@ button[type=submit]:hover {
 
 }
 
-.btn-login input:focus {
-    background-color: #c80000;
-}
-
 .btn-login input:hover {
     background-color: #bb0404;
 }
 
+
+.btn-login input:focus {
+    background-color: #c80000;
+}
+
 .Info {
-    padding-top: 5.8em;
-    margin-right: 5%;
+    padding-top: 5em;
 }
 
 .image {
-    width: 35%;
-    margin-top: 2em;
-    margin-bottom: 2em;
+    width: 70%;
+    margin-top: 1em;
+    margin-left: 15%;
 }
 
 #topBtn {
@@ -307,14 +351,15 @@ button[type=submit]:hover {
     font-size: 2.6em;
     font-family: Arial;
     text-align: center;
-    padding-top: 1em;
+    padding-top: 2em;
 }
 
 .Vantagens h3 {
     color: #c80000;
     text-align: center;
     font-size: 1.7em;
-    height: 8vh;
+    margin-bottom: 1em;
+    height: 20%;
 }
 
 .Vantagens p {
@@ -325,7 +370,7 @@ button[type=submit]:hover {
 }
 
 .Vantagens .boxV {
-    width: 26em;
+    width: 28em;
     border: #c80000;
     border-style: solid;
     border-radius: 2em;
@@ -416,3 +461,76 @@ button[type=submit]:hover {
     margin-top: 2em;
     margin-bottom: 2em;
 }
+
+.input-group{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%
+}
+
+.input-group input{
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+    margin-bottom: 0;
+}
+
+.input-group button{
+    margin-top: 8px;
+
+}
+
+
+/*Edit Register*/
+
+.conteudo {
+    margin: 75px;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.btn-custom {
+    background: rgb(19,38,82);
+    background: linear-gradient(90deg, rgba(19,38,82,1) 0%, rgba(28,56,121,1) 35%, rgba(56,96,187,1) 100%);
+    color:white;
+    border-radius: 20px;
+}
+
+  /* Style the input fields */
+  input {
+    padding: 10px;
+    width: 100%;
+    font-size: 17px;
+    border: 1px solid #aaaaaa;
+  }
+  
+  /* Mark input boxes that gets an error on validation: */
+  input.invalid {
+    background-color: #ffdddd;
+  }
+  
+
+/* Make circles that indicate the steps of the form: */
+.step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+  }
+  
+  /* Mark the active step: */
+  .step.active {
+    opacity: 1;
+  }
+  
+  /* Mark the steps that are finished and valid: */
+  .step.finish {
+    background-color: #04AA6D;
+  }
