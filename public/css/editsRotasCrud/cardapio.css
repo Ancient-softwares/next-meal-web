@@ -174,3 +174,7 @@ h5{
     margin-right: auto!important;
     margin-left: auto!important;
 }
+
+.btn-secondary{
+    border-color: #ff2f48!important;
+}

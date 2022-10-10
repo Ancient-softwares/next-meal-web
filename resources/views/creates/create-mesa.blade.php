@@ -50,7 +50,7 @@
                     <input type="number" class="form-control" name="numMesa" id="numMesa" value="{{$mesa->numMesa ?? ''}}">
                 </div>
                 @endif
-                <button type="submit" class="btn btn-outline-success">@if(isset($mesa))Editar @else Cadastrar @endif</button>
+                <button type="submit" class="btn btn-outline-light">@if(isset($mesa))Editar @else Cadastrar @endif</button>
             </form>
         </div>
     </div>
