@@ -56,7 +56,7 @@
                         @endforeach
                     </select>
                 </div>
-                <button type="submit" class="btn btn-outline-success">@if(isset($prato))Editar @else Cadastrar @endif</button>
+                <button type="submit" class="btn btn-outline-light">@if(isset($prato))Editar @else Cadastrar @endif</button>
             </form>
         </div>
     </div>
