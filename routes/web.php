@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/reserva', function () {
+    return view('reserva');
+});
+
 Route::get('/', [WebController::class, 'indexLogin'])->name('login');
 Route::post('/autenticar', [WebController::class, 'autenticar'])->name('autenticar');
 Route::post('/registrar', [WebController::class, 'registrar'])->name('registrar');
@@ -40,3 +44,7 @@ Route::resource('cardapio', CrudPrato::class);
 Route::get('/mobile/teste', [WebController::class, 'testeMobile'])->name('testeMobile');
 Route::post('/mobile/soma', [WebController::class, 'soma'])->name('soma');
 Route::post('/mobile/cadastroCliente', [WebController::class, 'cadastroCliente'])->name('cadastroCliente');
+
+
+//RESERVAS
+Route::get('/reserva','App\Http\Controllers\ReservaController@index');
