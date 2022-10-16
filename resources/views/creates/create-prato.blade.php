@@ -1,4 +1,4 @@
-@extends('layouts.sidebar')
+@extends('layouts.hamburguer')
 
 @section('titulo', 'Criar um prato')
 
@@ -8,7 +8,7 @@
 
 @section('conteudo')
     <div class="container-cadastro">
-        <div class="container-form scroll">
+        <div class="container-form">
             @if($errors->any())
             <div class="alert alert-danger" role="alert">
                 {{ $errors->first() }}

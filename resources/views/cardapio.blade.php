@@ -1,4 +1,4 @@
-@extends('layouts.sidebar')
+@extends('layouts.hamburguer')
 
 @section('titulo', 'Pratos')
 
@@ -148,7 +148,7 @@
                             <div class="ftprato">
                                 <img class="card-img-top" src="/img/pratos/{{ $prato->fotoPrato }}">
                             </div>
-                            <h3>{{ $prato->nomePrato }}</h3>
+                            <h3 class="modal-title">{{ $prato->nomePrato }}</h3>
 
                             <h6><b>Tipo do prato:</b> {{ $tipos->where('idTipoPrato', $prato->idTipoPrato)->first()->tipoPrato }}</h6>
                             <h6><b>Ingredientes:</b> {{$prato->ingredientesPrato}}</h6>

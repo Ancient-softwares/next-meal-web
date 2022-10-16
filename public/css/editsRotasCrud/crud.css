@@ -24,6 +24,7 @@ form{
 
 .container-form{
     background-color: #F4F4F4;
+    height: 100%;
     padding: 1.8em;
     padding-left: 24em;
     padding-right: 24em;
@@ -38,7 +39,7 @@ form{
     margin-left: auto;
 }
 .scroll {
-    max-height: 95%;
+    max-height: 90vh;
     overflow-y: scroll;
 }
 

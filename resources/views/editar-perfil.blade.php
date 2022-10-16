@@ -1,4 +1,4 @@
-@extends('layouts.sidebar')
+@extends('layouts.hamburguer')
 
 @section('titulo', 'editar-perfil')
 
