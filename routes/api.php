@@ -3,7 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\ReservaController;
+use App\Http\Controllers\ReservadoidaController;
 use App\Http\Controllers\WebController;
+use App\Models\ReservaModel;
 
 /*
  |--------------------------------------------------------------------------
@@ -21,13 +24,28 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // mobile
-Route::get('/teste', [AppController::class , 'testeMobile'])->name('testeMobile');
-Route::post('/soma', [AppController::class , 'soma'])->name('soma');
-Route::get('/restaurantes', [AppController::class , 'getRestaurants'])->name('getRestaurants');
-Route::post('/cadastroCliente', [AppController::class , 'cadastroCliente'])->name('cadastroCliente');
-Route::post('/loginCliente', [AppController::class , 'loginCliente'])->name('loginCliente');
-Route::post('/reserva', [AppController::class , 'reserva'])->name('reserva');
-Route::post('/uploadImage', [AppController::class , 'uploadImage'])->name('uploadImage');
+Route::get('/teste', [AppController::class, 'testeMobile'])->name('testeMobile');
+Route::post('/soma', [AppController::class, 'soma'])->name('soma');
+Route::get('/restaurantes', [AppController::class, 'getRestaurants'])->name('getRestaurants');
+Route::post('/cadastroCliente', [AppController::class, 'cadastroCliente'])->name('cadastroCliente');
+Route::post('/loginCliente', [AppController::class, 'loginCliente'])->name('loginCliente');
+Route::post('/uploadImage', [AppController::class, 'uploadImage'])->name('uploadImage');
+
+// reserva
+
+Route::resource('reserva', ReservadoidaController::class);
+
+Route::get('/getReservas', [ReservadoidaController::class, 'getReservas'])->name('getReservas');
+Route::get('/getReserva/{id}', [ReservadoidaController::class, 'getReserva'])->name('getReserva');
+Route::get('/getReservasByRestaurante/{id}', [ReservadoidaController::class, 'getReservasByRestaurante'])->name('getReservasByRestaurante');
+Route::get('/getReservasByCliente/{id}', [ReservadoidaController::class, 'getReservasByCliente'])->name('getReservasByCliente');
+Route::get('/getReservasByStatus/{id}', [ReservadoidaController::class, 'getReservasByStatus'])->name('getReservasByStatus');
+Route::get('/getReservasByData/{id}', [ReservadoidaController::class, 'getReservasByData'])->name('getReservasByData');
+
+Route::get('/aceitarReserva/{id}', [ReservadoidaController::class, 'aceitarReserva'])->name('aceitarReserva');
+Route::get('/rejeitarReserva/{id}', [ReservadoidaController::class, 'rejeitarReserva'])->name('rejeitarReserva');
+
 
 // web
-Route::get('/teste', [WebController::class , 'teste'])->name('teste');
+
+Route::get('/teste', [WebController::class, 'teste'])->name('teste');
