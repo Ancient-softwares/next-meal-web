@@ -51,11 +51,6 @@ class AppController extends Controller
         return response()->json($table);
     }
 
-    public function testeMobile(Request $request)
-    {
-        return 'Gostosun tesntin';
-    }
-
     public function cadastroCliente(Request $request)
     {
         $senha = $request->senha;
@@ -90,8 +85,7 @@ class AppController extends Controller
 
         if ($cad) {
             return $request . json_encode($cad);
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -113,8 +107,7 @@ class AppController extends Controller
             ]);
 
             return response()->json(['success' => $imageName]);
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
         }
     }
@@ -124,11 +117,9 @@ class AppController extends Controller
         try {
             $cliente = $this->clientes->where('emailCliente', '=', $request->emailCliente)->first();
             return $cliente->token;
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return $e;
         }
-
     }
 
     public function loginCliente(Request $request)
@@ -156,13 +147,5 @@ class AppController extends Controller
             'message' => 'Login ou senha incorretos!',
             'data' => error_get_last()
         ]);
-    }
-
-    public function soma(Request $request)
-    {
-        $n1 = $request->n1;
-        $n2 = $request->n2;
-
-        return $n1 + $n2;
     }
 }

@@ -24,8 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // mobile
-Route::get('/teste', [AppController::class, 'testeMobile'])->name('testeMobile');
-Route::post('/soma', [AppController::class, 'soma'])->name('soma');
 Route::get('/restaurantes', [AppController::class, 'getRestaurants'])->name('getRestaurants');
 Route::post('/cadastroCliente', [AppController::class, 'cadastroCliente'])->name('cadastroCliente');
 Route::post('/loginCliente', [AppController::class, 'loginCliente'])->name('loginCliente');
@@ -44,8 +42,3 @@ Route::get('/getReservasByData/{id}', [ReservadoidaController::class, 'getReserv
 
 Route::get('/aceitarReserva/{id}', [ReservadoidaController::class, 'aceitarReserva'])->name('aceitarReserva');
 Route::get('/rejeitarReserva/{id}', [ReservadoidaController::class, 'rejeitarReserva'])->name('rejeitarReserva');
-
-
-// web
-
-Route::get('/teste', [WebController::class, 'teste'])->name('teste');
