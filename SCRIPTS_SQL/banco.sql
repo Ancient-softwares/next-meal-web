@@ -34,10 +34,11 @@ USE dbNextMeal;
 
 
 CREATE TABLE `tbavaliacao` (
-  `idAvalicao` int(11),
+  `idAvaliacao` int(11),
   `notaAvaliacao` int(5),
   `descAvaliacao` varchar(200),
   `dtAvaliacao` date,
+  `idRestaurante` int(11),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -53,7 +54,7 @@ CREATE TABLE `tbcliente` (
   `nomeCliente` varchar(300),
   `cpfCliente` char(14),
   `celCliente` char(13),
-  `senhaCliente` varchar(255),
+  `senhaCliente` varchar(20),
   `fotoCliente` blob,
   `emailCliente` varchar(100),
   `cepCliente` char(9),
@@ -103,7 +104,7 @@ CREATE TABLE `tbrestaurante` (
   `nomeRestaurante` varchar(300),
   `cpfRestaurante` char(14),
   `telRestaurante` char(13),
-  loginRestaurante varchar(100),
+  `loginRestaurante` varchar(100),
   `senhaRestaurante` varchar(255),
   `fotoRestaurante` varchar(255),
   `emailRestaurante` varchar(100),
@@ -210,7 +211,7 @@ CREATE TABLE `tbtiporestaurante` (
 -- Índices para tabela `tbavaliacao`
 --
 ALTER TABLE `tbavaliacao`
-  ADD PRIMARY KEY (`idAvalicao`);
+  ADD PRIMARY KEY (`idAvaliacao`);
 
 --
 -- Índices para tabela `tbcliente`
@@ -258,6 +259,8 @@ ALTER TABLE `tbreserva`
 --
 -- Índices para tabela `tbrestaurante`
 --
+ALTER TABLE `tbrestaurante`
+  MODIFY `idRestaurante` int(11) AUTO_INCREMENT;
 
 
 --
@@ -266,17 +269,26 @@ ALTER TABLE `tbreserva`
 ALTER TABLE `tbstatusreserva`
   ADD PRIMARY KEY (`idStatusReserva`);
 
+  ALTER TABLE `tbstatusreserva`
+    MODIFY `idStatusReserva` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- Índices para tabela `tbtipoprato`
 --
 ALTER TABLE `tbtipoprato`
   ADD PRIMARY KEY (`idTipoPrato`);
 
+  ALTER TABLE `tbtipoprato`
+    MODIFY `idTipoPrato` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- Índices para tabela `tbtiporestaurante`
 --
 ALTER TABLE `tbtiporestaurante`
   ADD PRIMARY KEY (`idTipoRestaurante`);
+
+ALTER TABLE `tbtiporestaurante`
+  MODIFY `idTipoRestaurante` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
@@ -286,7 +298,7 @@ ALTER TABLE `tbtiporestaurante`
 -- AUTO_INCREMENT de tabela `tbavaliacao`
 --
 ALTER TABLE `tbavaliacao`
-  MODIFY `idAvalicao` int(11) AUTO_INCREMENT;
+  MODIFY `idAvaliacao` int(11) AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `tbcliente`
@@ -309,11 +321,7 @@ ALTER TABLE `tbmesareserva`
 --
 -- AUTO_INCREMENT de tabela `tbprato`
 --
-
 --
-ALTER TABLE `tbrestaurante`
-  MODIFY `idRestaurante` int(11) AUTO_INCREMENT;
-  
 ALTER TABLE `tbprato`
   MODIFY `idPrato` int(11) AUTO_INCREMENT;
 
@@ -382,6 +390,14 @@ ALTER TABLE `tbreserva`
 --
 ALTER TABLE `tbrestaurante`
   ADD CONSTRAINT `tbrestaurante_ibfk_2` FOREIGN KEY (`idTipoRestaurante`) REFERENCES `tbtiporestaurante` (`idTipoRestaurante`);
+
+--
+-- Limitadores para a tabela 'tbavaliacao'
+--
+
+ALTER TABLE `tbavaliacao`
+  ADD CONSTRAINT `tbavaliacao_ibfk_1` FOREIGN KEY (`idRestaurante`) REFERENCES `tbrestaurante` (`idRestaurante`);
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

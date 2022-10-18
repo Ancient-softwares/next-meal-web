@@ -1,4 +1,4 @@
-@extends('layouts.sidebar')
+@extends('layouts.hamburguer')
 
 @section('titulo', 'Index')
 <header>
@@ -19,8 +19,9 @@
                     <div class="icon">
                         <img src="{{ asset('img/sidebar/calendario-linhas-caneta.png') }}" alt="">
                     </div>
+                    <h1 class="txtreserva">Reservas</h1>
                 </div>
-                <h1 class="txtreserva">reservas</h1>
+                
             </div>
 
         </reservas>
@@ -38,7 +39,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><img src="{{ asset('img/tabelas/lixo.png') }}" alt=""></td>
+                        <td><img src="{{ asset('img/FotosDePratosPraApoio/burguer.png') }}" alt=""></td>
                         <td colspan="2">BRUNIN GAMEPRAY</td>
                         <td>RESERVAS 1345</td>
                     </tr>
@@ -54,7 +55,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><img src="{{ asset('img/tabelas/lixo.png') }}" alt=""></td>
+                        <td><img src="{{ asset('img/FotosDePratosPraApoio/donuts.png') }}" alt=""></td>
                         <td>BRUNIN GAMEPRAY</td>
                     </tr>
                 </tbody>

@@ -37,11 +37,9 @@
             </div> -->
             <nav>
                 <ul class="menu-side">
-                    <li class="menu-sidebar">
                         <div class="imagem">
-                            <img src="{{ asset('img/NextMeal.png') }}" alt="">
+                            <img src="{{ asset('img/logo-N-M-vermelho.png') }}" alt="">
                         </div>
-                    </li>
                         <li class="menu-sidebar">
                             <a href="{{ route('index') }}" class="menu-link">
                             <img src="{{ asset('img/sidebar/casa.png') }}" alt="">Início</a>   

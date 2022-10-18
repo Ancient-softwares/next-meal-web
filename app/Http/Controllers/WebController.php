@@ -6,6 +6,7 @@ use App\Models\RestauranteModel;
 use App\Models\ClienteModel;
 use App\Models\TipoRestauranteModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class WebController extends Controller
 {
@@ -17,25 +18,16 @@ class WebController extends Controller
         $this->restaurantes = new RestauranteModel();
     }
     
-    public function indexLogin(Request $request) {
-        $login = $request->session()->get("login");
+    public function indexLogin() {
+        $login = Session::get('login');
         if(isset($login)) {
             return redirect('index');
         }
-
         $tipos = TipoRestauranteModel::all();
 
         return view('login', compact('tipos'));
     }
 
-    public function indexRegistro(Request $request)
-    {
-        return view("registrar");
-    }
-
-    public function teste(Request $request) {
-        return 'Gostosun tesntin';
-    }
 
     public function registrar(Request $request)
     {
@@ -50,10 +42,21 @@ class WebController extends Controller
         $cep = str_replace('-', '', $cep);
 
         $cad = $this->restaurantes->create([
-            "nomeRestaurante" => $request->nome,
-            "telRestaurante" => $telefone,
-            "cepRestaurante" => $cep,
-            "senhaRestaurante" => $senha
+            'nomeRestaurante' => $request->nome,
+            'cnpjRestaurante' => "--",
+            'telRestaurante' => $telefone,
+            'loginRestaurante' => $request->login,
+            'senhaRestaurante' => $senha,
+            'fotoRestaurante' => "user.png",
+            'emailRestaurante' => "--",
+            'cepRestaurante' => $cep,
+            'ruaRestaurante' => $request->rua,
+            'numRestaurante' => $request->numero,
+            'bairroRestaurante' => $request->bairro,
+            'cidadeRestaurante' => $request->cidade,
+            'estadoRestaurante' => $request->uf,
+            'capMaximaRestaurante' => 1,
+            'idTipoRestaurante' => 1,
         ]);
 
         if($cad) {
@@ -64,12 +67,10 @@ class WebController extends Controller
     public function autenticar(Request $request) {
         $restaurante = $this->restaurantes->where('nomeRestaurante', '=', $request->login)->first();
 
-        
-
         if($restaurante) {
             if(password_verify($request->senha, $restaurante->senhaRestaurante)) {
-                $request->session()->put('login', $request->login);
-                $request->session()->put('idRestaurante', $restaurante->idRestaurante);
+                Session::put('login', $request->login);
+                Session::put('idRestaurante', $restaurante->idRestaurante);
 
                 return redirect("index");
             }
@@ -78,16 +79,16 @@ class WebController extends Controller
         return redirect()->back()->withErrors('Login inválido!');
     }
 
-    public function logout(Request $request) {
-        $request->session()->flush();
-
+    public function logout() {
+        Session::flush();
         return redirect('/');
     }
 
-    public function dashboard(Request $request) {
-        $login = $request->session()->get('login');
+    public function dashboard() {
+        $login = Session::get('login');
+
         if(!isset($login)) {
-            return redirect()->back();
+            return redirect()->route('login');
         }
 
         return view('index', compact('login'));

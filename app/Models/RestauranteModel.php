@@ -14,7 +14,7 @@ class RestauranteModel extends Model
     protected $fillable = [
         "idRestaurante",
         "nomeRestaurante",
-        "cpfRestaurante",
+        "cnpjRestaurante",
         "telRestaurante",
         "loginRestaurante",
         "senhaRestaurante",
@@ -30,4 +30,15 @@ class RestauranteModel extends Model
         "idTipoRestaurante",
         "idPrato"
     ];
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+
+    protected static function newFactory()
+    {
+        return \Database\Factories\RestauranteFactory::new ();
+    }
 }

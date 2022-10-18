@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Roboto:wght@100;300;400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body::-webkit-scrollbar {
+    width: 0.80rem;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: #FF4F4E;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #FF4F4E;
+}
+
+@media only screen and (min-width: 600px) {
+    .sidebar {
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 260px;
+    }
+
+    .sidebar {
+        box-shadow: none !important;
+    }
+
+    .sidebar.close .logo img {
+        width: 2em !important;
+    }
+
+    .sidebar .logo img {
+        width: 10em !important;
+        margin-bottom: 0!important;
+        margin-top: 0!important;
+    }
+
+    .imagem .bx{
+        height: 20vh!important;
+    }
+
+    .sidebar .imagem{
+        text-align: center;
+        height: 20vh;
+    }
+
+    .sidebar .img-logo img{
+        margin-left: auto!important;
+        margin-right: auto!important;
+    }
+
+    .sidebar.close .imagem{
+        height: 10vh;
+    }
+
+    .sidebar.close {
+        width: 78px;
+    }
+
+    .sidebar.close .logo-details .logo_name {
+        display: none;
+    }
+
+    .sidebar.close .nav-links .link_name {
+        display: none;
+    }
+
+    .sidebar.close~.home-section {
+        left: 78px;
+        width: calc(100% - 78px);
+    }
+
+    .sidebar .logo-details {
+        height: 60px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .home-section {
+        position: relative;
+        height: 100vh;
+        left: 25.7vh;
+        width: calc(100% - 26vh);
+        transition: all 0.5s ease;
+    }
+
+    .sidebar .nav-links li i {
+        height: 50px;
+        min-width: 78px;
+        text-align: center;
+        padding-right: 10px;
+        line-height: 50px;
+        color: #FF4F4E;
+        font-size: 20px;
+    }
+
+    .home-section .home-content {
+        height: 60px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+@media only screen and (max-width: 599px) {
+    .sidebar {
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 78px;
+    }
+
+    .sidebar.close {
+        width: 0px;
+    }
+
+    .sidebar .logo-details .logo_name {
+        display: none;
+    }
+
+    .sidebar .nav-links .link_name {
+        display: none;
+    }
+
+    .home-section {
+        position: relative;
+        height: 100vh;
+        left: 78px;
+        width: calc(100% - 78px);
+        transition: all 0.5s ease;
+    }
+
+    .sidebar~.home-section {
+        left: 78px;
+        width: calc(100% - 78px);
+    }
+
+    .sidebar.close~.home-section {
+        left: 0;
+        width: 100vw;
+    }
+
+    .sidebar .nav-links li i {
+        height: 55px;
+        min-width: 78px;
+        align-items: center;
+        padding-right: 10px;
+        line-height: 50px;
+        color: #FF4F4E;
+        font-size: 26px;
+    }
+
+    .home-section {
+        width: 100vw;
+    }
+
+    .home-section .home-content {
+        height: 60px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.sidebar {
+    position: fixed;
+    background: #F4F4F4;
+    transition: all 0.5s ease;
+}
+
+.bx img{
+    text-align: center;
+    margin: 0.8em;
+}
+
+.sidebar .logo-details i {
+    font-size: 30px;
+    color: #FF4F4E;
+    height: 50px;
+    min-width: 78px;
+    text-align: center;
+    line-height: 50px;
+}
+
+.sidebar .logo-details .logo_name {
+    font-size: 22px;
+    color: #FF4F4E;
+    font-weight: 600;
+}
+
+.sidebar .nav-links {
+    height: 100%;
+    padding-top: 30px;
+    padding-left: 4px;
+}
+
+.sidebar .nav-links li {
+    position: relative;
+    list-style: none;
+    transition: all 0.4s ease;
+}
+
+.sidebar .nav-links li:hover {
+    background: white;
+}
+
+li.img-logo:hover {
+    background: none!important;
+}
+
+.sidebar .nav-links li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.sidebar .nav-links li a .link_name {
+    font-size: 18px;
+    font-weight: 400;
+    color: black;
+}
+
+.sidebar .nav-links li .logout {
+    position: relative;
+    display: flex;
+    list-style: none;
+    float: inline-end;
+}
+
+.sidebar .nav-links li .logout:hover {
+    background: white;
+}
+
+
+
+.home-section .home-content .bx-menu {
+    color: #FF4F4E;
+    font-size: 35px;
+    margin: 0 15px;
+
+}
+
+.btn-custom {
+    background: #E3A162;
+    color: white;
+}
+
+.escondido {
+    transition: all 0.5s ease;
+}
+
+.bx img {
+    width: 1em;
+}
