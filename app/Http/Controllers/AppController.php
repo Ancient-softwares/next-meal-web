@@ -8,6 +8,8 @@ use App\Models\ReservaModel;
 use App\Models\RestauranteModel;
 use App\Models\ClienteModel;
 use App\Models\TipoRestauranteModel;
+use Exception;
+use Illuminate\Support\Str;
 
 class AppController extends Controller
 {
@@ -26,7 +28,8 @@ class AppController extends Controller
         $this->avaliacao = new AvaliacaoModel();
     }
 
-    public function reserva(Request $request) {
+    public function reserva(Request $request)
+    {
         $dataReserva = $request->dataReserva;
         $horaReserva = $request->horaReserva;
         $numPessoas = $request->numPessoas;
@@ -38,20 +41,23 @@ class AppController extends Controller
         ]);
     }
 
-    public function getRestaurants() {
+    public function getRestaurants()
+    {
         $table = RestauranteModel::select('tbrestaurante.idRestaurante', 'tbrestaurante.nomeRestaurante', 'tbrestaurante.fotoRestaurante', 'tbtiporestaurante.tipoRestaurante', 'tbavaliacao.notaAvaliacao')
             ->join('tbtiporestaurante', 'tbtiporestaurante.idTipoRestaurante', '=', 'tbrestaurante.idTipoRestaurante')
             ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbrestaurante.idRestaurante')
             ->get();
-        
+
         return response()->json($table);
     }
 
-    public function testeMobile(Request $request) {
+    public function testeMobile(Request $request)
+    {
         return 'Gostosun tesntin';
     }
 
-    public function cadastroCliente(Request $request) {
+    public function cadastroCliente(Request $request)
+    {
         $senha = $request->senha;
         $senha = password_hash($senha, PASSWORD_DEFAULT);
 
@@ -62,16 +68,17 @@ class AppController extends Controller
         $cpf = $request->cpfCliente;
         $cpf = preg_replace('/[^A-Za-z0-9\-]/', '', $cpf);
         $cpf = str_replace('-', '', $cpf);
-        
+
         $cep = $request->cepCliente;
         $cep = str_replace('-', '', $cep);
+
+        // $this->uploadImage($request->fotoCliente, $request->nomeCliente);
 
         $cad = $this->clientes->create([
             "nomeCliente" => $request->nomeCliente,
             "cpfCliente" => $cpf,
             "celCliente" => $celCliente,
             "senhaCliente" => $request->senhaCliente,
-            "fotoCliente" => $request->fotoCliente,
             "emailCliente" => $request->emailCliente,
             "cepCliente" => $cep,
             "ruaCliente" => $request->ruaCliente,
@@ -81,35 +88,81 @@ class AppController extends Controller
             "estadoCliente" => $request->estadoCliente
         ]);
 
-        if($cad) {
-            return $request.json_encode($cad);
-        } else {
+        if ($cad) {
+            return $request . json_encode($cad);
+        }
+        else {
             return false;
         }
     }
 
-        public function loginCliente(Request $request){
+    public function uploadImage(Request $request)
+    {
+        try {
+
+            $request->validate([
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            $imageName = time() . '.' . $request->image->extension();
+
+            $request->image->move(public_path('images'), $imageName);
+
+            $upload = $this->clientes->create([
+                "fotoCliente" => $imageName
+            ]);
+
+            return response()->json(['success' => $imageName]);
+        }
+        catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function getToken(Request $request)
+    {
+        try {
+            $cliente = $this->clientes->where('emailCliente', '=', $request->emailCliente)->first();
+            return $cliente->token;
+        }
+        catch (Exception $e) {
+            return $e;
+        }
+
+    }
+
+    public function loginCliente(Request $request)
+    {
         $cliente = $this->clientes->where('emailCliente', '=', $request->emailCliente)->first();
+        $senha = $request->senhaCliente;
 
+        if ($cliente) {
+            if ($senha == $cliente->senhaCliente) {
 
-        if($cliente) {
-            if(password_verify($request->senhaCliente, $cliente->senhaCliente)) {
-                // $request->session()->put('login', $request->login);
-                // $request->session()->put('idCliente', $cliente->idCliente);
+                $token = Str::random(200);
 
-                //return $request.json_encode($cliente);
-                return("Login feito, boy!");
+                $this->clientes->where('emailCliente', '=', $request->emailCliente)->update([ //muito obrigado caicu
+                    'token' => $token
+                ]);
+
+                return response()->json([
+                    'data' => $cliente,
+                ]);
             }
         }
 
-        return ('Login inválido!');
+        return response([
+            'status' => 401,
+            'message' => 'Login ou senha incorretos!',
+            'data' => error_get_last()
+        ]);
     }
 
-
-    public function soma(Request $request) {
+    public function soma(Request $request)
+    {
         $n1 = $request->n1;
         $n2 = $request->n2;
-        
+
         return $n1 + $n2;
     }
 }

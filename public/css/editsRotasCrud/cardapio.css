@@ -1,24 +1,33 @@
 .container-cont{
-    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    width: 90%;
 }
 
 table{
     background-color: #F4F4F4!important;
-    width: 90%!important;
-    margin: 4em;
+    width: 100%!important;
+    margin: 1em;
 }
 
 .container{
     width: 100vh;
 }
 
-td .botoes-editar{
+a .botoes-editar{
     width: 2.5vh;
-    height: 2.5vh;
+    height: 100%;
 }
-td .botoes-excluir{
+
+a .botoes-excluir{
+    cursor: pointer;
     width: 2.5vh;
-    height: 2.5vh;
+    height: 100%;
+}
+
+.btn-editar-excluir{
+    flex-direction: row;
+    justify-content: center;
 }
 
 td .img2{
@@ -31,4 +40,137 @@ li{
 
 .menu-prato a{
     margin: 2em;
+}
+
+.card-footer{
+    padding-right: 0!important;
+    padding-left: 0!important;
+    text-align: center;
+    justify-content: space-between;
+}
+
+.card-footer button{
+    color: white;
+    background-color: #f50000!important;
+    width: 50%;
+    height: 3vh;
+    font-size: 0.7vw!important;
+}
+
+.card-footer button:hover{
+    color: white;
+    background-color: #FF4F4E!important;
+}
+
+.card-footer button:focus{
+    color: white;
+}
+
+.modal-footer button{
+    color: white;
+    background-color: #f50000!important;
+    font-size: 0.7vw!important;
+}
+
+.modal-footer button:hover{
+    color: white;
+    background-color: #FF4F4E!important;
+}
+
+.card-deck{
+    margin-left: auto!important;
+    margin-right: auto!important;
+    height: 65vh!important;
+    width: 100%!important;
+}
+
+.card p{
+    padding-left: 1em!important;
+    margin-bottom: 5%;
+}
+
+.btn-cadastro{
+    margin-left: auto!important;
+    margin-right: auto!important;
+    width: 100%!important;
+    margin-bottom: 1em;
+    margin-top: 3em;
+}
+
+.btn-cadastro a{
+    color: white;
+    background-color: #f50000;
+}
+
+.btn-cadastro a:hover{
+    color: white;
+    background-color: #ff2f48;
+}
+
+.card-deck .card{
+    width: 100%!important;
+    margin-left: 0!important;
+}
+
+.card-body{
+    height: 10vh;
+    padding: 1rem!important;
+}
+
+h5{
+   font-size: max(20px, 1.1vw)!important;  /* viewport unit(width) */
+}
+
+.table {
+    margin-left: auto!important;
+    margin-right: auto!important;
+}
+
+.card .card-img-top{
+    height: 20vh;
+    width: 100%;
+}
+
+.mais-informacoes{
+    padding: 0!important;
+    font-size: 15px!important;
+}
+
+.col{
+    padding-left: 0!important;
+    height: 40vh!important;
+    width: 100%!important;
+}
+
+.scroll {
+    width: 100vh;
+    max-height: 100%;
+    overflow-y: scroll;
+}
+
+.modal-body h3{
+    text-align: center;
+}
+
+.modal-body img{
+    border-radius: 60vh;
+    width: 100%;
+    height: 100%;
+}
+
+.ftprato{
+    margin-right: auto;
+    margin-left: auto;
+    width: 20vh;
+    height: 20vh;
+}
+
+.ingredientes{
+    font-weight: 100;
+}
+
+.card-img-top{
+    
+    margin-right: auto!important;
+    margin-left: auto!important;
 }

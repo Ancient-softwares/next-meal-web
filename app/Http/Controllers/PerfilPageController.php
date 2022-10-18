@@ -6,6 +6,7 @@ use App\Models\RestauranteModel;
 use App\Models\TipoRestauranteModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 
 class PerfilPageController extends Controller
 {
@@ -19,10 +20,10 @@ class PerfilPageController extends Controller
         $this->tipoRestaurante = new TipoRestauranteModel();
     }
 
-    public function index(Request $request) {
-        $login = $request->session()->get('login');
+    public function index() {
+        $login = Session::get('login');
         if(!isset($login)) {
-            return redirect()->back();
+            return redirect()->route('login');
         }
 
         $info = RestauranteModel::where('nomeRestaurante', $login)->first();
@@ -31,10 +32,10 @@ class PerfilPageController extends Controller
         return view('perfil-page', compact('info', 'login', 'tipoRestaurante'));
     }
 
-    public function editarPerfil(Request $request) {
-        $login = $request->session()->get('login');
+    public function editarPerfil() {
+        $login = Session::get('login');
         if(!isset($login)) {
-            return redirect()->back();
+            return redirect()->route('login');
         }
 
         $info = RestauranteModel::where('nomeRestaurante', $login)->first();
@@ -44,9 +45,9 @@ class PerfilPageController extends Controller
     }
 
     public function editou(Request $request) {
-        $login = $request->session()->get('login');
+        $login = Session::get('login');
         if(!isset($login)) {
-            return redirect()->back();
+            return redirect()->route('login');
         }
 
         $imageName = $this->restaurante->where('nomeRestaurante', $login)->first()->fotoRestaurante;
@@ -75,7 +76,7 @@ class PerfilPageController extends Controller
 
         $cadastro = $this->restaurante->where('nomeRestaurante', $login)->update([
             'nomeRestaurante' => $request->nomeRestaurante,
-            'cpfRestaurante' => $request->cpfRestaurante,
+            'cnpjRestaurante' => $request->cnpjRestaurante,
             'telRestaurante' => $telefone,
             'fotoRestaurante' => $imageName,
             'emailRestaurante' => $request->emailRestaurante,
@@ -90,7 +91,7 @@ class PerfilPageController extends Controller
         ]);
 
         if($cadastro) {
-            $request->session()->put('login', $request->nomeRestaurante);
+            Session::put('login', $request->nomeRestaurante);
             return redirect()->route('perfil-page');
 
         }

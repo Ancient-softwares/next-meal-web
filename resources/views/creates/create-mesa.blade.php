@@ -1,4 +1,4 @@
-@extends('layouts.sidebar')
+@extends('layouts.hamburguer')
 
 @section('titulo', 'Criar uma mesa')
 
@@ -8,7 +8,7 @@
 
 @section('conteudo')
     <div class="container-cadastro">
-        <div class="container-form scroll">
+        <div class="container-form">
             @if($errors->any())
             <div class="alert alert-danger" role="alert">
                 {{ $errors->first() }}
@@ -50,7 +50,7 @@
                     <input type="number" class="form-control" name="numMesa" id="numMesa" value="{{$mesa->numMesa ?? ''}}">
                 </div>
                 @endif
-                <button type="submit" class="btn btn-outline-success">@if(isset($mesa))Editar @else Cadastrar @endif</button>
+                <button type="submit" class="btn btn-outline-light">@if(isset($mesa))Editar @else Cadastrar @endif</button>
             </form>
         </div>
     </div>

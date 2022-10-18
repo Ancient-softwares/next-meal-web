@@ -6,6 +6,7 @@ use App\Models\PratoModel;
 use App\Models\TipoPratoModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 
 class CrudPrato extends Controller
 {
@@ -23,13 +24,13 @@ class CrudPrato extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $login = $request->session()->get('login');
-        $id = $request->session()->get('idRestaurante');
+        $login = Session::get('login');
+        $id = Session::get('idRestaurante');
 
         if(!isset($login)) {
-            return redirect()->back();
+            return redirect()->route('login');
         }
 
         $tipos = TipoPratoModel::all();
@@ -44,11 +45,11 @@ class CrudPrato extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        $login = $request->session()->get('login');
+        $login = Session::get('login');
         if(!isset($login)) {
-            return redirect()->back();
+            return redirect()->route('login');
         }
 
 
@@ -66,16 +67,16 @@ class CrudPrato extends Controller
      */
     public function store(Request $request)
     {
-        $login = $request->session()->get('login');
-        $idRestaurante = $request->session()->get('idRestaurante');
+        $login = Session::get('login');
+        $idRestaurante = Session::get('idRestaurante');
         if(!isset($login)) {
-            return redirect()->back();
+            return redirect()->route('login');
         }
 
         $validated = $request->validate([
             'nomePrato' => 'required',
             'valorPrato' => 'required',
-            'ingredientesPrato' => 'required',
+            'ingredientePrato' => 'required',
             'fotoPrato' => 'required',
             'tipoPrato' => 'required',
         ]);
@@ -97,7 +98,7 @@ class CrudPrato extends Controller
         $cadastro = $this->pratos->create([
             'nomePrato' => $request->nomePrato,
             'valorPrato' => $request->valorPrato,
-            'ingredientesPrato' => $request->ingredientesPrato,
+            'ingredientePrato' => $request->ingredientePrato,
             'fotoPrato' => $imageName,
             'idRestaurante' => $idRestaurante,
             'idTipoPrato' => $request->tipoPrato
@@ -127,11 +128,11 @@ class CrudPrato extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function edit($id)
     {
-        $login = $request->session()->get('login');
+        $login = Session::get('login');
         if(!isset($login)) {
-            return redirect()->back();
+            return redirect()->route('login');
         }
 
         $tipos = TipoPratoModel::all();
@@ -149,15 +150,15 @@ class CrudPrato extends Controller
      */
     public function update(Request $request, $id)
     {
-        $login = $request->session()->get('login');
+        $login = Session::get('login');
         if(!isset($login)) {
-            return redirect()->back();
+            return redirect()->route('login');
         }
 
         $validated = $request->validate([
             'nomePrato' => 'required',
             'valorPrato' => 'required',
-            'ingredientesPrato' => 'required',
+            'ingredientePrato' => 'required',
             'tipoPrato' => 'required',
         ]);
 
@@ -181,7 +182,7 @@ class CrudPrato extends Controller
         $cadastro = $this->pratos->where(['idPrato'=>$id])->update([
             'nomePrato' => $request->nomePrato,
             'valorPrato' => $request->valorPrato,
-            'ingredientesPrato' => $request->ingredientesPrato,
+            'ingredientePrato' => $request->ingredientePrato,
             'fotoPrato' => $imageName,
             'idTipoPrato' => $request->tipoPrato
         ]);

@@ -12,13 +12,24 @@ class ReservaModel extends Model
     protected $table = 'tbreservas';
 
     protected $fillable = [
-        'idReservas',
+        'idReserva',
         'dataReservas',
         'horaReservas',
         'numPessoas',
         'idCliente',
         'idRestaurante',
         'idStatusReserva',
-        'idAvaliação',    
+        'idAvaiacao',
     ];
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+
+    protected static function newFactory()
+    {
+        return \Database\Factories\ReservaFactory::new ();
+    }
 }
