@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -20,7 +21,6 @@ return new class extends Migration {
             $table->unsignedInteger('idCliente');
             $table->unsignedInteger('idRestaurante');
             $table->unsignedInteger('idStatusReserva');
-            $table->unsignedInteger('idAvaliacao');
             $table->timestamps();
 
             //Foreign Key
@@ -38,12 +38,6 @@ return new class extends Migration {
             $table->foreign('idStatusReserva')
                 ->references('idStatusReserva')
                 ->on('tbstatusreserva');
-
-
-            $table->foreign('idAvaliacao')
-                ->references('idAvaliacao')
-                ->on('tbavaliacao');
-
         });
     }
 

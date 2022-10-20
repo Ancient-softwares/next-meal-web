@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AvaliacaoModel;
+use App\Models\ClienteModel;
 use App\Models\ReservaModel;
+use App\Models\RestauranteModel;
 use App\Models\StatusReservaModel;
+use App\Models\TipoRestauranteModel;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Throwable;
 
 class ReservadoidaController extends Controller
 {
@@ -15,6 +20,26 @@ class ReservadoidaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    private $reservas;
+    private $restaurantes;
+    private $clientes;
+    private $tipoRestaurante;
+    private $avaliacao;
+
+    private $statusReserva;
+
+
+    public function __construct()
+    {
+        $this->reservas = new ReservaModel();
+        $this->restaurantes = new RestauranteModel();
+        $this->clientes = new ClienteModel();
+        $this->tipoRestaurante = new TipoRestauranteModel();
+        $this->avaliacao = new AvaliacaoModel();
+        $this->statusReserva = new StatusReservaModel();
+    }
+
     public function index()
     {
         $login = Session::get('login');
@@ -38,10 +63,11 @@ class ReservadoidaController extends Controller
     {
         try {
             $cliente = $this->clientes->where('idCliente', '=', $request->idCliente)->first();
-            $restaurante = $this->restaurantes->where('idRestaurante', '=', $request->idRestaurante)->first();
+            $restaurante = RestauranteModel::where('idRestaurante', '=', $request->idRestaurante)->first();
 
             $datetime = strtotime($request->dataReserva);
-            $dataReserva = date('Y-m-d H:i', $datetime);
+            $dataReserva = date('Y-m-d', $datetime);
+            $horaReserva = date('H:i:s', $datetime);
 
             $numPessoas = $request->numPessoas;
 
@@ -49,11 +75,11 @@ class ReservadoidaController extends Controller
 
             $reserva = $this->reservas->create([
                 'dataReserva' => $dataReserva,
+                'horaReserva' => $horaReserva,
                 'numPessoas' => $numPessoas,
                 'idCliente' => $cliente->idCliente,
                 'idRestaurante' => $restaurante->idRestaurante,
                 'idStatusReserva' => $statusReserva->idStatusReserva,
-                'idAvaliacao' => null,
             ]);
 
             return response()->json([
@@ -63,7 +89,8 @@ class ReservadoidaController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'message' => 'Erro ao criar reserva',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
+                'request' => $request->all(),
             ], 500);
         }
     }
@@ -76,7 +103,6 @@ class ReservadoidaController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**

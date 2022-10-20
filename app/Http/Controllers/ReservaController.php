@@ -11,8 +11,6 @@ use App\Models\AvaliacaoModel;
 use App\Models\RestauranteModel;
 use App\Models\StatusReservaModel;
 use App\Models\TipoRestauranteModel;
-use App\Models\historicoClienteModel;
-use App\Http\Controllers\AppController;
 
 class ReservaController extends Controller
 {

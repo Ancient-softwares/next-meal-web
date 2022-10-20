@@ -35,8 +35,4 @@ Route::post('/editar-perfil', [PerfilPageController::class, 'editou'])->name('ed
 // Cruds
 Route::resource('mesas', CrudMesa::class);
 Route::resource('cardapio', CrudPrato::class);
-
-// mobile
-Route::get('/mobile/teste', [WebController::class, 'testeMobile'])->name('testeMobile');
-Route::post('/mobile/soma', [WebController::class, 'soma'])->name('soma');
-Route::post('/mobile/cadastroCliente', [WebController::class, 'cadastroCliente'])->name('cadastroCliente');
+Route::resource('reservas', ReservadoidaController::class);

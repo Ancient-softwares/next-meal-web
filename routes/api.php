@@ -29,10 +29,8 @@ Route::post('/cadastroCliente', [AppController::class, 'cadastroCliente'])->name
 Route::post('/loginCliente', [AppController::class, 'loginCliente'])->name('loginCliente');
 Route::post('/uploadImage', [AppController::class, 'uploadImage'])->name('uploadImage');
 
-// reserva
-
-Route::resource('reserva', ReservadoidaController::class);
-
+// reservas
+Route::post('/reserva', [ReservadoidaController::class, 'create']);
 Route::get('/getReservas', [ReservadoidaController::class, 'getReservas'])->name('getReservas');
 Route::get('/getReserva/{id}', [ReservadoidaController::class, 'getReserva'])->name('getReserva');
 Route::get('/getReservasByRestaurante/{id}', [ReservadoidaController::class, 'getReservasByRestaurante'])->name('getReservasByRestaurante');
@@ -42,3 +40,5 @@ Route::get('/getReservasByData/{id}', [ReservadoidaController::class, 'getReserv
 
 Route::get('/aceitarReserva/{id}', [ReservadoidaController::class, 'aceitarReserva'])->name('aceitarReserva');
 Route::get('/rejeitarReserva/{id}', [ReservadoidaController::class, 'rejeitarReserva'])->name('rejeitarReserva');
+
+Route::resource('reservas', ReservadoidaController::class);
