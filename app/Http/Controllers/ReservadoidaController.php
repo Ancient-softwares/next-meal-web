@@ -69,23 +69,48 @@ class ReservadoidaController extends Controller
             $dataReserva = date('Y-m-d', $datetime);
             $horaReserva = date('H:i:s', $datetime);
 
-            $numPessoas = $request->numPessoas;
+            // check if the restaurant is open
+            $horaAbertura = strtotime($restaurante->horaAbertura);
+            $horaFechamento = strtotime($restaurante->horaFechamento);
+            $horaReserva = strtotime($horaReserva);
 
-            $statusReserva = StatusReservaModel::where('statusReserva', '=', 'Aguardando')->first();
+            if ($horaReserva < $horaAbertura || $horaReserva > $horaFechamento) {
+                return response()->json([
+                    'message' => 'O restaurante está fechado nesse horário',
+                    'status' => 400
+                ], 400);
+            } else {
+                // checks if the date is available
+                $reserva = $this->reservas->where('idRestaurante', '=', $request->idRestaurante)
+                    ->where('dataReserva', '=', $dataReserva)
+                    ->where('horaReserva', '=', $horaReserva)
+                    ->first();
 
-            $reserva = $this->reservas->create([
-                'dataReserva' => $dataReserva,
-                'horaReserva' => $horaReserva,
-                'numPessoas' => $numPessoas,
-                'idCliente' => $cliente->idCliente,
-                'idRestaurante' => $restaurante->idRestaurante,
-                'idStatusReserva' => $statusReserva->idStatusReserva,
-            ]);
+                if ($reserva) {
+                    return response()->json([
+                        'message' => 'Data e hora indisponíveis',
+                        'status' => 400
+                    ]);
+                } else {
+                    $numPessoas = $request->numPessoas;
 
-            return response()->json([
-                'message' => 'Reserva realizada com sucesso!',
-                'data' => $reserva,
-            ], 201);
+                    $statusReserva = StatusReservaModel::where('statusReserva', '=', 'Aguardando')->first();
+
+                    $reserva = $this->reservas->create([
+                        'dataReserva' => $dataReserva,
+                        'horaReserva' => $horaReserva,
+                        'numPessoas' => $numPessoas,
+                        'idCliente' => $cliente->idCliente,
+                        'idRestaurante' => $restaurante->idRestaurante,
+                        'idStatusReserva' => $statusReserva->idStatusReserva,
+                    ]);
+
+                    return response()->json([
+                        'message' => 'Reserva realizada com sucesso!',
+                        'data' => $reserva,
+                    ], 201);
+                }
+            }
         } catch (Exception $e) {
             return response()->json([
                 'message' => 'Erro ao criar reserva',
