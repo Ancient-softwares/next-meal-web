@@ -9,6 +9,7 @@ use App\Models\RestauranteModel;
 use App\Models\ClienteModel;
 use App\Models\TipoRestauranteModel;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
 
 class AppController extends Controller
@@ -147,5 +148,233 @@ class AppController extends Controller
             'message' => 'Login ou senha incorretos!',
             'data' => error_get_last()
         ]);
+    }
+
+    // gets all restaurants by type
+    public function getRestaurantsByType(Request $request)
+    {
+        try {
+            $type = $request->type;
+            $typeId = $this->tipoRestaurante->where('tipoRestaurante', '=', $type)->first();
+
+            $restaurantes = $this->restaurantes->where('idTipoRestaurante', '=', $typeId)->get();
+
+            return response()->json([
+                'message' => 'Restaurantes encontrados do tipo ' . $type,
+                'data' => $restaurantes
+            ]);
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
+
+    // gets all restaurants by name
+    public function getRestaurantsByName(Request $request)
+    {
+        try {
+            $name = $request->name;
+
+            $restaurantes = $this->restaurantes->where('nomeRestaurante', 'like', '%' . $name . '%')->get();
+
+            return response()->json([
+                'message' => 'Restaurantes encontrados com o nome ' . $name,
+                'data' => $restaurantes
+            ]);
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
+
+    // passwrod reset
+    public function resetPassword(Request $request)
+    {
+        try {
+            $email = $request->email;
+            $senha = $request->senha;
+
+            $cliente = $this->clientes->where('emailCliente', '=', $email)->first();
+
+            if ($cliente) {
+                $this->clientes->where('emailCliente', '=', $email)->update([
+                    'senhaCliente' => $senha
+                ]);
+
+                return response()->json([
+                    'message' => 'Senha alterada com sucesso!',
+                    'data' => $cliente
+                ]);
+            } else {
+                return response()->json([
+                    'message' => 'Email não encontrado!',
+                    'data' => $cliente
+                ]);
+            }
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
+
+    // update user data
+    public function updateUserData(Request $request)
+    {
+        try {
+            $email = $request->email;
+            $nome = $request->nome;
+            $celular = $request->celular;
+            $cpf = $request->cpf;
+            $cep = $request->cep;
+            $rua = $request->rua;
+            $numero = $request->numero;
+            $bairro = $request->bairro;
+            $cidade = $request->cidade;
+            $estado = $request->estado;
+
+            $cliente = $this->clientes->where('emailCliente', '=', $email)->first();
+
+            if ($cliente) {
+                $this->clientes->where('emailCliente', '=', $email)->update([
+                    'nomeCliente' => $nome,
+                    'celCliente' => $celular,
+                    'cpfCliente' => $cpf,
+                    'cepCliente' => $cep,
+                    'ruaCliente' => $rua,
+                    'numCasa' => $numero,
+                    'bairroCliente' => $bairro,
+                    'cidadeCliente' => $cidade,
+                    'estadoCliente' => $estado
+                ]);
+
+                return response()->json([
+                    'message' => 'Dados atualizados com sucesso!',
+                    'data' => $cliente
+                ]);
+            } else {
+                return response()->json([
+                    'message' => 'Email não encontrado!',
+                    'data' => $cliente
+                ]);
+            }
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
+
+    // update user by id
+    public function updateUserById(Request $request)
+    {
+        try {
+            $id = $request->id;
+            $nome = $request->nome;
+            $celular = $request->celular;
+            $cpf = $request->cpf;
+            $cep = $request->cep;
+            $rua = $request->rua;
+            $numero = $request->numero;
+            $bairro = $request->bairro;
+            $cidade = $request->cidade;
+            $estado = $request->estado;
+
+            $cliente = $this->clientes->where('idCliente', '=', $id)->first();
+
+            if ($cliente) {
+                $this->clientes->where('idCliente', '=', $id)->update([
+                    'nomeCliente' => $nome,
+                    'celCliente' => $celular,
+                    'cpfCliente' => $cpf,
+                    'cepCliente' => $cep,
+                    'ruaCliente' => $rua,
+                    'numCasa' => $numero,
+                    'bairroCliente' => $bairro,
+                    'cidadeCliente' => $cidade,
+                    'estadoCliente' => $estado
+                ]);
+
+                return response()->json([
+                    'message' => 'Dados atualizados com sucesso!',
+                    'data' => $cliente
+                ]);
+            } else {
+                return response()->json([
+                    'message' => 'Email não encontrado!',
+                    'data' => $cliente
+                ]);
+            }
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
+
+    // get user data
+    public function getUserData(Request $request)
+    {
+        try {
+            $email = $request->email;
+
+            $cliente = $this->clientes->where('emailCliente', '=', $email)->first();
+
+            if ($cliente) {
+                return response()->json([
+                    'message' => 'Dados do usuário ' . $email,
+                    'data' => $cliente
+                ]);
+            } else {
+                return response()->json([
+                    'message' => 'Email não encontrado!',
+                    'data' => $cliente
+                ]);
+            }
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
+
+    // get user data by id
+    public function getUserDataById(Request $request)
+    {
+        try {
+            $id = $request->id;
+
+            $cliente = $this->clientes->where('idCliente', '=', $id)->first();
+
+            if ($cliente) {
+                return response()->json([
+                    'message' => 'Dados do usuário ' . $id,
+                    'data' => $cliente
+                ]);
+            } else {
+                return response()->json([
+                    'message' => 'Id não encontrado!',
+                    'data' => $cliente
+                ]);
+            }
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
+
+    // delete user by id
+    public function deleteUserById(Request $request)
+    {
+        try {
+            $id = $request->id;
+
+            $cliente = $this->clientes->where('idCliente', '=', $id)->first();
+
+            if ($cliente) {
+                $this->clientes->where('idCliente', '=', $id)->delete();
+
+                return response()->json([
+                    'message' => 'Usuário deletado com sucesso!',
+                    'data' => $cliente
+                ]);
+            } else {
+                return response()->json([
+                    'message' => 'Id não encontrado!',
+                    'data' => $cliente
+                ]);
+            }
+        } catch (Exception $e) {
+            return $e;
+        }
     }
 }

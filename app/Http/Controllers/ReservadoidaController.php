@@ -9,8 +9,10 @@ use App\Models\RestauranteModel;
 use App\Models\StatusReservaModel;
 use App\Models\TipoRestauranteModel;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use Throwable;
 
 class ReservadoidaController extends Controller
@@ -74,10 +76,15 @@ class ReservadoidaController extends Controller
             $horaFechamento = strtotime($restaurante->horaFechamento);
             $horaReserva = strtotime($horaReserva);
 
+
             if ($horaReserva < $horaAbertura || $horaReserva > $horaFechamento) {
                 return response()->json([
                     'message' => 'O restaurante está fechado nesse horário',
-                    'status' => 400
+                    'status' => 400,
+                    'request' => $request->all(),
+                    'open' => $restaurante->horaAbertura,
+                    'close' => $restaurante->horaFechamento,
+                    'restaurante' => $restaurante,
                 ], 400);
             } else {
                 // checks if the date is available
@@ -94,21 +101,31 @@ class ReservadoidaController extends Controller
                 } else {
                     $numPessoas = $request->numPessoas;
 
-                    $statusReserva = StatusReservaModel::where('statusReserva', '=', 'Aguardando')->first();
+                    // checks if the restaurant has enough tables
+                    $space = $restaurante->capacidadeRestaurante - $restaurante->ocupacaoRestaurante;
 
-                    $reserva = $this->reservas->create([
-                        'dataReserva' => $dataReserva,
-                        'horaReserva' => $horaReserva,
-                        'numPessoas' => $numPessoas,
-                        'idCliente' => $cliente->idCliente,
-                        'idRestaurante' => $restaurante->idRestaurante,
-                        'idStatusReserva' => $statusReserva->idStatusReserva,
-                    ]);
+                    if ($space < $request->numPessoas) {
+                        return response()->json([
+                            'message' => 'Não há mesas disponíveis para a quantidade de pessoas informada',
+                            'status' => 400
+                        ], 400);
+                    } else {
+                        $statusReserva = StatusReservaModel::where('statusReserva', '=', 'Aguardando')->first();
 
-                    return response()->json([
-                        'message' => 'Reserva realizada com sucesso!',
-                        'data' => $reserva,
-                    ], 201);
+                        $reserva = $this->reservas->create([
+                            'dataReserva' => $dataReserva,
+                            'horaReserva' => $horaReserva,
+                            'numPessoas' => $numPessoas,
+                            'idCliente' => $cliente->idCliente,
+                            'idRestaurante' => $restaurante->idRestaurante,
+                            'idStatusReserva' => $statusReserva->idStatusReserva,
+                        ]);
+
+                        return response()->json([
+                            'message' => 'Reserva realizada com sucesso!',
+                            'data' => $reserva,
+                        ], 201);
+                    }
                 }
             }
         } catch (Exception $e) {
@@ -159,24 +176,43 @@ class ReservadoidaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): JsonResponse
     {
         try {
             $reserva = $this->reservas->where('idReserva', '=', $request->idReserva)->first();
 
-            $reserva->dataReserva = $request->dataReserva || $reserva->dataReserva;
-            $reserva->numPessoas = $request->numPessoas || $reserva->numPessoas;
-            $reserva->idCliente = $request->idCliente || $reserva->idCliente;
-            $reserva->idRestaurante = $request->idRestaurante || $reserva->idRestaurante;
-            $reserva->idStatusReserva = $request->idStatusReserva || $reserva->idStatusReserva;
-            $reserva->idAvaliacao = $request->idAvaliacao || $reserva->idAvaliacao;
+            $validator = $request->validate([
+                'idReserva' => 'required|integer|exists:reservas,idReserva',
+                'idStatusReserva' => 'required|integer|exists:status_reserva,idStatusReserva',
+                'dataReserva' => 'required|date|date_format:Y-m-d',
+                'horaReserva' => 'required|date_format:H:i:s',
+                'numPessoas' => 'required|integer|min:1',
+                'idCliente' => 'required|integer|exists:clientes,idCliente',
+                'idRestaurante' => 'required|integer|exists:restaurantes,idRestaurante',
+            ]);
 
-            $reserva->save();
+            $validate = Validator::make($request->all(), $validator);
 
-            return response()->json([
-                'message' => 'Reserva atualizada com sucesso!',
-                'data' => $reserva,
-            ], 201);
+            if ($validate->fails()) {
+                return response()->json([
+                    'message' => 'Erro ao atualizar reserva',
+                    'error' => $validate->errors(),
+                    'request' => $request->all(),
+                ], 400);
+            } else {
+                $reserva->dataReserva = $request->dataReserva || $reserva->dataReserva;
+                $reserva->numPessoas = $request->numPessoas || $reserva->numPessoas;
+                $reserva->idCliente = $request->idCliente || $reserva->idCliente;
+                $reserva->idRestaurante = $request->idRestaurante || $reserva->idRestaurante;
+                $reserva->idStatusReserva = $request->idStatusReserva || $reserva->idStatusReserva;
+
+                $reserva->save();
+
+                return response()->json([
+                    'message' => 'Reserva atualizada com sucesso!',
+                    'data' => $reserva,
+                ], 201);
+            }
         } catch (Exception $e) {
             return response()->json([
                 'message' => 'Erro ao atualizar reserva',
@@ -191,7 +227,7 @@ class ReservadoidaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request, $id): JsonResponse
     {
         try {
             $query = ReservaModel::where('idReserva', '=', $request->idReserva)->delete();

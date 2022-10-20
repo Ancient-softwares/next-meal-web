@@ -30,7 +30,8 @@ return new class extends Migration
             $table->string('estadoRestaurante', 40);
             $table->time('horarioAberturaRestaurante');
             $table->time('horarioFechamentoRestaurante');
-            $table->integer('capMaximaRestaurante');
+            $table->integer('capacidadeRestaurante');
+            $table->integer('ocupacaoRestaurante');
             $table->unsignedInteger('idTipoRestaurante');
 
             $table->timestamps();

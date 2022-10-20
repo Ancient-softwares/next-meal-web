@@ -20,7 +20,7 @@ class RestauranteSeeder extends Seeder
             array(
                 [
                     'nomeRestaurante' => "Ragazzo",
-                    'cnpjRestaurante' => "--",
+                    'cnpjRestaurante' => "12345678901234",
                     'telRestaurante' => "1125555555",
                     'loginRestaurante' => "ragazzo",
                     'senhaRestaurante' => password_hash('123', PASSWORD_DEFAULT),
@@ -32,7 +32,8 @@ class RestauranteSeeder extends Seeder
                     'bairroRestaurante' => "COHAB A",
                     'cidadeRestaurante' => "Gravataí",
                     'estadoRestaurante' => "RS",
-                    'capMaximaRestaurante' => 1,
+                    'capacidadeRestaurante' => 30,
+                    'ocupacaoRestaurante' => 0,
                     'idTipoRestaurante' => 1,
                     'horarioAberturaRestaurante' => "12:00:00",
                     'horarioFechamentoRestaurante' => "23:00:00",
@@ -41,7 +42,7 @@ class RestauranteSeeder extends Seeder
                 ],
                 [
                     'nomeRestaurante' => "Spoleto",
-                    'cnpjRestaurante' => "--",
+                    'cnpjRestaurante' => "98765432109876",
                     'telRestaurante' => "1123333333",
                     'loginRestaurante' => "spoleto",
                     'senhaRestaurante' => password_hash('123', PASSWORD_DEFAULT),
@@ -53,7 +54,8 @@ class RestauranteSeeder extends Seeder
                     'bairroRestaurante' => "Além Ponte",
                     'cidadeRestaurante' => "Sorocaba",
                     'estadoRestaurante' => "SP",
-                    'capMaximaRestaurante' => 1,
+                    'capacidadeRestaurante' => 40,
+                    'ocupacaoRestaurante' => 0,
                     'idTipoRestaurante' => 2,
                     'horarioAberturaRestaurante' => "8:00:00",
                     'horarioFechamentoRestaurante' => "17:00:00",
