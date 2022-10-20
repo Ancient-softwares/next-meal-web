@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -14,7 +15,7 @@ return new class extends Migration {
     {
         Schema::create('tbstatusreserva', function (Blueprint $table) {
             $table->increments('idStatusReserva');
-            $table->string('statusReserva', 10);
+            $table->string('statusReserva');
             $table->timestamps();
         });
     }

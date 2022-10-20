@@ -17,31 +17,23 @@ class StatusReservaSeeder extends Seeder
     public function run()
     {
         DB::table('tbstatusreserva')->insert(
-        array([
-            'statusReserva' => 'Reservado',
-            'created_at' => Date::now(),
-            'updated_at' => Date::now(),
-        ],
-        [
-            'statusReserva' => 'Confirmado',
-            'created_at' => Date::now(),
-            'updated_at' => Date::now(),
-        ],
-        [
-            'statusReserva' => 'Cancelado',
-            'created_at' => Date::now(),
-            'updated_at' => Date::now(),
-        ],
-        [
-            'statusReserva' => 'Finalizado',
-            'created_at' => Date::now(),
-            'updated_at' => Date::now(),
-        ],
-        [
-            'statusReserva' => 'Aguardando',
-            'created_at' => Date::now(),
-            'updated_at' => Date::now(),
-        ])
+            array(
+                [
+                    'statusReserva' => 'Confirmado',
+                    'created_at' => Date::now(),
+                    'updated_at' => Date::now(),
+                ],
+                [
+                    'statusReserva' => 'Cancelado',
+                    'created_at' => Date::now(),
+                    'updated_at' => Date::now(),
+                ],
+                [
+                    'statusReserva' => 'Aguardando',
+                    'created_at' => Date::now(),
+                    'updated_at' => Date::now(),
+                ]
+            )
         );
     }
 }
