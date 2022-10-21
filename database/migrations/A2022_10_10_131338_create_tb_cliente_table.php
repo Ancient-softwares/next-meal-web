@@ -27,6 +27,7 @@ return new class extends Migration {
             $table->string('bairroCliente', 100);
             $table->string('cidadeCliente', 100);
             $table->string('estadoCliente', 40);
+            $table->string('token', 255)->default('');
             $table->timestamps();
         });
     }
