@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -16,7 +17,6 @@ return new class extends Migration {
             $table->increments('idCliente');
             $table->string('nomeCliente', 300);
             $table->char('cpfCliente', 14);
-            $table->char('rgCliente', 13);
             $table->string('senhaCliente', 255);
             $table->string('fotoCliente');
             $table->string('emailCliente', 100);

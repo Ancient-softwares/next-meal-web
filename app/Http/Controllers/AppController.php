@@ -54,40 +54,53 @@ class AppController extends Controller
 
     public function cadastroCliente(Request $request)
     {
-        $senha = $request->senha;
-        $senha = password_hash($senha, PASSWORD_DEFAULT);
+        try {
+            $senha = $request->senha;
+            $senha = password_hash($senha, PASSWORD_DEFAULT);
 
-        $celCliente = $request->celCliente;
-        $celCliente = preg_replace('/[^A-Za-z0-9\-]/', '', $celCliente);
-        $celCliente = str_replace('-', '', $celCliente);
+            $telefone = $request->telefoneCliente;
+            $telefone = preg_replace('/[^A-Za-z0-9\-]/', '', $telefone);
+            $telefone = str_replace('-', '', $telefone);
 
-        $cpf = $request->cpfCliente;
-        $cpf = preg_replace('/[^A-Za-z0-9\-]/', '', $cpf);
-        $cpf = str_replace('-', '', $cpf);
+            $cpf = $request->cpfCliente;
+            $cpf = preg_replace('/[^A-Za-z0-9\-]/', '', $cpf);
+            $cpf = str_replace('-', '', $cpf);
 
-        $cep = $request->cepCliente;
-        $cep = str_replace('-', '', $cep);
+            $cep = $request->cepCliente;
+            $cep = str_replace('-', '', $cep);
 
-        // $this->uploadImage($request->fotoCliente, $request->nomeCliente);
+            // $this->uploadImage($request->fotoCliente, $request->nomeCliente);
 
-        $cad = $this->clientes->create([
-            "nomeCliente" => $request->nomeCliente,
-            "cpfCliente" => $cpf,
-            "celCliente" => $celCliente,
-            "senhaCliente" => $request->senhaCliente,
-            "emailCliente" => $request->emailCliente,
-            "cepCliente" => $cep,
-            "ruaCliente" => $request->ruaCliente,
-            "numCasa" => $request->numCasa,
-            "bairroCliente" => $request->bairroCliente,
-            "cidadeCliente" => $request->cidadeCliente,
-            "estadoCliente" => $request->estadoCliente
-        ]);
+            $cad = $this->clientes->create([
+                "nomeCliente" => $request->nomeCliente,
+                "cpfCliente" => $cpf,
+                "telefoneCliente" => $telefone,
+                "senhaCliente" => $request->senhaCliente,
+                "emailCliente" => $request->emailCliente,
+                "fotoCliente" => $request->fotoCliente || '../../../public/img/sem-foto.png',
+                "cepCliente" => $cep,
+                "ruaCliente" => $request->ruaCliente,
+                "numCasa" => $request->numCasa,
+                "bairroCliente" => $request->bairroCliente,
+                "cidadeCliente" => $request->cidadeCliente,
+                "estadoCliente" => $request->estadoCliente
+            ]);
 
-        if ($cad) {
-            return $request . json_encode($cad);
-        } else {
-            return false;
+            if ($cad) {
+                return $request . json_encode($cad);
+            } else {
+                return response()->json([
+                    'error' => 'Erro ao cadastrar cliente',
+                    'status' => 500,
+                    'request' => $request->all()
+                ], 500);
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => 'Erro ao cadastrar cliente',
+                'message' => $e->getMessage(),
+                'request' => $request->all()
+            ], 500);
         }
     }
 
@@ -218,16 +231,16 @@ class AppController extends Controller
     public function updateUserData(Request $request)
     {
         try {
-            $email = $request->email;
-            $nome = $request->nome;
-            $celular = $request->celular;
-            $cpf = $request->cpf;
-            $cep = $request->cep;
-            $rua = $request->rua;
-            $numero = $request->numero;
-            $bairro = $request->bairro;
-            $cidade = $request->cidade;
-            $estado = $request->estado;
+            $email = $request->emailCliente;
+            $nome = $request->nomeCliente;
+            $celular = $request->telefoneCliente;
+            $cpf = $request->cpfCliente;
+            $cep = $request->cepCliente;
+            $rua = $request->ruaCliente;
+            $numero = $request->numeroCliente;
+            $bairro = $request->bairroCliente;
+            $cidade = $request->cidadeCliente;
+            $estado = $request->estadoCliente;
 
             $cliente = $this->clientes->where('emailCliente', '=', $email)->first();
 
@@ -263,23 +276,23 @@ class AppController extends Controller
     public function updateUserById(Request $request)
     {
         try {
-            $id = $request->id;
-            $nome = $request->nome;
-            $celular = $request->celular;
-            $cpf = $request->cpf;
-            $cep = $request->cep;
-            $rua = $request->rua;
-            $numero = $request->numero;
-            $bairro = $request->bairro;
-            $cidade = $request->cidade;
-            $estado = $request->estado;
+            $id = $request->idCliente;
+            $nome = $request->nomeCliente;
+            $celular = $request->telefoneCliente;
+            $cpf = $request->cpfCliente;
+            $cep = $request->cepCliente;
+            $rua = $request->ruaCliente;
+            $numero = $request->numeroCliente;
+            $bairro = $request->bairroCliente;
+            $cidade = $request->cidadeCliente;
+            $estado = $request->estadoCliente;
 
             $cliente = $this->clientes->where('idCliente', '=', $id)->first();
 
             if ($cliente) {
                 $this->clientes->where('idCliente', '=', $id)->update([
                     'nomeCliente' => $nome,
-                    'celCliente' => $celular,
+                    'telefoneCliente' => $celular,
                     'cpfCliente' => $cpf,
                     'cepCliente' => $cep,
                     'ruaCliente' => $rua,
