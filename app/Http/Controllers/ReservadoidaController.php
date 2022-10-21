@@ -61,7 +61,7 @@ class ReservadoidaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Request $request): JsonResponse
     {
         try {
             $cliente = $this->clientes->where('idCliente', '=', $request->idCliente)->first();

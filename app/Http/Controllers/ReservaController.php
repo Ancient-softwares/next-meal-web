@@ -56,7 +56,9 @@ class ReservaController extends Controller
             $restaurante = $this->restaurantes->where('idRestaurante', '=', $request->idRestaurante)->first();
 
             $datetime = strtotime($request->dataReserva);
-            $dataReserva = date('Y-m-d H:i', $datetime);
+            $dataReserva = date('Y-m-d', $datetime);
+
+            $horaReserva = date('H:i:s', $datetime);
 
             $numPessoas = $request->numPessoas;
 
@@ -64,6 +66,7 @@ class ReservaController extends Controller
 
             $reserva = $this->reservas->create([
                 'dataReserva' => $dataReserva,
+                'horaReserva' => $horaReserva,
                 'numPessoas' => $numPessoas,
                 'idCliente' => $cliente->idCliente,
                 'idRestaurante' => $restaurante->idRestaurante,

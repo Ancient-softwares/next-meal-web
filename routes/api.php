@@ -42,6 +42,7 @@ Route::post('/resetPassword', [AppController::class, 'resetPassword'])->name('re
 
 // reservas
 Route::post('/reserva', [ReservadoidaController::class, 'create']);
+Route::post('/reserva2', [ReservaController::class, 'reserva'])->name('reserva');
 Route::get('/getReservas', [ReservadoidaController::class, 'getReservas'])->name('getReservas');
 Route::get('/getReserva/{id}', [ReservadoidaController::class, 'getReserva'])->name('getReserva');
 Route::get('/getReservasByRestaurante/{id}', [ReservadoidaController::class, 'getReservasByRestaurante'])->name('getReservasByRestaurante');
