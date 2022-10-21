@@ -36,7 +36,7 @@ Route::delete('/deleteUser', [AppController::class, 'deleteUserById'])->name('de
 Route::patch('/updateUser', [AppController::class, 'updateUserData'])->name('updateUserData');
 Route::patch('/updateUserById', [AppController::class, 'updateUserById'])->name('updateUserById');
 Route::get('/getUser', [AppController::class, 'getUserData'])->name('getUserData');
-Route::get('/getUserById', [AppController::class, 'getUserById'])->name('getUserById');
+Route::get('/getUserById/{id}', [AppController::class, 'getUserById'])->name('getUserById');
 Route::post('/resetPassword', [AppController::class, 'resetPassword'])->name('resetPassword');
 
 

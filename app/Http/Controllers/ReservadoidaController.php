@@ -67,9 +67,10 @@ class ReservadoidaController extends Controller
             $cliente = $this->clientes->where('idCliente', '=', $request->idCliente)->first();
             $restaurante = RestauranteModel::where('idRestaurante', '=', $request->idRestaurante)->first();
 
-            $datetime = strtotime($request->dataReserva);
-            $dataReserva = date('Y-m-d', $datetime);
-            $horaReserva = date('H:i:s', $datetime);
+            $date = strtotime($request->dataReserva);
+            $time = 
+            $dataReserva = date('Y-m-d', $date);
+            $horaReserva = date('H:i:s', $date);
 
             // check if the restaurant is open
             $horaAbertura = strtotime($restaurante->horaAbertura);

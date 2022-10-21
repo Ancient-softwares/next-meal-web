@@ -53,35 +53,64 @@ class ReservaController extends Controller
     {
         try {
             $cliente = $this->clientes->where('idCliente', '=', $request->idCliente)->first();
-            $restaurante = $this->restaurantes->where('idRestaurante', '=', $request->idRestaurante)->first();
+            $restaurante = RestauranteModel::where('idRestaurante', '=', $request->idRestaurante)->first();
 
             $datetime = strtotime($request->dataReserva);
+            $time = strtotime($request->horaReserva);
             $dataReserva = date('Y-m-d', $datetime);
+            $horaReserva = date('H:i:s', $time);
 
-            $horaReserva = date('H:i:s', $datetime);
+            // check if the restaurant is open
+            $horaAbertura = strtotime($restaurante->horarioAberturaRestaurante);
+            $horaFechamento = strtotime($restaurante->horarioFechamentoRestaurante);
+            $horaReserva = strtotime($horaReserva);
 
-            $numPessoas = $request->numPessoas;
+            if ($horaReserva < $horaAbertura || $horaReserva > $horaFechamento) {
+                return response()->json([
+                    'message' => 'O restaurante está fechado nesse horário',
+                    'status' => 400,
+                    'request' => $request->all(),
+                    'restaurante' => $restaurante,
+                    'horarios' => [date('H:i:s', $horaAbertura), date('H:i:s', $horaFechamento), date('H:i:s', $horaReserva),  $datetime]
+                ], 400);
+            } else {
+                // checks if the date is available
+                $reserva = $this->reservas->where('idRestaurante', '=', $request->idRestaurante)
+                    ->where('dataReserva', '=', $dataReserva)
+                    ->where('horaReserva', '=', date('H:i:s', $horaReserva))
+                    ->first();
 
-            $statusReserva = StatusReservaModel::where('statusReserva', '=', 'Aguardando')->first();
+                if ($reserva) {
+                    return response()->json([
+                        'message' => 'Data e hora indisponíveis',
+                        'status' => 400,
+                        'horarios' => [date('H:i:s', $horaAbertura), date('H:i:s', $horaFechamento), date('H:i:s', $horaReserva), $reserva, $request->all()]
+                    ]);
+                } else {
+                    $numPessoas = $request->numPessoas;
 
-            $reserva = $this->reservas->create([
-                'dataReserva' => $dataReserva,
-                'horaReserva' => $horaReserva,
-                'numPessoas' => $numPessoas,
-                'idCliente' => $cliente->idCliente,
-                'idRestaurante' => $restaurante->idRestaurante,
-                'idStatusReserva' => $statusReserva->idStatusReserva,
-                'idAvaliacao' => null,
-            ]);
+                    $statusReserva = StatusReservaModel::where('statusReserva', '=', 'Aguardando')->first();
 
-            return response()->json([
-                'message' => 'Reserva realizada com sucesso!',
-                'data' => $reserva,
-            ], 201);
+                    $reserva = $this->reservas->create([
+                        'dataReserva' => $dataReserva,
+                        'horaReserva' => date('H:i:s', $horaReserva),
+                        'numPessoas' => $numPessoas,
+                        'idCliente' => $cliente->idCliente,
+                        'idRestaurante' => $restaurante->idRestaurante,
+                        'idStatusReserva' => $statusReserva->idStatusReserva,
+                    ]);
+
+                    return response()->json([
+                        'message' => 'Reserva realizada com sucesso!',
+                        'data' => $reserva,
+                    ], 201);
+                }
+            }
         } catch (Exception $e) {
             return response()->json([
                 'message' => 'Erro ao criar reserva',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
+                'request' => $request->all(),
             ], 500);
         }
     }
