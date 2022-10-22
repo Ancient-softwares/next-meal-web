@@ -185,12 +185,13 @@ section.hero h2 {
 
 /* Modal Content */
 .modal-content {
-    background-color: #fff;
+    background-color: #ffffffd9;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 100%;
     max-width: 555px;
+    border-radius: 2.4em;
 }
 
 .modal-content h2 {
@@ -241,8 +242,12 @@ input[type=password] {
     padding: 14px 20px;
     margin: 8px 0px;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid #ff000017;
     box-sizing: border-box;
+    border-radius: 2em;
+}
+hr{
+    color: #f40723;
 }
 
 .corpin-baixo .butao {

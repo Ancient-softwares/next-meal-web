@@ -25,5 +25,17 @@ class ClienteModel extends Model
         'bairroCliente',
         'cidadeCliente',
         'estadoCliente',
+        'token'
     ];
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+
+    protected static function newFactory()
+    {
+        return \Database\Factories\ClienteFactory::new ();
+    }
 }

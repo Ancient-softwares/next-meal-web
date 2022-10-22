@@ -23,25 +23,33 @@
 
 
 <div class="container-cadastro scroll">
-    <div class="container-form ">
+    <div class="container-form">
         <h1 class="TitleRegisterMesa">Editar perfil</h1>
         <hr>
         <form action="{{ route('editou') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <label>Nome do restaurante: </label>
-            <input type="text" class="form-control" name="nomeRestaurante" required value="{{ $info->nomeRestaurante ?? '' }}">
+            <div class="row">
+                <div class="col-sm-6">
+                    <label>Nome do restaurante: </label>
+                    <input type="text" class="form-control" name="nomeRestaurante" required value="{{ $info->nomeRestaurante ?? '' }}">
+                </div>
+                <div class="col-sm-6">
+                    <label>Telefone do restaurante: </label>
+                    <input type="text" class="form-control" name="telRestaurante" id="telefone" required value="{{ $info->telRestaurante ?? '' }}">
+                </div>
+            </div>
             <br>
 
-            <label>Cpf do restaurante: </label>
-            <input type="text" class="form-control" name="cpfRestaurante" id="cpf" required value="{{ $info->cpfRestaurante ?? '' }}">
-            <br>
-
-            <label>Telefone do restaurante: </label>
-            <input type="text" class="form-control" name="telRestaurante" id="telefone" required value="{{ $info->telRestaurante ?? '' }}">
-            <br>
-
-            <label>E-mail do restaurante: </label>
-            <input type="email" class="form-control" name="emailRestaurante" required value="{{ $info->emailRestaurante ?? '' }}">
+            <div class="row">
+                <div class="col-sm-6">
+                    <label>Cnpj do restaurante: </label>
+                    <input type="text" class="form-control" name="cnpjRestaurante" required value="{{ $info->cnpjRestaurante ?? '' }}">
+                </div>
+                <div class="col-sm-6">
+                    <label>E-mail do restaurante: </label>
+                    <input type="email" class="form-control" name="emailRestaurante" required value="{{ $info->emailRestaurante ?? '' }}">
+                </div>
+            </div>
             <br>
 
             <label>Cep do restaurante: </label>
@@ -58,34 +66,46 @@
             <label>Número do restaurante: </label>
             <input type="text" class="form-control" name="numRestaurante" id="numero" required value="{{ $info->numRestaurante ?? '' }}">
             <br>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Bairro do restaurante: </label>
+                    <input type="text" class="form-control" name="bairroRestaurante" id="bairro" required value="{{ $info->bairroRestaurante ?? '' }}">
             
-            <label>Bairro do restaurante: </label>
-            <input type="text" class="form-control" name="bairroRestaurante" id="bairro" required value="{{ $info->bairroRestaurante ?? '' }}">
-            <br>
+                </div>
+                <div class="col-sm-6">
+                    <label>Cidade do restaurante: </label>
+                    <input type="text" class="form-control" name="cidadeRestaurante" id="cidade" required value="{{ $info->cidadeRestaurante ?? '' }}">
             
-            <label>Cidade do restaurante: </label>
-            <input type="text" class="form-control" name="cidadeRestaurante" id="cidade" required value="{{ $info->cidadeRestaurante ?? '' }}">
-            <br>
-            
-            <label>Estado do restaurante: </label>
-            <input type="text" class="form-control" name="estadoRestaurante" id="estado" required value="{{ $info->estadoRestaurante ?? '' }}">
+                </div>
+                <div class="col-sm-2">
+                    <label>Estado: </label>
+                    <input type="text" class="form-control" name="estadoRestaurante" id="estado" required value="{{ $info->estadoRestaurante ?? '' }}">
+                </div>
+            </div>
             <br>
 
-            <label>capacidade máxima do restaurante: </label>
-            <input type="number" class="form-control" name="capMaximaRestaurante" value="{{ $info->capMaximaRestaurante ?? '' }}">
+            
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>capacidade máxima do restaurante: </label>
+                    <input type="number" class="form-control" name="capMaximaRestaurante" value="{{ $info->capMaximaRestaurante ?? '' }}">
+                </div>
+                <div class="col-sm-6">
+                    <label>Tipo do restaurante: </label>
+                    <select name="tipoRestaurante" class="form-control">
+                        @foreach($tipos as $tipo)
+                            <option value="{{ $tipo->idTipoRestaurante }}">{{ $tipo->tipoRestaurante }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <label for="formFile" class="form-label">Foto do restaurante</label>
+                    <input type="file" name="fotoRestaurante" class="form-control" id="formFile">
+                </div>
+            </div>
             <br>
-
-            <label>Tipo do restaurante: </label>
-            <select name="tipoRestaurante" class="form-control">
-                @foreach($tipos as $tipo)
-                    <option value="{{ $tipo->idTipoRestaurante }}">{{ $tipo->tipoRestaurante }}</option>
-                @endforeach
-            </select>
-            <br>
-
-            <label>Foto do restaurante</label>
-            <input type="file" name="fotoRestaurante" class="form-control">
-            <br>
+            
 
             <input type="submit" class="btn btn-light" value="Editar">
             <br>

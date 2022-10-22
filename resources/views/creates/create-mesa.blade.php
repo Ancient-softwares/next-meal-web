@@ -7,13 +7,13 @@
 @endsection
 
 @section('conteudo')
-<div class="container-cadastro">
-    <div class="container-form scroll">
-        @if($errors->any())
-        <div class="alert alert-danger" role="alert">
-            {{ $errors->first() }}
-        </div>
-        @endif
+    <div class="container-cadastro">
+        <div class="container-form">
+            @if($errors->any())
+            <div class="alert alert-danger" role="alert">
+                {{ $errors->first() }}
+            </div>
+            @endif
 
         <h1 class="text">@if(isset($mesa))Editar mesa de númeração {{ $mesa->numMesa }} @else Cadastrar mesa @endif </h1>
         <hr>

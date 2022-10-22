@@ -76,7 +76,8 @@
   <!-- -->
   <div id="modalLogin" class="modal">
     <div class="modal-content">
-      <h2>Login</h2>
+      <h2 class="Registro-cadrastar-style">Login</h2>
+      <hr>
       <div class="corpin">
         @if($errors->any())
         <div class="alert alert-danger" role="alert">
@@ -91,8 +92,8 @@
           <label>Senha: </label>
           <input type="password" name="senha">
           <div class="btn-login">
-
-            <input type="submit" class="btn btn-success" value="Entrar">
+         
+            <input type="submit" class=" btn btn-custom" value="Entrar">
             <a id="btn-abrirRegistro">Registrar-se</a>
           </div>
         </form>
@@ -106,7 +107,8 @@
 
   <div id="modalRegistro" class="modal">
     <div class="modal-content" class="conteudo">
-      <h2>Registro</h2>
+      <h2 class="Registro-cadrastar-style">Registro</h2>
+      <hr>
       <div class="corpin">
         @if($errors->any())
         <div class="alert alert-danger" role="alert">
@@ -114,7 +116,7 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('registrar') }}">
+        <!-- <form method="POST" action="{{ route('registrar') }}">
           @csrf
           <label>Nome do restaurante: </label>
           <input type="text" name="nome">
@@ -155,50 +157,82 @@
             <a id="btn-abrirLogin">Login</a>
 
           </div>
-        </form>
+        </form> -->
 
-        <!-- <form id="regForm"  method="POST" action="{{ route('registrar') }}">
-          
-           <div class="tab">
-              <label>Nome do restaurante: </label>
-              <input type="text" name="nome">
+        <form id="regForm" method="POST" action="{{ route('registrar') }}">
+          @csrf
+          <div class="tab">
+            <label>Nome do restaurante: </label>
+            <input type="text" name="nome">
+            <br>
 
-              <label>Telefone do restaurante: </label>
-              <input type="text" name="telefone" id="telefone">
+            <label>Telefone do restaurante: </label>
+            <input type="text" name="telefone" id="telefone">
+            <br>
+            <div class="row">
+              <div class="col-sm-6">
+                <label>Login: </label>
+                <input type="text" name="login">
+              </div>
+              <div class="col-sm-6">
+                <label>Senha: </label>
+                <input type="password" name="senha">
+              </div>
+            </div>
           </div>
           <div class="tab">
-              <label>Nome do restaurante: </label>
-              <input type="text" name="nome">
+            <div class="row">
+              <div class="col-sm-5">
+                <label>Cep:
+                  <input name="cep" type="text" id="cep" value="" size="10" maxlength="9" onblur="pesquisacep(this.value);" /></label>
+              </div>
+              <div class="col-sm-5">
+                <label>Rua: <input name="rua" type="text" id="rua" /> </label>
+              </div>
+              <div class="col-sm-2">
+                <label>Estado:
+                  <input name="uf" type="text" id="uf" /></label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-5">
+                <label>Bairro:
+                  <input name="bairro" type="text" id="bairro" /></label>
+              </div>
+              <div class="col-sm-5">
+                <label>Cidade:
+                  <input name="cidade" type="text" id="cidade" /></label>
+              </div>
+              <div class="col-sm-2">
+                <label>Numero: </label>
+                <input type="text" name="numero" id="numero">
+                <br>
+              </div>
+            </div>
+          </div>
 
-              <label>Telefone do restaurante: </label>
-              <input type="text" name="telefone" id="telefone">
-          </div> 
-       
-       
-         
-          Já possui login? <a class="edit-entra-registro" href="#">Entrar</a>
+
+          Já possui login? <a class="edit-entra-registro" type="button" id="btn-abrirLogin">Entrar</a>
           <div class="d-grid gap-2">
-                    <div style="overflow:auto;">
-                        <div style="float:right;">
-                          <button type="button" class="btn btn-custom" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-                          <button type="button" class="btn btn-custom" id="nextBtn" onclick="nextPrev(1)">Next</button>
-                        </div>
-                      </div>
-                </div>
-        </form> -->
-        <!-- <div style="text-align:center;">
-            <span class="step"></span>
-            <span class="step"></span>
-            <span class="step"></span>
-            <span class="step"></span>
-        </div> -->
-
-
-
+            <div style="overflow:auto;">
+              <div style="float:right;">
+                <button type="button" class="btn btn-custom" id="prevBtn" onclick="nextPrev(-1)">Anterior</button>
+                <button type="button" class="btn btn-custom" id="nextBtn" onclick="nextPrev(1)">Próximo</button>
+              </div>
+            </div>
+          </div>
+          <div style="text-align:center;">
+              <span class="step"></span>
+              <span class="step"></span>
+          </div>
+        </form>
         
-
-
-
+        
+        
+        
+        
+        
+        
       </div>
     </div>
   </div>
@@ -365,6 +399,10 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
   <script src="{{ asset('js/Modal.js') }}"></script>
   <script src="{{ asset('js/back-top.js') }}"></script>
+  <script src="{{ asset('js/registroHome/teste.js') }}"></script>
+  <script src="{{ asset('js/registroHome/jquery-3.6.1.min.jss') }}"></script>
+
+
 
 
 </body>

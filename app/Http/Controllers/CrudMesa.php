@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MesaModel;
 use App\Models\RestauranteModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CrudMesa extends Controller
 {
@@ -23,10 +24,10 @@ class CrudMesa extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index(Request $request)
+    public function index()
     {
-        $login = $request->session()->get('login');
-        $id = $request->session()->get('idRestaurante');
+        $login = Session::get('login');
+        $id = Session::get('idRestaurante');
 
         if(!isset($login)) {
             return redirect()->back();
@@ -43,9 +44,9 @@ class CrudMesa extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        $login = $request->session()->get('login');
+        $login = Session::get('login');
 
         if(!isset($login)) {
             return redirect()->back();
@@ -62,7 +63,7 @@ class CrudMesa extends Controller
      */
     public function store(Request $request)
     {
-        $restaurante = RestauranteModel::where("nomeRestaurante", $request->session()->get('login'))->first();
+        $restaurante = RestauranteModel::where("nomeRestaurante", Session::get('login'))->first();
     
         $numeracao = $this->mesas->where([["numMesa", "=", $request->numMesa], ["idRestaurante", "=", $restaurante->idRestaurante]])->first();
 
@@ -107,14 +108,12 @@ class CrudMesa extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function edit($id)
     {
-        $login = $request->session()->get('login');
+        $login = Session::get('login');
         if(!isset($login)) {
             return redirect()->back();
         }
-
-        
 
         $mesa = $this->mesas->where('idMesa', $id)->first();
 

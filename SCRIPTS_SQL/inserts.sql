@@ -39,8 +39,7 @@ INSERT INTO tbavaliacao (notaAvaliacao, idRestaurante,descAvaliacao,dtAvaliacao,
 	 (4, 2,'teste2','2022-09-18','2022-09-18 21:51:42.0','2022-09-18 21:51:42.0'),
 	 (1, 3,'teste3','2022-09-18','2022-09-18 21:51:42.0','2022-09-18 21:51:42.0'),
 	 (5, 5,'teste1','2022-09-18','2022-09-18 21:55:56.0','2022-09-18 21:55:56.0'),
-	 (4, 2,'teste2','2022-09-18','2022-09-18 21:55:56.0','2022-09-18 21:55:56.0'),
-	 (1, 4,'teste3','2022-09-18','2022-09-18 21:55:56.0','2022-09-18 21:55:56.0');
+	 (4, 4,'teste2','2022-09-18','2022-09-18 21:55:56.0','2022-09-18 21:55:56.0'),
 
 -- INNER JOIN das tabelas tbrestaurante, tbtiporestaurante e tbavaliacao
 SELECT tbrestaurante.nomeRestaurante, tbtiporestaurante.tipoRestaurante, tbavaliacao.notaAvaliacao FROM tbrestaurante 
