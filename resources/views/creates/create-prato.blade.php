@@ -35,11 +35,11 @@
                 </div>
                 <div class="form-group">
                     <label for="ingredientes">Ingredientes</label>
-                    <input type="text" class="form-control" name="ingredientePrato" id="ingredientes" placeholder="Digite os ingredientes" value="{{$prato->ingredientesPrato ?? ''}}">
+                    <input type="text" class="form-control" name="ingredientesPrato" id="ingredientes" placeholder="Digite os ingredientes" value="{{$prato->ingredientesPrato ?? ''}}">
                 </div>
                 <div class="form-group">
                     <label>Foto do Prato</label>
-                    <input type="file" name="fotoPrato" class="form-control">
+                    <input type="file" name="fotoPrato" class="form-control form-imagem">
                 </div>
 
                 <div class="form-group">

@@ -53,3 +53,12 @@ form{
     color: white!important;
     border-color: #ff2f48!important;
 }
+
+.btn-editar{
+    margin-top: 1em;
+}
+
+.form-imagem{
+    padding: 0.2em!important;
+    padding-left: 1em!important;
+}
