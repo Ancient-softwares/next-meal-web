@@ -24,7 +24,7 @@
     <div class="global">
         <h4>Pendentes</h4>
         <div class="aceitar-reserva scroll">
-            @foreach($reserva as $r)
+            @foreach($reservas as $r)
             <div class="card-group">
                 <div class="card">
                     <img src="{{ asset('img/sidebar/casa.png') }}" class="card-img-top" alt="...">
