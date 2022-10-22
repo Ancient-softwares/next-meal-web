@@ -82,7 +82,7 @@
             <li>
                 <a href="/reserva">
                     <i class='bx'>
-                        <img src="{{ asset('img/sidebar/usuarios-alt.png') }}" alt="">
+                        <img src="{{ asset('img/sidebar/reserva.png') }}" alt="">
                     </i>
                     <span class="link_name">Reservas</span>
                 </a>
