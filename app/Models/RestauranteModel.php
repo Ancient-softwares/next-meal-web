@@ -15,7 +15,7 @@ class RestauranteModel extends Model
         "idRestaurante",
         "nomeRestaurante",
         "cnpjRestaurante",
-        "telRestaurante",
+        "telefoneRestaurante",
         "loginRestaurante",
         "senhaRestaurante",
         "fotoRestaurante",
@@ -39,6 +39,6 @@ class RestauranteModel extends Model
 
     protected static function newFactory()
     {
-        return \Database\Factories\RestauranteFactory::new ();
+        return \Database\Factories\RestauranteFactory::new();
     }
 }

@@ -112,15 +112,27 @@ class AppController extends Controller
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
-            $imageName = time() . '.' . $request->image->extension();
+            $validated = $request->validated();
 
-            $request->image->move(public_path('images'), $imageName);
+            if ($validated) {
+                $imageName = time() . '.' . $request->image->extension();
 
-            $upload = $this->clientes->create([
-                "fotoCliente" => $imageName
-            ]);
+                $request->image->move(public_path('img'), $imageName);
 
-            return response()->json(['success' => $imageName]);
+                $upload = $this->clientes->imageCliente = $imageName;
+
+                return response()->json([
+                    'message' => 'Imagem enviada com sucesso',
+                    'status' => 200,
+                    'image' => $imageName
+                ], 200);
+            } else {
+                return response()->json([
+                    'message' => 'Erro ao enviar imagem',
+                    'status' => 500,
+                    'request' => $request->all()
+                ], 500);
+            }
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
         }

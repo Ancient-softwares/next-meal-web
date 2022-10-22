@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('fotoCliente');
             $table->string('emailCliente', 100);
             $table->char('cepCliente', 9);
-            $table->char('telefoneCliente', 15);
+            $table->string('telefoneCliente', 15);
             $table->string('ruaCliente', 100);
             $table->string('numCasa', 5);
             $table->string('bairroCliente', 100);
