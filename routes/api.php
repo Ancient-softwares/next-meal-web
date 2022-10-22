@@ -39,6 +39,8 @@ Route::get('/getUser', [AppController::class, 'getUserData'])->name('getUserData
 Route::get('/getUserById/{id}', [AppController::class, 'getUserById'])->name('getUserById');
 Route::post('/resetPassword', [AppController::class, 'resetPassword'])->name('resetPassword');
 
+//token
+Route::get('/getToken/{emailCliente}', [AppController::class, 'getToken'])->name('getToken');
 
 // reservas
 Route::post('/reserva', [ReservadoidaController::class, 'create']);

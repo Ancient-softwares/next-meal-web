@@ -153,25 +153,30 @@ class AppController extends Controller
         $cliente = $this->clientes->where('emailCliente', '=', $request->emailCliente)->first();
         $senha = $request->senhaCliente;
 
-        if ($cliente) {
-            if ($senha == $cliente->senhaCliente) {
-
-                $token = Str::random(200);
-
-                $this->clientes->where('emailCliente', '=', $request->emailCliente)->update([ //muito obrigado caicu
-                    'token' => $token
-                ]);
-
-                return response()->json([
-                    'data' => $cliente,
-                ]);
-            }
+        if (!$cliente) {
+           return response([
+                'status' => 401,
+                'message' => 'Login ou senha incorretos!',
+                'data' => error_get_last(),
+           ]);    
+        }
+        
+        if ($senha != $cliente->senhaCliente) {
+            return response([
+                'status' => 401,
+                'message' => 'Login ou senha incorretos!',
+                'data' => error_get_last(),
+            ]);    
         }
 
-        return response([
-            'status' => 401,
-            'message' => 'Login ou senha incorretos!',
-            'data' => error_get_last()
+        $token = Str::random(200);
+
+        $this->clientes->where('emailCliente', '=', $request->emailCliente)->update([ //muito obrigado caicu
+            'token' => $token,
+        ]);
+
+        return response()->json([
+            'data' => $cliente,
         ]);
     }
 
