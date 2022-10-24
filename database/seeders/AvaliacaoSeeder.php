@@ -20,39 +20,40 @@ class AvaliacaoSeeder extends Seeder
     public function run()
     {
         DB::table('tbavaliacao')->insert(
-        array([
-            'dtAvaliacao' => Date::now(),
-            'notaAvaliacao' => 5,
-            'descAvaliacao' => 'Primeira descrição da avaliação',
-            'idRestaurante' => 1,
-            'created_at' => Date::now(),
-            'updated_at' => Date::now(),
-        ],
-        [
-            'dtAvaliacao' => Date::now(),
-            'notaAvaliacao' => 4,
-            'descAvaliacao' => 'Segunda descrição da avaliação',
-            'idRestaurante' => 1,
-            'created_at' => Date::now(),
-            'updated_at' => Date::now(),
-        ],
-        [
-            'dtAvaliacao' => Date::now(),
-            'notaAvaliacao' => 3,
-            'descAvaliacao' => 'Terceira descrição da avaliação',
-            'idRestaurante' => 2,
-            'created_at' => Date::now(),
-            'updated_at' => Date::now(),
-        ],
-        [
-            'dtAvaliacao' => Date::now(),
-            'notaAvaliacao' => 2,
-            'descAvaliacao' => 'Quarta descrição de avaliação',
-            'idRestaurante' => 2,
-            'created_at' => Date::now(),
-            'updated_at' => Date::now(),
-        ])
+            array(
+                [
+                    'dtAvaliacao' => Date::now(),
+                    'notaAvaliacao' => 5,
+                    'descAvaliacao' => 'Primeira descrição da avaliação',
+                    'idRestaurante' => 1,
+                    'created_at' => Date::now(),
+                    'updated_at' => Date::now(),
+                ],
+                [
+                    'dtAvaliacao' => Date::now(),
+                    'notaAvaliacao' => 4,
+                    'descAvaliacao' => 'Segunda descrição da avaliação',
+                    'idRestaurante' => 1,
+                    'created_at' => Date::now(),
+                    'updated_at' => Date::now(),
+                ],
+                [
+                    'dtAvaliacao' => Date::now(),
+                    'notaAvaliacao' => 1,
+                    'descAvaliacao' => 'Terceira descrição da avaliação',
+                    'idRestaurante' => 2,
+                    'created_at' => Date::now(),
+                    'updated_at' => Date::now(),
+                ],
+                [
+                    'dtAvaliacao' => Date::now(),
+                    'notaAvaliacao' => 1,
+                    'descAvaliacao' => 'Quarta descrição de avaliação',
+                    'idRestaurante' => 2,
+                    'created_at' => Date::now(),
+                    'updated_at' => Date::now(),
+                ]
+            )
         );
-
     }
 }

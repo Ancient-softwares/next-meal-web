@@ -37,6 +37,7 @@ class RestauranteSeeder extends Seeder
                     'idTipoRestaurante' => 1,
                     'horarioAberturaRestaurante' => "12:00:00",
                     'horarioFechamentoRestaurante' => "23:00:00",
+                    'descricaoRestaurante' => "Ragazzo é um restaurante italiano que oferece uma experiência gastronômica única, com pratos que vão desde a culinária tradicional italiana até as mais modernas criações. O restaurante é um dos mais tradicionais da cidade, com mais de 20 anos de história e uma equipe de profissionais altamente qualificados. O ambiente é aconchegante e agradável, com uma decoração que remete à Itália, e a música ambiente é sempre apropriada para o momento. O restaurante é ideal para quem busca um ambiente agradável e uma experiência gastronômica única.",
                     'created_at' => Date::now(),
                     'updated_at' => Date::now(),
                 ],
@@ -59,6 +60,7 @@ class RestauranteSeeder extends Seeder
                     'idTipoRestaurante' => 2,
                     'horarioAberturaRestaurante' => "8:00:00",
                     'horarioFechamentoRestaurante' => "17:00:00",
+                    'descricaoRestaurante' => "Spoleto é um restaurante italiano que oferece uma experiência gastronômica única, com pratos que vão desde a culinária tradicional italiana até as mais modernas criações. O restaurante é um dos mais tradicionais da cidade, com mais de 20 anos de história e uma equipe de profissionais altamente qualificados. O ambiente é aconchegante e agradável, com uma decoração que remete à Itália, e a música ambiente é sempre apropriada para o momento. O restaurante é ideal para quem busca um ambiente agradável e uma experiência gastronômica única.",
                     'created_at' => Date::now(),
                     'updated_at' => Date::now(),
                 ]

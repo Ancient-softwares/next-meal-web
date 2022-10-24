@@ -44,10 +44,38 @@ class AppController extends Controller
 
     public function getRestaurants()
     {
-        $table = RestauranteModel::select('tbrestaurante.idRestaurante', 'tbrestaurante.nomeRestaurante', 'tbrestaurante.fotoRestaurante', 'tbtiporestaurante.tipoRestaurante', 'tbavaliacao.notaAvaliacao')
+        $table = RestauranteModel::select(
+            'tbrestaurante.idRestaurante',
+            'tbrestaurante.telRestaurante',
+            'tbrestaurante.emailRestaurante',
+            'tbrestaurante.ruaRestaurante',
+            'tbrestaurante.cepRestaurante',
+            'tbrestaurante.ruaRestaurante',
+            'tbrestaurante.bairroRestaurante',
+            'tbrestaurante.cidadeRestaurante',
+            'tbrestaurante.estadoRestaurante',
+            'tbrestaurante.horarioAberturaRestaurante',
+            'tbrestaurante.horarioFechamentoRestaurante',
+            'tbrestaurante.capacidadeRestaurante',
+            'tbrestaurante.ocupacaoRestaurante',
+            'tbrestaurante.nomeRestaurante',
+            'tbrestaurante.fotoRestaurante',
+            'tbrestaurante.descricaoRestaurante',
+            'tbtiporestaurante.tipoRestaurante',
+        )
             ->join('tbtiporestaurante', 'tbtiporestaurante.idTipoRestaurante', '=', 'tbrestaurante.idTipoRestaurante')
             ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbrestaurante.idRestaurante')
             ->get();
+
+        $rating = $this->avaliacao->select('tbrestaurante.nomeRestaurante', 'tbavaliacao.notaAvaliacao')
+            ->join('tbrestaurante', 'tbrestaurante.idRestaurante', '=', 'tbavaliacao.idRestaurante')
+            ->get()->groupBy('idRestaurante')->map(function ($item, $key) {
+                return $item->where('idRestaurante', $key)->avg('notaAvaliacao');
+            });
+
+        $table->map(function ($item) use ($rating) {
+            $item->rating = $rating;
+        });
 
         return response()->json($table);
     }
@@ -154,19 +182,19 @@ class AppController extends Controller
         $senha = $request->senhaCliente;
 
         if (!$cliente) {
-           return response([
+            return response([
                 'status' => 401,
                 'message' => 'Login ou senha incorretos!',
                 'data' => error_get_last(),
-           ]);    
+            ]);
         }
-        
+
         if ($senha != $cliente->senhaCliente) {
             return response([
                 'status' => 401,
                 'message' => 'Login ou senha incorretos!',
                 'data' => error_get_last(),
-            ]);    
+            ]);
         }
 
         $token = Str::random(200);
@@ -176,7 +204,10 @@ class AppController extends Controller
         ]);
 
         return response()->json([
+            'status' => 200,
+            'message' => 'Login realizado com sucesso!',
             'data' => $cliente,
+            'token' => $token,
         ]);
     }
 
