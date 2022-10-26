@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CrudMesa;
 use App\Http\Controllers\CrudPrato;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\PerfilPageController;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +27,7 @@ Route::post('/autenticar', [WebController::class, 'autenticar'])->name('autentic
 Route::post('/registrar', [WebController::class, 'registrar'])->name('registrar');
 Route::get('/logout', [WebController::class, 'logout'])->name('logout');
 
-Route::get('/index', [WebController::class, 'dashboard'])->name('index');
+Route::get('/index', [DashboardController::class, 'index'])->name('index');
 
 
 Route::get('/perfil-page', [PerfilPageController::class, 'index'])->name('perfil-page');

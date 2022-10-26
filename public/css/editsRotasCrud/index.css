@@ -59,8 +59,7 @@ clientes-recentes{
 grafico{
   grid-area:f;
   border-radius: 2em;
-
-  
+  background-color: #f4f4f4;
 }
 
 .container-dash{
