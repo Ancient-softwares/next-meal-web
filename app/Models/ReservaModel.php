@@ -9,7 +9,7 @@ class ReservaModel extends Model
 {
     use HasFactory;
 
-    protected $table = 'tbreservas';
+    protected $table = 'tbreserva';
 
     protected $fillable = [
         'idReserva',

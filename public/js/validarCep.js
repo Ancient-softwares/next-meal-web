@@ -1,4 +1,4 @@
-/*$(document).ready(function() {
+$(document).ready(function() {
     $("#validar").on("click", function(){
         var cep = $("#cep").val();
         var url = "https://viacep.com.br/ws/"+cep+"/json";
@@ -17,7 +17,7 @@
             }
         });
     })
-});*/
+});
 
 function limpa_formulário_cep() {
     //Limpa valores do formulário de cep.

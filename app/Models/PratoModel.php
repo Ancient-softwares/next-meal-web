@@ -15,7 +15,7 @@ class PratoModel extends Model
         'idPrato',
         'nomePrato',
         'valorPrato',
-        'ingredientePrato',
+        'ingredientesPrato',
         'fotoPrato',
         'idTipoPrato',
         'idRestaurante',

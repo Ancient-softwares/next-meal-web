@@ -148,10 +148,10 @@
                             <div class="ftprato">
                                 <img class="card-img-top" src="/img/pratos/{{ $prato->fotoPrato }}">
                             </div>
-                            <h3>{{ $prato->nomePrato }}</h3>
+                            <h3 class="modal-title">{{ $prato->nomePrato }}</h3>
 
                             <h6><b>Tipo do prato:</b> {{ $tipos->where('idTipoPrato', $prato->idTipoPrato)->first()->tipoPrato }}</h6>
-                            <h6><b>Ingredientes:</b> {{$prato->ingredientePrato}}</h6>
+                            <h6><b>Ingredientes:</b> {{$prato->ingredientesPrato}}</h6>
                             
                         </div>
                         <div class="modal-footer">
@@ -163,7 +163,16 @@
         </div>
 
         @endforeach
+        <!--Teste Modal-->
 
+
+
+        @foreach ($pratos as $modelPratos)
+
+        @endforeach
+
+
+        <!--Teste Modal-->
 
     </div>
 </div>

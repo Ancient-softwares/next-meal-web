@@ -25,10 +25,6 @@
 </head>
 <body>  
     <div class="container-sidebar">
-        <aside>
-            <h1 class="nomeUser">Olá, {{ $login }}!<h1>
-        </aside>
-  
         <header>
             <!-- <div class="hamburger">
                 <div class="line" id="line1"></div> 
@@ -56,6 +52,10 @@
                         <li class="menu-sidebar">
                             <a href="{{ route('mesas.index') }}" class="menu-link">
                             <img src="{{ asset('img/sidebar/tabuleiro-de-jogo-alt.png') }}" alt="">Mesas</a>   
+                        </li>
+                        <li class="menu-sidebar">
+                            <a href="/reserva" class="menu-link">
+                            <img src="{{ asset('img/sidebar/usuarios-alt.png') }}" alt="">Reservas</a>   
                         </li>
                         <li class="menu-sidebar">
                             <a href="/avaliacao" class="menu-link">

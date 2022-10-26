@@ -47,7 +47,7 @@ class ReservaController extends Controller
 
         $reservas = $this->reservas->where('idRestaurante', $id)->get();
 
-        return view("reservas", compact('reservas', 'login'));
+        return view("reserva", compact('reservas', 'login'));
     }
 
     // creates a new reservation
