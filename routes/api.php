@@ -47,6 +47,8 @@ Route::post('/reserva', [ReservadoidaController::class, 'create']);
 Route::post('/reserva2', [ReservaController::class, 'reserva'])->name('reserva');
 Route::get('/getReservas', [ReservadoidaController::class, 'getReservas'])->name('getReservas');
 Route::get('/getReserva/{id}', [ReservadoidaController::class, 'getReserva'])->name('getReserva');
+Route::get('/getClientesFieis', [ReservadoidaController::class, 'getClientesFieis'])->name('getClientesFieis');
+Route::get('/getReservasByDate', [ReservadoidaController::class, 'getReservasByDate'])->name('getReservasByDate');
 Route::get('/getReservasByRestaurante/{id}', [ReservadoidaController::class, 'getReservasByRestaurante'])->name('getReservasByRestaurante');
 Route::get('/getReservasByCliente/{id}', [ReservadoidaController::class, 'getReservasByCliente'])->name('getReservasByCliente');
 Route::get('/getReservasByStatus/{id}', [ReservadoidaController::class, 'getReservasByStatus'])->name('getReservasByStatus');

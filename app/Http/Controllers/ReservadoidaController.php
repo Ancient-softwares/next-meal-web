@@ -11,6 +11,7 @@ use App\Models\TipoRestauranteModel;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Throwable;
@@ -316,6 +317,45 @@ class ReservadoidaController extends Controller
                 'error' => $e->getMessage()
             ], 500);
         }
+    }
+
+    // numero de reservas com base no número de dias
+    public function getReservasByDate(Request $request)
+    {
+        try {
+            $reservas = $this->reservas->where('dataReserva', '>=', date('Y-m-d', strtotime($request->dataInicio)))
+                ->where('dataReserva', '<=', date('Y-m-d'))
+                ->where('idRestaurante', '=', $request->idRestaurante)
+                ->get();
+
+            return response()->json([
+                'message' => 'Reservas encontradas com sucesso!',
+                'data' => $reservas ? $reservas->count() : 0,
+            ], 201);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'Erro ao buscar reservas',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+
+    public function getClientesFieis(Request $request)
+    {
+        $query = DB::table('tbreserva')
+            ->select('tbcliente.nomeCliente', DB::raw('count(tbreserva.idCliente) as total'))
+            ->join('tbcliente', 'tbreserva.idCliente', '=', 'tbcliente.idCliente')
+            ->where('tbreserva.idRestaurante', '=', $request->idRestaurante)
+            ->groupBy('tbcliente.nomeCliente')
+            ->orderBy('total', 'desc')
+            ->limit(5)
+            ->get();
+
+        return response()->json([
+            'message' => 'Clientes encontrados com sucesso!',
+            'data' => $query,
+        ], 201);
     }
 
     // delete reserva
