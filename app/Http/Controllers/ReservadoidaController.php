@@ -136,7 +136,7 @@ class ReservadoidaController extends Controller
         string $dataReserva,
         string $horaReserva,
         int $numPessoas,
-        string $bearerToken
+        $bearerToken
     ): JsonResponse {
         try {
             $cliente = $this->clientes->where('idCliente', '=', $idCliente)->first();
@@ -145,6 +145,7 @@ class ReservadoidaController extends Controller
             if ($bearerToken != $cliente->token) {
                 return response()->json([
                     'message' => 'Você não está logado',
+                    'status' => 401,
                 ], 401);
             } else {
 
@@ -179,7 +180,7 @@ class ReservadoidaController extends Controller
                             ]);
                         } else {
                             return response()->json([
-                                'message' => 'Número de pessoas indisponível',
+                                'message' => 'O restaurante não tem capacidade para essa quantidade de pessoas',
                                 'status' => 400,
                             ]);
                         }
