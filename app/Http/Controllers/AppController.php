@@ -199,8 +199,9 @@ class AppController extends Controller
 
         $token = Str::random(200);
 
-        $this->clientes->where('emailCliente', '=', $request->emailCliente)->update([ //muito obrigado caicu
-            'token' => $token,
+        $cliente->token = $token;
+        $this->clientes->where('emailCliente', '=', $request->emailCliente)->update([
+            'token' => $token
         ]);
 
         return response()->json([

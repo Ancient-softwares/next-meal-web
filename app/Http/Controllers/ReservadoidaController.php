@@ -57,6 +57,25 @@ class ReservadoidaController extends Controller
         return view("reservas", compact('reservas', 'login'));
     }
 
+    public function bearerTokenVerify(Request $request): JsonResponse
+    {
+        try {
+
+            $token = $request->bearerToken();
+            $token = str_replace('Bearer ', '', $token);
+
+            $cliente = $this->clientes->where('idCliente', $request->idCliente)->first();
+
+            if ($cliente->token == $token) {
+                return response()->json(['status' => 'success', 'message' => 'Token válido']);
+            } else {
+                return response()->json(['status' => 'error', 'message' => 'Token inválido']);
+            }
+        } catch (Throwable $th) {
+            return response()->json(['status' => 'error', 'message' => 'Token inválido'], 401);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -89,6 +108,7 @@ class ReservadoidaController extends Controller
                 $param['bearerToken']
             );
 
+
             if ($checking->original['status'] == 200 || $checking->original['message'] == 'Reserva disponível') {
                 $statusReserva = StatusReservaModel::where('statusReserva', '=', 'Aguardando')->first();
 
@@ -118,7 +138,6 @@ class ReservadoidaController extends Controller
                 'message' => 'Erro ao criar reserva',
                 'error' => $e->getMessage(),
                 'request' => $request->all(),
-                'checking' => $checking->original['message'],
             ], 500);
         }
     }
@@ -131,11 +150,11 @@ class ReservadoidaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function checkReserva(
-        int $idCliente,
-        int $idRestaurante,
-        string $dataReserva,
-        string $horaReserva,
-        int $numPessoas,
+        $idCliente,
+        $idRestaurante,
+        $dataReserva,
+        $horaReserva,
+        $numPessoas,
         $bearerToken
     ): JsonResponse {
         try {
@@ -324,7 +343,7 @@ class ReservadoidaController extends Controller
     public function getReservasByDate(Request $request)
     {
         try {
-            $reservas = $this->reservas->where('dataReserva', '>=', date('Y-m-d', strtotime($request->dataInicio)))
+            $reservas = $this->reservas->where('dataReserva', '>=', date('Y-m-d', strtotime('-' . $request->numDias . ' days')))
                 ->where('dataReserva', '<=', date('Y-m-d'))
                 ->where('idRestaurante', '=', $request->idRestaurante)
                 ->get();
@@ -345,11 +364,11 @@ class ReservadoidaController extends Controller
     public function getClientesFieis(Request $request)
     {
         $query = DB::table('tbreserva')
-            ->select('tbcliente.nomeCliente', DB::raw('count(tbreserva.idCliente) as total'))
+            ->select('tbcliente.nomeCliente', DB::raw('count(tbreserva.idCliente) as totalReservas'))
             ->join('tbcliente', 'tbreserva.idCliente', '=', 'tbcliente.idCliente')
             ->where('tbreserva.idRestaurante', '=', $request->idRestaurante)
             ->groupBy('tbcliente.nomeCliente')
-            ->orderBy('total', 'desc')
+            ->orderBy('totalReservas', 'desc')
             ->limit(5)
             ->get();
 
@@ -426,6 +445,28 @@ class ReservadoidaController extends Controller
     {
         try {
             $reservas = $this->reservas->where('idCliente', '=', $request->idCliente)->get();
+
+            foreach ($reservas as $reserva) {
+                $reserva->restaurante = $this->restaurantes->where('idRestaurante', '=', $reserva->idRestaurante)->first()->nomeRestaurante;
+
+                $reserva->cliente = $this->clientes->where('idCliente', '=', $reserva->idCliente)->first()->nomeCliente;
+
+                $reserva->status = $this->statusReserva->where('idStatusReserva', '=', $reserva->idStatusReserva)->first()->statusReserva;
+
+                $reserva->dataReserva = date('d/m/Y', strtotime($reserva->dataReserva));
+
+                $reserva->horaReserva = date('H:i', strtotime($reserva->horaReserva));
+            }
+
+
+            foreach ($reservas as $reserva) {
+                unset($reserva->idCliente);
+                unset($reserva->idRestaurante);
+                unset($reserva->idStatusReserva);
+                unset($reserva->created_at);
+                unset($reserva->updated_at);
+            }
+
 
             return response()->json([
                 'message' => 'Reservas encontradas com sucesso!',
@@ -537,10 +578,10 @@ class ReservadoidaController extends Controller
         }
     }
     // gets last three reservations made by client
-    public function getLatestReservasCliente($id)
+    public function getLatestReservasCliente(Request $request)
     {
         try {
-            $historico = $this->reservas->where('idCliente', '=', $id)->orderBy('dataReserva', 'desc')->limit(3)->get();
+            $historico = $this->reservas->where('idCliente', '=', $request->idCliente)->orderBy('dataReserva', 'desc')->limit(3)->get();
 
             return response()->json([
                 'message' => 'Histórico encontrado com sucesso!',
