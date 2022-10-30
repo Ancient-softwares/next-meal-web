@@ -41,7 +41,7 @@ Route::post('/resetPassword', [AppController::class, 'resetPassword'])->name('re
 
 //token
 Route::get('/getToken/{emailCliente}', [AppController::class, 'getToken'])->name('getToken');
-Route::get('/bearerTokenTest', [ReservadoidaController::class, 'bearerTokenTest'])->name('bearerTokenTest');
+Route::post('/bearerTokenVerify', [ReservadoidaController::class, 'bearerTokenVerify'])->name('bearerTokenVerify');
 
 // reservas
 Route::post('/reserva', [ReservadoidaController::class, 'create']);

@@ -444,34 +444,45 @@ class ReservadoidaController extends Controller
     public function getReservasByCliente(Request $request)
     {
         try {
-            $reservas = $this->reservas->where('idCliente', '=', $request->idCliente)->get();
+            $token = $request->header('Authorization');
+            $token = str_replace('Bearer ', '', $token);
 
-            foreach ($reservas as $reserva) {
-                $reserva->restaurante = $this->restaurantes->where('idRestaurante', '=', $reserva->idRestaurante)->first()->nomeRestaurante;
+            $cliente = $this->clientes->where('idCliente', '=', $request->idCliente)->first();
 
-                $reserva->cliente = $this->clientes->where('idCliente', '=', $reserva->idCliente)->first()->nomeCliente;
+            if ($cliente->token == $token) {
+                $reservas = $this->reservas->where('idCliente', '=', $request->idCliente)->get();
 
-                $reserva->status = $this->statusReserva->where('idStatusReserva', '=', $reserva->idStatusReserva)->first()->statusReserva;
+                foreach ($reservas as $reserva) {
+                    $reserva->restaurante = $this->restaurantes->where('idRestaurante', '=', $reserva->idRestaurante)->first()->nomeRestaurante;
 
-                $reserva->dataReserva = date('d/m/Y', strtotime($reserva->dataReserva));
+                    $reserva->cliente = $this->clientes->where('idCliente', '=', $reserva->idCliente)->first()->nomeCliente;
 
-                $reserva->horaReserva = date('H:i', strtotime($reserva->horaReserva));
+                    $reserva->status = $this->statusReserva->where('idStatusReserva', '=', $reserva->idStatusReserva)->first()->statusReserva;
+
+                    $reserva->dataReserva = date('d/m/Y', strtotime($reserva->dataReserva));
+
+                    $reserva->horaReserva = date('H:i', strtotime($reserva->horaReserva));
+                }
+
+
+                foreach ($reservas as $reserva) {
+                    unset($reserva->idCliente);
+                    unset($reserva->idRestaurante);
+                    unset($reserva->idStatusReserva);
+                    unset($reserva->created_at);
+                    unset($reserva->updated_at);
+                }
+
+
+                return response()->json([
+                    'message' => 'Reservas encontradas com sucesso!',
+                    'data' => $reservas,
+                ], 201);
+            } else {
+                return response()->json([
+                    'message' => 'Você não tem permissão para acessar essas informações',
+                ], 401);
             }
-
-
-            foreach ($reservas as $reserva) {
-                unset($reserva->idCliente);
-                unset($reserva->idRestaurante);
-                unset($reserva->idStatusReserva);
-                unset($reserva->created_at);
-                unset($reserva->updated_at);
-            }
-
-
-            return response()->json([
-                'message' => 'Reservas encontradas com sucesso!',
-                'data' => $reservas,
-            ], 201);
         } catch (Exception $e) {
             return response()->json([
                 'message' => 'Erro ao buscar reservas',
