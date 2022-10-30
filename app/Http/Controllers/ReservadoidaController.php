@@ -72,22 +72,24 @@ class ReservadoidaController extends Controller
             $dataReserva = date('Y-m-d', $datetime);
             $horaReserva = date('H:i:s', $time);
 
+
             if ($cliente->token == $token) {
-                return response()->json(
-                    [
-                        'status' => 'success',
-                        'message' => 'Token válido',
-                        'cliente' => $cliente,
-                        'restaurante' => $restaurante,
-                        'dataReserva' => $dataReserva,
-                        'horaReserva' => $horaReserva,
-                        'dataReserva' => $dataReserva,
-                        'request' => $request->all()
-                    ],
-                    200
-                );
+                $reserva = $this->reservas->create([
+                    'idCliente' => $request->idCliente,
+                    'idRestaurante' => $request->idRestaurante,
+                    'dataReserva' => $dataReserva,
+                    'horaReserva' => $horaReserva,
+                    'idStatusReserva' => 1,
+                    'numPessoas' => $request->numPessoas,
+                ]);
+
+
+                return response()->json([
+                    'message' => 'Reserva realizada com sucesso!',
+                    'data' => $reserva
+                ], 200);
             } else {
-                return response()->json(['status' => 'error', 'message' => 'Token inválido', 'data' => [
+                return response()->json(['status' => 'error', 'message' => 'Token inválido parça', 'data' => [
                     'token' => $token,
                     'tokenCliente' => $cliente->token,
                     'cliente' => $cliente,
@@ -95,12 +97,15 @@ class ReservadoidaController extends Controller
                 ]]);
             }
         } catch (Throwable $th) {
-            return response()->json(['status' => 'error', 'message' => 'Token inválido', 'data' => [
-                'token' => $token,
-                'tokenCliente' => $cliente->token,
-                'cliente' => $cliente,
-                'request' => $request->all()
-            ]], 401);
+            return response()->json([
+                'message' => $th->getMessage(),
+                'data' => [
+                    'token' => $token,
+                    'tokenCliente' => $cliente->token,
+                    'cliente' => $cliente,
+                    'request' => $request->all()
+                ]
+            ], 401);
         }
     }
 
