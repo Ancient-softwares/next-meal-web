@@ -65,14 +65,42 @@ class ReservadoidaController extends Controller
             $token = str_replace('Bearer ', '', $token);
 
             $cliente = $this->clientes->where('idCliente', $request->idCliente)->first();
+            $restaurante = $this->restaurantes->where('idRestaurante', $request->idRestaurante)->first();
+
+            $datetime = strtotime($request->dataReserva);
+            $time = strtotime($request->horaReserva);
+            $dataReserva = date('Y-m-d', $datetime);
+            $horaReserva = date('H:i:s', $time);
 
             if ($cliente->token == $token) {
-                return response()->json(['status' => 'success', 'message' => 'Token válido']);
+                return response()->json(
+                    [
+                        'status' => 'success',
+                        'message' => 'Token válido',
+                        'cliente' => $cliente,
+                        'restaurante' => $restaurante,
+                        'dataReserva' => $dataReserva,
+                        'horaReserva' => $horaReserva,
+                        'dataReserva' => $dataReserva,
+                        'request' => $request->all()
+                    ],
+                    200
+                );
             } else {
-                return response()->json(['status' => 'error', 'message' => 'Token inválido']);
+                return response()->json(['status' => 'error', 'message' => 'Token inválido', 'data' => [
+                    'token' => $token,
+                    'tokenCliente' => $cliente->token,
+                    'cliente' => $cliente,
+                    'request' => $request->all()
+                ]]);
             }
         } catch (Throwable $th) {
-            return response()->json(['status' => 'error', 'message' => 'Token inválido'], 401);
+            return response()->json(['status' => 'error', 'message' => 'Token inválido', 'data' => [
+                'token' => $token,
+                'tokenCliente' => $cliente->token,
+                'cliente' => $cliente,
+                'request' => $request->all()
+            ]], 401);
         }
     }
 
@@ -208,7 +236,7 @@ class ReservadoidaController extends Controller
             }
         } catch (Exception $e) {
             return response()->json([
-                'message' => 'Erro ao criar reserva',
+                'message' => 'Erro ao validar suas credenciais',
                 'error' => $e->getMessage(),
             ], 500);
         }
