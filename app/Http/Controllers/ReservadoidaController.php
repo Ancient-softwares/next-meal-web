@@ -109,6 +109,44 @@ class ReservadoidaController extends Controller
         }
     }
 
+    public function checkDate(
+        $dataReserva,
+        $horaReserva,
+    ) {
+        try {
+
+            $reservas = $this->reservas->where('dataReserva', $dataReserva)->where('horaReserva', $horaReserva)->get();
+
+            if (count($reservas) > 0) {
+                return false;
+            }
+
+            return true;
+        } catch (Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+
+    public function verifyToken(
+        $token,
+        $idCliente
+    ) {
+        try {
+
+            $cliente = $this->clientes->where('idCliente', $idCliente)->first();
+            $token = str_replace('Bearer ', '', $token);
+
+            if ($cliente->token == $token) {
+                return true;
+            }
+
+            return false;
+        } catch (Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -247,15 +285,78 @@ class ReservadoidaController extends Controller
         }
     }
 
-
-    /**
-     * Store a newly created resource in storage.
+    /**  nesource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
+        try {
+            $token = $request->bearerToken();
+            $token = str_replace('Bearer ', '', $token);
+
+            $datetime = strtotime($request->dataReserva);
+            $time = strtotime($request->horaReserva);
+            $dataReserva = date('Y-m-d', $datetime);
+            $horaReserva = date('H:i:s', $time);
+
+            try {
+                $checkToken = $this->verifyToken($token, $request->idCliente);
+            } catch (Exception $e) {
+                return response()->json([
+                    'message' => 'Erro ao validar suas credenciais',
+                    'error' => $e->getMessage(),
+                ], 500);
+            }
+
+            try {
+                $checkDate = $this->checkDate($request->dataReserva, $request->horaReserva);
+            } catch (Exception $e) {
+                return response()->json([
+                    'message' => 'Erro ao validar a data',
+                    'error' => $e->getMessage(),
+                ], 500);
+            }
+
+            if ($checkToken && $checkDate) {
+                $cliente = $this->clientes->where('idCliente', $request->idCliente)->first();
+                $restaurante = $this->restaurantes->where('idRestaurante', $request->idRestaurante)->first();
+
+                $reserva = $this->reservas->create([
+                    'idCliente' => $request->idCliente,
+                    'idRestaurante' => $request->idRestaurante,
+                    'dataReserva' => $dataReserva,
+                    'horaReserva' => $horaReserva,
+                    'idStatusReserva' => 1,
+                    'numPessoas' => $request->numPessoas,
+                ]);
+
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Reserva realizada com sucesso',
+                    'data' => $reserva
+                ], 200);
+            } else {
+                if (!$checkToken) {
+                    return response()->json([
+                        'message' => 'Você não está logado',
+                        'status' => 401,
+                    ], 401);
+                } else {
+                    return response()->json([
+                        'message' => 'Data e hora indisponíveis',
+                        'status' => 400,
+                    ], 400);
+                }
+            }
+        } catch (Throwable $th) {
+            return response()->json([
+                'message' => 'Erro ao criar reserva',
+                'error' => $th->getMessage(),
+                'request' => $request->all(),
+            ], 500);
+        }
     }
 
     /**

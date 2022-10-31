@@ -46,6 +46,7 @@ Route::post('/bearerTokenVerify', [ReservadoidaController::class, 'bearerTokenVe
 // reservas
 Route::post('/reserva', [ReservadoidaController::class, 'create'])->name('create');
 Route::post('/reserva2', [ReservaController::class, 'reserva'])->name('reserva');
+Route::post('/reserva3', [ReservadoidaController::class, 'store'])->name('store');
 Route::get('/getReservas', [ReservadoidaController::class, 'getReservas'])->name('getReservas');
 Route::get('/getReserva/{id}', [ReservadoidaController::class, 'getReserva'])->name('getReserva');
 Route::get('/getClientesFieis/{id}', [ReservadoidaController::class, 'getClientesFieis'])->name('getClientesFieis');
