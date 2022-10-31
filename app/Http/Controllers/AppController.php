@@ -216,7 +216,7 @@ class AppController extends Controller
     {
         try {
 
-            $cep = $request->cepCliente;
+            $cep = $request->cepRestaurante;
             $cep = str_replace('-', '', $cep);
 
             $restaurante = $this->restaurantes->where('cepRestaurante', '=', $cep)->get();
