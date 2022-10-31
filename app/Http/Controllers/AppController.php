@@ -10,6 +10,7 @@ use App\Models\ClienteModel;
 use App\Models\TipoRestauranteModel;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class AppController extends Controller
@@ -62,19 +63,27 @@ class AppController extends Controller
             'tbrestaurante.fotoRestaurante',
             'tbrestaurante.descricaoRestaurante',
             'tbtiporestaurante.tipoRestaurante',
+            'tbavaliacao.notaAvaliacao',
         )
             ->join('tbtiporestaurante', 'tbtiporestaurante.idTipoRestaurante', '=', 'tbrestaurante.idTipoRestaurante')
             ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbrestaurante.idRestaurante')
             ->get();
 
-        $rating = $this->avaliacao->select('tbrestaurante.nomeRestaurante', 'tbavaliacao.notaAvaliacao')
-            ->join('tbrestaurante', 'tbrestaurante.idRestaurante', '=', 'tbavaliacao.idRestaurante')
-            ->get()->groupBy('idRestaurante')->map(function ($item, $key) {
-                return $item->where('idRestaurante', $key)->avg('notaAvaliacao');
-            });
+        // gets the average of the rating
+        $table->map(function ($item) {
+            $item->notaAvaliacao = DB::table('tbavaliacao')
+                ->where('idRestaurante', $item->idRestaurante)
+                ->avg('notaAvaliacao');
+            return $item;
+        });
 
-        $table->map(function ($item) use ($rating) {
-            $item->rating = $rating;
+        // deletes duplicates
+        $table = $table->unique('idRestaurante');
+
+        // converts the average rating to a float
+        $table->map(function ($item) {
+            $item->notaAvaliacao = (float) $item->notaAvaliacao;
+            return $item;
         });
 
         return response()->json($table);
