@@ -212,6 +212,37 @@ class AppController extends Controller
         ]);
     }
 
+    public function getRestaurantByCep(Request $request)
+    {
+        try {
+
+            $cep = $request->cepCliente;
+            $cep = str_replace('-', '', $cep);
+
+            $restaurante = $this->restaurantes->where('cepRestaurante', '=', $cep)->get();
+
+            if ($restaurante) {
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Restaurante encontrado!',
+                    'data' => $restaurante,
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Restaurante não encontrado!',
+                    'data' => error_get_last(),
+                ]);
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => 'Erro ao buscar restaurante',
+                'message' => $e->getMessage(),
+                'request' => $request->all()
+            ], 500);
+        }
+    }
+
     // gets all restaurants by type
     public function getRestaurantsByType(Request $request)
     {
