@@ -127,6 +127,48 @@ class ReservadoidaController extends Controller
         }
     }
 
+    public function checkAvailability(
+        $idRestaurante,
+        $horaReserva,
+    ) {
+        try {
+            $restaurante = $this->restaurantes->where('idRestaurante', $idRestaurante)->first();
+
+            // check if the restaurant is open
+            $horaAbertura = strtotime($restaurante->horarioAberturaRestaurante);
+            $horaFechamento = strtotime($restaurante->horarioFechamentoRestaurante);
+            $horaReserva = strtotime($horaReserva);
+
+            if ($horaReserva < $horaAbertura || $horaReserva > $horaFechamento) {
+                return false;
+            }
+
+            return true;
+        } catch (Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function checkOcupation(
+        $idRestaurante,
+        $numPessoas
+    ) {
+        try {
+            $reservas = $this->reservas->where('idRestaurante', $idRestaurante)->get();
+
+
+            $restaurante = $this->restaurantes->where('idRestaurante', $idRestaurante)->first();
+
+            if (($restaurante->capacidadeRestaurante - $restaurante->ocupacaoRestaurante) >= $numPessoas) {
+                return true;
+            }
+
+            return false;
+        } catch (Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
 
     public function verifyToken(
         $token,
@@ -301,6 +343,10 @@ class ReservadoidaController extends Controller
             $dataReserva = date('Y-m-d', $datetime);
             $horaReserva = date('H:i:s', $time);
 
+            $cliente = $this->clientes->where('idCliente', $request->idCliente)->first();
+            $restaurante = $this->restaurantes->where('idRestaurante', $request->idRestaurante)->first();
+
+
             try {
                 $checkToken = $this->verifyToken($token, $request->idCliente);
             } catch (Exception $e) {
@@ -319,9 +365,25 @@ class ReservadoidaController extends Controller
                 ], 500);
             }
 
-            if ($checkToken && $checkDate) {
-                $cliente = $this->clientes->where('idCliente', $request->idCliente)->first();
-                $restaurante = $this->restaurantes->where('idRestaurante', $request->idRestaurante)->first();
+            try {
+                $checkOcupation = $this->checkOcupation($request->idRestaurante, $request->numPessoas);
+            } catch (Exception $e) {
+                return response()->json([
+                    'message' => 'Erro ao validar a ocupação',
+                    'error' => $e->getMessage(),
+                ], 500);
+            }
+
+            try {
+                $checkAvaliable = $this->checkAvailability($request->idRestaurante, $dataReserva);
+            } catch (Exception $e) {
+                return response()->json([
+                    'message' => 'Erro ao validar a disponibilidade',
+                    'error' => $e->getMessage(),
+                ], 500);
+            }
+
+            if ($checkToken && $checkDate && $checkOcupation && $checkAvaliable) {
 
                 $reserva = $this->reservas->create([
                     'idCliente' => $request->idCliente,
@@ -340,14 +402,45 @@ class ReservadoidaController extends Controller
             } else {
                 if (!$checkToken) {
                     return response()->json([
-                        'message' => 'Você não está logado',
+                        'message' => 'Credenciais incorretas. Por favor, faça login e tente novamente?',
                         'status' => 401,
                     ], 401);
-                } else {
+                } else if (!$checkAvaliable) {
+                    return response()->json([
+                        'message' => 'O restaurante está fechado nesse horário',
+                        'horarios' => [
+                            'abertura' => $restaurante->horarioAberturaRestaurante,
+                            'fechamento' => $restaurante->horarioFechamentoRestaurante,
+                            'reserva' => $horaReserva,
+                        ],
+                        'validacao' => [
+                            'abertura' => $restaurante->horarioAberturaRestaurante > $horaReserva,
+                            'fechamento' => $restaurante->horarioFechamentoRestaurante < $horaReserva,
+                        ],
+                        'status' => 400,
+                    ], 400);
+                } else if (!$checkDate) {
                     return response()->json([
                         'message' => 'Data e hora indisponíveis',
                         'status' => 400,
                     ], 400);
+                } else if (!$checkOcupation) {
+                    return response()->json([
+                        'message' => 'O restaurante não tem capacidade para essa quantidade de pessoas',
+                        'status' => 400,
+                    ], 400);
+                } else {
+                    return response()->json([
+                        'message' => 'Erro desconhecido ao realizar a reserva',
+                        'status' => 500,
+                        'data' => $request->all(),
+                        'validations' => [
+                            'token' => $checkToken,
+                            'date' => $checkDate,
+                            'ocupation' => $checkOcupation,
+                            'availability' => $checkAvaliable,
+                        ],
+                    ], 500);
                 }
             }
         } catch (Throwable $th) {
