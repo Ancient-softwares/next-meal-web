@@ -184,11 +184,7 @@ class AppController extends Controller
                 ], 500);
             }
         } catch (Exception $e) {
-            return response()->json([
-                'error' => 'Erro ao cadastrar cliente',
-                'message' => $e->getMessage(),
-                'request' => $request->all()
-            ], 500);
+            return $e;
         }
     }
 
