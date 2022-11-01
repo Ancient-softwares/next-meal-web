@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('tbcliente', function (Blueprint $table) {
             $table->increments('idCliente');
             $table->string('nomeCliente', 300);
-            $table->char('cpfCliente', 14)->unique();
+            $table->char('cpfCliente', 11)->unique();
             $table->string('senhaCliente', 255);
             $table->string('fotoCliente');
             $table->string('emailCliente', 100)->unique();
-            $table->char('cepCliente', 9)->unique();
-            $table->string('telefoneCliente', 15)->unique();
+            $table->char('cepCliente', 8)->unique();
+            $table->string('telefoneCliente', 11)->unique();
             $table->string('ruaCliente', 100);
             $table->string('numCasa', 5);
             $table->string('bairroCliente', 100);

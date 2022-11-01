@@ -49,6 +49,7 @@ class AppController extends Controller
     {
         $table = RestauranteModel::select(
             'tbrestaurante.idRestaurante',
+            'tbrestaurante.nomeRestaurante',
             'tbrestaurante.telRestaurante',
             'tbrestaurante.emailRestaurante',
             'tbrestaurante.ruaRestaurante',
@@ -113,8 +114,8 @@ class AppController extends Controller
             // checks if the email already exists
             try {
 
-                $email = $this->clientes->where('emailCliente', $request->emailCliente)->first();
-                if ($email) {
+                $varEmail = $this->clientes->where('emailCliente', $request->emailCliente)->first();
+                if ($varEmail) {
                     return response()->json([
                         'message' => 'Email já cadastrado'
                     ], 400);
@@ -127,9 +128,8 @@ class AppController extends Controller
 
             // checks if the cpf already exists
             try {
-
-                $cpf = $this->clientes->where('cpfCliente', $cpf)->first();
-                if ($cpf) {
+                $varCpf = $this->clientes->where('cpfCliente', $cpf)->first();
+                if ($varCpf) {
                     return response()->json([
                         'message' => 'CPF já cadastrado'
                     ], 400);
@@ -143,8 +143,8 @@ class AppController extends Controller
             // checks if the phone number already exists
             try {
 
-                $telefone = $this->clientes->where('telefoneCliente', $telefone)->first();
-                if ($telefone) {
+                $varTelefone = $this->clientes->where('telefoneCliente', $telefone)->first();
+                if ($varTelefone) {
                     return response()->json([
                         'message' => 'Telefone já cadastrado'
                     ], 400);
