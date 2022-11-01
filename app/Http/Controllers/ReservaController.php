@@ -11,6 +11,7 @@ use App\Models\AvaliacaoModel;
 use App\Models\RestauranteModel;
 use App\Models\StatusReservaModel;
 use App\Models\TipoRestauranteModel;
+use Illuminate\Support\Facades\Session;
 
 class ReservaController extends Controller
 {
@@ -36,16 +37,22 @@ class ReservaController extends Controller
     // index
     public function index(Request $request)
     {
-        $login = $request->session()->get('login');
-        $id = $request->session()->get('idRestaurante');
+        $login = Session::get('login');
+        $id = Session::get('idRestaurante');
 
         if (!isset($login)) {
             return redirect()->back();
         }
 
         $reservas = $this->reservas->where('idRestaurante', $id)->get();
+        $reservasAceitas = $this->reservas->where('idRestaurante', $id)
+        ->where('idStatusReserva', "=", 2)
+        ->get();
 
-        return view("reservas", compact('reservas', 'login'));
+        $status = $this->statusReserva->all();
+        $clientes = $this->clientes->all();
+
+        return view("reserva", compact('reservas', 'clientes', 'status', 'login', 'reservasAceitas'));
     }
 
     // creates a new reservation
@@ -71,7 +78,7 @@ class ReservaController extends Controller
                     'status' => 400,
                     'request' => $request->all(),
                     'restaurante' => $restaurante,
-                    'horarios' => [date('H:i:s', $horaAbertura), date('H:i:s', $horaFechamento), date('H:i:s', $horaReserva),  $datetime]
+                    'horarios' => [date('H:i:s', $horaAbertura), date('H:i:s', $horaFechamento), date('H:i:s', $horaReserva),  $datetime],
                 ], 400);
             } else {
                 // checks if the date is available
@@ -273,21 +280,22 @@ class ReservaController extends Controller
     // accepts a reservation
     public function aceitarReserva(Request $request)
     {
-        try {
-            $reserva = $this->reservas->where('idReserva', '=', $request->idReserva)->first();
 
-            $reserva->idStatusReserva = 2;
-            $reserva->save();
+    
+        try {
+            $reserva = $this->reservas->where('idReserva', '=', $request->id)->update([
+                'idStatusReserva' => 1
+            ]);
 
             return response()->json([
                 'message' => 'Reserva aceita com sucesso!',
                 'data' => $reserva,
-            ], 201);
+            ], 201); //temo que redirecionar pros bang 
         } catch (Exception $e) {
             return response()->json([
                 'message' => 'Erro ao aceitar reserva',
                 'error' => $e->getMessage()
-            ], 500);
+            ], 500); //temo que redirecionar pros bang
         }
     }
 
@@ -295,10 +303,9 @@ class ReservaController extends Controller
     public function rejeitarReserva(Request $request)
     {
         try {
-            $reserva = $this->reservas->where('idReserva', '=', $request->idReserva)->first();
-
-            $reserva->idStatusReserva = 3;
-            $reserva->save();
+            $reserva = $this->reservas->where('idReserva', '=', $request->id)->update([
+                'idStatusReserva' => 2
+            ]);
 
             return response()->json([
                 'message' => 'Reserva rejeitada com sucesso!',

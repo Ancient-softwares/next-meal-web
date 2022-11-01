@@ -819,7 +819,7 @@ class ReservadoidaController extends Controller
     public function getLatestReservasCliente(Request $request)
     {
         try {
-            $historico = $this->reservas->where('idCliente', '=', $request->idCliente)->orderBy('dataReserva', 'desc')->limit(3)->get();
+            $historico = $this->reservas->where('idCliente', '=', $request->idCliente)->orderBy('dataReserva', 'desc')->limit($request->limite)->get();
 
             return response()->json([
                 'message' => 'Histórico encontrado com sucesso!',

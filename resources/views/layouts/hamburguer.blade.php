@@ -80,7 +80,7 @@
 
             </li>
             <li>
-                <a href="/reserva">
+                <a href="{{ route('reserva') }}">
                     <i class='bx'>
                         <img src="{{ asset('img/sidebar/usuarios-alt.png') }}" alt="">
                     </i>
