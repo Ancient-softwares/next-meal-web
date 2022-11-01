@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AvaliacaoModel;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Models\ReservaModel;
 use App\Models\RestauranteModel;
@@ -12,6 +13,7 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use PDOException;
 
 class AppController extends Controller
 {
@@ -108,6 +110,52 @@ class AppController extends Controller
 
             // $this->uploadImage($request->fotoCliente, $request->nomeCliente);
 
+            // checks if the email already exists
+            try {
+
+                $email = $this->clientes->where('emailCliente', $request->emailCliente)->first();
+                if ($email) {
+                    return response()->json([
+                        'message' => 'Email já cadastrado'
+                    ], 400);
+                }
+            } catch (Exception $e) {
+                return response()->json([
+                    'message' => 'Email já cadastrado'
+                ], 400);
+            }
+
+            // checks if the cpf already exists
+            try {
+
+                $cpf = $this->clientes->where('cpfCliente', $cpf)->first();
+                if ($cpf) {
+                    return response()->json([
+                        'message' => 'CPF já cadastrado'
+                    ], 400);
+                }
+            } catch (Exception $e) {
+                return response()->json([
+                    'message' => 'CPF já cadastrado'
+                ], 400);
+            }
+
+            // checks if the phone number already exists
+            try {
+
+                $telefone = $this->clientes->where('telefoneCliente', $telefone)->first();
+                if ($telefone) {
+                    return response()->json([
+                        'message' => 'Telefone já cadastrado'
+                    ], 400);
+                }
+            } catch (Exception $e) {
+                return response()->json([
+                    'message' => 'Telefone já cadastrado'
+                ], 400);
+            }
+
+
             $cad = $this->clientes->create([
                 "nomeCliente" => $request->nomeCliente,
                 "cpfCliente" => $cpf,
@@ -124,7 +172,10 @@ class AppController extends Controller
             ]);
 
             if ($cad) {
-                return $request . json_encode($cad);
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Cadastro realizado com sucesso!'
+                ]);
             } else {
                 return response()->json([
                     'error' => 'Erro ao cadastrar cliente',

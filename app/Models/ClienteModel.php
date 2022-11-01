@@ -15,7 +15,7 @@ class ClienteModel extends Model
         'idCliente',
         'nomeCliente',
         'cpfCliente',
-        'celCliente',
+        'telefoneCliente',
         'senhaCliente',
         'fotoCliente',
         'emailCliente',
@@ -36,6 +36,6 @@ class ClienteModel extends Model
 
     protected static function newFactory()
     {
-        return \Database\Factories\ClienteFactory::new ();
+        return \Database\Factories\ClienteFactory::new();
     }
 }
