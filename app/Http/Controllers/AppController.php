@@ -173,9 +173,9 @@ class AppController extends Controller
 
             if ($cad) {
                 return response()->json([
-                    'status' => 'success',
+                    'status' => 201,
                     'message' => 'Cadastro realizado com sucesso!'
-                ]);
+                ], 200);
             } else {
                 return response()->json([
                     'error' => 'Erro ao cadastrar cliente',
