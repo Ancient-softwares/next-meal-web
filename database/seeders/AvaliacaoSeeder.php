@@ -83,6 +83,24 @@ class AvaliacaoSeeder extends Seeder
                     'idCliente' => 1,
                     'created_at' => Date::now(),
                     'updated_at' => Date::now(),
+                ],
+                [
+                    'dtAvaliacao' => Date::now(),
+                    'notaAvaliacao' => 4,
+                    'descAvaliacao' => 'Oitava descrição de avaliação',
+                    'idRestaurante' => 5,
+                    'idCliente' => 2,
+                    'created_at' => Date::now(),
+                    'updated_at' => Date::now(),
+                ],
+                [
+                    'dtAvaliacao' => Date::now(),
+                    'notaAvaliacao' => 3,
+                    'descAvaliacao' => 'Nona descrição de avaliação',
+                    'idRestaurante' => 6,
+                    'idCliente' => 3,
+                    'created_at' => Date::now(),
+                    'updated_at' => Date::now(),
                 ]
             )
         );
