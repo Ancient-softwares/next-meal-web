@@ -45,6 +45,32 @@ class AppController extends Controller
         ]);
     }
 
+    public function getPratosByRestaurante(Request $request)
+    {
+        $idRestaurante = $request->idRestaurante;
+
+        $pratos = DB::table('tbprato')
+            ->select('idPrato', 'nomePrato', 'valorPrato', 'fotoPrato', 'tipoPrato')
+            ->join('tbtipoprato', 'tbprato.idTipoPrato', '=', 'tbtipoprato.idTipoPrato')
+            ->where('tbprato.idRestaurante', '=', $idRestaurante)
+            ->get();
+
+        return response()->json($pratos);
+    }
+
+    public function getAvaliacoesByRestaurante(Request $request)
+    {
+        $idRestaurante = $request->idRestaurante;
+
+        $avaliacoes = DB::table('tbavaliacao')
+            ->select('tbavaliacao.idAvaliacao', 'tbavaliacao.notaAvaliacao', 'tbavaliacao.dtAvaliacao', 'tbavaliacao.descAvaliacao', 'tbcliente.nomeCliente')
+            ->join('tbcliente', 'tbavaliacao.idCliente', '=', 'tbcliente.idCliente')
+            ->where('tbavaliacao.idRestaurante', '=', $idRestaurante)
+            ->get();
+
+        return response()->json($avaliacoes);
+    }
+
     public function getRestaurants()
     {
         $table = RestauranteModel::select(
@@ -68,12 +94,9 @@ class AppController extends Controller
             'tbtiporestaurante.tipoRestaurante',
             'tbavaliacao.notaAvaliacao',
             'tbavaliacao.descAvaliacao',
-            'tbprato.nomePrato',
-            'tbprato.valorPrato'
         )
             ->join('tbtiporestaurante', 'tbtiporestaurante.idTipoRestaurante', '=', 'tbrestaurante.idTipoRestaurante')
             ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbrestaurante.idRestaurante')
-            ->join('tbprato', 'tbprato.idRestaurante', '=', 'tbrestaurante.idRestaurante')
             ->get();
 
         // gets the average of the rating
@@ -94,6 +117,15 @@ class AppController extends Controller
         });
 
         return response()->json($table);
+    }
+
+    public function getTipoRestaurantes()
+    {
+        $table = $this->tipoRestaurante->select('idTipoRestaurante', 'tipoRestaurante')->get();
+        return response()->json([
+            'data' => $table,
+            'message' => 'Tipos de restaurantes retornados com sucesso'
+        ], 201);
     }
 
     public function cadastroCliente(Request $request)
