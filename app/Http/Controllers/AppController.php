@@ -67,9 +67,13 @@ class AppController extends Controller
             'tbrestaurante.descricaoRestaurante',
             'tbtiporestaurante.tipoRestaurante',
             'tbavaliacao.notaAvaliacao',
+            'tbavaliacao.descAvaliacao',
+            'tbprato.nomePrato',
+            'tbprato.valorPrato'
         )
             ->join('tbtiporestaurante', 'tbtiporestaurante.idTipoRestaurante', '=', 'tbrestaurante.idTipoRestaurante')
             ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbrestaurante.idRestaurante')
+            ->join('tbprato', 'tbprato.idRestaurante', '=', 'tbrestaurante.idRestaurante')
             ->get();
 
         // gets the average of the rating

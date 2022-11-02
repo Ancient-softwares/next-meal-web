@@ -206,19 +206,19 @@ class ReservadoidaController extends Controller
             $horaReserva = date('H:i:s', $time);
 
             $param = $request;
-            $param['idCliente'] = $cliente->idCliente;
-            $param['idRestaurante'] = $restaurante->idRestaurante;
-            $param['horaReserva'] = $horaReserva;
-            $param['dataReserva'] = $dataReserva;
-            $param['bearerToken'] = $request->bearerToken();
+            $param->idCliente = $cliente->idCliente;
+            $param->idRestaurante = $restaurante->idRestaurante;
+            $param->horaReserva = $horaReserva;
+            $param->dataReserva = $dataReserva;
+            $param->bearerToken = $request->bearerToken();
 
             $checking = $this->checkReserva(
-                $param['idCliente'],
-                $param['idRestaurante'],
-                $param['dataReserva'],
-                $param['horaReserva'],
-                $param['numPessoas'],
-                $param['bearerToken']
+                $param->idCliente,
+                $param->idRestaurante,
+                $param->dataReserva,
+                $param->horaReserva,
+                $param->numPessoas,
+                $param->bearerToken
             );
 
 
@@ -239,7 +239,7 @@ class ReservadoidaController extends Controller
                 return response()->json([
                     'status' => 200,
                     'message' => 'Reserva realizada com sucesso',
-                    'data' => $reserva
+                    'data' => $cliente
                 ], 200);
             } else {
                 return response()->json([
@@ -276,8 +276,10 @@ class ReservadoidaController extends Controller
 
             if ($bearerToken != $cliente->token) {
                 return response()->json([
-                    'message' => 'Você não está logado',
+                    'message' => 'Você não está logado. Faça login e tente novamente.',
                     'status' => 401,
+                    'cliente token' => $cliente->token,
+                    'bearer token' => $bearerToken
                 ], 401);
             } else {
 
