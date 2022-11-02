@@ -821,6 +821,13 @@ class ReservadoidaController extends Controller
     public function getLatestReservasCliente(Request $request)
     {
         try {
+            if ($request->idCliente == 0) {
+                return response()->json([
+                    'message' => 'Erro ao buscar reservas',
+                    'error' => 'Cliente não encontrado',
+                ], 500);
+            }
+
             $historico = $this->reservas->where('idCliente', '=', $request->idCliente)->orderBy('dataReserva', 'desc')->limit($request->limite)->get();
 
             return response()->json([
@@ -848,6 +855,91 @@ class ReservadoidaController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'message' => 'Erro ao buscar histórico',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    // gets the restaurants with the most reservations
+    public function getRestaurantesMaisReservados(Request $request)
+    {
+        try {
+            $query = $this->reservas->select('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante', DB::raw('count(tbreserva.idRestaurante) as total'))
+                ->join('tbrestaurante', 'tbrestaurante.idRestaurante', '=', 'tbreserva.idRestaurante')
+                ->groupBy('tbrestaurante.nomeRestaurante', 'tbreserva.idRestaurante')
+                ->orderBy('total', 'desc')
+                ->limit($request->limite)
+                ->get();
+
+
+            return response()->json([
+                'message' => 'Restaurantes encontrados com sucesso!',
+                'data' => $query,
+            ], 201);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'Erro ao buscar restaurantes',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    // gets the restaurants with the best ratings  
+    public function getRestaurantesMelhoresAvaliados(Request $request)
+    {
+        try {
+            $query = $this->reservas->select('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante', 'tbavaliacao.notaAvaliacao', DB::raw('avg(tbavaliacao.notaAvaliacao) as media'))
+                ->join('tbrestaurante', 'tbrestaurante.idRestaurante', '=', 'tbreserva.idRestaurante')
+                ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbreserva.idRestaurante')
+                ->groupBy('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante', 'tbavaliacao.notaAvaliacao')
+                ->orderBy('media', 'desc')
+                ->limit($request->limite)
+                ->get();
+
+            // converts the average rating to a float
+            $query->map(function ($item) {
+                $item->media = (float) $item->media;
+                return $item;
+            });
+
+            return response()->json([
+                'message' => 'Restaurantes encontrados com sucesso!',
+                'data' => $query,
+            ], 201);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'Erro ao buscar restaurantes',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    // gets the restaurants with the most reservations and best ratings
+    public function getRestaurantesMaisReservadosMelhoresAvaliados(Request $request)
+    {
+        try {
+            $query = $this->reservas->select('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante', 'tbavaliacao.notaAvaliacao', DB::raw('count(tbreserva.idRestaurante) as total, avg(tbavaliacao.notaAvaliacao) as media'))
+                ->join('tbrestaurante', 'tbrestaurante.idRestaurante', '=', 'tbreserva.idRestaurante')
+                ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbreserva.idRestaurante')
+                ->groupBy('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante', 'tbavaliacao.notaAvaliacao')
+                ->orderBy('total', 'desc')
+                ->orderBy('media', 'desc')
+                ->limit($request->limite)
+                ->get();
+
+            // converts the average rating to a float
+            $query->map(function ($item) {
+                $item->media = (float) $item->media;
+                return $item;
+            });
+
+            return response()->json([
+                'message' => 'Restaurantes encontrados com sucesso!',
+                'data' => $query,
+            ], 201);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'Erro ao buscar restaurantes',
                 'error' => $e->getMessage()
             ], 500);
         }
