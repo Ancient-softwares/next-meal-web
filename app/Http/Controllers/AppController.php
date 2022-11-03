@@ -339,15 +339,68 @@ class AppController extends Controller
     public function getRestaurantsByType(Request $request)
     {
         try {
-            $type = $request->tipoRestaurante;
-            $typeId = $this->tipoRestaurante->where('tipoRestaurante', '=', $type)->first();
+            $tipoRestaurante = $this->tipoRestaurante->where('tipoRestaurante', '=', $request->tipoRestaurante)->first();
 
-            $restaurantes = $this->restaurantes->where('idTipoRestaurante', '=', $typeId->idTipoRestaurante)->get();
+            // removes duplicate restaurants
+            $restaurantes = RestauranteModel::select(
+                'tbrestaurante.idRestaurante',
+                'tbrestaurante.nomeRestaurante',
+                'tbrestaurante.telRestaurante',
+                'tbrestaurante.emailRestaurante',
+                'tbrestaurante.ruaRestaurante',
+                'tbrestaurante.cepRestaurante',
+                'tbrestaurante.ruaRestaurante',
+                'tbrestaurante.bairroRestaurante',
+                'tbrestaurante.cidadeRestaurante',
+                'tbrestaurante.estadoRestaurante',
+                'tbrestaurante.horarioAberturaRestaurante',
+                'tbrestaurante.horarioFechamentoRestaurante',
+                'tbrestaurante.capacidadeRestaurante',
+                'tbrestaurante.ocupacaoRestaurante',
+                'tbrestaurante.nomeRestaurante',
+                'tbrestaurante.fotoRestaurante',
+                'tbrestaurante.descricaoRestaurante',
+                'tbtiporestaurante.tipoRestaurante',
+                'tbavaliacao.notaAvaliacao',
+                'tbavaliacao.descAvaliacao',
+            )
+                ->join('tbtiporestaurante', 'tbtiporestaurante.idTipoRestaurante', '=', 'tbrestaurante.idTipoRestaurante')
+                ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbrestaurante.idRestaurante')
+                ->where('tbtiporestaurante.tipoRestaurante', '=', $request->tipoRestaurante)
+                ->get();
 
-            return response()->json([
-                'message' => 'Restaurantes encontrados do tipo ' . $type,
-                'data' => $restaurantes
-            ]);
+
+            // removes empty restaurants
+            $restaurantes = $restaurantes->filter(function ($value, $key) {
+                return $value != null;
+            });
+
+            // gets the average of the rating
+            $restaurantes->map(function ($item) {
+                $item->notaAvaliacao = DB::table('tbavaliacao')
+                    ->where('idRestaurante', $item->idRestaurante)
+                    ->avg('notaAvaliacao');
+                return $item;
+            });
+
+            // deletes duplicates
+            $restaurantes = $restaurantes->unique('idRestaurante');
+
+            // converts the average rating to a float
+            $restaurantes->map(function ($item) {
+                $item->notaAvaliacao = (float) $item->notaAvaliacao;
+                return $item;
+            });
+
+            if ($restaurantes) {
+                return $restaurantes;
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Restaurantes não encontrados!',
+                    'data' => error_get_last(),
+                ]);
+            }
         } catch (Exception $e) {
             return $e;
         }
