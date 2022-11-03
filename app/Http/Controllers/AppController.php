@@ -339,10 +339,10 @@ class AppController extends Controller
     public function getRestaurantsByType(Request $request)
     {
         try {
-            $type = $request->type;
+            $type = $request->tipoRestaurante;
             $typeId = $this->tipoRestaurante->where('tipoRestaurante', '=', $type)->first();
 
-            $restaurantes = $this->restaurantes->where('idTipoRestaurante', '=', $typeId)->get();
+            $restaurantes = $this->restaurantes->where('idTipoRestaurante', '=', $typeId->idTipoRestaurante)->get();
 
             return response()->json([
                 'message' => 'Restaurantes encontrados do tipo ' . $type,

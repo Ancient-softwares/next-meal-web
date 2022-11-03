@@ -28,9 +28,9 @@ Route::get('/restaurantes', [AppController::class, 'getRestaurants'])->name('get
 Route::post('/loginCliente', [AppController::class, 'loginCliente'])->name('loginCliente');
 Route::post('/uploadImage', [AppController::class, 'uploadImage'])->name('uploadImage');
 Route::post('/getRestaurantByCep', [AppController::class, 'getRestaurantByCep'])->name('getRestaurantByCep');
-Route::get('/getRestaurantsByType', [AppController::class, 'getRestaurantesByType'])->name('getRestaurantesByType');
+Route::post('/getRestaurantsByType', [AppController::class, 'getRestaurantsByType'])->name('getRestaurantsByType');
 Route::get('/getRestaurantsByName', [AppController::class, 'getRestaurantsByName'])->name('getRestaurantsByName');
-Route::get('/getTipoRestaurantes', [AppController::class, 'getTipoRestaurantes'])->name('getTipoRestaurantes');
+Route::post('/getTipoRestaurantes', [AppController::class, 'getTipoRestaurantes'])->name('getTipoRestaurantes');
 Route::post('/getPratosByRestaurante', [AppController::class, 'getPratosByRestaurante'])->name('getPratosByRestaurante');
 Route::post('/getAvaliacoesByRestaurante', [AppController::class, 'getAvaliacoesByRestaurante'])->name('getAvaliacoesByRestaurante');
 
