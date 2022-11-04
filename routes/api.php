@@ -33,6 +33,7 @@ Route::get('/getRestaurantsByName', [AppController::class, 'getRestaurantsByName
 Route::post('/getTipoRestaurantes', [AppController::class, 'getTipoRestaurantes'])->name('getTipoRestaurantes');
 Route::post('/getPratosByRestaurante', [AppController::class, 'getPratosByRestaurante'])->name('getPratosByRestaurante');
 Route::post('/getAvaliacoesByRestaurante', [AppController::class, 'getAvaliacoesByRestaurante'])->name('getAvaliacoesByRestaurante');
+Route::post('/postAvaliacao', [AppController::class, 'postAvaliacao'])->name('postAvaliacao');
 
 // user
 Route::post('/cadastroCliente', [AppController::class, 'cadastroCliente'])->name('cadastroCliente');

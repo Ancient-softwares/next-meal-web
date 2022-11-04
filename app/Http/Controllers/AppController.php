@@ -700,4 +700,38 @@ class AppController extends Controller
             ], 500);
         }
     }
+
+    public function postAvaliacao(Request $request)
+    {
+        try {
+            $cliente = $this->clientes->where('idCliente', '=', $request->idCliente)->first();
+
+            if ($cliente) {
+                $query = $this->avaliacao->create([
+                    'idRestaurante' => $request->idRestaurante,
+                    'idCliente' => $request->idCliente,
+                    'notaAvaliacao' => $request->notaAvaliacao,
+                    'dtAvaliacao' => date('Y-m-d H:i:s'),
+                    'descAvaliacao' => $request->descAvaliacao
+                ]);
+
+                return response()->json([
+                    'message' => 'Avaliação criada com sucesso!',
+                    'data' => $query
+                ]);
+            } else {
+                return response()->json([
+                    'message' => 'Você precisa estar logado para avaliar o restaurante!',
+                ]);
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'Erro ao criar avaliação',
+                'error' => $e->getMessage(),
+                'data' => $request->all(),
+                'cliente' => $cliente,
+                'restaurante' => $this->restaurantes->where('idRestaurante', '=', $request->idRestaurante)->first()
+            ], 500);
+        }
+    }
 }
