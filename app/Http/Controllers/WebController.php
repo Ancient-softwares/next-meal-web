@@ -17,10 +17,11 @@ class WebController extends Controller
     {
         $this->restaurantes = new RestauranteModel();
     }
-    
-    public function indexLogin() {
+
+    public function indexLogin()
+    {
         $login = Session::get('login');
-        if(isset($login)) {
+        if (isset($login)) {
             return redirect('index');
         }
         $tipos = TipoRestauranteModel::all();
@@ -37,7 +38,7 @@ class WebController extends Controller
         $telefone = $request->telefone;
         $telefone = preg_replace('/[^A-Za-z0-9\-]/', '', $telefone);
         $telefone = str_replace('-', '', $telefone);
-        
+
         $cep = $request->cep;
         $cep = str_replace('-', '', $cep);
 
@@ -55,20 +56,21 @@ class WebController extends Controller
             'bairroRestaurante' => $request->bairro,
             'cidadeRestaurante' => $request->cidade,
             'estadoRestaurante' => $request->uf,
-            'capMaximaRestaurante' => 1,
+            'capacidadeRestaurante' => 1,
             'idTipoRestaurante' => 1,
         ]);
 
-        if($cad) {
+        if ($cad) {
             return redirect()->back();
         }
     }
 
-    public function autenticar(Request $request) {
+    public function autenticar(Request $request)
+    {
         $restaurante = $this->restaurantes->where('nomeRestaurante', '=', $request->login)->first();
 
-        if($restaurante) {
-            if(password_verify($request->senha, $restaurante->senhaRestaurante)) {
+        if ($restaurante) {
+            if (password_verify($request->senha, $restaurante->senhaRestaurante)) {
                 Session::put('login', $request->login);
                 Session::put('idRestaurante', $restaurante->idRestaurante);
 
@@ -79,15 +81,17 @@ class WebController extends Controller
         return redirect()->back()->withErrors('Login inválido!');
     }
 
-    public function logout() {
+    public function logout()
+    {
         Session::flush();
         return redirect('/');
     }
 
-    public function dashboard() {
+    public function dashboard()
+    {
         $login = Session::get('login');
 
-        if(!isset($login)) {
+        if (!isset($login)) {
             return redirect()->route('login');
         }
 

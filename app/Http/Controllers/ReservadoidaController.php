@@ -307,7 +307,7 @@ class ReservadoidaController extends Controller
                             'status' => 400,
                         ]);
                     } else {
-                        if (($restaurante->capacidadeRestaurante - $restaurante->ocupacaoRestaurante) >= $numPessoas) {
+                        if (($restaurante->capMaximaRestaurante - $restaurante->ocupacaoRestaurante) >= $numPessoas) {
                             return response()->json([
                                 'message' => 'Reserva disponível',
                                 'status' => 200,
