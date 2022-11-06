@@ -1,17 +1,19 @@
 @extends('layouts.hamburguer')
 
 @section('titulo', 'Index')
-<header>
-    <link href="{{ asset('css/editsRotasCrud/index.css') }}" rel="stylesheet" type="text/css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="{{ asset('css/grafico.css') }}">
-</header>
 
-<script>
-    < script src = "https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js" />
-</script>
+@section('css')
+<link href="{{ asset('css/editsRotasCrud/index.css') }}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="{{ asset('css/grafico.css') }}">
+<link rel="stylesheet" href="{{ asset('css/menu.css') }}">
+@endsection
 
-</script>
+@section('js')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src = "https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+@endsection
+
+
 
 @section('conteudo')
 
@@ -26,7 +28,7 @@
                     <div class="icon">
                         <img src="{{ asset('img/sidebar/calendario-linhas-caneta.png') }}" alt="">
                     </div>
-                    <h1 class="txtreserva">Reservas</h1>
+                    <h1 class="txtreserva">Reservas concluídas</h1>
                 </div>
 
             </div>
@@ -34,15 +36,20 @@
         </reservas>
         <grafico>
             <canvas id="myChart" class="grafico"></canvas>
-            <script class="grafico">
+            <script>
                 const ctx = document.getElementById('myChart').getContext('2d');
+                
+                var valores = JSON.parse('{!! json_encode($graficoValor) !!}');
+                var meses = JSON.parse('{!! json_encode($graficoMes) !!}');
+                
                 const myChart = new Chart(ctx, {
-                    type: 'bar',
+                    type: 'line',
                     data: {
-                        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                        labels: meses,
                         datasets: [{
-                            label: '# of Votes',
-                            data: [12, 19, 3, 5, 2, 3],
+                            label: 'Reservas feitas em 6 meses',
+                            data: valores,
+                            borderWidth: 6,
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
                                 'rgba(54, 162, 235, 0.2)',
@@ -62,6 +69,9 @@
                             borderWidth: 1
                         }]
                     },
+                    options: {
+                        maintainAspectRatio: false,
+                    }
                 });
             </script>
         </grafico>
@@ -75,11 +85,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($fieis as $f)
                     <tr>
-                        <td><img src="{{ asset('img/FotosDePratosPraApoio/burguer.png') }}" alt=""></td>
-                        <td colspan="2">BRUNIN GAMEPRAY</td>
-                        <td>RESERVAS 1345</td>
+                        <td><img src="{{ asset('img/perfil.png') }}" alt=""></td>
+                        <td colspan="2">{{$f->nomeCliente}}</td>
+                        <td>Reservas: {{$f->totalReservas}}</td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </clientes-fieis>
@@ -91,10 +103,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($recentes as $r)
                     <tr>
-                        <td><img src="{{ asset('img/FotosDePratosPraApoio/donuts.png') }}" alt=""></td>
-                        <td>BRUNIN GAMEPRAY</td>
+                        <td><img src="{{ asset('img/perfil.png') }}" alt=""></td>
+                        <td>{{$r->nomeCliente}}</td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </clientes-recentes>

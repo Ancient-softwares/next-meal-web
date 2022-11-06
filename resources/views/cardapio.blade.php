@@ -109,9 +109,10 @@
                 <p class="card-text">{{ $tipos->where('idTipoPrato', $prato->idTipoPrato)->first()->tipoPrato }}</p>
                 <div class="card-footer">
                     <button type="button" data-bs-toggle="modal" href="#exampleModalToggle{{ $prato->idPrato }}" class="btn btn-light mais-informacoes">Detalhes</button>
-                    <a href="{{ url("cardapio/$prato->idPrato/edit") }}"><img class="botoes-editar" src="{{ asset('img/tabelas/editar.png') }}" alt=""></a>
-                    <a value="{{ $prato->idPrato }}" data-bs-toggle="modal" data-bs-target="#excluir{{ $prato->idPrato }}"><img class="botoes-excluir" src="{{ asset('img/tabelas/excluir.png') }}" alt=""></a>
-
+                    <div class="editar-excluir">
+                        <a href="{{ url("cardapio/$prato->idPrato/edit") }}"><img class="botoes-editar" src="{{ asset('img/tabelas/editar.png') }}" alt=""></a>
+                        <a value="{{ $prato->idPrato }}" data-bs-toggle="modal" data-bs-target="#excluir{{ $prato->idPrato }}"><img class="botoes-excluir" src="{{ asset('img/tabelas/excluir.png') }}" alt=""></a>
+                    </div>
                 </div>
             </div>
             <!-- DELETAR MODEL -->
@@ -148,10 +149,10 @@
                             <div class="ftprato">
                                 <img class="card-img-top" src="/img/pratos/{{ $prato->fotoPrato }}">
                             </div>
-                            <h3 class="modal-title">{{ $prato->nomePrato }}</h3>
+                            <h3>{{ $prato->nomePrato }}</h3>
 
                             <h6><b>Tipo do prato:</b> {{ $tipos->where('idTipoPrato', $prato->idTipoPrato)->first()->tipoPrato }}</h6>
-                            <h6><b>Ingredientes:</b> {{$prato->ingredientesPrato}}</h6>
+                            <h6><b>Ingredientes:</b> {{$prato->ingredientePrato}}</h6>
                             
                         </div>
                         <div class="modal-footer">
@@ -163,16 +164,7 @@
         </div>
 
         @endforeach
-        <!--Teste Modal-->
 
-
-
-        @foreach ($pratos as $modelPratos)
-
-        @endforeach
-
-
-        <!--Teste Modal-->
 
     </div>
 </div>

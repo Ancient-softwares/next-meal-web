@@ -5,6 +5,7 @@ use App\Http\Controllers\CrudPrato;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\PerfilPageController;
+use App\Http\Controllers\ReservaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,10 +18,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/reserva', function () {
-    return view('reserva');
-});
 
 Route::get('/', [WebController::class, 'indexLogin'])->name('login');
 Route::post('/autenticar', [WebController::class, 'autenticar'])->name('autenticar');
@@ -40,12 +37,9 @@ Route::post('/editar-perfil', [PerfilPageController::class, 'editou'])->name('ed
 // Cruds
 Route::resource('mesas', CrudMesa::class);
 Route::resource('cardapio', CrudPrato::class);
-
-// mobile
-Route::get('/mobile/teste', [WebController::class, 'testeMobile'])->name('testeMobile');
-Route::post('/mobile/soma', [WebController::class, 'soma'])->name('soma');
-Route::post('/mobile/cadastroCliente', [WebController::class, 'cadastroCliente'])->name('cadastroCliente');
+Route::resource('reservas', ReservadoidaController::class);
 
 
-//RESERVAS
-Route::get('/reserva','App\Http\Controllers\ReservaController@index');
+Route::get('/reservas', [ReservaController::class, 'index'])->name('reserva');
+Route::get('/aceitar-reserva', [ReservaController::class, 'aceitarReserva'])->name('aceitar-reserva');
+Route::get('/rejeitar-reserva', [ReservaController::class, 'rejeitarReserva'])->name('rejeitar-reserva');

@@ -76,7 +76,7 @@ class CrudPrato extends Controller
         $validated = $request->validate([
             'nomePrato' => 'required',
             'valorPrato' => 'required',
-            'ingredientesPrato' => 'required',
+            'ingredientePrato' => 'required',
             'fotoPrato' => 'required',
             'tipoPrato' => 'required',
         ]);
@@ -98,7 +98,7 @@ class CrudPrato extends Controller
         $cadastro = $this->pratos->create([
             'nomePrato' => $request->nomePrato,
             'valorPrato' => $request->valorPrato,
-            'ingredientesPrato' => $request->ingredientesPrato,
+            'ingredientePrato' => $request->ingredientePrato,
             'fotoPrato' => $imageName,
             'idRestaurante' => $idRestaurante,
             'idTipoPrato' => $request->tipoPrato
@@ -158,7 +158,7 @@ class CrudPrato extends Controller
         $validated = $request->validate([
             'nomePrato' => 'required',
             'valorPrato' => 'required',
-            'ingredientesPrato' => 'required',
+            'ingredientePrato' => 'required',
             'tipoPrato' => 'required',
         ]);
 
@@ -182,7 +182,7 @@ class CrudPrato extends Controller
         $cadastro = $this->pratos->where(['idPrato'=>$id])->update([
             'nomePrato' => $request->nomePrato,
             'valorPrato' => $request->valorPrato,
-            'ingredientesPrato' => $request->ingredientesPrato,
+            'ingredientePrato' => $request->ingredientePrato,
             'fotoPrato' => $imageName,
             'idTipoPrato' => $request->tipoPrato
         ]);

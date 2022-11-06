@@ -25,36 +25,49 @@
                 <form method="post" action="{{ route('cardapio.store') }}" enctype="multipart/form-data">
             @endif
                 @csrf
-                <div class="form-group">
-                    <label for="nome">Nome</label>
-                    <input type="text" class="form-control" name="nomePrato" id="nome" placeholder="Digite o nome do prato" value="{{$prato->nomePrato ?? ''}}">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="nome">Nome</label>
+                            <input type="text" class="form-control" name="nomePrato" id="nome" placeholder="Digite o nome do prato" value="{{$prato->nomePrato ?? ''}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="valor">Valor</label>
+                            <input type="number" class="form-control" name="valorPrato" id="valor" placeholder="Digite o valor do prato" value="{{$prato->valorPrato ?? ''}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label>Tipo do Prato</label>
+                            <select class="custom-select" name="tipoPrato" aria-label="Default select example">
+                                @if(isset($prato))
+                                    <option selected value="{{ $prato->idTipoPrato ?? '' }}">{{ $tipos->where('idTipoPrato', $prato->idTipoPrato)->first()->tipoPrato }}</option>
+                                @else
+                                    <option selected disabled>Selecione um tipo</option>
+                                @endif
+        
+                                @foreach ($tipos as $tipo)
+                                <option value="{{ $tipo->idTipoPrato }}">{{ $tipo->tipoPrato }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="valor">Valor</label>
-                    <input type="number" class="form-control" name="valorPrato" id="valor" placeholder="Digite o valor do prato" value="{{$prato->valorPrato ?? ''}}">
-                </div>
-                <div class="form-group">
-                    <label for="ingredientes">Ingredientes</label>
-                    <input type="text" class="form-control" name="ingredientesPrato" id="ingredientes" placeholder="Digite os ingredientes" value="{{$prato->ingredientesPrato ?? ''}}">
-                </div>
-                <div class="form-group">
-                    <label>Foto do Prato</label>
-                    <input type="file" name="fotoPrato" class="form-control form-imagem">
-                </div>
-
-                <div class="form-group">
-                    <label>Tipo do Prato</label>
-                    <select class="custom-select" name="tipoPrato" aria-label="Default select example">
-                        @if(isset($prato))
-                            <option selected value="{{ $prato->idTipoPrato ?? '' }}">{{ $tipos->where('idTipoPrato', $prato->idTipoPrato)->first()->tipoPrato }}</option>
-                        @else
-                            <option selected disabled>Selecione um tipo</option>
-                        @endif
-
-                        @foreach ($tipos as $tipo)
-                        <option value="{{ $tipo->idTipoPrato }}">{{ $tipo->tipoPrato }}</option>
-                        @endforeach
-                    </select>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="ingredientes">Ingredientes</label>
+                            <input type="text" class="form-control" name="ingredientePrato" id="ingredientes" placeholder="Digite os ingredientes" value="{{$prato->ingredientesPrato ?? ''}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Foto do Prato</label>
+                            <input type="file" name="fotoPrato" class="form-control">
+                        </div>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-outline-light">@if(isset($prato))Editar @else Cadastrar @endif</button>
             </form>

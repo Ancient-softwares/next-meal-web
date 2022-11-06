@@ -45,7 +45,7 @@ clientes-fieis{
   grid-area:m;
   border-radius: 2em;
   padding: 15px;
-  
+  height: 35vh;
 
 }
 clientes-recentes{
@@ -53,6 +53,7 @@ clientes-recentes{
   grid-area:a;
   border-radius: 2em; 
   padding: 15px;
+  height: 35vh;
   
 
 }
@@ -60,6 +61,8 @@ grafico{
   grid-area:f;
   border-radius: 2em;
   background-color: #f4f4f4;
+  position:relative;
+  width: 99.8%;
 }
 
 .container-dash{
@@ -100,9 +103,13 @@ td img{
 
 .style-reservas{
 text-align: center;
-margin: 2em;
+margin: 1em;
 }
 
 li img{
 margin-bottom: 0;
+}
+
+h1{
+  font-size: 1.5rem!important;
 }

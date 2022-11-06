@@ -13,8 +13,8 @@ class ReservaModel extends Model
 
     protected $fillable = [
         'idReserva',
-        'dataReservas',
-        'horaReservas',
+        'dataReserva',
+        'horaReserva',
         'numPessoas',
         'idCliente',
         'idRestaurante',
@@ -30,6 +30,6 @@ class ReservaModel extends Model
 
     protected static function newFactory()
     {
-        return \Database\Factories\ReservaFactory::new ();
+        return \Database\Factories\ReservaFactory::new();
     }
 }

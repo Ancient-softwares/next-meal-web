@@ -26,7 +26,11 @@ class RestauranteModel extends Model
         "bairroRestaurante",
         "cidadeRestaurante",
         "estadoRestaurante",
-        "capMaximaRestaurante",
+        "capacidadeRestaurante",
+        "horarioAberturaRestaurante",
+        "horarioFechamentoRestaurante",
+        "ocupacaoRestaurante",
+        "descricaoRestaurante",
         "idTipoRestaurante",
         "idPrato"
     ];
@@ -39,6 +43,6 @@ class RestauranteModel extends Model
 
     protected static function newFactory()
     {
-        return \Database\Factories\RestauranteFactory::new ();
+        return \Database\Factories\RestauranteFactory::new();
     }
 }

@@ -2,10 +2,6 @@
     margin-right: auto;
     margin-left: auto;
     width: 90%;
-    height: 90%;
-    background-color: #F4F4F4;
-    border-radius: 10px;
-    padding: 2.5em;
 }
 
 table{
@@ -51,6 +47,8 @@ li{
     padding-left: 0!important;
     text-align: center;
     justify-content: space-between;
+    align-items: center;
+    display: flex;
 }
 
 .card-footer button{
@@ -58,7 +56,12 @@ li{
     background-color: #f50000!important;
     width: 50%;
     height: 3vh;
-    font-size: 0.7vw!important;
+    font-size: 1.8vh!important;
+    margin-left: 0.8em;
+}
+
+.card-footer .editar-excluir{
+    margin-right: 0.8em;
 }
 
 .card-footer button:hover{
@@ -89,9 +92,9 @@ li{
 }
 
 .card p{
+    font-size: 0.8em;
     padding-left: 1em!important;
     margin-bottom: 5%;
-    font-size: 0.9em;
 }
 
 .btn-cadastro{
@@ -121,12 +124,8 @@ li{
     padding: 1rem!important;
 }
 
-.card-body h5{
-    font-size: 0.9em;
-}
-
-.card-text p{
-    font-size: 0.7em;
+h5{
+   font-size: max(10px, 1.1vw)!important;  /* viewport unit(width) */
 }
 
 .table {
@@ -148,17 +147,17 @@ li{
     padding-left: 0!important;
     height: 40vh!important;
     width: 100%!important;
+    margin-top: 2em;
 }
 
 .scroll {
-    max-height: 90vh;
+    width: 100vh;
+    max-height: 100%;
     overflow-y: scroll;
 }
 
 .modal-body h3{
     text-align: center;
-    font-size: 1.30rem;
-    margin-bottom: 1em;
 }
 
 .modal-body img{
@@ -183,8 +182,3 @@ li{
     margin-right: auto!important;
     margin-left: auto!important;
 }
-
-.btn-secondary{
-    border-color: #ff2f48!important;
-}
-

@@ -24,29 +24,46 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // mobile
+Route::get('/restaurantes', [AppController::class, 'getRestaurants'])->name('getRestaurants');
+Route::post('/loginCliente', [AppController::class, 'loginCliente'])->name('loginCliente');
+Route::post('/uploadImage', [AppController::class, 'uploadImage'])->name('uploadImage');
+Route::post('/getRestaurantByCep', [AppController::class, 'getRestaurantByCep'])->name('getRestaurantByCep');
+Route::get('/getRestaurantsByType', [AppController::class, 'getRestaurantesByType'])->name('getRestaurantesByType');
+Route::get('/getRestaurantsByName', [AppController::class, 'getRestaurantsByName'])->name('getRestaurantsByName');
 
-Route::get('/teste', [AppController::class , 'testeMobile'])->name('testeMobile');
-Route::post('/soma', [AppController::class , 'soma'])->name('soma');
-Route::get('/restaurantes', [AppController::class , 'getRestaurants'])->name('getRestaurants');
-Route::post('/cadastroCliente', [AppController::class , 'cadastroCliente'])->name('cadastroCliente');
-Route::post('/loginCliente', [AppController::class , 'loginCliente'])->name('loginCliente');
-Route::post('/uploadImage', [AppController::class , 'uploadImage'])->name('uploadImage');
-                                                                                                                    
-// reserva
+// user
+Route::post('/cadastroCliente', [AppController::class, 'cadastroCliente'])->name('cadastroCliente');
+Route::delete('/deleteUser', [AppController::class, 'deleteUserById'])->name('deleteUserById');
+Route::patch('/updateUser', [AppController::class, 'updateUserData'])->name('updateUserData');
+Route::patch('/updateUserById', [AppController::class, 'updateUserById'])->name('updateUserById');
+Route::get('/getUser', [AppController::class, 'getUserData'])->name('getUserData');
+Route::get('/getUserById/{id}', [AppController::class, 'getUserById'])->name('getUserById');
+Route::post('/resetPassword', [AppController::class, 'resetPassword'])->name('resetPassword');
 
-Route::resource('reserva', ReservadoidaController::class);
+//token
+Route::get('/getToken/{emailCliente}', [AppController::class, 'getToken'])->name('getToken');
+Route::post('/bearerTokenVerify', [ReservadoidaController::class, 'bearerTokenVerify'])->name('bearerTokenVerify');
 
+// reservas
+Route::post('/reserva', [ReservadoidaController::class, 'create'])->name('create');
+Route::post('/reserva2', [ReservaController::class, 'reserva'])->name('reserva');
+Route::post('/reserva3', [ReservadoidaController::class, 'store'])->name('store');
 Route::get('/getReservas', [ReservadoidaController::class, 'getReservas'])->name('getReservas');
 Route::get('/getReserva/{id}', [ReservadoidaController::class, 'getReserva'])->name('getReserva');
-Route::get('/getReservasByRestaurante/{id}', [ReservadoidaController::class, 'getReservasByRestaurante'])->name('getReservasByRestaurante');
-Route::get('/getReservasByCliente/{id}', [ReservadoidaController::class, 'getReservasByCliente'])->name('getReservasByCliente');
-Route::get('/getReservasByStatus/{id}', [ReservadoidaController::class, 'getReservasByStatus'])->name('getReservasByStatus');
-Route::get('/getReservasByData/{id}', [ReservadoidaController::class, 'getReservasByData'])->name('getReservasByData');
-
+Route::get('/getClientesFieis/{id}', [ReservadoidaController::class, 'getClientesFieis'])->name('getClientesFieis');
+Route::get('/getReservasByDate/{id}', [ReservadoidaController::class, 'getReservasByDate'])->name('getReservasByDate');
+Route::get('/getReservasByRestaurante', [ReservadoidaController::class, 'getReservasByRestaurante'])->name('getReservasByRestaurante');
+Route::post('/getReservasByCliente', [ReservadoidaController::class, 'getReservasByCliente'])->name('getReservasByCliente');
+Route::get('/getReservasByStatus', [ReservadoidaController::class, 'getReservasByStatus'])->name('getReservasByStatus');
+Route::get('/getReservasByData', [ReservadoidaController::class, 'getReservasByData'])->name('getReservasByData');
+Route::get('/getLatestReservasCliente', [ReservadoidaController::class, 'getLatestReservasCliente'])->name('getLatestReservasCliente');
+Route::get('/getLatestReservasRestaurante', [ReservadoidaController::class, 'getLatestReservasRestaurante'])->name('getLatestReservasRestaurante');
+Route::get('/getReservasByRestauranteAndStatus', [ReservadoidaController::class, 'getReservasByRestauranteAndStatus'])->name('getReservasByRestauranteAndStatus');
+Route::delete('/deleteReserva/{id}', [ReservadoidaController::class, 'deleteReserva'])->name('deleteReserva');
+Route::put('/updateReserva/{id}', [ReservadoidaController::class, 'update'])->name('update');
+Route::post('/checkReserva', [ReservadoidaController::class, 'checkReserva'])->name('checkReserva');
 Route::get('/aceitarReserva/{id}', [ReservadoidaController::class, 'aceitarReserva'])->name('aceitarReserva');
 Route::get('/rejeitarReserva/{id}', [ReservadoidaController::class, 'rejeitarReserva'])->name('rejeitarReserva');
 
 
-// web
-
-Route::get('/teste', [WebController::class , 'teste'])->name('teste');
+Route::resource('reservas', ReservadoidaController::class);

@@ -86,7 +86,7 @@ class PerfilPageController extends Controller
             'bairroRestaurante' => $request->bairroRestaurante,
             'cidadeRestaurante' => $request->cidadeRestaurante,
             'estadoRestaurante' => $request->estadoRestaurante,
-            'capMaximaRestaurante' => $request->capMaximaRestaurante,
+            'capacidadeRestaurante' => $request->capMaximaRestaurante,
             'idTipoRestaurante' => $request->tipoRestaurante
         ]);
 

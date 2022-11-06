@@ -1,11 +1,19 @@
 /*Edit Perfil*/
 .FundoFoto{
-  width: 55vh;
   height: 20vh;
   padding-left: 1em;
   padding-top: 0.1em;
-  background: #ffffff;
+  background: #f50000;
 }
+
+.info {
+  background:white;
+  padding: 10px;
+}
+.cardzinho {
+  width: 55vh;
+}
+
 .fotoPerfil{
   width:17vh;
   height:17vh;
@@ -52,4 +60,13 @@
 .btn-cadastro a:hover{
   color: white;
   background-color: #ff2f48;
+}
+
+h1{
+  font-size: 1.5em!important;
+}
+
+
+h3{
+  font-size: 1rem!important;
 }

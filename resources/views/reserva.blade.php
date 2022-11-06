@@ -22,174 +22,53 @@
         <h1>Reservas</h1>
     </div>
     <div class="global">
-        <h4>Pendentes</h4>
+        <h2>Pendentes</h2>
         <div class="aceitar-reserva scroll">
             @foreach($reservas as $r)
+            @if($r->idStatusReserva == 3)
             <div class="card-group">
                 <div class="card">
-                    <img src="{{ asset('img/sidebar/casa.png') }}" class="card-img-top" alt="...">
+                    <img src="{{ asset('img/perfil.png') }}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">{{$r->idCliente}}</h5>
+                        <h5 class="card-title">{{ $clientes->where('idCliente', $r->idCliente)->first()->nomeCliente }}</h5>
                         <p class="card-text">Data: {{$r->dataReserva}} {{$r->horaReserva}}</p>
                         <p class="card-text">Mesa: {{$r->numPessoas}} acentos.</p>
+                        <p class="card-text">Status: {{ $status->where('idStatusReserva', $r->idStatusReserva)->first()->statusReserva }}.</p>
+
                     </div>
                     <div class="botoes">
-                        <a href="{{ route('cardapio.create') }}" class="btn btn-light">
+                        <a href="{{ route('aceitar-reserva', ['id'=>$r->idReserva]) }}" class="btn btn-light">
                             Aceitar
                         </a>
-                        <a href="{{ route('cardapio.create') }}" class="btn btn-light">
+                        <a href="{{ route('rejeitar-reserva', ['id'=>$r->idReserva]) }}" class="btn btn-light">
                             Recusar
                         </a>
                     </div>
                 </div>
             </div>
+            @endif
             @endForeach
         </div>
 
         
-        <h4>Aceitas</h4>
+        <h2>Aceitas</h2>
         <div class="reservados scroll-lateral">
             <div class="row row-cols-1 row-cols-md-6 g-4">
-                <div class="col">
-                    <div class="card">
-                        <img src="{{ asset('img/sidebar/casa.png') }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Bruno</h5>
-                            <p class="card-text">Data: 12/02/2022 12:30</p>
-                            <p class="card-text">Mesa com: 12 acentos</p>
+                @foreach($reservas as $r)
+                @if($r->idStatusReserva == 1)
+                
+                    <div class="col">
+                        <div class="card">
+                            <img src="{{ asset('img/perfil.png') }}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $clientes->where('idCliente', $r->idCliente)->first()->nomeCliente }}</h5>
+                                <p class="card-text">Data: {{$r->dataReserva}} {{$r->horaReserva}}</p>
+                                <p class="card-text">Mesa: {{$r->numPessoas}} acentos</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="{{ asset('img/sidebar/casa.png') }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Bruno</h5>
-                            <p class="card-text">Data: 12/02/2022 12:30</p>
-                            <p class="card-text">Mesa com: 12 acentos</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="{{ asset('img/sidebar/casa.png') }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Bruno</h5>
-                            <p class="card-text">Data: 12/02/2022 12:30</p>
-                            <p class="card-text">Mesa com: 12 acentos</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="{{ asset('img/sidebar/casa.png') }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Bruno</h5>
-                            <p class="card-text">Data: 12/02/2022 12:30</p>
-                            <p class="card-text">Mesa com: 12 acentos</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="{{ asset('img/sidebar/casa.png') }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Bruno</h5>
-                            <p class="card-text">Data: 12/02/2022 12:30</p>
-                            <p class="card-text">Mesa com: 12 acentos</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="{{ asset('img/sidebar/casa.png') }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Bruno Teixeira Pereira Pires </h5>
-                            <p class="card-text">Data: 12/02/2022 12:30</p>
-                            <p class="card-text">Mesa com: 12 acentos</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="{{ asset('img/sidebar/casa.png') }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Bruno</h5>
-                            <p class="card-text">Data: 12/02/2022 12:30</p>
-                            <p class="card-text">Mesa com: 12 acentos</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="{{ asset('img/sidebar/casa.png') }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Bruno</h5>
-                            <p class="card-text">Data: 12/02/2022 12:30</p>
-                            <p class="card-text">Mesa com: 12 acentos</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="{{ asset('img/sidebar/casa.png') }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Bruno</h5>
-                            <p class="card-text">Data: 12/02/2022 12:30</p>
-                            <p class="card-text">Mesa com: 12 acentos</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="{{ asset('img/sidebar/casa.png') }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Bruno</h5>
-                            <p class="card-text">Data: 12/02/2022 12:30</p>
-                            <p class="card-text">Mesa com: 12 acentos</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="{{ asset('img/sidebar/casa.png') }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Bruno</h5>
-                            <p class="card-text">Data: 12/02/2022 12:30</p>
-                            <p class="card-text">Mesa com: 12 acentos</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="{{ asset('img/sidebar/casa.png') }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Bruno</h5>
-                            <p class="card-text">Data: 12/02/2022 12:30</p>
-                            <p class="card-text">Mesa com: 12 acentos</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="{{ asset('img/sidebar/casa.png') }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Bruno</h5>
-                            <p class="card-text">Data: 12/02/2022 12:30</p>
-                            <p class="card-text">Mesa com: 12 acentos</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="{{ asset('img/sidebar/casa.png') }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Bruno</h5>
-                            <p class="card-text">Data: 12/02/2022 12:30</p>
-                            <p class="card-text">Mesa com: 12 acentos</p>
-                        </div>
-                    </div>
-                </div>
+                @endif
+                @endForeach
             </div>
         </div>
     </div>

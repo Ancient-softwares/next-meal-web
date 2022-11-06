@@ -5,6 +5,12 @@
     height: 80%;
 }
 
+.main{
+
+    height: 90%;
+
+}
+
 .card-reserva{
     width: 100%;
     height: 100%;
@@ -12,12 +18,12 @@
 }
 
 .card-title{
-    font-size: 0.7vw;
+    font-size: 0.7rem;
     font-weight: bold;
 }
 
 .card-text{
-    font-size: 0.7vw;
+    font-size: 0.7rem;
 }
 
 .card{
@@ -73,11 +79,19 @@
 }
 
 .botoes a{
-    font-size: 0.9vw;
+    font-size: 85%;
 }
 
 h4{
     margin-top: 0.5em!important;
+}
+
+h1{
+    font-size: 1.5rem!important;
+}
+
+h2{
+    font-size: 1.3rem!important;
 }
 
 .col{
@@ -92,10 +106,19 @@ h4{
 .scroll {
     width: 100%!important;
     overflow-x:scroll;
+    height: 30vh;
 }
 
 .scroll-lateral {
+
     width: 100%!important;
-    height: 23vw;
+
+    height: 30vh;
+
     overflow-y:scroll;
+
+}
+
+.card-group .card{
+    height: 30vh;
 }

@@ -24,12 +24,7 @@ form{
 
 .container-form{
     background-color: #F4F4F4;
-    height: 100%;
-    padding: 1.8em;
-    padding-left: 24em;
-    padding-right: 24em;
-    margin-right: 0;
-    margin-left: 0;
+    padding: 20px;
     border-radius: 2em;
     text-align: center;
 }
@@ -39,7 +34,7 @@ form{
     margin-left: auto;
 }
 .scroll {
-    max-height: 90vh;
+    max-height: 88vh;
     overflow-y: scroll;
 }
 
@@ -54,11 +49,6 @@ form{
     border-color: #ff2f48!important;
 }
 
-.btn-editar{
-    margin-top: 1em;
-}
-
-.form-imagem{
-    padding: 0.2em!important;
-    padding-left: 1em!important;
+h1{
+    font-size: 1.5rem!important;
 }

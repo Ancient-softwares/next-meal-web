@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\RestauranteModel;
 use App\Models\ClienteModel;
+use App\Models\ReservaModel;
 use App\Models\TipoRestauranteModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class WebController extends Controller
@@ -41,22 +43,32 @@ class WebController extends Controller
         $cep = $request->cep;
         $cep = str_replace('-', '', $cep);
 
+        $cnpj = $request->cnpj;
+        $cnpj = str_replace('-', '', $cep);
+        $cnpj = str_replace('.', '', $cep);
+        $cnpj = str_replace('/', '', $cep);
+
+
         $cad = $this->restaurantes->create([
             'nomeRestaurante' => $request->nome,
-            'cnpjRestaurante' => "--",
+            'cnpjRestaurante' => $cnpj,
             'telRestaurante' => $telefone,
             'loginRestaurante' => $request->login,
             'senhaRestaurante' => $senha,
             'fotoRestaurante' => "user.png",
-            'emailRestaurante' => "--",
+            'emailRestaurante' => $cnpj,
             'cepRestaurante' => $cep,
             'ruaRestaurante' => $request->rua,
             'numRestaurante' => $request->numero,
             'bairroRestaurante' => $request->bairro,
             'cidadeRestaurante' => $request->cidade,
             'estadoRestaurante' => $request->uf,
-            'capMaximaRestaurante' => 1,
-            'idTipoRestaurante' => 1,
+            'capacidadeRestaurante' => $request->capacidade,
+            'horarioAberturaRestaurante' => $request->horarioabertura,
+            'horarioFechamentoRestaurante' => ($request->horariofechamento . ":00"),
+            'ocupacaoRestaurante' => 1,
+            'descricaoRestaurante' => '--',
+            'idTipoRestaurante' => $request->tipoRestaurante,
         ]);
 
         if($cad) {
@@ -84,13 +96,4 @@ class WebController extends Controller
         return redirect('/');
     }
 
-    public function dashboard() {
-        $login = Session::get('login');
-
-        if(!isset($login)) {
-            return redirect()->route('login');
-        }
-
-        return view('index', compact('login'));
-    }
 }

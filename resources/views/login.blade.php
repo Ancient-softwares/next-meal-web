@@ -14,12 +14,15 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
   <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+
   <script src="{{ asset('js/validarCep.js') }}"></script>
 
   <script>
     $(document).ready(function($) {
-      $("#telefone").mask("(00) 0000-0000");
+      $("#telefone").mask("(00) 0000-00000");
       $("#cep").mask("00000-000");
+      $("#cnpj").mask("99.999.999/9999-99");
+
 
     });
   </script>
@@ -111,53 +114,10 @@
       <hr>
       <div class="corpin">
         @if($errors->any())
-        <div class="alert alert-danger" role="alert">
-          {{ $errors->first() }}
-        </div>
+          <div class="alert alert-danger" role="alert">
+            {{ $errors->first() }}
+          </div>
         @endif
-
-        <!-- <form method="POST" action="{{ route('registrar') }}">
-          @csrf
-          <label>Nome do restaurante: </label>
-          <input type="text" name="nome">
-          <br>
-
-          <label>Telefone do restaurante: </label>
-          <input type="text" name="telefone" id="telefone">
-          <br>
-
-          <label>CEP do restaurante: </label>
-          <div class="input-group">
-            <input type="text" name="cep" id="cep">
-            <button type="button" class="btn btn-light" id="validar">Validar</button>
-          </div>
-          <br>
-
-          <label>Rua: </label>
-          <input type="text" name="rua" id="rua">
-          <br>
-
-          <label>Bairro: </label>
-          <input type="text" name="bairro" id="bairro">
-          <br>
-
-          <label>Cidade: </label>
-          <input type="text" name="cidade" id="cidade">
-          <br>
-
-          <label>Numero: </label>
-          <input type="text" name="numero" id="numero">
-          <br>
-
-          <label>Senha: </label>
-          <input type="password" name="senha">
-          <br>
-          <div class="btn-login">
-            <input type="submit" class="btn btn-success" value="Registrar">
-            <a id="btn-abrirLogin">Login</a>
-
-          </div>
-        </form> -->
 
         <form id="regForm" method="POST" action="{{ route('registrar') }}">
           @csrf
@@ -166,9 +126,18 @@
             <input type="text" name="nome">
             <br>
 
-            <label>Telefone do restaurante: </label>
-            <input type="text" name="telefone" id="telefone">
-            <br>
+            <div class="row">
+              <div class="col-sm-6">
+                <label>Telefone do restaurante: </label>
+                <input type="text" name="telefone" id="telefone">
+              </div>
+              <div class="col-sm-6">
+                <label>CNPJ do restaurante: </label>
+                <input type="text" name="cnpj" id="cnpj">
+              </div>
+            </div>
+
+
             <div class="row">
               <div class="col-sm-6">
                 <label>Login: </label>
@@ -210,7 +179,35 @@
               </div>
             </div>
           </div>
-
+          <div class="tab">
+            <div class="row">
+              <div class="col-sm-6">
+                <label>Capacidade máxima do restaurante: </label>
+                <input type="number" name="capacidade" id="capacidade">
+                <br>
+              </div>
+              <div class="col-sm-6">
+                <label>Tipo do restaurante: </label>
+                <select name="tipoRestaurante">
+                    @foreach($tipos as $tipo)
+                        <option value="{{ $tipo->idTipoRestaurante }}">{{ $tipo->tipoRestaurante }}</option>
+                    @endforeach
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <label>Horário de abertura: </label>
+                <input type="time" name="horarioabertura" id="horarioabertura">
+                <br>
+              </div>
+              <div class="col-sm-6">
+                <label>Horário de fechamento: </label>
+                <input type="time" name="horariofechamento" id="horariofechamento">
+                <br>
+              </div>
+            </div>
+          </div>
 
           Já possui login? <a class="edit-entra-registro" type="button" id="btn-abrirLogin">Entrar</a>
           <div class="d-grid gap-2">
@@ -222,6 +219,7 @@
             </div>
           </div>
           <div style="text-align:center;">
+              <span class="step"></span>
               <span class="step"></span>
               <span class="step"></span>
           </div>
@@ -401,8 +399,6 @@
   <script src="{{ asset('js/back-top.js') }}"></script>
   <script src="{{ asset('js/registroHome/teste.js') }}"></script>
   <script src="{{ asset('js/registroHome/jquery-3.6.1.min.jss') }}"></script>
-
-
 
 
 </body>
