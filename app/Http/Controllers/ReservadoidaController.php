@@ -673,7 +673,7 @@ class ReservadoidaController extends Controller
     public function getReservasByCliente(Request $request)
     {
         try {
-            $token = $request->header('Authorization');
+            $token = $request->bearerToken();
             $token = str_replace('Bearer ', '', $token);
 
             $cliente = $this->clientes->where('idCliente', '=', $request->idCliente)->first();

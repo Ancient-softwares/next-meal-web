@@ -64,9 +64,9 @@ Route::post('/getLatestReservasCliente', [ReservadoidaController::class, 'getLat
 Route::get('/getLatestReservasRestaurante', [ReservadoidaController::class, 'getLatestReservasRestaurante'])->name('getLatestReservasRestaurante');
 Route::get('/getReservasByRestauranteAndStatus', [ReservadoidaController::class, 'getReservasByRestauranteAndStatus'])->name('getReservasByRestauranteAndStatus');
 Route::delete('/deleteReserva/{id}', [ReservadoidaController::class, 'deleteReserva'])->name('deleteReserva');
-Route::get('/getRestaurantesMaisReservados', [ReservadoidaController::class, 'getRestaurantesMaisReservados'])->name('getRestaurantesMaisReservados');
-Route::get('/getRestaurantesMelhoresAvaliados', [ReservadoidaController::class, 'getRestaurantesMelhoresAvaliados'])->name('getRestaurantesMelhoresAvaliados');
-Route::get('/getRestaurantesMaisReservadosMelhoresAvaliados', [ReservadoidaController::class, 'getRestaurantesMaisReservadosMelhoresAvaliados'])->name('getRestaurantesMaisReservadosMelhoresAvaliados');
+Route::post('/getRestaurantesMaisReservados', [AppController::class, 'getRestaurantesMaisReservados'])->name('getRestaurantesMaisReservados');
+Route::post('/getRestaurantesMelhoresAvaliados', [AppController::class, 'getRestaurantesMelhoresAvaliados'])->name('getRestaurantesMelhoresAvaliados');
+Route::post('/getRestaurantesMaisReservadosMelhoresAvaliados', [AppController::class, 'getRestaurantesMaisReservadosMelhoresAvaliados'])->name('getRestaurantesMaisReservadosMelhoresAvaliados');
 Route::put('/updateReserva/{id}', [ReservadoidaController::class, 'update'])->name('update');
 Route::post('/checkReserva', [ReservadoidaController::class, 'checkReserva'])->name('checkReserva');
 Route::get('/aceitarReserva/{id}', [ReservadoidaController::class, 'aceitarReserva'])->name('aceitarReserva');
