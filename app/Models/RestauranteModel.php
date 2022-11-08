@@ -27,9 +27,9 @@ class RestauranteModel extends Model
         "cidadeRestaurante",
         "estadoRestaurante",
         "capacidadeRestaurante",
+        "lotacaoRestaurante",
         "horarioAberturaRestaurante",
         "horarioFechamentoRestaurante",
-        "ocupacaoRestaurante",
         "descricaoRestaurante",
         "idTipoRestaurante",
         "idPrato"

@@ -149,7 +149,7 @@ class ReservadoidaController extends Controller
         }
     }
 
-    public function checkOcupation(
+    public function checkCapacity(
         $idRestaurante,
         $numPessoas
     ) {
@@ -159,7 +159,7 @@ class ReservadoidaController extends Controller
 
             $restaurante = $this->restaurantes->where('idRestaurante', $idRestaurante)->first();
 
-            if (($restaurante->capacidadeRestaurante - $restaurante->ocupacaoRestaurante) >= $numPessoas) {
+            if ($restaurante->capacidadeRestaurante  >= $numPessoas) {
                 return true;
             }
 
@@ -307,12 +307,12 @@ class ReservadoidaController extends Controller
                             'status' => 400,
                         ]);
                     } else {
-                        if (($restaurante->capMaximaRestaurante - $restaurante->ocupacaoRestaurante) >= $numPessoas) {
+                        if (!$restaurante->lotacaoRestaurante) {
                             return response()->json([
                                 'message' => 'Reserva disponível',
                                 'status' => 200,
                             ]);
-                        } else {
+                        } else if ($restaurante->lotacaoRestaurante) {
                             return response()->json([
                                 'message' => 'O restaurante não tem capacidade para essa quantidade de pessoas',
                                 'status' => 400,
@@ -368,10 +368,10 @@ class ReservadoidaController extends Controller
             }
 
             try {
-                $checkOcupation = $this->checkOcupation($request->idRestaurante, $request->numPessoas);
+                $checkCapacity = $this->checkCapacity($request->idRestaurante, $request->numPessoas);
             } catch (Exception $e) {
                 return response()->json([
-                    'message' => 'Erro ao validar a ocupação',
+                    'message' => 'Erro ao validar a capacidade',
                     'error' => $e->getMessage(),
                 ], 500);
             }
@@ -385,7 +385,7 @@ class ReservadoidaController extends Controller
                 ], 500);
             }
 
-            if ($checkToken && $checkDate && $checkOcupation && $checkAvaliable) {
+            if ($checkToken && $checkDate && !$restaurante->lotacaoRestaurante && $checkAvaliable) {
 
                 $reserva = $this->reservas->create([
                     'idCliente' => $request->idCliente,
@@ -426,7 +426,12 @@ class ReservadoidaController extends Controller
                         'message' => 'Data e hora indisponíveis',
                         'status' => 400,
                     ], 400);
-                } else if (!$checkOcupation) {
+                } else if ($restaurante->lotacaoRestaurante) {
+                    return response()->json([
+                        'message' => 'O restaurante não tem capacidade para essa quantidade de pessoas',
+                        'status' => 400,
+                    ], 400);
+                } else if ($checkCapacity) {
                     return response()->json([
                         'message' => 'O restaurante não tem capacidade para essa quantidade de pessoas',
                         'status' => 400,
@@ -439,7 +444,7 @@ class ReservadoidaController extends Controller
                         'validations' => [
                             'token' => $checkToken,
                             'date' => $checkDate,
-                            'ocupation' => $checkOcupation,
+                            'ocupation' => $checkCapacity,
                             'availability' => $checkAvaliable,
                         ],
                     ], 500);
