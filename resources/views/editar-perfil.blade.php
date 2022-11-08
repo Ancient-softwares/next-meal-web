@@ -91,7 +91,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <label>capacidade máxima do restaurante: </label>
-                    <input type="number" class="form-control" name="capMaximaRestaurante" value="{{ $info->capMaximaRestaurante ?? '' }}">
+                    <input type="number" class="form-control" name="capacidadeRestaurante" value="{{ $info->capacidadeRestaurante ?? '' }}">
                 </div>
                 <div class="col-sm-6">
                     <label>Tipo do restaurante: </label>

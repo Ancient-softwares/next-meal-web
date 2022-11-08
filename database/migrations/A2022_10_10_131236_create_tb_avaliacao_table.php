@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->integer('notaAvaliacao');
             $table->string('descAvaliacao', 255);
             $table->integer('idRestaurante');
+            $table->integer('idCliente');
             $table->timestamps();
         });
     }

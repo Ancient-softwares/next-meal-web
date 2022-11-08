@@ -45,6 +45,32 @@ class AppController extends Controller
         ]);
     }
 
+    public function getPratosByRestaurante(Request $request)
+    {
+        $idRestaurante = $request->idRestaurante;
+
+        $pratos = DB::table('tbprato')
+            ->select('idPrato', 'nomePrato', 'valorPrato', 'fotoPrato', 'tipoPrato')
+            ->join('tbtipoprato', 'tbprato.idTipoPrato', '=', 'tbtipoprato.idTipoPrato')
+            ->where('tbprato.idRestaurante', '=', $idRestaurante)
+            ->get();
+
+        return response()->json($pratos);
+    }
+
+    public function getAvaliacoesByRestaurante(Request $request)
+    {
+        $idRestaurante = $request->idRestaurante;
+
+        $avaliacoes = DB::table('tbavaliacao')
+            ->select('tbavaliacao.idAvaliacao', 'tbavaliacao.notaAvaliacao', 'tbavaliacao.dtAvaliacao', 'tbavaliacao.descAvaliacao', 'tbcliente.nomeCliente')
+            ->join('tbcliente', 'tbavaliacao.idCliente', '=', 'tbcliente.idCliente')
+            ->where('tbavaliacao.idRestaurante', '=', $idRestaurante)
+            ->get();
+
+        return response()->json($avaliacoes);
+    }
+
     public function getRestaurants()
     {
         $table = RestauranteModel::select(
@@ -67,9 +93,10 @@ class AppController extends Controller
             'tbrestaurante.descricaoRestaurante',
             'tbtiporestaurante.tipoRestaurante',
             'tbavaliacao.notaAvaliacao',
+            'tbavaliacao.descAvaliacao',
         )
             ->join('tbtiporestaurante', 'tbtiporestaurante.idTipoRestaurante', '=', 'tbrestaurante.idTipoRestaurante')
-            ->leftjoin('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbrestaurante.idRestaurante')
+            ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbrestaurante.idRestaurante')
             ->get();
 
         // gets the average of the rating
@@ -90,6 +117,15 @@ class AppController extends Controller
         });
 
         return response()->json($table);
+    }
+
+    public function getTipoRestaurantes()
+    {
+        $table = $this->tipoRestaurante->select('idTipoRestaurante', 'tipoRestaurante')->get();
+        return response()->json([
+            'data' => $table,
+            'message' => 'Tipos de restaurantes retornados com sucesso'
+        ], 201);
     }
 
     public function cadastroCliente(Request $request)
@@ -173,9 +209,9 @@ class AppController extends Controller
 
             if ($cad) {
                 return response()->json([
-                    'status' => 'success',
+                    'status' => 201,
                     'message' => 'Cadastro realizado com sucesso!'
-                ]);
+                ], 200);
             } else {
                 return response()->json([
                     'error' => 'Erro ao cadastrar cliente',
@@ -303,15 +339,68 @@ class AppController extends Controller
     public function getRestaurantsByType(Request $request)
     {
         try {
-            $type = $request->type;
-            $typeId = $this->tipoRestaurante->where('tipoRestaurante', '=', $type)->first();
+            $tipoRestaurante = $this->tipoRestaurante->where('tipoRestaurante', '=', $request->tipoRestaurante)->first();
 
-            $restaurantes = $this->restaurantes->where('idTipoRestaurante', '=', $typeId)->get();
+            // removes duplicate restaurants
+            $restaurantes = RestauranteModel::select(
+                'tbrestaurante.idRestaurante',
+                'tbrestaurante.nomeRestaurante',
+                'tbrestaurante.telRestaurante',
+                'tbrestaurante.emailRestaurante',
+                'tbrestaurante.ruaRestaurante',
+                'tbrestaurante.cepRestaurante',
+                'tbrestaurante.ruaRestaurante',
+                'tbrestaurante.bairroRestaurante',
+                'tbrestaurante.cidadeRestaurante',
+                'tbrestaurante.estadoRestaurante',
+                'tbrestaurante.horarioAberturaRestaurante',
+                'tbrestaurante.horarioFechamentoRestaurante',
+                'tbrestaurante.capacidadeRestaurante',
+                'tbrestaurante.ocupacaoRestaurante',
+                'tbrestaurante.nomeRestaurante',
+                'tbrestaurante.fotoRestaurante',
+                'tbrestaurante.descricaoRestaurante',
+                'tbtiporestaurante.tipoRestaurante',
+                'tbavaliacao.notaAvaliacao',
+                'tbavaliacao.descAvaliacao',
+            )
+                ->join('tbtiporestaurante', 'tbtiporestaurante.idTipoRestaurante', '=', 'tbrestaurante.idTipoRestaurante')
+                ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbrestaurante.idRestaurante')
+                ->where('tbtiporestaurante.tipoRestaurante', '=', $request->tipoRestaurante)
+                ->get();
 
-            return response()->json([
-                'message' => 'Restaurantes encontrados do tipo ' . $type,
-                'data' => $restaurantes
-            ]);
+
+            // removes empty restaurants
+            $restaurantes = $restaurantes->filter(function ($value, $key) {
+                return $value != null;
+            });
+
+            // gets the average of the rating
+            $restaurantes->map(function ($item) {
+                $item->notaAvaliacao = DB::table('tbavaliacao')
+                    ->where('idRestaurante', $item->idRestaurante)
+                    ->avg('notaAvaliacao');
+                return $item;
+            });
+
+            // deletes duplicates
+            $restaurantes = $restaurantes->unique('idRestaurante');
+
+            // converts the average rating to a float
+            $restaurantes->map(function ($item) {
+                $item->notaAvaliacao = (float) $item->notaAvaliacao;
+                return $item;
+            });
+
+            if ($restaurantes) {
+                return $restaurantes;
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Restaurantes não encontrados!',
+                    'data' => error_get_last(),
+                ]);
+            }
         } catch (Exception $e) {
             return $e;
         }
@@ -524,6 +613,125 @@ class AppController extends Controller
             }
         } catch (Exception $e) {
             return $e;
+        }
+    }
+
+    // gets the restaurants with the most reservations
+    public function getRestaurantesMaisReservados(Request $request)
+    {
+        try {
+            $query = $this->reservas->select('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante', DB::raw('count(tbreserva.idRestaurante) as total'))
+                ->join('tbrestaurante', 'tbrestaurante.idRestaurante', '=', 'tbreserva.idRestaurante')
+                ->groupBy('tbrestaurante.nomeRestaurante', 'tbreserva.idRestaurante')
+                ->orderBy('total', 'desc')
+                ->limit($request->limite)
+                ->get();
+
+
+            return response()->json([
+                'message' => 'Restaurantes encontrados com sucesso!',
+                'data' => $query,
+            ], 201);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'Erro ao buscar restaurantes',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    // gets the restaurants with the best ratings  
+    public function getRestaurantesMelhoresAvaliados(Request $request)
+    {
+        try {
+            $query = $this->reservas->select('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante', 'tbavaliacao.notaAvaliacao', DB::raw('avg(tbavaliacao.notaAvaliacao) as media'))
+                ->join('tbrestaurante', 'tbrestaurante.idRestaurante', '=', 'tbreserva.idRestaurante')
+                ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbreserva.idRestaurante')
+                ->groupBy('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante', 'tbavaliacao.notaAvaliacao')
+                ->orderBy('media', 'desc')
+                ->limit($request->limite)
+                ->get();
+
+            // converts the average rating to a float
+            $query->map(function ($item) {
+                $item->media = (float) $item->media;
+                return $item;
+            });
+
+            return response()->json([
+                'message' => 'Restaurantes encontrados com sucesso!',
+                'data' => $query,
+            ], 201);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'Erro ao buscar restaurantes',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    // gets the restaurants with the most reservations and best ratings
+    public function getRestaurantesMaisReservadosMelhoresAvaliados(Request $request)
+    {
+        try {
+            $query = $this->reservas->select('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante', 'tbavaliacao.notaAvaliacao', DB::raw('count(tbreserva.idRestaurante) as total, avg(tbavaliacao.notaAvaliacao) as media'))
+                ->join('tbrestaurante', 'tbrestaurante.idRestaurante', '=', 'tbreserva.idRestaurante')
+                ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbreserva.idRestaurante')
+                ->groupBy('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante', 'tbavaliacao.notaAvaliacao')
+                ->orderBy('total', 'desc')
+                ->orderBy('media', 'desc')
+                ->limit($request->limite)
+                ->get();
+
+            // converts the average rating to a float
+            $query->map(function ($item) {
+                $item->media = (float) $item->media;
+                return $item;
+            });
+
+            return response()->json([
+                'message' => 'Restaurantes encontrados com sucesso!',
+                'data' => $query,
+            ], 201);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'Erro ao buscar restaurantes',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function postAvaliacao(Request $request)
+    {
+        try {
+            $cliente = $this->clientes->where('idCliente', '=', $request->idCliente)->first();
+
+            if ($cliente) {
+                $query = $this->avaliacao->create([
+                    'idRestaurante' => $request->idRestaurante,
+                    'idCliente' => $request->idCliente,
+                    'notaAvaliacao' => $request->notaAvaliacao,
+                    'dtAvaliacao' => date('Y-m-d H:i:s'),
+                    'descAvaliacao' => $request->descAvaliacao
+                ]);
+
+                return response()->json([
+                    'message' => 'Avaliação criada com sucesso!',
+                    'data' => $query
+                ]);
+            } else {
+                return response()->json([
+                    'message' => 'Você precisa estar logado para avaliar o restaurante!',
+                ]);
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'Erro ao criar avaliação',
+                'error' => $e->getMessage(),
+                'data' => $request->all(),
+                'cliente' => $cliente,
+                'restaurante' => $this->restaurantes->where('idRestaurante', '=', $request->idRestaurante)->first()
+            ], 500);
         }
     }
 }

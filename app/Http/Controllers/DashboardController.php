@@ -16,8 +16,7 @@ class DashboardController extends Controller
         if(!isset($login)) {
             return redirect()->route('login');
         }
-
-        $restaurante = RestauranteModel::where("nomeRestaurante", Session::get('login'))->first();
+        $restaurante = RestauranteModel::where("loginRestaurante", Session::get('login'))->first();
         
         $fieis = DB::table('tbreserva')
             ->select('tbcliente.nomeCliente', DB::raw('count(tbreserva.idCliente) as totalReservas'))

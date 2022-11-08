@@ -206,19 +206,19 @@ class ReservadoidaController extends Controller
             $horaReserva = date('H:i:s', $time);
 
             $param = $request;
-            $param['idCliente'] = $cliente->idCliente;
-            $param['idRestaurante'] = $restaurante->idRestaurante;
-            $param['horaReserva'] = $horaReserva;
-            $param['dataReserva'] = $dataReserva;
-            $param['bearerToken'] = $request->bearerToken();
+            $param->idCliente = $cliente->idCliente;
+            $param->idRestaurante = $restaurante->idRestaurante;
+            $param->horaReserva = $horaReserva;
+            $param->dataReserva = $dataReserva;
+            $param->bearerToken = $request->bearerToken();
 
             $checking = $this->checkReserva(
-                $param['idCliente'],
-                $param['idRestaurante'],
-                $param['dataReserva'],
-                $param['horaReserva'],
-                $param['numPessoas'],
-                $param['bearerToken']
+                $param->idCliente,
+                $param->idRestaurante,
+                $param->dataReserva,
+                $param->horaReserva,
+                $param->numPessoas,
+                $param->bearerToken
             );
 
 
@@ -239,7 +239,7 @@ class ReservadoidaController extends Controller
                 return response()->json([
                     'status' => 200,
                     'message' => 'Reserva realizada com sucesso',
-                    'data' => $reserva
+                    'data' => $cliente
                 ], 200);
             } else {
                 return response()->json([
@@ -276,8 +276,10 @@ class ReservadoidaController extends Controller
 
             if ($bearerToken != $cliente->token) {
                 return response()->json([
-                    'message' => 'Você não está logado',
+                    'message' => 'Você não está logado. Faça login e tente novamente.',
                     'status' => 401,
+                    'cliente token' => $cliente->token,
+                    'bearer token' => $bearerToken
                 ], 401);
             } else {
 
@@ -305,7 +307,7 @@ class ReservadoidaController extends Controller
                             'status' => 400,
                         ]);
                     } else {
-                        if (($restaurante->capacidadeRestaurante - $restaurante->ocupacaoRestaurante) >= $numPessoas) {
+                        if (($restaurante->capMaximaRestaurante - $restaurante->ocupacaoRestaurante) >= $numPessoas) {
                             return response()->json([
                                 'message' => 'Reserva disponível',
                                 'status' => 200,
@@ -596,7 +598,7 @@ class ReservadoidaController extends Controller
             ->where('tbreserva.idRestaurante', '=', $request->idRestaurante)
             ->groupBy('tbcliente.nomeCliente')
             ->orderBy('totalReservas', 'desc')
-            ->limit(3)
+            ->limit(5)
             ->get();
 
         return response()->json([
@@ -671,7 +673,7 @@ class ReservadoidaController extends Controller
     public function getReservasByCliente(Request $request)
     {
         try {
-            $token = $request->header('Authorization');
+            $token = $request->bearerToken();
             $token = str_replace('Bearer ', '', $token);
 
             $cliente = $this->clientes->where('idCliente', '=', $request->idCliente)->first();
@@ -819,6 +821,13 @@ class ReservadoidaController extends Controller
     public function getLatestReservasCliente(Request $request)
     {
         try {
+            if ($request->idCliente == 0) {
+                return response()->json([
+                    'message' => 'Erro ao buscar reservas',
+                    'error' => 'Cliente não encontrado',
+                ], 500);
+            }
+
             $historico = $this->reservas->where('idCliente', '=', $request->idCliente)->orderBy('dataReserva', 'desc')->limit($request->limite)->get();
 
             return response()->json([

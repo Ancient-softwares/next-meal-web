@@ -77,7 +77,7 @@ class WebController extends Controller
     }
 
     public function autenticar(Request $request) {
-        $restaurante = $this->restaurantes->where('nomeRestaurante', '=', $request->login)->first();
+        $restaurante = $this->restaurantes->where('loginRestaurante', '=', $request->login)->first();
 
         if($restaurante) {
             if(password_verify($request->senha, $restaurante->senhaRestaurante)) {

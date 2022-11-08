@@ -26,7 +26,7 @@ class PerfilPageController extends Controller
             return redirect()->route('login');
         }
 
-        $info = RestauranteModel::where('nomeRestaurante', $login)->first();
+        $info = RestauranteModel::where('loginRestaurante', $login)->first();
         $tipoRestaurante = $this->tipoRestaurante->all();
 
         return view('perfil-page', compact('info', 'login', 'tipoRestaurante'));
@@ -38,7 +38,7 @@ class PerfilPageController extends Controller
             return redirect()->route('login');
         }
 
-        $info = RestauranteModel::where('nomeRestaurante', $login)->first();
+        $info = RestauranteModel::where('loginRestaurante', $login)->first();
         $tipos = $this->tipoRestaurante->all();
 
         return view('editar-perfil', compact('info', 'tipos', 'login'));
@@ -50,7 +50,7 @@ class PerfilPageController extends Controller
             return redirect()->route('login');
         }
 
-        $imageName = $this->restaurante->where('nomeRestaurante', $login)->first()->fotoRestaurante;
+        $imageName = $this->restaurante->where('loginRestaurante', $login)->first()->fotoRestaurante;
 
 
         if($request->hasFile("fotoRestaurante") && $request->file("fotoRestaurante")->isValid()) {
@@ -74,7 +74,7 @@ class PerfilPageController extends Controller
         $cep = $request->cepRestaurante;
         $cep = str_replace('-', '', $cep);
 
-        $cadastro = $this->restaurante->where('nomeRestaurante', $login)->update([
+        $cadastro = $this->restaurante->where('loginRestaurante', $login)->update([
             'nomeRestaurante' => $request->nomeRestaurante,
             'cnpjRestaurante' => $request->cnpjRestaurante,
             'telRestaurante' => $telefone,
