@@ -59,7 +59,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="ingredientes">Ingredientes</label>
-                            <input type="text" class="form-control" name="ingredientePrato" id="ingredientes" placeholder="Digite os ingredientes" value="{{$prato->ingredientesPrato ?? ''}}">
+                            <input type="text" class="form-control" name="ingredientesPrato" id="ingredientes" placeholder="Digite os ingredientes" value="{{$prato->ingredientesPrato ?? ''}}">
                         </div>
                     </div>
                     <div class="col-sm-6">

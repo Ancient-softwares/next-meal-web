@@ -44,9 +44,9 @@ class WebController extends Controller
         $cep = str_replace('-', '', $cep);
 
         $cnpj = $request->cnpj;
-        $cnpj = str_replace('-', '', $cep);
-        $cnpj = str_replace('.', '', $cep);
-        $cnpj = str_replace('/', '', $cep);
+        $cnpj = str_replace('-', '', $cnpj);
+        $cnpj = str_replace('.', '', $cnpj);
+        $cnpj = str_replace('/', '', $cnpj);
 
 
         $cad = $this->restaurantes->create([
@@ -56,7 +56,7 @@ class WebController extends Controller
             'loginRestaurante' => $request->login,
             'senhaRestaurante' => $senha,
             'fotoRestaurante' => "user.png",
-            'emailRestaurante' => $cnpj,
+            'emailRestaurante' => '---',
             'cepRestaurante' => $cep,
             'ruaRestaurante' => $request->rua,
             'numRestaurante' => $request->numero,
@@ -66,7 +66,7 @@ class WebController extends Controller
             'capacidadeRestaurante' => $request->capacidade,
             'horarioAberturaRestaurante' => $request->horarioabertura,
             'horarioFechamentoRestaurante' => ($request->horariofechamento . ":00"),
-            'ocupacaoRestaurante' => 1,
+            'lotacaoRestaurante' => false,
             'descricaoRestaurante' => '--',
             'idTipoRestaurante' => $request->tipoRestaurante,
         ]);
