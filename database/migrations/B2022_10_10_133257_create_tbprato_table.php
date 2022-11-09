@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->increments('idPrato');
             $table->string('nomePrato', 60);
             $table->decimal('valorPrato', 6, 2);
-            $table->string('ingredientePrato', 100);
+            $table->string('ingredientesPrato', 100);
             $table->string('fotoPrato', 255);
             $table->unsignedInteger('idTipoPrato');
             $table->unsignedInteger('idRestaurante');

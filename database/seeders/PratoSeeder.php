@@ -21,7 +21,7 @@ class PratoSeeder extends Seeder
                 [
                     'nomePrato' => 'Bife à Parmegiana',
                     'valorPrato' => 25.00,
-                    'ingredientePrato' => 'Bife, molho de tomate, queijo parmesão, batata palha',
+                    'ingredientesPrato' => 'Bife, molho de tomate, queijo parmesão, batata palha',
                     'fotoPrato' => 'parmegiana.jpg',
                     'idRestaurante' => 1,
                     'idTipoPrato' => 1,
@@ -31,7 +31,7 @@ class PratoSeeder extends Seeder
                 [
                     'nomePrato' => 'Bife à Milanesa',
                     'valorPrato' => 25.00,
-                    'ingredientePrato' => 'Bife, molho de tomate, queijo parmesão, batata palha',
+                    'ingredientesPrato' => 'Bife, molho de tomate, queijo parmesão, batata palha',
                     'fotoPrato' => 'milanesa.jpg',
                     'idRestaurante' => 1,
                     'idTipoPrato' => 1,
@@ -41,7 +41,7 @@ class PratoSeeder extends Seeder
                 [
                     'nomePrato' => 'Bife à Rolê',
                     'valorPrato' => 25.00,
-                    'ingredientePrato' => 'Bife, molho de tomate, queijo parmesão, batata palha',
+                    'ingredientesPrato' => 'Bife, molho de tomate, queijo parmesão, batata palha',
                     'fotoPrato' => 'role.jpg',
                     'idRestaurante' => 2,
                     'idTipoPrato' => 1,
@@ -51,7 +51,7 @@ class PratoSeeder extends Seeder
                 [
                     'nomePrato' => 'Bife à Portuguesa',
                     'valorPrato' => 25.00,
-                    'ingredientePrato' => 'Bife, molho de tomate, queijo parmesão, batata palha',
+                    'ingredientesPrato' => 'Bife, molho de tomate, queijo parmesão, batata palha',
                     'fotoPrato' => 'portuguesa.jpg',
                     'idRestaurante' => 2,
                     'idTipoPrato' => 1,
@@ -61,7 +61,7 @@ class PratoSeeder extends Seeder
                 [
                     'nomePrato' => 'Bife à Moda da Casa',
                     'valorPrato' => 25.00,
-                    'ingredientePrato' => 'Bife, molho de tomate, queijo parmesão, batata palha',
+                    'ingredientesPrato' => 'Bife, molho de tomate, queijo parmesão, batata palha',
                     'fotoPrato' => 'casa.jpg',
                     'idRestaurante' => 3,
                     'idTipoPrato' => 1,
@@ -71,7 +71,7 @@ class PratoSeeder extends Seeder
                 [
                     'nomePrato' => 'Batata Frita',
                     'valorPrato' => 10.00,
-                    'ingredientePrato' => 'Batata, óleo, sal',
+                    'ingredientesPrato' => 'Batata, óleo, sal',
                     'fotoPrato' => 'batatafrita.jpg',
                     'idRestaurante' => 4,
                     'idTipoPrato' => 2,
@@ -82,7 +82,7 @@ class PratoSeeder extends Seeder
                 [
                     'nomePrato' => 'Batata Rústica',
                     'valorPrato' => 10.00,
-                    'ingredientePrato' => 'Batata, óleo, sal',
+                    'ingredientesPrato' => 'Batata, óleo, sal',
                     'fotoPrato' => 'batatarustica.jpg',
                     'idRestaurante' => 4,
                     'idTipoPrato' => 3,
