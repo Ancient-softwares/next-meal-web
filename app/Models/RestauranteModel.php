@@ -16,10 +16,9 @@ class RestauranteModel extends Model
         "nomeRestaurante",
         "cnpjRestaurante",
         "telRestaurante",
-        "loginRestaurante",
+        "emailRestaurante",
         "senhaRestaurante",
         "fotoRestaurante",
-        "emailRestaurante",
         "cepRestaurante",
         "ruaRestaurante",
         "numRestaurante",
@@ -32,7 +31,6 @@ class RestauranteModel extends Model
         "horarioFechamentoRestaurante",
         "descricaoRestaurante",
         "idTipoRestaurante",
-        "idPrato"
     ];
 
     /**

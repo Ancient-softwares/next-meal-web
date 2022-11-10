@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('nomeRestaurante', 300);
             $table->char('cnpjRestaurante', 14);
             $table->char('telRestaurante', 13);
-            $table->string('loginRestaurante', 100);
             $table->string('senhaRestaurante', 255);
             $table->string('fotoRestaurante', 255);
             $table->string('emailRestaurante', 100);

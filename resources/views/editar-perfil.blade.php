@@ -45,10 +45,7 @@
                     <label>Cnpj do restaurante: </label>
                     <input type="text" class="form-control" name="cnpjRestaurante" required value="{{ $info->cnpjRestaurante ?? '' }}">
                 </div>
-                <div class="col-sm-6">
-                    <label>E-mail do restaurante: </label>
-                    <input type="email" class="form-control" name="emailRestaurante" required value="{{ $info->emailRestaurante ?? '' }}">
-                </div>
+
             </div>
             <br>
 

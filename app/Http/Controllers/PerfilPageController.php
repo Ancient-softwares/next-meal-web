@@ -26,7 +26,7 @@ class PerfilPageController extends Controller
             return redirect()->route('login');
         }
 
-        $info = RestauranteModel::where('loginRestaurante', $login)->first();
+        $info = RestauranteModel::where('emailRestaurante', $login)->first();
         $tipoRestaurante = $this->tipoRestaurante->all();
 
         return view('perfil-page', compact('info', 'login', 'tipoRestaurante'));
@@ -38,7 +38,7 @@ class PerfilPageController extends Controller
             return redirect()->route('login');
         }
 
-        $info = RestauranteModel::where('loginRestaurante', $login)->first();
+        $info = RestauranteModel::where('emailRestaurante', $login)->first();
         $tipos = $this->tipoRestaurante->all();
 
         return view('editar-perfil', compact('info', 'tipos', 'login'));
@@ -50,7 +50,7 @@ class PerfilPageController extends Controller
             return redirect()->route('login');
         }
 
-        $imageName = $this->restaurante->where('loginRestaurante', $login)->first()->fotoRestaurante;
+        $imageName = $this->restaurante->where('emailRestaurante', $login)->first()->fotoRestaurante;
 
 
         if($request->hasFile("fotoRestaurante") && $request->file("fotoRestaurante")->isValid()) {
@@ -74,12 +74,12 @@ class PerfilPageController extends Controller
         $cep = $request->cepRestaurante;
         $cep = str_replace('-', '', $cep);
 
-        $cadastro = $this->restaurante->where('loginRestaurante', $login)->update([
+        $cadastro = $this->restaurante->where('emailRestaurante', $login)->update([
             'nomeRestaurante' => $request->nomeRestaurante,
             'cnpjRestaurante' => $request->cnpjRestaurante,
             'telRestaurante' => $telefone,
             'fotoRestaurante' => $imageName,
-            'emailRestaurante' => $request->emailRestaurante,
+            'emailRestaurante' => $login,
             'cepRestaurante' => $cep,
             'ruaRestaurante' => $request->ruaRestaurante,
             'numRestaurante' => $request->numRestaurante,
@@ -91,13 +91,9 @@ class PerfilPageController extends Controller
         ]);
 
         if($cadastro) {
-            Session::put('login', $request->nomeRestaurante);
             return redirect()->route('perfil-page');
+        }
 
-        }
-        else {
-            dd($cadastro);
-        }
 
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CrudMesa;
 use App\Http\Controllers\CrudPrato;
 use App\Http\Controllers\DashboardController;
@@ -23,6 +24,13 @@ Route::get('/', [WebController::class, 'indexLogin'])->name('login');
 Route::post('/autenticar', [WebController::class, 'autenticar'])->name('autenticar');
 Route::post('/registrar', [WebController::class, 'registrar'])->name('registrar');
 Route::get('/logout', [WebController::class, 'logout'])->name('logout');
+
+// Rotas do administrador
+Route::prefix('admin')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin');
+    Route::get('/restaurantes', [AdminController::class, 'pagrestaurantes'])->name('pagrestaurante');
+    Route::get('/clientes', [AdminController::class, 'pagclientes'])->name('pagclientes');
+});
 
 Route::get('/index', [DashboardController::class, 'index'])->name('index');
 

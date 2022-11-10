@@ -89,8 +89,8 @@
         @endif
         <form method="POST" action="{{ route('autenticar') }}">
           @csrf
-          <label>Login: </label>
-          <input type="text" name="login">
+          <label>E-mail: </label>
+          <input type="email" name="email">
 
           <label>Senha: </label>
           <input type="password" name="senha">
@@ -140,8 +140,8 @@
 
             <div class="row">
               <div class="col-sm-6">
-                <label>Login: </label>
-                <input type="text" name="login">
+                <label>E-mail: </label>
+                <input type="email" name="email">
               </div>
               <div class="col-sm-6">
                 <label>Senha: </label>

@@ -63,7 +63,7 @@ class CrudMesa extends Controller
      */
     public function store(Request $request)
     {
-        $restaurante = RestauranteModel::where("nomeRestaurante", Session::get('login'))->first();
+        $restaurante = RestauranteModel::where("emailRestaurante", Session::get('login'))->first();
     
         $numeracao = $this->mesas->where([["numMesa", "=", $request->numMesa], ["idRestaurante", "=", $restaurante->idRestaurante]])->first();
 
