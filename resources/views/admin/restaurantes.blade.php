@@ -1,10 +1,14 @@
 @extends('admin.admin')
 
+@section('titulo', 'Clientes')
 
 @section('css')
 <link href="{{ asset('css/editsRotasCrud/cardapio.css') }}" rel="stylesheet" type="text/css">
-
+<link href="{{ asset('css/reserva.css') }}" rel="stylesheet" type="text/css">
 @endsection
+
+<link rel="icon" href="{{ asset('img/iconNM.png')}}">
+
 
 @section('conteudo')
 <div class="container-cont">

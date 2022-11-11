@@ -182,3 +182,31 @@ h5{
     margin-right: auto!important;
     margin-left: auto!important;
 }
+
+.card-dash{
+    text-align: center;
+    background-color: #F4F4F4!important;
+    border-radius: 2em!important;
+    height: 100%;
+}
+
+.colDash{
+    height: 100%!important;
+}
+
+.cardDash p{
+    font-size: 2em;
+}
+
+.rowDash{
+    height: 20vh!important;
+    margin-bottom: 1em;
+}
+
+.row2{
+    height: 40vh!important;
+}
+
+.style-reservas{
+    height: 80vh;
+}
