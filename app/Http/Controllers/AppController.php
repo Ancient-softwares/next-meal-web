@@ -786,6 +786,13 @@ class AppController extends Controller
             return $item;
         });
 
+        if (gettype($table) == 'object') {
+            foreach ($table as $key) {
+                unset($table->$key);
+            }
+        }      
+
+
         return response()->json($table);
     }
 
