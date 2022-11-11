@@ -8,6 +8,9 @@
 <link href="/website/css/uicons-outline-rounded.css" rel="stylesheet">
 @endsection
 
+<!-- ICONE -->
+<link rel="icon" href="{{ asset('img/iconNM.png')}}">
+
 @section('conteudo')
 
 

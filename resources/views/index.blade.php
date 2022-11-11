@@ -8,6 +8,9 @@
 <link rel="stylesheet" href="{{ asset('css/menu.css') }}">
 @endsection
 
+<!-- ICONE -->
+<link rel="icon" href="{{ asset('img/iconNM.png')}}">
+
 @section('js')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src = "https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>

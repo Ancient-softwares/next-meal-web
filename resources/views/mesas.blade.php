@@ -9,6 +9,9 @@
 
 @endsection
 
+<!-- ICONE -->
+<link rel="icon" href="{{ asset('img/iconNM.png')}}">
+
 @section('conteudo')
 <div class="container-cont">
 

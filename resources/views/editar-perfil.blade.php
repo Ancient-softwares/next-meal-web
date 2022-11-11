@@ -6,6 +6,9 @@
     <link href="{{ asset('css/editsRotasCrud/crud.css') }}" rel="stylesheet" type="text/css">
 @endsection
 
+<!-- ICONE -->
+<link rel="icon" href="{{ asset('img/iconNM.png')}}">
+
 @section('js')
     <script src="{{ asset('js/validarCep.js') }}"></script>
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>

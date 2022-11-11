@@ -8,7 +8,7 @@
 <link href="{{ asset('css/reserva.css') }}" rel="stylesheet" type="text/css">
 
 @endsection
-
+<!-- ICONE -->
 <link rel="icon" href="{{ asset('img/iconNM.png')}}">
 
 

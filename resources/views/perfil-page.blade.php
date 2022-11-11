@@ -6,6 +6,9 @@
 <link href="{{ asset('css/editsRotasCrud/perfil.css') }}" rel="stylesheet" type="text/css">
 @endsection
 
+<!-- ICONE -->
+<link rel="icon" href="{{ asset('img/iconNM.png')}}">
+
 @section('conteudo')
 
 <div class="container-perfil">
