@@ -5,38 +5,100 @@ namespace App\Http\Controllers;
 use App\Models\ClienteModel;
 use App\Models\RestauranteModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
     public function index() {
         $login = Session::get('login');
-        if(!isset($login) && $login != 'admin') {
+        if(isset($login) && $login != 'admin') {
             return redirect('index');
         }
 
-        return view('admin.dashboard');
+        $quantidadeCliente = ClienteModel::count();
+        $quantidadeRestaurante = RestauranteModel::count();
+
+        $graficoMes = $this->getGraphRestaurantesMes();
+        $graficoValor = $this->getGraphRestaurantesValor();
+
+        return view('admin.dashboard', compact('quantidadeCliente', 'quantidadeRestaurante', 'graficoMes', 'graficoValor'));
     }
 
     public function pagrestaurantes() {
         $login = Session::get('login');
-        if(!isset($login) && $login != 'admin') {
+        if(isset($login) && $login != 'admin') {
             return redirect('index');
         }
 
         $restaurantes = RestauranteModel::all();
-
+        
         return view('admin.restaurantes', compact('restaurantes'));
     }
 
     public function pagclientes() {
         $login = Session::get('login');
-        if(!isset($login) && $login != 'admin') {
+        if(isset($login) && $login != 'admin') {
             return redirect('index');
         }
 
         $clientes = ClienteModel::all();
 
         return view('admin.clientes', compact('clientes'));
+    }
+
+    public function getGraphRestaurantesMes() {
+        $mesAtual = date('m');
+
+        if(($mesAtual - 6) < 0)
+        {
+            $aux = 12 - (6 - $mesAtual);
+        }
+        else{
+            $aux = $mesAtual - 6;
+        }
+
+        $resultado = [];
+        $meses = ['Janeiro','Fevereiro', 'Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+        
+        while($aux != $mesAtual){
+
+            array_push($resultado, $meses[$aux]);
+
+            if($aux == 11) $aux = 0;
+            else $aux++;
+        }
+
+        return $resultado;
+    }
+
+    public function getGraphRestaurantesValor() {
+        $mesAtual = date('m');
+
+        if(($mesAtual - 6) < 0)
+        {
+            $aux = 12 - (6 - $mesAtual);
+        }
+        else{
+            $aux = $mesAtual - 6;
+        }
+        $resultado = [];
+        
+        while($aux <= $mesAtual){
+            array_push($resultado,  $this->getRestaurantespMes($aux + 1));
+            $aux++;
+        }
+
+        return $resultado;
+    }
+
+    private function getRestaurantespMes($mes)
+    {
+        $query = DB::table('tbrestaurante')
+            ->select(DB::raw('COUNT(idRestaurante) AS total'))
+            ->where(DB::raw('MONTH(created_at)'), '=', $mes)
+            ->first()->total;
+
+            return $query;
     }
 }

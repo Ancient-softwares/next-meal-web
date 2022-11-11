@@ -43,6 +43,9 @@ class ReservaController extends Controller
         if (!isset($login)) {
             return redirect()->back();
         }
+        else if($login == "admin") {
+            return redirect()->back();
+        }
 
         $reservas = $this->reservas->where('idRestaurante', $id)->get();
         $reservasAceitas = $this->reservas->where('idRestaurante', $id)

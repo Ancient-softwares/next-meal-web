@@ -32,6 +32,9 @@ class CrudMesa extends Controller
         if(!isset($login)) {
             return redirect()->back();
         }
+        else if($login == "admin") {
+            return redirect()->back();
+        }
 
         $mesas = $this->mesas->where('idRestaurante', $id)->get();
 
@@ -49,6 +52,9 @@ class CrudMesa extends Controller
         $login = Session::get('login');
 
         if(!isset($login)) {
+            return redirect()->back();
+        }
+        else if($login == "admin") {
             return redirect()->back();
         }
 
@@ -112,6 +118,9 @@ class CrudMesa extends Controller
     {
         $login = Session::get('login');
         if(!isset($login)) {
+            return redirect()->back();
+        }
+        else if($login == "admin") {
             return redirect()->back();
         }
 

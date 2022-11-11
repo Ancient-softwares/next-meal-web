@@ -237,6 +237,7 @@ section.hero h2 {
     margin-top: 4%;
 }
 
+select,
 input[type=text],
 input[type=password],
 input[type=email],
@@ -250,6 +251,7 @@ input[type=number] {
     box-sizing: border-box;
     border-radius: 1em;
 }
+
 hr{
     color: #f40723;
 }

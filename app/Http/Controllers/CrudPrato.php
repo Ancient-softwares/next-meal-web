@@ -32,6 +32,9 @@ class CrudPrato extends Controller
         if(!isset($login)) {
             return redirect()->route('login');
         }
+        else if($login == "admin") {
+            return redirect()->back();
+        }
 
         $tipos = TipoPratoModel::all();
 
@@ -50,6 +53,9 @@ class CrudPrato extends Controller
         $login = Session::get('login');
         if(!isset($login)) {
             return redirect()->route('login');
+        }
+        else if($login == "admin") {
+            return redirect()->back();
         }
 
 
@@ -71,6 +77,9 @@ class CrudPrato extends Controller
         $idRestaurante = Session::get('idRestaurante');
         if(!isset($login)) {
             return redirect()->route('login');
+        }
+        else if($login == "admin") {
+            return redirect()->back();
         }
 
         $validated = $request->validate([
@@ -134,6 +143,9 @@ class CrudPrato extends Controller
         if(!isset($login)) {
             return redirect()->route('login');
         }
+        else if($login == "admin") {
+            return redirect()->back();
+        }
 
         $tipos = TipoPratoModel::all();
         $prato = $this->pratos->where('idPrato', $id)->first();
@@ -153,6 +165,9 @@ class CrudPrato extends Controller
         $login = Session::get('login');
         if(!isset($login)) {
             return redirect()->route('login');
+        }
+        else if($login == "admin") {
+            return redirect()->back();
         }
 
         $validated = $request->validate([

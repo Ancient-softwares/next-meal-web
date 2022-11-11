@@ -25,6 +25,9 @@ class PerfilPageController extends Controller
         if(!isset($login)) {
             return redirect()->route('login');
         }
+        else if($login == "admin") {
+            return redirect()->back();
+        }
 
         $info = RestauranteModel::where('emailRestaurante', $login)->first();
         $tipoRestaurante = $this->tipoRestaurante->all();
@@ -36,6 +39,9 @@ class PerfilPageController extends Controller
         $login = Session::get('login');
         if(!isset($login)) {
             return redirect()->route('login');
+        }
+        else if($login == "admin") {
+            return redirect()->back();
         }
 
         $info = RestauranteModel::where('emailRestaurante', $login)->first();
@@ -49,7 +55,10 @@ class PerfilPageController extends Controller
         if(!isset($login)) {
             return redirect()->route('login');
         }
-
+        else if($login == "admin") {
+            return redirect()->back();
+        }
+        
         $imageName = $this->restaurante->where('emailRestaurante', $login)->first()->fotoRestaurante;
 
 

@@ -6,10 +6,7 @@
 @section('css')
 <link href="{{ asset('css/editsRotasCrud/cardapio.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('css/reserva.css') }}" rel="stylesheet" type="text/css">
-
 @endsection
-<!-- ICONE -->
-<link rel="icon" href="{{ asset('img/iconNM.png')}}">
 
 
 @section('js')
@@ -27,7 +24,7 @@
                 <div class="card-dash">
                     <div class="card-body cardDash">
                         <h5 class="card-title">Quantidade de clientes</h5>
-                        <p class="card-text">5</p>
+                        <p class="card-text">{{ $quantidadeCliente }}</p>
                     </div>
                 </div>
             </div>
@@ -35,7 +32,7 @@
                 <div class="card-dash">
                     <div class="card-body cardDash">
                         <h5 class="card-title">Quantidade de restaurantes</h5>
-                        <p class="card-text">5</p>
+                        <p class="card-text">{{ $quantidadeRestaurante }}</p>
                     </div>
                 </div>
             </div>
@@ -45,13 +42,17 @@
                 <canvas id="myChart" class="grafico"></canvas>
                 <script>
                     const ctx = document.getElementById('myChart').getContext('2d');
+                    
+                    var valores = JSON.parse('{!! json_encode($graficoValor) !!}');
+                    var meses = JSON.parse('{!! json_encode($graficoMes) !!}');
+                                    
                     const myChart = new Chart(ctx, {
                         type: 'line',
                         data: {
-                            labels: ['Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro'],
+                            labels: meses,
                             datasets: [{
                                 label: 'Restaurantes cadastrados por mês',
-                                data: [12, 19, 3, 5, 2, 3],
+                                data: valores,
                                 backgroundColor: [
                                     'rgba(255, 99, 132, 0.2)',
                                     'rgba(54, 162, 235, 0.2)',

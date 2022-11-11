@@ -16,6 +16,10 @@ class DashboardController extends Controller
         if(!isset($login)) {
             return redirect()->route('login');
         }
+        else if($login == "admin") {
+            return redirect()->back();
+        }
+        
         $restaurante = RestauranteModel::where("emailRestaurante", Session::get('login'))->first();
         
         $fieis = DB::table('tbreserva')

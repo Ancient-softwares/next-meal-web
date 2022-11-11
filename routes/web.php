@@ -8,6 +8,7 @@ use App\Http\Controllers\WebController;
 use App\Http\Controllers\PerfilPageController;
 use App\Http\Controllers\ReservaController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,3 +52,10 @@ Route::resource('reservas', ReservadoidaController::class);
 Route::get('/reservas', [ReservaController::class, 'index'])->name('reserva');
 Route::get('/aceitar-reserva', [ReservaController::class, 'aceitarReserva'])->name('aceitar-reserva');
 Route::get('/rejeitar-reserva', [ReservaController::class, 'rejeitarReserva'])->name('rejeitar-reserva');
+
+
+
+// Rota para se caso ocorrer o erro 404 temos uma página personalizada
+Route::fallback(function () {
+    return view('404page');
+});

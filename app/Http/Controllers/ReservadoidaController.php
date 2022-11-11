@@ -51,6 +51,9 @@ class ReservadoidaController extends Controller
         if (!isset($login)) {
             return redirect()->route('login');
         }
+        else if($login == "admin") {
+            return redirect()->back();
+        }
 
         $reservas = $this->reservas->where('idRestaurante', $id)->get();
 

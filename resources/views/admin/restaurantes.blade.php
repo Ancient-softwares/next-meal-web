@@ -7,7 +7,6 @@
 <link href="{{ asset('css/reserva.css') }}" rel="stylesheet" type="text/css">
 @endsection
 
-<link rel="icon" href="{{ asset('img/iconNM.png')}}">
 
 
 @section('conteudo')
@@ -27,6 +26,7 @@
             <th scope="col">Rua</th>
             <th scope="col">Bairro</th>
             <th scope="col">Cidade</th>
+            <th scope="col">Data de cadastro</th>
         </tr>
     </thead>
     <tbody>
@@ -40,6 +40,7 @@
             <td>{{ $restaurante->ruaRestaurante}}</td>
             <td>{{ $restaurante->bairroRestaurante}}</td>
             <td>{{ $restaurante->cidadeRestaurante}}</td>
+            <td>{{ $restaurante->created_at }}</td>
         </tr>
         @endforeach
     </tbody>
