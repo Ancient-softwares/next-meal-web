@@ -44,7 +44,7 @@ class PratoSeeder extends Seeder
                     'ingredientesPrato' => 'Bife, molho de tomate, queijo parmesão, batata palha',
                     'fotoPrato' => 'role.jpg',
                     'idRestaurante' => 2,
-                    'idTipoPrato' => 1,
+                    'idTipoPrato' => 4,
                     'created_at' => Date::now(),
                     'updated_at' => Date::now(),
                 ],

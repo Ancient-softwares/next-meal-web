@@ -22,8 +22,8 @@ return new class extends Migration {
         DB::table('tbtipoprato')->insert(
             array(
                 ['tipoPrato' => 'FastFood'],
-                ['tipoPrato' => ''],
-                ['tipoPrato' => 'buffet'],
+                ['tipoPrato' => 'Caseiro'],
+                ['tipoPrato' => 'Buffet'],
             )
         );
     }

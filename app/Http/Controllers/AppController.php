@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\ReservaModel;
 use App\Models\RestauranteModel;
 use App\Models\ClienteModel;
+use App\Models\PratoModel;
 use App\Models\TipoRestauranteModel;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -731,5 +732,68 @@ class AppController extends Controller
                 'restaurante' => $this->restaurantes->where('idRestaurante', '=', $request->idRestaurante)->first()
             ], 500);
         }
+    }
+
+    public function filterByMealsOrIngredients(Request $request) {
+        $input = strtolower($request->input);
+        
+        $table = RestauranteModel::select(
+            'tbrestaurante.idRestaurante',
+            'tbrestaurante.nomeRestaurante',
+            'tbrestaurante.telRestaurante',
+            'tbrestaurante.emailRestaurante',
+            'tbrestaurante.ruaRestaurante',
+            'tbrestaurante.cepRestaurante',
+            'tbrestaurante.ruaRestaurante',
+            'tbrestaurante.bairroRestaurante',
+            'tbrestaurante.cidadeRestaurante',
+            'tbrestaurante.estadoRestaurante',
+            'tbrestaurante.horarioAberturaRestaurante',
+            'tbrestaurante.horarioFechamentoRestaurante',
+            'tbrestaurante.capacidadeRestaurante',
+            'tbrestaurante.nomeRestaurante',
+            'tbrestaurante.fotoRestaurante',
+            'tbrestaurante.descricaoRestaurante',
+            'tbtiporestaurante.tipoRestaurante',
+            'tbavaliacao.notaAvaliacao',
+            'tbavaliacao.descAvaliacao',
+        )
+            ->join('tbtiporestaurante', 'tbtiporestaurante.idTipoRestaurante', '=', 'tbrestaurante.idTipoRestaurante')
+            ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbrestaurante.idRestaurante')
+            ->join('tbprato', 'tbprato.idRestaurante', '=', 'tbrestaurante.idRestaurante')
+            ->join('tbtipoprato', 'tbtipoprato.idTipoPrato', '=', 'tbprato.idTipoPrato')
+            ->where(strtolower('tbprato.nomePrato'), 'LIKE', '%'.$input.'%')
+            ->orWhere(strtolower('tbprato.ingredientesPrato'),'LIKE', '%'.$input.'%')
+            ->orWhere(strtolower('tbrestaurante.nomeRestaurante'), 'LIKE', '%'.$input.'%')
+            ->orWhere(strtolower('tbtiporestaurante.tipoRestaurante'), 'LIKE', '%'.$input.'%')
+            ->orWhere(strtolower('tbtipoprato.tipoPrato'), 'LIKE', '%'.$input.'%')
+            ->get();
+
+        // gets the average of the rating
+        $table->map(function ($item) {
+            $item->notaAvaliacao = DB::table('tbavaliacao')
+                ->where('idRestaurante', $item->idRestaurante)
+                ->avg('notaAvaliacao');
+            return $item;
+        });
+
+        // deletes duplicates
+        $table = $table->unique('idRestaurante');
+
+        // converts the average rating to a float
+        $table->map(function ($item) {
+            $item->notaAvaliacao = (float) $item->notaAvaliacao;
+            return $item;
+        });
+
+        return response()->json($table);
+    }
+
+    public function filterByName(Request $request) {
+        //
+    }
+
+    public function filterByCategory(Request $request) {
+        //
     }
 }
