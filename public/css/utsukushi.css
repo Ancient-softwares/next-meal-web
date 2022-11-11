@@ -239,6 +239,7 @@ section.hero h2 {
 
 input[type=text],
 input[type=password],
+input[type=email],
 input[type=time],
 input[type=number] {
     width: 100%;
