@@ -13,6 +13,8 @@ class AvaliacaoModel extends Model
 
     protected $fillable = [
         'idAvaliacao',
+        'idRestaurante',
+        'idCliente',
         'dtAvaliacao',
         'notaAvaliacao',
         'descAvaliacao'
@@ -25,6 +27,6 @@ class AvaliacaoModel extends Model
      */
     protected static function newFactory()
     {
-        return \Database\Factories\AvaliacaoFactory::new ();
+        return \Database\Factories\AvaliacaoFactory::new();
     }
 }
