@@ -826,7 +826,7 @@ class AppController extends Controller
                 if ($this->reservas->where('idRestaurante', '=', $request->idRestaurante)
                     ->where('idCliente', '=', $request->idCliente)
                     ->where('dataReserva', '<', date('Y-m-d H:i:s'))
-                    ->where('idStatusReserva', '=', 3)
+                    ->where('idStatusReserva', '=', 4)
                     ->first()
                 ) {
                     return response()->json([
@@ -835,7 +835,7 @@ class AppController extends Controller
                     ]);
                 } else {
                     return response()->json([
-                        'message' => 'Você precisa ter feito uma reserva para avaliar esse restaurante!',
+                        'message' => 'Você ainda não pode avaliar esse restaurante!',
                         'status' => false
                     ]);
                 }
