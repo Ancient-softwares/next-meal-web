@@ -113,6 +113,9 @@ class AppController extends Controller
         // converts the average rating to a float
         $table->map(function ($item) {
             $item->notaAvaliacao = (float) $item->notaAvaliacao;
+
+            // rounds the average to 1 decimal place
+            $item->notaAvaliacao = round($item->notaAvaliacao, 1);
             return $item;
         });
 
@@ -227,25 +230,29 @@ class AppController extends Controller
     public function uploadImage(Request $request)
     {
         try {
+            // return $request->all();
 
-            $request->validate([
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
+            $file = $request->file('fotoCliente');
 
-            $validated = $request->validated();
+            if ($file) {
+                $imageName = time() . '.' . $file->extension();
 
-            if ($validated) {
-                $imageName = time() . '.' . $request->image->extension();
-
-                $request->image->move(public_path('img'), $imageName);
+                $file->move(public_path('img/fotosCliente'), $imageName);
 
                 $upload = $this->clientes->imageCliente = $imageName;
 
-                return response()->json([
-                    'message' => 'Imagem enviada com sucesso',
-                    'status' => 200,
-                    'image' => $imageName
-                ], 200);
+                if ($upload) {
+                    return response()->json([
+                        'status' => 201,
+                        'message' => 'Imagem enviada com sucesso!'
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'error' => 'Não foi possível enviar a imagem',
+                        'status' => 500,
+                        'request' => $request->all()
+                    ], 500);
+                }
             } else {
                 return response()->json([
                     'message' => 'Erro ao enviar imagem',
@@ -643,10 +650,10 @@ class AppController extends Controller
     public function getRestaurantesMelhoresAvaliados(Request $request)
     {
         try {
-            $query = $this->reservas->select('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante', 'tbavaliacao.notaAvaliacao', DB::raw('avg(tbavaliacao.notaAvaliacao) as media'))
+            $query = $this->reservas->select('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante', DB::raw('avg(tbavaliacao.notaAvaliacao) as media'))
                 ->join('tbrestaurante', 'tbrestaurante.idRestaurante', '=', 'tbreserva.idRestaurante')
                 ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbreserva.idRestaurante')
-                ->groupBy('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante', 'tbavaliacao.notaAvaliacao')
+                ->groupBy('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante')
                 ->orderBy('media', 'desc')
                 ->limit($request->limite)
                 ->get();
@@ -654,6 +661,8 @@ class AppController extends Controller
             // converts the average rating to a float
             $query->map(function ($item) {
                 $item->media = (float) $item->media;
+                // rounds the average rating to 1 decimal place
+                $item->media = round($item->media, 1);
                 return $item;
             });
 
@@ -673,10 +682,10 @@ class AppController extends Controller
     public function getRestaurantesMaisReservadosMelhoresAvaliados(Request $request)
     {
         try {
-            $query = $this->reservas->select('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante', 'tbavaliacao.notaAvaliacao', DB::raw('count(tbreserva.idRestaurante) as total, avg(tbavaliacao.notaAvaliacao) as media'))
+            $query = $this->reservas->select('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante', DB::raw('count(tbreserva.idRestaurante) as total, avg(tbavaliacao.notaAvaliacao) as media'))
                 ->join('tbrestaurante', 'tbrestaurante.idRestaurante', '=', 'tbreserva.idRestaurante')
                 ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbreserva.idRestaurante')
-                ->groupBy('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante', 'tbavaliacao.notaAvaliacao')
+                ->groupBy('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante')
                 ->orderBy('total', 'desc')
                 ->orderBy('media', 'desc')
                 ->limit($request->limite)
@@ -685,6 +694,8 @@ class AppController extends Controller
             // converts the average rating to a float
             $query->map(function ($item) {
                 $item->media = (float) $item->media;
+                // rounds the average rating to 1 decimal place
+                $item->media = round($item->media, 1);
                 return $item;
             });
 
