@@ -32,7 +32,12 @@ class StatusReservaSeeder extends Seeder
                     'statusReserva' => 'Aguardando',
                     'created_at' => Date::now(),
                     'updated_at' => Date::now(),
-                ]
+                ],
+                [
+                    'statusReserva' => 'Finalizado',
+                    'created_at' => Date::now(),
+                    'updated_at' => Date::now(),
+                ],
             )
         );
     }

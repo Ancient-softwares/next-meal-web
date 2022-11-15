@@ -50,8 +50,7 @@ class ReservadoidaController extends Controller
 
         if (!isset($login)) {
             return redirect()->route('login');
-        }
-        else if($login == "admin") {
+        } else if ($login == "admin") {
             return redirect()->back();
         }
 
@@ -157,12 +156,9 @@ class ReservadoidaController extends Controller
         $numPessoas
     ) {
         try {
-            $reservas = $this->reservas->where('idRestaurante', $idRestaurante)->get();
-
-
             $restaurante = $this->restaurantes->where('idRestaurante', $idRestaurante)->first();
 
-            if ($restaurante->capacidadeRestaurante  >= $numPessoas) {
+            if ($restaurante->capacidadeRestaurante >= $numPessoas) {
                 return true;
             }
 
@@ -388,7 +384,13 @@ class ReservadoidaController extends Controller
                 ], 500);
             }
 
-            if ($checkToken && $checkDate && !$restaurante->lotacaoRestaurante && $checkAvaliable) {
+            if (
+                $checkToken &&
+                $checkDate &&
+                !$restaurante->lotacaoRestaurante
+                && $checkAvaliable
+                && $checkCapacity
+            ) {
 
                 $reserva = $this->reservas->create([
                     'idCliente' => $request->idCliente,
@@ -429,12 +431,12 @@ class ReservadoidaController extends Controller
                         'message' => 'Data e hora indisponíveis',
                         'status' => 400,
                     ], 400);
-                } else if ($restaurante->lotacaoRestaurante) {
+                } else if (!$restaurante->lotacaoRestaurante) {
                     return response()->json([
-                        'message' => 'O restaurante não tem capacidade para essa quantidade de pessoas',
+                        'message' => 'O restaurante está lotado nesse horário',
                         'status' => 400,
                     ], 400);
-                } else if ($checkCapacity) {
+                } else if (!$checkCapacity) {
                     return response()->json([
                         'message' => 'O restaurante não tem capacidade para essa quantidade de pessoas',
                         'status' => 400,

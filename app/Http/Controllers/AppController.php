@@ -734,9 +734,10 @@ class AppController extends Controller
         }
     }
 
-    public function filterByMealsOrIngredients(Request $request) {
+    public function filterByMealsOrIngredients(Request $request)
+    {
         $input = strtolower($request->input);
-        
+
         $table = RestauranteModel::select(
             'tbrestaurante.idRestaurante',
             'tbrestaurante.nomeRestaurante',
@@ -762,11 +763,11 @@ class AppController extends Controller
             ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbrestaurante.idRestaurante')
             ->join('tbprato', 'tbprato.idRestaurante', '=', 'tbrestaurante.idRestaurante')
             ->join('tbtipoprato', 'tbtipoprato.idTipoPrato', '=', 'tbprato.idTipoPrato')
-            ->where(strtolower('tbprato.nomePrato'), 'LIKE', '%'.$input.'%')
-            ->orWhere(strtolower('tbprato.ingredientesPrato'),'LIKE', '%'.$input.'%')
-            ->orWhere(strtolower('tbrestaurante.nomeRestaurante'), 'LIKE', '%'.$input.'%')
-            ->orWhere(strtolower('tbtiporestaurante.tipoRestaurante'), 'LIKE', '%'.$input.'%')
-            ->orWhere(strtolower('tbtipoprato.tipoPrato'), 'LIKE', '%'.$input.'%')
+            ->where(strtolower('tbprato.nomePrato'), 'LIKE', '%' . $input . '%')
+            ->orWhere(strtolower('tbprato.ingredientesPrato'), 'LIKE', '%' . $input . '%')
+            ->orWhere(strtolower('tbrestaurante.nomeRestaurante'), 'LIKE', '%' . $input . '%')
+            ->orWhere(strtolower('tbtiporestaurante.tipoRestaurante'), 'LIKE', '%' . $input . '%')
+            ->orWhere(strtolower('tbtipoprato.tipoPrato'), 'LIKE', '%' . $input . '%')
             ->get();
 
         // gets the average of the rating
@@ -790,17 +791,49 @@ class AppController extends Controller
             foreach ($table as $key) {
                 unset($table->$key);
             }
-        }      
+        }
 
 
         return response()->json($table);
     }
 
-    public function filterByName(Request $request) {
-        //
-    }
+    public function checkRatingPermission(Request $request)
+    {
+        $cliente = $this->clientes->where('idCliente', '=', $request->idCliente)->first();
 
-    public function filterByCategory(Request $request) {
-        //
+        if ($cliente) {
+            $query = $this->avaliacao->where('idRestaurante', '=', $request->idRestaurante)
+                ->where('idCliente', '=', $request->idCliente)
+                ->first();
+
+            if ($query) {
+                return response()->json([
+                    'message' => 'Você já avaliou esse restaurante!',
+                    'status' => false
+                ]);
+            } else {
+                if ($this->reservas->where('idRestaurante', '=', $request->idRestaurante)
+                    ->where('idCliente', '=', $request->idCliente)
+                    ->where('dataReserva', '<', date('Y-m-d H:i:s'))
+                    ->where('idStatusReserva', '=', 3)
+                    ->first()
+                ) {
+                    return response()->json([
+                        'message' => 'Você pode avaliar esse restaurante!',
+                        'status' => true
+                    ]);
+                } else {
+                    return response()->json([
+                        'message' => 'Você precisa ter feito uma reserva para avaliar esse restaurante!',
+                        'status' => false
+                    ]);
+                }
+            }
+        } else {
+            return response()->json([
+                'message' => 'Você precisa estar logado para avaliar o restaurante!',
+                'status' => false
+            ]);
+        }
     }
 }
