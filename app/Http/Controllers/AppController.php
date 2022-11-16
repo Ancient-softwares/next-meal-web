@@ -250,6 +250,57 @@ class AppController extends Controller
                     return response()->json([
                         'error' => 'Não foi possível enviar a imagem',
                         'status' => 500,
+                        'request' => $request->all(),
+                    ], 500);
+                }
+            } else {
+                return response()->json([
+                    'message' => 'Erro ao enviar imagem',
+                    'status' => 500,
+                    'request' => $request->all(),
+                ], 500);
+            }
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function decodandomeuovo(Request $request)
+    {
+        try {
+            // return $request->all();
+
+            $file = $request->image;
+
+            if ($file) {
+                
+                $image_64 = $file; //your base64 encoded data
+
+                $extension = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];   // .jpg .png .pdf
+              
+                $replace = substr($image_64, 0, strpos($image_64, ',')+1); 
+              
+              // find substring fro replace here eg: data:image/png;base64,
+              
+               $image = str_replace($replace, '', $image_64); 
+              
+               $image = str_replace(' ', '+', $image); 
+              
+               $imageName = Str::random(10).'.'.$extension;
+              
+               $image->move(public_path('img/fotosCliente'), $imageName);
+
+            // DECODAR O BANG NO APP FI
+
+                if ($image) {
+                    return response()->json([
+                        'status' => 201,
+                        'message' => 'Imagem enviada com sucesso!'
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'error' => 'Não foi possível enviar a imagem',
+                        'status' => 500,
                         'request' => $request->all()
                     ], 500);
                 }

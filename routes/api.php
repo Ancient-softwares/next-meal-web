@@ -27,6 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/restaurantes', [AppController::class, 'getRestaurants'])->name('getRestaurants');
 Route::post('/loginCliente', [AppController::class, 'loginCliente'])->name('loginCliente');
 Route::post('/uploadImage', [AppController::class, 'uploadImage'])->name('uploadImage');
+Route::post('/uploadUri', [AppController::class, 'decodandomeuovo'])->name('decodandomeuovo');
 Route::post('/getRestaurantByCep', [AppController::class, 'getRestaurantByCep'])->name('getRestaurantByCep');
 Route::post('/getRestaurantsByType', [AppController::class, 'getRestaurantsByType'])->name('getRestaurantsByType');
 Route::get('/getRestaurantsByName', [AppController::class, 'getRestaurantsByName'])->name('getRestaurantsByName');
