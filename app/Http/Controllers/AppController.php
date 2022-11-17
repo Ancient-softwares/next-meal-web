@@ -273,24 +273,24 @@ class AppController extends Controller
             $file = $request->image;
 
             if ($file) {
-                
+
                 $image_64 = $file; //your base64 encoded data
 
                 $extension = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];   // .jpg .png .pdf
-              
-                $replace = substr($image_64, 0, strpos($image_64, ',')+1); 
-              
-              // find substring fro replace here eg: data:image/png;base64,
-              
-               $image = str_replace($replace, '', $image_64); 
-              
-               $image = str_replace(' ', '+', $image); 
-              
-               $imageName = Str::random(10).'.'.$extension;
-              
-               $image->move(public_path('img/fotosCliente'), $imageName);
 
-            // DECODAR O BANG NO APP FI
+                $replace = substr($image_64, 0, strpos($image_64, ',') + 1);
+
+                // find substring fro replace here eg: data:image/png;base64,
+
+                $image = str_replace($replace, '', $image_64);
+
+                $image = str_replace(' ', '+', $image);
+
+                $imageName = Str::random(10) . '.' . $extension;
+
+                $image->move(public_path('img/fotosCliente'), $imageName);
+
+                // DECODAR O BANG NO APP FI
 
                 if ($image) {
                     return response()->json([
@@ -677,13 +677,21 @@ class AppController extends Controller
     public function getRestaurantesMaisReservados(Request $request)
     {
         try {
-            $query = $this->reservas->select('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante', DB::raw('count(tbreserva.idRestaurante) as total'))
+            $query = $this->reservas->select('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante', DB::raw('count(tbreserva.idRestaurante) as total, avg(tbavaliacao.notaAvaliacao) as media'))
                 ->join('tbrestaurante', 'tbrestaurante.idRestaurante', '=', 'tbreserva.idRestaurante')
+                ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbrestaurante.idRestaurante')
                 ->groupBy('tbrestaurante.nomeRestaurante', 'tbreserva.idRestaurante')
                 ->orderBy('total', 'desc')
                 ->limit($request->limite)
                 ->get();
 
+            // converts the average rating to a float
+            $query->map(function ($item) {
+                $item->media = (float) $item->media;
+                // rounds the average rating to 1 decimal place
+                $item->media = round($item->media, 1);
+                return $item;
+            });
 
             return response()->json([
                 'message' => 'Restaurantes encontrados com sucesso!',
@@ -701,7 +709,7 @@ class AppController extends Controller
     public function getRestaurantesMelhoresAvaliados(Request $request)
     {
         try {
-            $query = $this->reservas->select('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante', DB::raw('avg(tbavaliacao.notaAvaliacao) as media'))
+            $query = $this->reservas->select('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante', DB::raw('count(tbavaliacao.idRestaurante) as notas, avg(tbavaliacao.notaAvaliacao) as media'))
                 ->join('tbrestaurante', 'tbrestaurante.idRestaurante', '=', 'tbreserva.idRestaurante')
                 ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbreserva.idRestaurante')
                 ->groupBy('tbreserva.idRestaurante', 'tbrestaurante.nomeRestaurante')

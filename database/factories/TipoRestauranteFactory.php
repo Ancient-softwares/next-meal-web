@@ -19,7 +19,7 @@ class TipoRestauranteFactory extends Factory
     public function definition()
     {
         return [
-            'tipoRestaurante' => $this->faker->text(20),
+            'tipoRestaurante' => $this->faker->word(),
         ];
     }
 }
