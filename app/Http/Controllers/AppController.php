@@ -804,6 +804,7 @@ class AppController extends Controller
         }
     }
 
+
     public function filterByMealsOrIngredients(Request $request)
     {
         $input = strtolower($request->input);
@@ -882,10 +883,11 @@ class AppController extends Controller
                     'status' => false
                 ]);
             } else {
+                $statusPermitido = 4;
+
                 if ($this->reservas->where('idRestaurante', '=', $request->idRestaurante)
                     ->where('idCliente', '=', $request->idCliente)
-                    ->where('dataReserva', '<', date('Y-m-d H:i:s'))
-                    ->where('idStatusReserva', '=', 4)
+                    ->where('idStatusReserva', '=', $statusPermitido)
                     ->first()
                 ) {
                     return response()->json([
