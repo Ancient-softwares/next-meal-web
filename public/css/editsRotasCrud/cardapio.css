@@ -143,6 +143,12 @@ h5{
     font-size: 15px!important;
 }
 
+@media screen and (max-width:1440px){
+.card-footer button{    
+     font-size: 1.5vh!important;
+}
+}
+
 .col{
     padding-left: 0!important;
     height: 40vh!important;
