@@ -96,9 +96,9 @@
           <input type="password" name="senha">
           <div class="btn-login">
          
-            <input type="submit" class=" btn btn-custom" value="Entrar">
-            <a id="btn-abrirRegistro">Registrar-se</a>
+            <input type="submit" class=" btn btn-outline-danger" value="Entrar">
           </div>
+          Ainda não possui uma conta?<a class="btn-abreModalRegistro" id="btn-abrirRegistro" >Registrar-se</a>
         </form>
       </div>
     </div>
@@ -110,7 +110,7 @@
 
   <div id="modalRegistro" class="modal">
     <div class="modal-content" class="conteudo">
-      <h2 class="Registro-cadrastar-style">Registro</h2>
+      <h2 class="Registro-cadrastar-style">Registro do restaurante</h2>
       <hr>
       <div class="corpin">
         @if($errors->any())
@@ -213,8 +213,10 @@
           <div class="d-grid gap-2">
             <div style="overflow:auto;">
               <div style="float:right;">
-                <button type="button" class="btn btn-custom" id="prevBtn" onclick="nextPrev(-1)">Anterior</button>
-                <button type="button" class="btn btn-custom" id="nextBtn" onclick="nextPrev(1)">Próximo</button>
+              <div class="btn-group">
+                <button type="button" class="btn btn-outline-danger btn-proxAnterior" id="prevBtn" onclick="nextPrev(-1)">Anterior</button>
+                <button type="button" class="btn btn-outline-danger btn-proxAnterior" id="nextBtn" onclick="nextPrev(1)">Próximo</button>
+                </div>
               </div>
             </div>
           </div>
