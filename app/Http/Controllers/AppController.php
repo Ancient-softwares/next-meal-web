@@ -931,4 +931,47 @@ class AppController extends Controller
             ]);
         }
     }
+
+    public function checkNotifications(Request $request)
+    {
+        try {
+
+            $cliente = $this->clientes->where('idCliente', '=', $request->idCliente)->first();
+
+            if ($cliente) {
+                $query = $this->reservas->where('idCliente', '=', $request->idCliente)
+                    ->where('idStatusReserva', '=', 3)
+                    ->get();
+
+                $idRestaurante = $this->reservas->where('idCliente', '=', $request->idCliente)
+                    ->where('idStatusReserva', '=', 3)
+                    ->pluck('idRestaurante');
+
+                $restaurante = $this->restaurantes->where('idRestaurante', '=', $idRestaurante)->first();
+
+                if ($query) {
+                    return response()->json([
+                        'message' => 'O restaurante ' . $restaurante->nomeRestaurante . ' aceitou sua reserva!',
+                        'status' => true,
+                    ]);
+                } else {
+                    return response()->json([
+                        'message' => 'Você não tem reservas pendentes!',
+                        'status' => false
+                    ]);
+                }
+            } else {
+                return response()->json([
+                    'message' => 'Você precisa estar logado para verificar suas reservas!',
+                    'status' => false
+                ]);
+            }
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Erro ao verificar reservas!',
+                'status' => false,
+                'error' => $th,
+            ]);
+        }
+    }
 }

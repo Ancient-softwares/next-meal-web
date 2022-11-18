@@ -41,7 +41,7 @@ Route::post('/checkCapacity', [ReservadoidaController::class, 'checkCapacity'])-
 Route::post('/getRestaurantesMaisReservados', [AppController::class, 'getRestaurantesMaisReservados'])->name('getRestaurantesMaisReservados');
 Route::post('/getRestaurantesMelhoresAvaliados', [AppController::class, 'getRestaurantesMelhoresAvaliados'])->name('getRestaurantesMelhoresAvaliados');
 Route::post('/getRestaurantesMaisReservadosMelhoresAvaliados', [AppController::class, 'getRestaurantesMaisReservadosMelhoresAvaliados'])->name('getRestaurantesMaisReservadosMelhoresAvaliados');
-Route::post('/uploadImage', [AppController::class, 'uploadImage'])->name('uploadImage');
+Route::post('/checkNotifications', [AppController::class, 'checkNotifications'])->name('checkNotifications');
 
 // user
 Route::post('/cadastroCliente', [AppController::class, 'cadastroCliente'])->name('cadastroCliente');

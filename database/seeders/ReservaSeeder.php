@@ -57,6 +57,16 @@ class ReservaSeeder extends Seeder
                     'idStatusReserva' => 1,
                     'created_at' => Date::now(),
                     'updated_at' => Date::now(),
+                ],
+                [
+                    'dataReserva' => Date::now(),
+                    'horaReserva' => '16:00:00',
+                    'numPessoas' => 2,
+                    'idCliente' => 1,
+                    'idRestaurante' => 4,
+                    'idStatusReserva' => 3,
+                    'created_at' => Date::now(),
+                    'updated_at' => Date::now(),
                 ]
             )
         );
