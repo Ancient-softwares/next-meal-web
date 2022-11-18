@@ -117,7 +117,5 @@ class ClienteSeeder extends Seeder
                 ]
             )
         );
-
-        TipoRestauranteModel::factory()->count(10)->create();
     }
 }

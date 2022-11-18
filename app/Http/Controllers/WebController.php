@@ -33,6 +33,11 @@ class WebController extends Controller
 
     public function registrar(Request $request)
     {
+        $restauranteExiste = RestauranteModel::where('emailRestaurante', $request->email)->first();
+        if($restauranteExiste) {
+            return redirect()->back()->withErrors('E-mail já cadastrado');
+        }
+
         $senha = $request->senha;
         $senha = password_hash($senha, PASSWORD_DEFAULT);
 
@@ -48,10 +53,15 @@ class WebController extends Controller
         $cnpj = str_replace('.', '', $cnpj);
         $cnpj = str_replace('/', '', $cnpj);
 
-        $restauranteExiste = RestauranteModel::where('emailRestaurante', $request->email)->first();
-        if($restauranteExiste) {
-            return redirect()->back()->withErrors('E-mail já cadastrado');
+        
+        $tipo = $request->tipoRestaurante;
+        if($request->novo != "" || $request->novo != "-") {
+            TipoRestauranteModel::create([
+                'tipoRestaurante' => $request->novo
+            ]);
+            $tipo = TipoRestauranteModel::where('tipoRestaurante', $request->novo)->first()->idTipoRestaurante;
         }
+
 
 
         $cad = $this->restaurantes->create([
@@ -72,7 +82,7 @@ class WebController extends Controller
             'horarioAberturaRestaurante' => $request->horarioabertura,
             'horarioFechamentoRestaurante' => ($request->horariofechamento . ":00"),
             'descricaoRestaurante' => '--',
-            'idTipoRestaurante' => $request->tipoRestaurante,
+            'idTipoRestaurante' => $tipo,
         ]);
 
         if($cad) {

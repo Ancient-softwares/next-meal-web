@@ -180,19 +180,26 @@
             </div>
           </div>
           <div class="tab">
+            <div class="col-sm-12">
+              <label>Capacidade máxima do restaurante: </label>
+              <input type="number" name="capacidade" id="capacidade">
+              <br>
+            </div>
             <div class="row">
               <div class="col-sm-6">
-                <label>Capacidade máxima do restaurante: </label>
-                <input type="number" name="capacidade" id="capacidade">
-                <br>
-              </div>
-              <div class="col-sm-6">
                 <label>Tipo do restaurante: </label>
-                <select name="tipoRestaurante">
+                <select name="tipoRestaurante" id="tipoRestaurante" onChange="return showTipoNovo()">
                     @foreach($tipos as $tipo)
                         <option value="{{ $tipo->idTipoRestaurante }}">{{ $tipo->tipoRestaurante }}</option>
                     @endforeach
+                    <option value="0">Outros</option>
                 </select>
+              </div>
+              <div class="col-sm-6">
+                <div class="escondido" id="novoTipo" style="visibility:hidden">
+                    <label>Novo tipo de restaurante: </label>
+                    <input type="text" name="novo" id="novo" value="-">
+                </div>
               </div>
             </div>
             <div class="row">
@@ -401,8 +408,20 @@
   <script src="{{ asset('js/back-top.js') }}"></script>
   <script src="{{ asset('js/registroHome/teste.js') }}"></script>
   <script src="{{ asset('js/registroHome/jquery-3.6.1.min.jss') }}"></script>
-
-
+  <script>
+    function showTipoNovo() {
+        var selectBox = document.getElementById('tipoRestaurante');
+        var userInput = selectBox.options[selectBox.selectedIndex].value;
+        if(userInput == "0") {
+          document.getElementById('novoTipo').style.visibility = 'visible';
+          document.getElementById('novo').value = '';
+        }
+        else {
+          document.getElementById('novoTipo').style.visibility = 'hidden';
+          document.getElementById('novo').value = '-';
+        }
+        return false;
+    }
+  </script>
 </body>
-
 </html>
