@@ -776,18 +776,41 @@ class AppController extends Controller
             $cliente = $this->clientes->where('idCliente', '=', $request->idCliente)->first();
 
             if ($cliente) {
-                $query = $this->avaliacao->create([
-                    'idRestaurante' => $request->idRestaurante,
-                    'idCliente' => $request->idCliente,
-                    'notaAvaliacao' => $request->notaAvaliacao,
-                    'dtAvaliacao' => date('Y-m-d H:i:s'),
-                    'descAvaliacao' => $request->descAvaliacao
-                ]);
+                $query = $this->avaliacao->where('idCliente', '=', $request->idCliente)->where('idRestaurante', '=', $request->idRestaurante)->first();
 
-                return response()->json([
-                    'message' => 'Avaliação criada com sucesso!',
-                    'data' => $query
-                ]);
+                if ($query) {
+                    return response()->json([
+                        'message' => 'Você já avaliou esse restaurante!',
+                        'data' => $query,
+                    ], 500);
+                } else {
+                    $reservation = $this->reservas
+                        ->where('idCliente', '=', $request->idCliente)
+                        ->where('idRestaurante', '=', $request->idRestaurante)
+                        ->where('idStatusReserva', '=', 4)
+                        ->first();
+
+                    if ($reservation) {
+
+                        $query = $this->avaliacao->create([
+                            'idRestaurante' => $request->idRestaurante,
+                            'idCliente' => $request->idCliente,
+                            'notaAvaliacao' => $request->notaAvaliacao,
+                            'dtAvaliacao' => date('Y-m-d H:i:s'),
+                            'descAvaliacao' => $request->descAvaliacao
+
+                        ]);
+
+                        return response()->json([
+                            'message' => 'Avaliação criada com sucesso!',
+                            'data' => $query,
+                        ], 201);
+                    } else {
+                        return response()->json([
+                            'message' => 'Você não pode avaliar esse restaurante!',
+                        ], 500);
+                    }
+                }
             } else {
                 return response()->json([
                     'message' => 'Você precisa estar logado para avaliar o restaurante!',
