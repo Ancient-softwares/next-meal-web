@@ -940,16 +940,16 @@ class AppController extends Controller
 
             if ($cliente) {
                 $query = $this->reservas->where('idCliente', '=', $request->idCliente)
-                    ->where('idStatusReserva', '=', 3)
+                    ->where('idStatusReserva', '=', 1)
                     ->get();
 
                 $idRestaurante = $this->reservas->where('idCliente', '=', $request->idCliente)
-                    ->where('idStatusReserva', '=', 3)
+                    ->where('idStatusReserva', '=', 1)
                     ->pluck('idRestaurante');
 
                 $restaurante = $this->restaurantes->where('idRestaurante', '=', $idRestaurante)->first();
 
-                if ($query) {
+                if ($query && $restaurante && $idRestaurante) {
                     return response()->json([
                         'message' => 'O restaurante ' . $restaurante->nomeRestaurante . ' aceitou sua reserva!',
                         'status' => true,

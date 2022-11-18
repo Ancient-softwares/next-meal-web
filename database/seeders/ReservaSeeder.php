@@ -64,7 +64,7 @@ class ReservaSeeder extends Seeder
                     'numPessoas' => 2,
                     'idCliente' => 1,
                     'idRestaurante' => 4,
-                    'idStatusReserva' => 3,
+                    'idStatusReserva' => 1,
                     'created_at' => Date::now(),
                     'updated_at' => Date::now(),
                 ]
