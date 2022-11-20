@@ -51,7 +51,7 @@ class AppController extends Controller
         $idRestaurante = $request->idRestaurante;
 
         $pratos = DB::table('tbprato')
-            ->select('idPrato', 'nomePrato', 'valorPrato', 'fotoPrato', 'tipoPrato')
+            ->select('idPrato', 'nomePrato', 'valorPrato', 'ingredientesPrato', 'fotoPrato', 'fotoPrato', 'tipoPrato')
             ->join('tbtipoprato', 'tbprato.idTipoPrato', '=', 'tbtipoprato.idTipoPrato')
             ->where('tbprato.idRestaurante', '=', $idRestaurante)
             ->get();
