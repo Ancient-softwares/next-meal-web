@@ -42,6 +42,7 @@ Route::post('/getRestaurantesMaisReservados', [AppController::class, 'getRestaur
 Route::post('/getRestaurantesMelhoresAvaliados', [AppController::class, 'getRestaurantesMelhoresAvaliados'])->name('getRestaurantesMelhoresAvaliados');
 Route::post('/getRestaurantesMaisReservadosMelhoresAvaliados', [AppController::class, 'getRestaurantesMaisReservadosMelhoresAvaliados'])->name('getRestaurantesMaisReservadosMelhoresAvaliados');
 Route::post('/checkNotifications', [AppController::class, 'checkNotifications'])->name('checkNotifications');
+Route::post('/findIfClientHasRatingByRestaurant', [AppController::class, 'findIfClientHasRatingByRestaurant'])->name('findIfClientHasRatingByRestaurant');
 
 // user
 Route::post('/cadastroCliente', [AppController::class, 'cadastroCliente'])->name('cadastroCliente');

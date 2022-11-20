@@ -64,7 +64,7 @@ class AppController extends Controller
         $idRestaurante = $request->idRestaurante;
 
         $avaliacoes = DB::table('tbavaliacao')
-            ->select('tbavaliacao.idAvaliacao', 'tbavaliacao.notaAvaliacao', 'tbavaliacao.dtAvaliacao', 'tbavaliacao.descAvaliacao', 'tbcliente.nomeCliente')
+            ->select('tbavaliacao.idAvaliacao', 'tbavaliacao.notaAvaliacao', 'tbavaliacao.idCliente', 'tbavaliacao.dtAvaliacao', 'tbavaliacao.descAvaliacao', 'tbcliente.nomeCliente')
             ->join('tbcliente', 'tbavaliacao.idCliente', '=', 'tbcliente.idCliente')
             ->where('tbavaliacao.idRestaurante', '=', $idRestaurante)
             ->get();
@@ -467,7 +467,7 @@ class AppController extends Controller
     public function getRestaurantsByName(Request $request)
     {
         try {
-            $name = $request->name;
+            $name = $request->nomeRestaurante;
 
             $restaurantes = $this->restaurantes->where('nomeRestaurante', 'like', '%' . $name . '%')->get();
 
@@ -627,7 +627,7 @@ class AppController extends Controller
     public function getUserDataById(Request $request)
     {
         try {
-            $id = $request->id;
+            $id = $request->idCliente;
 
             $cliente = $this->clientes->where('idCliente', '=', $id)->first();
 
@@ -791,13 +791,26 @@ class AppController extends Controller
                         ->first();
 
                     if ($reservation) {
+                        $notaAvaliacao = $request->notaAvaliacao;
+                        $descAvaliacao = $request->descAvailiacao;
+
+                        if (!$notaAvaliacao && !$descAvaliacao) {
+                            return response()->json([
+                                'message' => 'Preencha todos os campos!',
+                            ], 201);
+                        } else if ($notaAvaliacao > 5) {
+                            $notaAvaliacao = 5;
+                        } else if ($notaAvaliacao < 1) {
+                            $notaAvaliacao = 1;
+                        }
+
 
                         $query = $this->avaliacao->create([
                             'idRestaurante' => $request->idRestaurante,
                             'idCliente' => $request->idCliente,
-                            'notaAvaliacao' => $request->notaAvaliacao,
+                            'notaAvaliacao' => $notaAvaliacao,
                             'dtAvaliacao' => date('Y-m-d H:i:s'),
-                            'descAvaliacao' => $request->descAvaliacao
+                            'descAvaliacao' => $descAvaliacao
 
                         ]);
 
@@ -827,6 +840,29 @@ class AppController extends Controller
         }
     }
 
+    public function findIfClientHasRatingByRestaurant(Request $request)
+    {
+        try {
+            $query = $this->avaliacao->where('idCliente', '=', $request->idCliente)->where('idRestaurante', '=', $request->idRestaurante)->first();
+            $idCliente = (int) $request->idCliente;
+            $idRestaurante = (int) $request->idRestaurante;
+
+            foreach ($query as $avaliacao) {
+                if ($avaliacao->idCliente == $idCliente && $avaliacao->idRestaurante == $idRestaurante) {
+                    return response()->json([
+                        'message' => 'Você já avaliou esse restaurante!',
+                        'data' => $avaliacao,
+                    ], 201);
+                }
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'Erro ao buscar avaliação',
+                'error' => $e->getMessage(),
+                'data' => $request->all(),
+            ], 500);
+        }
+    }
 
     public function filterByMealsOrIngredients(Request $request)
     {
