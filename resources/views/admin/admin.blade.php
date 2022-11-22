@@ -73,7 +73,12 @@
                     </i>
                     <span class="link_name">Clientes</span>
                 </a>
-
+            </li>
+            <li>
+                <a href="{{ route('tipo-restaurante.index') }}">
+                    <i class='bx bx-food-menu'></i>
+                    <span class="link_name">Tipos de restaurante</span>
+                </a>
             </li>
             <li>
                 <a class="logout" href="/logout">

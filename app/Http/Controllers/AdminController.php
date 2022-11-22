@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ClienteModel;
 use App\Models\RestauranteModel;
+use App\Models\TipoRestauranteModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -100,5 +101,11 @@ class AdminController extends Controller
             ->first()->total;
 
             return $query;
+    }
+
+
+    public function deletartipo($id) {
+        dd('asd');
+        TipoRestauranteModel::where('idTipoRestaurante', $id)->delete();
     }
 }

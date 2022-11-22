@@ -22,8 +22,4 @@ class TipoRestauranteModel extends Model
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
 
-    protected static function newFactory()
-    {
-        return \Database\Factories\TipoRestauranteFactory::new ();
-    }
 }

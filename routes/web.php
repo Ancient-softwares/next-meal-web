@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CrudMesa;
 use App\Http\Controllers\CrudPrato;
+use App\Http\Controllers\CrudTipoRestaurante;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\PerfilPageController;
@@ -31,6 +32,10 @@ Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');
     Route::get('/restaurantes', [AdminController::class, 'pagrestaurantes'])->name('pagrestaurante');
     Route::get('/clientes', [AdminController::class, 'pagclientes'])->name('pagclientes');
+    Route::resource('tipo-restaurante', CrudTipoRestaurante::class);
+
+    Route::post('/editar-tipo/{$id}', [AdminController::class, 'editartipo'])->name('editar-tipo');
+    Route::post('/deletar-tipo/{$id}', [AdminController::class, 'deletartipo'])->name('deletar-tipo');
 });
 
 Route::get('/index', [DashboardController::class, 'index'])->name('index');
