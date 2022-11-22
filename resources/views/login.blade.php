@@ -95,10 +95,10 @@
           <label>Senha: </label>
           <input type="password" name="senha">
           <div class="btn-login">
-         
+
             <input type="submit" class=" btn btn-outline-danger" value="Entrar">
           </div>
-          Ainda não possui uma conta?<a class="btn-abreModalRegistro" id="btn-abrirRegistro" >Registrar-se</a>
+          Ainda não possui uma conta?<a class="btn-abreModalRegistro" id="btn-abrirRegistro">Registrar-se</a>
         </form>
       </div>
     </div>
@@ -114,9 +114,9 @@
       <hr>
       <div class="corpin">
         @if($errors->any())
-          <div class="alert alert-danger" role="alert">
-            {{ $errors->first() }}
-          </div>
+        <div class="alert alert-danger" role="alert">
+          {{ $errors->first() }}
+        </div>
         @endif
 
         <form id="regForm" method="POST" action="{{ route('registrar') }}">
@@ -189,16 +189,16 @@
               <div class="col-sm-6">
                 <label>Tipo do restaurante: </label>
                 <select name="tipoRestaurante" id="tipoRestaurante" onChange="return showTipoNovo()">
-                    @foreach($tipos as $tipo)
-                        <option value="{{ $tipo->idTipoRestaurante }}">{{ $tipo->tipoRestaurante }}</option>
-                    @endforeach
-                    <option value="0">Outros</option>
+                  @foreach($tipos as $tipo)
+                  <option value="{{ $tipo->idTipoRestaurante }}">{{ $tipo->tipoRestaurante }}</option>
+                  @endforeach
+                  <option value="0">Outros</option>
                 </select>
               </div>
               <div class="col-sm-6">
                 <div class="escondido" id="novoTipo" style="visibility:hidden">
-                    <label>Novo tipo de restaurante: </label>
-                    <input type="text" name="novo" id="novo" value="-">
+                  <label>Novo tipo de restaurante: </label>
+                  <input type="text" name="novo" id="novo" value="-">
                 </div>
               </div>
             </div>
@@ -220,26 +220,26 @@
           <div class="d-grid gap-2">
             <div style="overflow:auto;">
               <div style="float:right;">
-              <div class="btn-group">
-                <button type="button" class="btn btn-outline-danger btn-proxAnterior" id="prevBtn" onclick="nextPrev(-1)">Anterior</button>
-                <button type="button" class="btn btn-outline-danger btn-proxAnterior" id="nextBtn" onclick="nextPrev(1)">Próximo</button>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-outline-danger btn-proxAnterior" id="prevBtn" onclick="nextPrev(-1)">Anterior</button>
+                  <button type="button" class="btn btn-outline-danger btn-proxAnterior" id="nextBtn" onclick="nextPrev(1)">Próximo</button>
                 </div>
               </div>
             </div>
           </div>
           <div style="text-align:center;">
-              <span class="step"></span>
-              <span class="step"></span>
-              <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
           </div>
         </form>
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
       </div>
     </div>
   </div>
@@ -278,95 +278,104 @@
 
   <!--NavBar-->
   <main>
+    <div class="BackColor2">
+      <section class="hero">
+        <div class="BoxContainer">
+          <div class="slideshow-container">
 
-    <section class="hero">
-      <div class="BoxContainer">
-        <div class="slideshow-container">
+            <div class="mySlides">
+              <img src="{{ URL::asset('img/slide1.jpg') }}" style="width:100%">
+            </div>
 
-          <div class="mySlides">
-            <img src="{{ URL::asset('img/slide1.jpg') }}" style="width:100%">
+            <div class="mySlides">
+              <img src="{{ URL::asset('img/slide2.jpg') }}" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+              <img src="{{ URL::asset('img/slide3.jpg') }}" style="width:100%">
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1)">❮</a>
+            <a class="next" onclick="plusSlides(1)">❯</a>
+
           </div>
-
-          <div class="mySlides">
-            <img src="{{ URL::asset('img/slide2.jpg') }}" style="width:100%">
+          <div class="Info">
+            <img class="image" src="{{ URL::asset('img/logoNextRed.png') }}" />
+            <p>O Next Meal é uma solução web e mobile para reduzir as filas de restaurantes,
+              ajudando mais de 10mil pessoas por dia.</p>
           </div>
+        </div>
+      </section>
 
-          <div class="mySlides">
-            <img src="{{ URL::asset('img/slide3.jpg') }}" style="width:100%">
-          </div>
-
-          <a class="prev" onclick="plusSlides(-1)">❮</a>
-          <a class="next" onclick="plusSlides(1)">❯</a>
-
+      <div class="BoxVideo">
+        <div class="text">
+          <h2>Aplicativo</h2>
+          <h3>O Next Meal permite você reservar mesas de forma rápida e simples possibilitando também consultas de
+            restaurantes próximos de sua localização.</h3>
         </div>
-        <div class="Info">
-          <img class="image" src="{{ URL::asset('img/logoNextRed.png') }}" />
-          <p>O Next Meal é uma solução web e mobile para reduzir as filas de restaurantes,
-            ajudando mais de 10mil pessoas por dia.</p>
-        </div>
-      </div>
-      </div>
-    </section>
-
-    <div class="BoxVideo">
-      <div class="text">
-        <h2>Aplicativo</h2>
-        <h3>O Next Meal permite você reservar mesas de forma rápida e simples possibilitando também consultas de
-          restaurantes próximos de sua localização.</h3>
-      </div>
-      <video autoplay muted loop class="VideoBack">
-        <source src="{{ URL::asset('img/back.mp4') }}" type="video/mp4">
-      </video>
-    </div>
-
-
-    <div class="Vantagens">
-      <h2>Vantagens</h2>
-      <div class="container">
-        <div class="boxV">
-          <h3>Esteja à frente da concorrência.</h3>
-          <p>Conosco, o seu restaurante será movimentado da forma correta, onde poderão escolher o seu estabelecimento!
-          </p>
-        </div>
-        <div class="boxV">
-          <h3>Melhorar a logística do seu negócio.</h3>
-          <p>Melhoria em organização, gerando agilidade no atendimento ao seu cliente.
-          </p>
-        </div>
-        <div class="boxV">
-          <h3>Experiência que gera fidelidade do cliente.</h3>
-          <p>Uma solução perfeita para você construir a fidelidade com seu cliente.
-            O NextMeal é a ponte entre o seu negócio e o público-alvo.
-          </p>
-        </div>
-        <div class="boxV">
-          <h3>Optar pelo seu estabelecimento</h3>
-          <p>Utilizando o nosso sistema de reservas o seu cliente estará ligado diretamente ao seu restaurante
-            pois poderá escolher você!!
-          </p>
-        </div>
-      </div>
-      <div class="bottonV">
-        <div class="letsGo">
-          <a id="btn-registro" href="#"> Vamos lá?</a>
-        </div>
+        <video autoplay muted loop class="VideoBack">
+          <source class="VideoV" src="{{ URL::asset('img/back.mp4') }}" type="video/mp4">
+        </video>
       </div>
     </div>
 
-    <div class="Download" id="Download">
-      <div class="container">
-        <img class="boxIMG" src="{{ URL::asset('img/dwon.png') }}">
-        <div class="box">
-          <h2>Download</h2>
-          <div class="iOSAndroid">
-            <button class="Android">
-              <a href="#"><img src="{{ URL::asset('img/and.png') }}"></a>
-              <h5 class="card-title">Play Store</h5>
-            </button>
-            <button class="iOS">
-              <a href="#"><img src="{{ URL::asset('img/ios.png') }}"></a>
-              <h5 class="card-title">App Store</h5>
-            </button>
+    <div class="BackColor">
+      <div class="Vantagens">
+        <h2>Vantagens</h2>
+        <div class="container">
+          <div class="boxV">
+            <div class="titleV">
+              <h3>Esteja à frente da concorrência.</h3>
+            </div>
+            <p>Conosco, o seu restaurante será movimentado da forma correta, onde poderão escolher o seu estabelecimento!
+            </p>
+          </div>
+          <div class="boxV">
+            <div class="titleV">
+              <h3>Melhorar a logística do seu negócio.</h3>
+            </div>
+            <p>Melhoria em organização, gerando agilidade no atendimento ao seu cliente.
+            </p>
+          </div>
+          <div class="boxV">
+            <div class="titleV">
+              <h3>Experiência que gera fidelidade do cliente.</h3>
+            </div>
+            <p>Uma solução perfeita para você construir a fidelidade com seu cliente.
+              O NextMeal é a ponte entre o seu negócio e o público-alvo.
+            </p>
+          </div>
+          <div class="boxV">
+            <div class="titleV">
+              <h3>Optar pelo seu estabelecimento</h3>
+            </div>
+            <p>Utilizando o nosso sistema de reservas o seu cliente estará ligado diretamente ao seu restaurante
+              pois poderá escolher você!!
+            </p>
+          </div>
+        </div>
+        <div class="bottonV">
+          <div class="letsGo">
+            <a id="btn-registro" href="#"> Vamos lá?</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="Download" id="Download">
+        <div class="container">
+          <img class="boxIMG" src="{{ URL::asset('img/dwon.png') }}">
+          <div class="box">
+            <h2>Download</h2>
+            <div class="iOSAndroid">
+              <button class="Android">
+                <a href="#"><img src="{{ URL::asset('img/and.png') }}"></a>
+                <h5 class="card-title">Play Store</h5>
+              </button>
+              <button class="iOS">
+                <a href="#"><img src="{{ URL::asset('img/ios.png') }}"></a>
+                <h5 class="card-title">App Store</h5>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -410,18 +419,18 @@
   <script src="{{ asset('js/registroHome/jquery-3.6.1.min.jss') }}"></script>
   <script>
     function showTipoNovo() {
-        var selectBox = document.getElementById('tipoRestaurante');
-        var userInput = selectBox.options[selectBox.selectedIndex].value;
-        if(userInput == "0") {
-          document.getElementById('novoTipo').style.visibility = 'visible';
-          document.getElementById('novo').value = '';
-        }
-        else {
-          document.getElementById('novoTipo').style.visibility = 'hidden';
-          document.getElementById('novo').value = '-';
-        }
-        return false;
+      var selectBox = document.getElementById('tipoRestaurante');
+      var userInput = selectBox.options[selectBox.selectedIndex].value;
+      if (userInput == "0") {
+        document.getElementById('novoTipo').style.visibility = 'visible';
+        document.getElementById('novo').value = '';
+      } else {
+        document.getElementById('novoTipo').style.visibility = 'hidden';
+        document.getElementById('novo').value = '-';
+      }
+      return false;
     }
   </script>
 </body>
+
 </html>
