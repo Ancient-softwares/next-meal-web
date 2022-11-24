@@ -26,8 +26,8 @@
     </div>
 
     <div class="title">
-        <h2>Aceitas</h2>
         <h2>Pendentes</h2>
+        <h2>Aceitas</h2>
     </div>
     <div class="global">
         <div class="aceitar-reserva scroll">
@@ -59,23 +59,47 @@
             </div>
         </div>
 
-        <div class="reservados scroll">
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-                @foreach($reservas as $r)
-                @if($r->idStatusReserva == 1)
+        <div class="flex">
+            <div class="reservados scroll">
+                <div class="row row-cols-1 row-cols-md-4 g-4">
+                    @foreach($reservas as $r)
+                    @if($r->idStatusReserva == 1)
 
-                <div class="col">
-                    <div class="card">
-                        <img src="{{ asset('img/perfil.png') }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $clientes->where('idCliente', $r->idCliente)->first()->nomeCliente }}</h5>
-                            <p class="card-text">Data: {{$r->dataReserva}} {{$r->horaReserva}}</p>
-                            <p class="card-text">Mesa: {{$r->numPessoas}} acentos</p>
+                    <div class="col">
+                        <div class="card">
+                            <img src="{{ asset('img/perfil.png') }}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $clientes->where('idCliente', $r->idCliente)->first()->nomeCliente }}</h5>
+                                <p class="card-text">Data: {{$r->dataReserva}} {{$r->horaReserva}}</p>
+                                <p class="card-text">Mesa: {{$r->numPessoas}} acentos</p>
+                            </div>
                         </div>
                     </div>
+                    @endif
+                    @endForeach
                 </div>
-                @endif
-                @endForeach
+            </div>
+            <div class="title-finalizadas">
+                <h2>Finalizadas</h2>
+            </div>
+            <div class="reservados scroll">
+                <div class="row row-cols-1 row-cols-md-4 g-4">
+                    @foreach($reservas as $r)
+                    @if($r->idStatusReserva == 1)
+
+                    <div class="col">
+                        <div class="card">
+                            <img src="{{ asset('img/perfil.png') }}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $clientes->where('idCliente', $r->idCliente)->first()->nomeCliente }}</h5>
+                                <p class="card-text">Data: {{$r->dataReserva}} {{$r->horaReserva}}</p>
+                                <p class="card-text">Mesa: {{$r->numPessoas}} acentos</p>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                    @endForeach
+                </div>
             </div>
         </div>
     </div>

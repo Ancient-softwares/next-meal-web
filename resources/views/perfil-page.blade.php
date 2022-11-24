@@ -37,7 +37,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-6 scroll">
             {{ $info->descricaoRestaurante }}
         </div>
     </div>

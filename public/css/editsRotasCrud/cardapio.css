@@ -143,11 +143,6 @@ h5{
     font-size: 15px!important;
 }
 
-@media screen and (max-width:1440px){
-.card-footer button{    
-     font-size: 1.5vh!important;
-}
-}
 
 .col{
     padding-left: 0!important;
@@ -215,4 +210,41 @@ h5{
 
 .style-reservas{
     height: 80vh;
+}
+
+@media screen and (max-width:1440px){
+    .card-footer button{    
+         font-size: 1.5vh!important;
+    }
+}
+
+@media (max-width:1320px){
+    a .botoes-excluir{
+        width: 2vh;
+        height: 100%;
+    }
+    a .botoes-editar{
+        width: 2vh;
+        height: 100%;
+    }
+    .card-footer button{
+        font-size: 1.2vh!important;
+        height: 2vh;
+    }
+
+}
+
+@media (max-width:1104px){
+    a .botoes-excluir{
+        width: 1.5vh;
+        height: 100%;
+    }
+    a .botoes-editar{
+        width: 1.5vh;
+        height: 100%;
+    }
+    .card-footer button{
+        font-size: 1vh!important;
+        height: 2vh;
+    }
 }

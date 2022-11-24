@@ -81,7 +81,7 @@
     </div>
     <div class="container-dash">
         <clientes-fieis>
-            <table class="table table-hover">
+            <table class="table table-hover tabela">
                 <thead>
                     <tr>
                         <h3 class="clientes-h3">Clientes fiéis</h3>
@@ -99,7 +99,7 @@
             </table>
         </clientes-fieis>
         <clientes-recentes>
-            <table class="table table-hover">
+            <table class="table table-hover tabela">
                 <thead>
                     <tr>
                         <h3 class="clientes-h3">Clientes recentes</h3>

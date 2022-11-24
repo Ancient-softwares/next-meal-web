@@ -102,8 +102,11 @@ td img{
 }
 
 .style-reservas{
-text-align: center;
-margin: 1em;
+  text-align: center;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  display:flex;
 }
 
 li img{
@@ -112,4 +115,20 @@ margin-bottom: 0;
 
 h1{
   font-size: 1.5rem!important;
+}
+
+.tabela{
+  height: 80%!important;
+}
+
+@media (max-width:1030px){
+  .txtreserva{
+    font-size: 1.3em!important;
+  }
+  .numero{
+    font-size: 2.5em;
+  }
+  .clientes-h3{
+    font-size: 1.50rem;
+  }
 }
