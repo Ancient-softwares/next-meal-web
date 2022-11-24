@@ -792,7 +792,7 @@ class AppController extends Controller
 
                     if ($reservation) {
                         $notaAvaliacao = $request->notaAvaliacao;
-                        $descAvaliacao = $request->descAvailiacao;
+                        $descAvaliacao = $request->descAvaliacao;
 
                         if (!$notaAvaliacao && !$descAvaliacao) {
                             return response()->json([
@@ -847,12 +847,15 @@ class AppController extends Controller
             $idCliente = (int) $request->idCliente;
             $idRestaurante = (int) $request->idRestaurante;
 
-            foreach ($query as $avaliacao) {
-                if ($avaliacao->idCliente == $idCliente && $avaliacao->idRestaurante == $idRestaurante) {
-                    return response()->json([
-                        'message' => 'Você já avaliou esse restaurante!',
-                        'data' => $avaliacao,
-                    ], 201);
+            if ($query) {
+
+                foreach ($query as $avaliacao) {
+                    if ($avaliacao->idCliente == $idCliente && $avaliacao->idRestaurante == $idRestaurante) {
+                        return response()->json([
+                            'message' => 'Você já avaliou esse restaurante!',
+                            'data' => $avaliacao,
+                        ], 201);
+                    }
                 }
             }
         } catch (Exception $e) {
@@ -883,7 +886,6 @@ class AppController extends Controller
             'tbrestaurante.horarioFechamentoRestaurante',
             'tbrestaurante.capacidadeRestaurante',
             'tbrestaurante.nomeRestaurante',
-            'tbrestaurante.fotoRestaurante',
             'tbrestaurante.descricaoRestaurante',
             'tbtiporestaurante.tipoRestaurante',
             'tbavaliacao.notaAvaliacao',
