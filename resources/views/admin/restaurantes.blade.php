@@ -43,6 +43,7 @@
             <td>{{ $restaurante->created_at }}</td>
         </tr>
         @endforeach
+        {{ $restaurantes->links() }}
     </tbody>
 </table>
 </div>

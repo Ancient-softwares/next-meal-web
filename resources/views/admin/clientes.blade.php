@@ -38,6 +38,7 @@
             <td>{{ $cliente->cidadeRestaurante}}</td>
         </tr>
         @endforeach
+        {{ $clientes->links() }}
     </tbody>
     </table>
 </div>

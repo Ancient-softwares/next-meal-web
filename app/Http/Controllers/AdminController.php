@@ -13,7 +13,7 @@ class AdminController extends Controller
 {
     public function index() {
         $login = Session::get('login');
-        if(isset($login) && $login != 'admin') {
+        if($login != 'admin') {
             return redirect('index');
         }
 
@@ -28,22 +28,22 @@ class AdminController extends Controller
 
     public function pagrestaurantes() {
         $login = Session::get('login');
-        if(isset($login) && $login != 'admin') {
+        if($login != 'admin') {
             return redirect('index');
         }
 
-        $restaurantes = RestauranteModel::all();
-        
+        $restaurantes = RestauranteModel::paginate(3);
+            
         return view('admin.restaurantes', compact('restaurantes'));
     }
 
     public function pagclientes() {
         $login = Session::get('login');
-        if(isset($login) && $login != 'admin') {
+        if($login != 'admin') {
             return redirect('index');
         }
 
-        $clientes = ClienteModel::all();
+        $clientes = ClienteModel::paginate(3);
 
         return view('admin.clientes', compact('clientes'));
     }
@@ -103,9 +103,4 @@ class AdminController extends Controller
             return $query;
     }
 
-
-    public function deletartipo($id) {
-        dd('asd');
-        TipoRestauranteModel::where('idTipoRestaurante', $id)->delete();
-    }
 }

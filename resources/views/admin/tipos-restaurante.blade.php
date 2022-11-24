@@ -56,9 +56,8 @@
                     </div>
                 </form>
             </div>
-        
-
             @endforeach
+            {{ $tipos->links() }}
         </tbody>
     </table>
 </div>

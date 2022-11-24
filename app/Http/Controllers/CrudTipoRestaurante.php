@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RestauranteModel;
 use App\Models\TipoRestauranteModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CrudTipoRestaurante extends Controller
 {
@@ -14,7 +16,12 @@ class CrudTipoRestaurante extends Controller
      */
     public function index()
     {
-        $tipos = TipoRestauranteModel::all();
+        $login = Session::get('login');
+        if($login != 'admin') {
+            return redirect('index');
+        }
+        
+        $tipos = TipoRestauranteModel::paginate(5);
         return view('admin.tipos-restaurante', compact('tipos'));
     }
 
@@ -81,6 +88,11 @@ class CrudTipoRestaurante extends Controller
      */
     public function destroy($id)
     {
+
+        $restaurante = RestauranteModel::where('idTipoRestaurante', $id)->update([
+            'idTipoRestaurante' => 1,
+        ]);
+
         TipoRestauranteModel::where('idTipoRestaurante', $id)->delete();
         return redirect()->back();    
     }
