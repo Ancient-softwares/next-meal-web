@@ -19,11 +19,20 @@
         margin-left: 0 !important;
         margin-right: 0 !important;
     }
+    .img-Avaliação{
+        padding: 16px;
+    }
+    .hrChav{
+        border-top: 1px solid red;
+    }
     .nome{
         width: 100%;
     }
     .desc{
         width: 100%;
+        padding: 8px;
+        margin-left: 0em;
+        font-family: none;
     }
     .nota{
         width: 100%;
