@@ -127,6 +127,10 @@ h2 {
     height: 25vh;
 }
 
+.card-group{
+    margin-bottom: 1em;
+}
+
 .title {
     display: flex;
 }
@@ -149,68 +153,75 @@ h2 {
 
 /* RESOLUÇÕES BAIXAS DO RESERVAS ACEITAS*/
 
-@media(max-width: 1280px){
-
-}
-
-@media (max-width: 1280px){
+@media (max-width: 1280px) {
     .aceitar-reserva .card {
         height: 28vh !important;
     }
-    .reservados .card{
+
+    .reservados .row {
         height: 24vh;
     }
+
     .botoes {
-        display: grid!important;
+        display: grid !important;
     }
 }
 
-@media (max-width: 1152px){
+@media (max-width: 1152px) {
     .aceitar-reserva .card {
         height: 30vh !important;
     }
-    .reservados .card{
+
+    .reservados .col {
         height: 30vh;
     }
 }
 
-@media (max-width: 1024px){
+@media (max-width: 1024px) {
     .aceitar-reserva .card {
         height: 32vh !important;
     }
-    .reservados .card{
-        height: 38vh;
+
+    .reservados .col {
+        height: 32vh;
     }
 }
 
-@media (max-width: 960px){
-    .reservados .card{
-        height: 44vh!important;
+@media (max-width:1008px){
+    .reservados .col {
+        height: 34vh!important;
     }
 }
 
-@media (max-width: 911px){
-    .reservados .card{
-        height: 54vh!important;
+@media (max-width: 960px) {
+    .reservados .col {
+        height: 36vh !important;
     }
 }
 
-@media (max-width: 880px){
-    .reservados .card{
-        height: 60vh!important;
+@media (max-width: 911px) {
+    .reservados .col {
+        height: 38vh !important;
     }
 }
 
-@media (max-width: 800px){
+@media (max-width: 880px) {
+    .reservados .col {
+        height: 40vh !important;
+    }
+}
+
+@media (max-width: 800px) {
     .aceitar-reserva .card {
         height: 50vh !important;
     }
-    .reservados .card{
-        height: 56vh!important;
+
+    .reservados .col {
+        height: 42vh !important;
     }
 }
 
-@media (max-width: 790px){
+@media (max-width: 790px) {
     .aceitar-reserva .card {
         height: 40vh !important;
     }
@@ -218,38 +229,61 @@ h2 {
 
 /* MEDIA HEIGHT "altura" */
 
-@media(max-height:900px){
-    .global{
-        height: 88%!important;
+@media(max-height:900px) {
+    .global {
+        height: 88% !important;
     }
 }
 
-@media(max-height:870px){
-    .global{
-        height: 86%!important;
+@media(max-height:870px) {
+    .global {
+        height: 86% !important;
     }
 }
 
-@media(max-height:850px){
-    .global{
-        height: 80%!important;
+@media(max-height:850px) {
+    .global {
+        height: 80% !important;
     }
 }
 
-@media(max-height:810px){
-    .global{
-        height: 72%!important;
+@media(max-height:810px) {
+    .global {
+        height: 72% !important;
     }
 }
 
-@media(max-height: 734px){
-    .global{
-        height: 68%!important;
+@media(max-height: 734px) {
+    .global {
+        height: 68% !important;
     }
 }
 
-@media(max-height: 680px){
-    .global{
-        height: 60%!important;
+@media(max-height: 680px) {
+    .global {
+        height: 60% !important;
+    }
+}
+
+/* MEDIA CARD ACEITAS */
+
+
+@media (max-width: 1442px) {
+    .reservados .row {
+        height: 70% !important;
+    }
+
+    .reservados .col {
+        height: 100%;
+    }
+}
+
+@media (max-width: 1410px) {
+    .reservados .row {
+        height: 75% !important;
+    }
+
+    .reservados .col {
+        height: 100%;
     }
 }

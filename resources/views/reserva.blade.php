@@ -63,25 +63,22 @@
             <div class="reservados scroll">
                 <div class="row row-cols-1 row-cols-md-4 g-4">
                     @foreach($reservas as $r)
-                    @if($r->idStatusReserva == 1)
+                    @if($r->idStatusReserva == 1 )
 
-                    <div class="col">
-                        <div class="card">
+                    <div class="col" style="padding: 0; ">
+                        <div class="card" style="padding: 0; margin-right: 0.5em; margin-left: 0.5em;">
                             <img src="{{ asset('img/perfil.png') }}" class="card-img-top" alt="...">
-                            <div class="card-body">
+                            <div class="card-body" style="padding-top: 6px;">
                                 <h5 class="card-title">{{ $clientes->where('idCliente', $r->idCliente)->first()->nomeCliente }}</h5>
                                 <p class="card-text">Data: {{$r->dataReserva}} {{$r->horaReserva}}</p>
                                 <p class="card-text">Mesa: {{$r->numPessoas}} acentos</p>
-                                <div class="botoes">
-                                    <a href="{{ route('finalizar-reserva', ['id'=>$r->idReserva]) }}" class="btn btn-light">
-                                        Finalizar
-                                    </a>
-                                    <a href="{{ route('rejeitar-reserva', ['id'=>$r->idReserva]) }}" class="btn btn-light">
-                                        Recusar
-                                    </a>
-                                </div>
                             </div>
-                            
+                            <div class="botoes">
+                                <a href="{{ route('finalizar-reserva', ['id'=>$r->idReserva]) }}" class="btn btn-light">
+                                    Finalizar
+                                </a>
+                            </div>
+
                         </div>
                     </div>
                     @endif
@@ -96,7 +93,7 @@
                     @foreach($reservas as $r)
                     @if($r->idStatusReserva == 4)
 
-                    <div class="col">
+                    <div class="col" style="padding-right: 0.5em; padding-left: 0.5em;">
                         <div class="card">
                             <img src="{{ asset('img/perfil.png') }}" class="card-img-top" alt="...">
                             <div class="card-body">
