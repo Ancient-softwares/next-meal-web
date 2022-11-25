@@ -42,7 +42,7 @@
                 </div>
             </li>
             <li>
-                <a href="{{ route('index') }}">
+                <a href="index">
                     <i class='bx'>
                         <div class="icone">
                             <img src="{{ asset('img/sidebar/casa.png') }}" alt="">

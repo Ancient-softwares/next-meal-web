@@ -20,10 +20,12 @@ class AdminController extends Controller
         $quantidadeCliente = ClienteModel::count();
         $quantidadeRestaurante = RestauranteModel::count();
 
-        $graficoMes = $this->getGraphRestaurantesMes();
-        $graficoValor = $this->getGraphRestaurantesValor();
+        $graficoMes = $this->getGraphMeses();
+        $graficoValorRestaurantes = $this->getGraphRestaurantesValor();
+        $graficoValorReservas = $this->getGraphReservasValor();
+        $graficoValorClientes = $this->getGraphClientesValor();
 
-        return view('admin.dashboard', compact('quantidadeCliente', 'quantidadeRestaurante', 'graficoMes', 'graficoValor'));
+        return view('admin.dashboard', compact('quantidadeCliente', 'quantidadeRestaurante', 'graficoMes', 'graficoValorRestaurantes', 'graficoValorReservas', 'graficoValorClientes'));
     }
 
     public function pagrestaurantes() {
@@ -48,7 +50,7 @@ class AdminController extends Controller
         return view('admin.clientes', compact('clientes'));
     }
 
-    public function getGraphRestaurantesMes() {
+    public function getGraphMeses() {
         $mesAtual = date('m');
 
         if(($mesAtual - 6) < 0)
@@ -74,6 +76,47 @@ class AdminController extends Controller
     }
 
     public function getGraphRestaurantesValor() {
+        $mesAtual = date('m');
+
+        if(($mesAtual - 6) < 0)
+        {
+            $aux = 12 - (6 - $mesAtual);
+        }
+        else{
+            $aux = $mesAtual - 6;
+        }
+        $resultado = [];
+        
+        while($aux <= $mesAtual){
+            array_push($resultado,  $this->getRestaurantespMes($aux + 1));
+            $aux++;
+        }
+
+        return $resultado;
+    }
+
+
+    public function getGraphReservasValor() {
+        $mesAtual = date('m');
+
+        if(($mesAtual - 6) < 0)
+        {
+            $aux = 12 - (6 - $mesAtual);
+        }
+        else{
+            $aux = $mesAtual - 6;
+        }
+        $resultado = [];
+        
+        while($aux <= $mesAtual){
+            array_push($resultado,  $this->getRestaurantespMes($aux + 1));
+            $aux++;
+        }
+
+        return $resultado;
+    }
+
+    public function getGraphClientesValor() {
         $mesAtual = date('m');
 
         if(($mesAtual - 6) < 0)
