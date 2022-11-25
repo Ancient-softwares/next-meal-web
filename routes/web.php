@@ -56,6 +56,7 @@ Route::resource('reservas', ReservadoidaController::class);
 
 Route::get('/reservas', [ReservaController::class, 'index'])->name('reserva');
 Route::get('/aceitar-reserva', [ReservaController::class, 'aceitarReserva'])->name('aceitar-reserva');
+Route::get('/finalizar-reserva', [ReservaController::class, 'finalizarReserva'])->name('finalizar-reserva');
 Route::get('/rejeitar-reserva', [ReservaController::class, 'rejeitarReserva'])->name('rejeitar-reserva');
 
 

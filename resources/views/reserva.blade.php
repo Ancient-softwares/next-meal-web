@@ -72,7 +72,16 @@
                                 <h5 class="card-title">{{ $clientes->where('idCliente', $r->idCliente)->first()->nomeCliente }}</h5>
                                 <p class="card-text">Data: {{$r->dataReserva}} {{$r->horaReserva}}</p>
                                 <p class="card-text">Mesa: {{$r->numPessoas}} acentos</p>
+                                <div class="botoes">
+                                    <a href="{{ route('finalizar-reserva', ['id'=>$r->idReserva]) }}" class="btn btn-light">
+                                        Finalizar
+                                    </a>
+                                    <a href="{{ route('rejeitar-reserva', ['id'=>$r->idReserva]) }}" class="btn btn-light">
+                                        Recusar
+                                    </a>
+                                </div>
                             </div>
+                            
                         </div>
                     </div>
                     @endif
@@ -85,7 +94,7 @@
             <div class="reservados scroll">
                 <div class="row row-cols-1 row-cols-md-4 g-4">
                     @foreach($reservas as $r)
-                    @if($r->idStatusReserva == 1)
+                    @if($r->idStatusReserva == 4)
 
                     <div class="col">
                         <div class="card">

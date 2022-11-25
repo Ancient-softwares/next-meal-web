@@ -293,22 +293,18 @@ class ReservaController extends Controller
         }
 
         return redirect()->back()->withErrors("Algo deu errado...");
-    
-        // try {
-        //     $reserva = $this->reservas->where('idReserva', '=', $request->id)->update([
-        //         'idStatusReserva' => 1
-        //     ]);
+    }
 
-        //     return response()->json([
-        //         'message' => 'Reserva aceita com sucesso!',
-        //         'data' => $reserva,
-        //     ], 201); //temo que redirecionar pros bang 
-        // } catch (Exception $e) {
-        //     return response()->json([
-        //         'message' => 'Erro ao aceitar reserva',
-        //         'error' => $e->getMessage()
-        //     ], 500); //temo que redirecionar pros bang
-        // }
+    public function finalizarReserva(Request $request) {
+        $reserva = $this->reservas->where('idReserva', '=', $request->id)->update([
+            'idStatusReserva' => 4
+        ]);
+
+        if($reserva) {
+            return redirect()->back();
+        }
+
+        return redirect()->back()->withErrors("Algo deu errado...");
     }
 
     // rejects a reservation
