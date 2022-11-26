@@ -95,8 +95,8 @@ class AppController extends Controller
             'tbavaliacao.notaAvaliacao',
             'tbavaliacao.descAvaliacao',
         )
-            ->join('tbtiporestaurante', 'tbtiporestaurante.idTipoRestaurante', '=', 'tbrestaurante.idTipoRestaurante')
-            ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbrestaurante.idRestaurante')
+            ->leftJoin('tbtiporestaurante', 'tbtiporestaurante.idTipoRestaurante', '=', 'tbrestaurante.idTipoRestaurante')
+            ->leftJoin('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbrestaurante.idRestaurante')
             ->get();
 
         // gets the average of the rating
@@ -145,8 +145,8 @@ class AppController extends Controller
             'tbavaliacao.notaAvaliacao',
             'tbavaliacao.descAvaliacao',
         )
-            ->join('tbtiporestaurante', 'tbtiporestaurante.idTipoRestaurante', '=', 'tbrestaurante.idTipoRestaurante')
-            ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbrestaurante.idRestaurante')
+            ->leftJoin('tbtiporestaurante', 'tbtiporestaurante.idTipoRestaurante', '=', 'tbrestaurante.idTipoRestaurante')
+            ->leftJoin('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbrestaurante.idRestaurante')
             ->where('tbrestaurante.idRestaurante', '=', $request->idRestaurante)
             ->get();
 

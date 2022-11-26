@@ -158,7 +158,7 @@ class RestauranteSeeder extends Seeder
                     'senhaRestaurante' => password_hash('123', PASSWORD_DEFAULT),
                     'fotoRestaurante' => "user.png",
                     'emailRestaurante' => "jkbuffet@outlook.com",
-                    'cepRestaurante' => "08411000",
+                    'cepRestaurante' => "08421570",
                     'ruaRestaurante' => "Rua Saturnino Pereira",
                     'numRestaurante' => "110",
                     'bairroRestaurante' => "Guaianases",
@@ -195,7 +195,7 @@ class RestauranteSeeder extends Seeder
                     'descricaoRestaurante' => "A melhor Esfiharia da região com a melhor qualidade.",
                     'created_at' => Date::now(),
                     'updated_at' => Date::now(),
-                ],
+                ]
             )
         );
     }
