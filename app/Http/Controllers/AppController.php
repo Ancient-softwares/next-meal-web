@@ -122,6 +122,57 @@ class AppController extends Controller
         return response()->json($table);
     }
 
+    public function getRestaurantById(Request $request)
+    {
+        $table = RestauranteModel::select(
+            'tbrestaurante.idRestaurante',
+            'tbrestaurante.nomeRestaurante',
+            'tbrestaurante.telRestaurante',
+            'tbrestaurante.emailRestaurante',
+            'tbrestaurante.ruaRestaurante',
+            'tbrestaurante.cepRestaurante',
+            'tbrestaurante.ruaRestaurante',
+            'tbrestaurante.bairroRestaurante',
+            'tbrestaurante.cidadeRestaurante',
+            'tbrestaurante.estadoRestaurante',
+            'tbrestaurante.horarioAberturaRestaurante',
+            'tbrestaurante.horarioFechamentoRestaurante',
+            'tbrestaurante.capacidadeRestaurante',
+            'tbrestaurante.nomeRestaurante',
+            'tbrestaurante.fotoRestaurante',
+            'tbrestaurante.descricaoRestaurante',
+            'tbtiporestaurante.tipoRestaurante',
+            'tbavaliacao.notaAvaliacao',
+            'tbavaliacao.descAvaliacao',
+        )
+            ->join('tbtiporestaurante', 'tbtiporestaurante.idTipoRestaurante', '=', 'tbrestaurante.idTipoRestaurante')
+            ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbrestaurante.idRestaurante')
+            ->where('tbrestaurante.idRestaurante', '=', $request->idRestaurante)
+            ->get();
+
+        // gets the average of the rating
+        $table->map(function ($item) {
+            $item->notaAvaliacao = DB::table('tbavaliacao')
+                ->where('idRestaurante', $item->idRestaurante)
+                ->avg('notaAvaliacao');
+            return $item;
+        });
+
+        // deletes duplicates
+        $table = $table->unique('idRestaurante');
+
+        // converts the average rating to a float
+        $table->map(function ($item) {
+            $item->notaAvaliacao = (float) $item->notaAvaliacao;
+
+            // rounds the average to 1 decimal place
+            $item->notaAvaliacao = round($item->notaAvaliacao, 1);
+            return $item;
+        });
+
+        return response()->json($table);
+    }
+
     public function getTipoRestaurantes()
     {
         $table = $this->tipoRestaurante->select('idTipoRestaurante', 'tipoRestaurante')->get();

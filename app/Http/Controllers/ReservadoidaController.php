@@ -697,7 +697,6 @@ class ReservadoidaController extends Controller
 
                 foreach ($reservas as $reserva) {
                     unset($reserva->idCliente);
-                    unset($reserva->idRestaurante);
                     unset($reserva->idStatusReserva);
                     unset($reserva->created_at);
                     unset($reserva->updated_at);
