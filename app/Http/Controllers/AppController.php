@@ -584,12 +584,15 @@ class AppController extends Controller
             $cidade = $request->cidadeCliente;
             $estado = $request->estadoCliente;
 
-            $cliente = $this->clientes->where('emailCliente', '=', $email)->first();
+            $bearerToken = $request->bearerToken();
+
+            $cliente = $this->clientes->where('token', '=', $bearerToken)->first();
 
             if ($cliente) {
-                $this->clientes->where('emailCliente', '=', $email)->update([
+                $this->clientes->where('token', '=', $bearerToken)->update([
                     'nomeCliente' => $nome,
                     'telefoneCliente' => $telefone,
+                    'emailCliente' => $email,
                     'cpfCliente' => $cpf,
                     'cepCliente' => $cep,
                     'ruaCliente' => $rua,
