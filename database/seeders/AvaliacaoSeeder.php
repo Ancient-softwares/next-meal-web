@@ -24,7 +24,7 @@ class AvaliacaoSeeder extends Seeder
                 [
                     'dtAvaliacao' => Date::now(),
                     'notaAvaliacao' => 5,
-                    'descAvaliacao' => 'Primeira descrição da avaliação',
+                    'descAvaliacao' => 'Restaurante excelente! voltarei mais vezes',
                     'idRestaurante' => 1,
                     'idCliente' => 1,
                     'created_at' => Date::now(),
@@ -33,7 +33,7 @@ class AvaliacaoSeeder extends Seeder
                 [
                     'dtAvaliacao' => Date::now(),
                     'notaAvaliacao' => 4,
-                    'descAvaliacao' => 'Segunda descrição da avaliação',
+                    'descAvaliacao' => 'Amei as massas, mas o atendimento não me agradou muito',
                     'idRestaurante' => 1,
                     'idCliente' => 2,
                     'created_at' => Date::now(),
@@ -42,7 +42,7 @@ class AvaliacaoSeeder extends Seeder
                 [
                     'dtAvaliacao' => Date::now(),
                     'notaAvaliacao' => 1,
-                    'descAvaliacao' => 'Terceira descrição da avaliação',
+                    'descAvaliacao' => 'A comida veio fria e fui atendido muito mal',
                     'idRestaurante' => 2,
                     'idCliente' => 3,
                     'created_at' => Date::now(),
@@ -51,7 +51,7 @@ class AvaliacaoSeeder extends Seeder
                 [
                     'dtAvaliacao' => Date::now(),
                     'notaAvaliacao' => 1,
-                    'descAvaliacao' => 'Quarta descrição de avaliação',
+                    'descAvaliacao' => 'Pessimo restaurante, local nada agradavel e muito sujo',
                     'idRestaurante' => 2,
                     'idCliente' => 4,
                     'created_at' => Date::now(),
@@ -60,7 +60,7 @@ class AvaliacaoSeeder extends Seeder
                 [
                     'dtAvaliacao' => Date::now(),
                     'notaAvaliacao' => 3,
-                    'descAvaliacao' => 'Quinta descrição de avaliação',
+                    'descAvaliacao' => 'Comida não me agradou muito, poderiam investir mais nos ingredientes',
                     'idRestaurante' => 3,
                     'idCliente' => 5,
                     'created_at' => Date::now(),
@@ -69,7 +69,7 @@ class AvaliacaoSeeder extends Seeder
                 [
                     'dtAvaliacao' => Date::now(),
                     'notaAvaliacao' => 2,
-                    'descAvaliacao' => 'Sexta descrição de avaliação',
+                    'descAvaliacao' => 'Os garçons estavam perdidos e demoraram para trazer a comida',
                     'idRestaurante' => 3,
                     'idCliente' => 6,
                     'created_at' => Date::now(),
@@ -78,7 +78,7 @@ class AvaliacaoSeeder extends Seeder
                 [
                     'dtAvaliacao' => Date::now(),
                     'notaAvaliacao' => 5,
-                    'descAvaliacao' => 'Sétima descrição de avaliação',
+                    'descAvaliacao' => 'Eu amei o ambiente, a pizza estava perfeita e fui super bem atendide',
                     'idRestaurante' => 4,
                     'idCliente' => 1,
                     'created_at' => Date::now(),
@@ -87,7 +87,7 @@ class AvaliacaoSeeder extends Seeder
                 [
                     'dtAvaliacao' => Date::now(),
                     'notaAvaliacao' => 4,
-                    'descAvaliacao' => 'Oitava descrição de avaliação',
+                    'descAvaliacao' => 'Pizzaria muito boa, gostei dos sabores das pizzas!!!',
                     'idRestaurante' => 5,
                     'idCliente' => 2,
                     'created_at' => Date::now(),
@@ -96,13 +96,23 @@ class AvaliacaoSeeder extends Seeder
                 [
                     'dtAvaliacao' => Date::now(),
                     'notaAvaliacao' => 3,
-                    'descAvaliacao' => 'Nona descrição de avaliação',
+                    'descAvaliacao' => 'O local estava muito cheio e passei 25 minutos para ser atendido',
                     'idRestaurante' => 6,
                     'idCliente' => 3,
                     'created_at' => Date::now(),
                     'updated_at' => Date::now(),
+                ],
+                
+                [
+                    'dtAvaliacao' => Date::now(),
+                    'notaAvaliacao' => 5,
+                    'descAvaliacao' => 'O local estava cheio mas fui atendido e as esfirras estavam muito boas!!!',
+                    'idRestaurante' => 8,
+                    'idCliente' => 3,
+                    'created_at' => Date::now(),
+                    'updated_at' => Date::now(),
                 ]
-            )
+                )
         );
     }
 }

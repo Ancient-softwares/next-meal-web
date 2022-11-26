@@ -32,11 +32,25 @@ class TipoRestauranteSeeder extends Seeder
             'created_at' => Date::now(),
             'updated_at' => Date::now(),
         ],
+
         [
             'tipoRestaurante' => 'Cafeteria',
             'created_at' => Date::now(),
             'updated_at' => Date::now(),
+        ],
+        
+        [
+            'tipoRestaurante' => 'Pizzaria',
+            'created_at' => Date::now(),
+            'updated_at' => Date::now(),
+        ],
+
+        [
+            'tipoRestaurante' => 'Esfiharia',
+            'created_at' => Date::now(),
+            'updated_at' => Date::now(),
         ])
+
         );
     }
 }
