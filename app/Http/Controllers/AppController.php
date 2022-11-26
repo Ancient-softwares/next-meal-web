@@ -561,16 +561,25 @@ class AppController extends Controller
     }
 
     // update user data
-    public function updateUserData(Request $request)
+    public function updateCliente(Request $request)
     {
         try {
             $email = $request->emailCliente;
             $nome = $request->nomeCliente;
-            $celular = $request->telefoneCliente;
-            $cpf = $request->cpfCliente;
-            $cep = $request->cepCliente;
+            $telefone = $request->telefone;
+            $telefone = preg_replace('/[^A-Za-z0-9\-]/', '', $telefone);
+            $telefone = str_replace('-', '', $telefone);
+
+            $cep = $request->cep;
+            $cep = str_replace('-', '', $cep);
+
+            $cpf = $request->cpf;
+            $cpf = str_replace('-', '', $cpf);
+            $cpf = str_replace('.', '', $cpf);
+            $cpf = str_replace('/', '', $cpf);
+
             $rua = $request->ruaCliente;
-            $numero = $request->numeroCliente;
+            $numero = $request->numCasa;
             $bairro = $request->bairroCliente;
             $cidade = $request->cidadeCliente;
             $estado = $request->estadoCliente;
@@ -580,7 +589,7 @@ class AppController extends Controller
             if ($cliente) {
                 $this->clientes->where('emailCliente', '=', $email)->update([
                     'nomeCliente' => $nome,
-                    'celCliente' => $celular,
+                    'telefoneCliente' => $telefone,
                     'cpfCliente' => $cpf,
                     'cepCliente' => $cep,
                     'ruaCliente' => $rua,

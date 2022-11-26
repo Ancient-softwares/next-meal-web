@@ -48,7 +48,7 @@ Route::post('/findIfClientHasRatingByRestaurant', [AppController::class, 'findIf
 // user
 Route::post('/cadastroCliente', [AppController::class, 'cadastroCliente'])->name('cadastroCliente');
 Route::delete('/deleteUser', [AppController::class, 'deleteUserById'])->name('deleteUserById');
-Route::patch('/updateUser', [AppController::class, 'updateUserData'])->name('updateUserData');
+Route::patch('/updateCliente', [AppController::class, 'updateCliente'])->name('updateCliente');
 Route::patch('/updateUserById', [AppController::class, 'updateUserById'])->name('updateUserById');
 Route::get('/getUser', [AppController::class, 'getUserData'])->name('getUserData');
 Route::get('/getUserById/{id}', [AppController::class, 'getUserById'])->name('getUserById');
