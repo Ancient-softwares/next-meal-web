@@ -382,6 +382,7 @@ class AppController extends Controller
         $cliente = $this->clientes->where('emailCliente', '=', $request->emailCliente)->first();
         $senha = $request->senhaCliente;
 
+
         if (!$cliente) {
             return response([
                 'status' => 401,
@@ -1145,5 +1146,22 @@ class AppController extends Controller
                 'error' => $th,
             ]);
         }
+    }
+
+    // returns users profile picture
+    public function getProfileBase64Picture(Request $request)
+    {
+        $cliente = $this->clientes->where('idCliente', '=', $request->idCliente)->first();
+
+        // gets the image
+        $image = $this->clientes->where('idCliente', '=', $request->idCliente)->pluck('fotoCliente');
+
+        // converts the image to blob
+        $image = base64_encode($image);
+
+        // transforms the image into base64
+        $fotoCliente = base64_encode($cliente->fotoCliente);
+
+        return $fotoCliente;
     }
 }
