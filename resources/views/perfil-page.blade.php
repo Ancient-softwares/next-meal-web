@@ -43,7 +43,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 scroll">
+        <div class="col-sm-6">
             <form action="{{ route('atualizar-descricao') }}" method="post" class="formDesc">
                 @csrf
                 <label class="form-label">Descrição do restaurante</label>

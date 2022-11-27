@@ -85,11 +85,11 @@ h3{
 }
 
 .formDesc{
-  height: 37vh;
+  height: 47.5vh;
 }
 
 textarea.form-control{
-  height: 100%!important;
+  height: 75%!important;
 }
 
 ::-webkit-scrollbar{
