@@ -19,7 +19,7 @@ class ReservaSeeder extends Seeder
         DB::table('tbreserva')->insert(
             array(
                 [
-                    'dataReserva' => Date::now(),
+                    'dataReserva' => '2022-01-01',
                     'horaReserva' => '12:00:00',
                     'numPessoas' => 4,
                     'idCliente' => 1,
@@ -29,7 +29,27 @@ class ReservaSeeder extends Seeder
                     'updated_at' => Date::now(),
                 ],
                 [
-                    'dataReserva' => Date::now(),
+                    'dataReserva' => '2017-12-12',
+                    'horaReserva' => '12:00:00',
+                    'numPessoas' => 6,
+                    'idCliente' => 1,
+                    'idRestaurante' => 4,
+                    'idStatusReserva' => 1,
+                    'created_at' => Date::now(),
+                    'updated_at' => Date::now(),
+                ],
+                [
+                    'dataReserva' => '2021-05-01',
+                    'horaReserva' => '12:00:00',
+                    'numPessoas' => 12,
+                    'idCliente' => 1,
+                    'idRestaurante' => 3,
+                    'idStatusReserva' => 2,
+                    'created_at' => Date::now(),
+                    'updated_at' => Date::now(),
+                ],
+                [
+                    'dataReserva' => '2018-04-07',
                     'horaReserva' => '13:00:00',
                     'numPessoas' => 3,
                     'idCliente' => 2,
@@ -39,7 +59,7 @@ class ReservaSeeder extends Seeder
                     'updated_at' => Date::now(),
                 ],
                 [
-                    'dataReserva' => Date::now(),
+                    'dataReserva' => '2019-11-09',
                     'horaReserva' => '14:00:00',
                     'numPessoas' => 3,
                     'idCliente' => 2,
@@ -49,7 +69,7 @@ class ReservaSeeder extends Seeder
                     'updated_at' => Date::now(),
                 ],
                 [
-                    'dataReserva' => Date::now(),
+                    'dataReserva' => '2020-07-08',
                     'horaReserva' => '15:00:00',
                     'numPessoas' => 2,
                     'idCliente' => 3,

@@ -934,6 +934,8 @@ class AppController extends Controller
     {
         $input = strtolower($request->input);
 
+        $input = trim($input);
+
         $table = RestauranteModel::select(
             'tbrestaurante.idRestaurante',
             'tbrestaurante.nomeRestaurante',
@@ -954,15 +956,15 @@ class AppController extends Controller
             'tbavaliacao.notaAvaliacao',
             'tbavaliacao.descAvaliacao',
         )
-            ->join('tbtiporestaurante', 'tbtiporestaurante.idTipoRestaurante', '=', 'tbrestaurante.idTipoRestaurante')
-            ->join('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbrestaurante.idRestaurante')
-            ->join('tbprato', 'tbprato.idRestaurante', '=', 'tbrestaurante.idRestaurante')
-            ->join('tbtipoprato', 'tbtipoprato.idTipoPrato', '=', 'tbprato.idTipoPrato')
-            ->where(strtolower('tbprato.nomePrato'), 'LIKE', '%' . $input . '%')
-            ->orWhere(strtolower('tbprato.ingredientesPrato'), 'LIKE', '%' . $input . '%')
-            ->orWhere(strtolower('tbrestaurante.nomeRestaurante'), 'LIKE', '%' . $input . '%')
-            ->orWhere(strtolower('tbtiporestaurante.tipoRestaurante'), 'LIKE', '%' . $input . '%')
-            ->orWhere(strtolower('tbtipoprato.tipoPrato'), 'LIKE', '%' . $input . '%')
+            ->leftJoin('tbtiporestaurante', 'tbtiporestaurante.idTipoRestaurante', '=', 'tbrestaurante.idTipoRestaurante')
+            ->leftJoin('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbrestaurante.idRestaurante')
+            ->leftJoin('tbprato', 'tbprato.idRestaurante', '=', 'tbrestaurante.idRestaurante')
+            ->leftJoin('tbtipoprato', 'tbtipoprato.idTipoPrato', '=', 'tbprato.idTipoPrato')
+            ->where(trim(strtolower('tbprato.nomePrato')), 'LIKE', '%' . $input . '%')
+            ->orWhere(trim(strtolower('tbprato.ingredientesPrato')), 'LIKE', '%' . $input . '%')
+            ->orWhere(trim(strtolower('tbrestaurante.nomeRestaurante')), 'LIKE', '%' . $input . '%')
+            ->orWhere(trim(strtolower('tbtiporestaurante.tipoRestaurante')), 'LIKE', '%' . $input . '%')
+            ->orWhere(trim(strtolower('tbtipoprato.tipoPrato')), 'LIKE', '%' . $input . '%')
             ->get();
 
         // gets the average of the rating
