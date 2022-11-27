@@ -34,7 +34,7 @@ class AdminController extends Controller
             return redirect('index');
         }
 
-        $restaurantes = RestauranteModel::paginate(3);
+        $restaurantes = RestauranteModel::paginate(4);
             
         return view('admin.restaurantes', compact('restaurantes'));
     }
@@ -45,7 +45,7 @@ class AdminController extends Controller
             return redirect('index');
         }
 
-        $clientes = ClienteModel::paginate(3);
+        $clientes = ClienteModel::paginate(4);
 
         return view('admin.clientes', compact('clientes'));
     }
@@ -106,14 +106,14 @@ class AdminController extends Controller
         else{
             $aux = $mesAtual - 6;
         }
-        $resultado = [];
+        $resultadoReservas = [];
         
         while($aux <= $mesAtual){
-            array_push($resultado,  $this->getRestaurantespMes($aux + 1));
+            array_push($resultadoReservas,  $this->getReservaspMes($aux + 1));
             $aux++;
         }
 
-        return $resultado;
+        return $resultadoReservas;
     }
 
     public function getGraphClientesValor() {
@@ -126,14 +126,14 @@ class AdminController extends Controller
         else{
             $aux = $mesAtual - 6;
         }
-        $resultado = [];
+        $resultadoClientes = [];
         
         while($aux <= $mesAtual){
-            array_push($resultado,  $this->getRestaurantespMes($aux + 1));
+            array_push($resultadoClientes,  $this->getClientespMes($aux + 1));
             $aux++;
         }
 
-        return $resultado;
+        return $resultadoClientes;
     }
 
     private function getRestaurantespMes($mes)
@@ -144,6 +144,26 @@ class AdminController extends Controller
             ->first()->total;
 
             return $query;
+    }
+
+    private function getReservaspMes($mes)
+    {
+        $reservas = DB::table('tbreserva')
+            ->select(DB::raw('COUNT(idReserva) AS total'))
+            ->where(DB::raw('MONTH(created_at)'), '=', $mes)
+            ->first()->total;
+
+            return $reservas;
+    }
+
+    private function getClientespMes($mes)
+    {
+        $clientes = DB::table('tbcliente')
+            ->select(DB::raw('COUNT(idCliente) AS total'))
+            ->where(DB::raw('MONTH(created_at)'), '=', $mes)
+            ->first()->total;
+
+            return $clientes;
     }
 
 }

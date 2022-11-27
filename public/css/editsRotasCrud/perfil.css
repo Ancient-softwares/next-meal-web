@@ -71,9 +71,20 @@ h3{
   font-size: 1rem!important;
 }
 
-@media (max-width:1010px){
+::-webkit-scrollbar{
+  background-color:#ff9494;
+  width: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+::-webkit-scrollbar-thumb{
+  background-color: #f50000;
+  border-radius: 5px;
+}
+
+@media (max-width:1172px){
   .scroll{
-    height: 35vh;
-    overflow-y: scroll;
+    height: 45vh;
+    overflow-y: auto;
   }
 }

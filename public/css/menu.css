@@ -80,6 +80,7 @@ body::-webkit-scrollbar-thumb {
 
     .sidebar.close {
         width: 78px;
+        font-size: 1em!important;
     }
 
     .sidebar.close .logo-details .logo_name {
@@ -179,7 +180,6 @@ body::-webkit-scrollbar-thumb {
         padding-right: 10px;
         line-height: 50px;
         color: #FF4F4E;
-        font-size: 26px;
     }
 
     .home-section {
@@ -205,7 +205,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 .sidebar .logo-details i {
-    font-size: 30px;
     color: #FF4F4E;
     height: 50px;
     min-width: 78px;
@@ -222,7 +221,6 @@ body::-webkit-scrollbar-thumb {
 .sidebar .nav-links {
     height: 100%;
     padding-top: 30px;
-    padding-left: 4px;
 }
 
 .sidebar .nav-links li {
@@ -246,8 +244,8 @@ li.img-logo:hover {
 }
 
 .sidebar .nav-links li a .link_name {
-    font-size: 18px;
-    font-weight: 400;
+    font-size: 0.8em;
+    font-weight: 500;
     color: black;
 }
 
@@ -261,8 +259,6 @@ li.img-logo:hover {
 .sidebar .nav-links li .logout:hover {
     background: white;
 }
-
-
 
 .home-section .home-content .bx-menu {
     color: #FF4F4E;
