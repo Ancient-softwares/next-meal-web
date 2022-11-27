@@ -34,7 +34,7 @@ class AdminController extends Controller
             return redirect('index');
         }
 
-        $restaurantes = RestauranteModel::paginate(4);
+        $restaurantes = RestauranteModel::paginate(5);
             
         return view('admin.restaurantes', compact('restaurantes'));
     }
@@ -45,7 +45,7 @@ class AdminController extends Controller
             return redirect('index');
         }
 
-        $clientes = ClienteModel::paginate(4);
+        $clientes = ClienteModel::paginate(5);
 
         return view('admin.clientes', compact('clientes'));
     }
