@@ -18,7 +18,7 @@
 @section('conteudo')
 
 <div class="container-avaliacao">
-    <h1>Avaliacões</h1>
+    <h4>Avaliacões</h4>
     <!-- <div class="card-avalicao">
         <div class="conteudo-avaliacao">
             <div class="img-perfil">
@@ -50,11 +50,11 @@
                             <img src="{{asset('img/restaurante.jpg')}}" class="img-Avaliação" alt="">
                         </div>
                         <div class="nome">
-                            <h3>{{$a->nomeCliente}}</h3>
+                            <h4>{{$a->nomeCliente}}</h4>
                             <hr class="hrChav">
                             <div class="nota">
                                 <img src="{{asset('img/estrela.png')}}" alt="">
-                                <h3>{{$a->notaAvaliacao}}</h3>
+                                <h4>{{$a->notaAvaliacao}}</h4>
                             </div>
                             <div class="desc">
                                 <p>{{$a->descAvaliacao}}</p>
