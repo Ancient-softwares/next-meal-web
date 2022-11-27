@@ -25,22 +25,18 @@
                 <form method="post" action="{{ route('mesas.store') }}" enctype="multipart/form-data">
             @endif
                 @csrf
-                <div class="row">
-                    <div class="col-sm-6">
+                    <div class="formMesas">
                         <div class="form-group">
                             <label for="quantAcentosMesa">Quantidade de acentos: </label>
                             <input type="number" class="form-control" name="quantAcentosMesa" id="quantAcentosMesa" value="{{$mesa->quantAcentosMesa ?? ''}}">
                         </div>
-                    </div>
-                    <div class="col-sm-6">
                         @if(!isset($mesa))
                         <div class="form-group">
                             <label for="ingredientes">Númeração da mesa: </label>
                             <input type="number" class="form-control" name="numMesa" id="numMesa" value="{{$mesa->numMesa ?? ''}}">
                         </div>
-                        @endif
+                        @endif     
                     </div>
-                </div>
                 
                 
                 <div class="form-group">

@@ -56,6 +56,10 @@ h1 {
     font-size: 1.5rem !important;
 }
 
+.foto{
+    padding: 0.2em!important;
+}
+
 ::-webkit-scrollbar {
     background-color: #ff9494;
     width: 5px;
@@ -66,4 +70,34 @@ h1 {
 ::-webkit-scrollbar-thumb {
     background-color: #f50000;
     border-radius: 5px;
+}
+
+.formMesas{
+    display: flex;
+}
+
+.formMesas .form-group{
+    width: 100%;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+@media(max-width: 1285px){
+    label{
+        font-size: 0.8em!important;
+    }
+}
+
+@media(max-width: 1102px){
+    label{
+        font-size: 0.6em!important;
+        font-weight: 600;
+    }
+}
+
+/* TAMANHO */
+@media(max-height: 514px){
+    .scroll{
+        max-height: 80vh;
+    }
 }

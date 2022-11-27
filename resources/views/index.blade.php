@@ -108,7 +108,7 @@
                     @foreach($recentes as $r)
                     <tr>
                         <td><img src="{{ asset('img/perfil.png') }}" alt=""></td>
-                        <td>{{$r->nomeCliente}}</td>
+                        <td><h6 class="h6">{{$r->nomeCliente}}</h6></td>
                     </tr>
                     @endforeach
                 </tbody>

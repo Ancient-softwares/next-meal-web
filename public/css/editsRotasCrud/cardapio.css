@@ -4,6 +4,13 @@
     width: 90%;
 }
 
+.container-cont2 {
+    margin-right: auto;
+    margin-left: auto;
+    width: 90%;
+    height: 86vh;
+}
+
 table {
     background-color: #F4F4F4 !important;
     width: 100% !important;
@@ -15,13 +22,13 @@ table {
 }
 
 a .botoes-editar {
-    width: 2.5vh;
+    width: 3vh;
     height: 100%;
 }
 
 a .botoes-excluir {
     cursor: pointer;
-    width: 2.5vh;
+    width: 3vh;
     height: 100%;
 }
 
@@ -121,7 +128,7 @@ li {
 
 .card-body {
     height: 10vh;
-    padding: 1rem !important;
+    padding: 0.4rem !important;
 }
 
 h5 {
@@ -147,7 +154,7 @@ h5 {
 
 .col {
     padding-left: 0 !important;
-    height: 40vh !important;
+    height: 47vh !important;
     width: 100% !important;
     margin-top: 2em;
 }
@@ -232,9 +239,14 @@ h5 {
     height: 75vh;
 }
 
+.card{
+    height: 100%!important;
+}
+
 ::-webkit-scrollbar {
     background-color: #ff9494;
     width: 5px;
+    height: 10px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
@@ -259,50 +271,100 @@ h5 {
 
 .card-title{
     margin-bottom: 0em!important;
+    height: 100%!important;
+    width: 100%!important;
 }
 
 h1{
     font-size: 1.5em!important;
 }
 
+p{
+    margin-bottom: 0rem!important;
+}
+
+.cardDash{
+    padding-bottom: 2em!important;
+}
+
+.scroll2 {
+    max-height: 80%;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+tr .th{
+    font-weight: 400!important;
+}
 
 @media screen and (max-width:1440px) {
     .card-footer button {
-        font-size: 1.5vh !important;
+        font-size: 1.8vh !important;
     }
 }
 
 @media (max-width:1320px) {
     a .botoes-excluir {
-        width: 2vh;
+        width: 3.5vh;
         height: 100%;
     }
 
     a .botoes-editar {
-        width: 2vh;
+        width: 3.5vh;
         height: 100%;
     }
 
     .card-footer button {
-        font-size: 1.2vh !important;
-        height: 2vh;
+        font-size: 1.6vh !important;
+        height: 3vh;
     }
 
 }
 
+@media(max-width: 1325px){
+    .col{
+        height: 48vh!important;
+    }
+}
+
 @media (max-width:1104px) {
     a .botoes-excluir {
-        width: 1.5vh;
-        height: 100%;
+        width: 2.5vh;
+        height: 90%;
     }
 
     a .botoes-editar {
-        width: 1.5vh;
-        height: 100%;
+        width: 2.5vh;
+        height: 90%;
     }
 
     .card-footer button {
-        font-size: 1vh !important;
-        height: 2vh;
+        font-size: 1.4vh !important;
+        height: 3vh;
+    }
+}
+
+@media(max-width: 865px){
+    a .botoes-excluir {
+        width: 2vh;
+        height: 90%;
+    }
+
+    a .botoes-editar {
+        width: 2vh;
+        height: 90%;
+    }
+}
+
+/* MEDIA MESAS */
+@media (max-width:1150px){
+    th, td{
+        font-size: 0.7em!important;
+    }
+}
+
+@media (max-width:906px){
+    th{
+        font-size: 0.6em!important;
     }
 }

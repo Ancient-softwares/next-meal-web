@@ -44,14 +44,16 @@
             </div>
         </div>
         <div class="col-sm-6 scroll">
-            <form action="{{ route('atualizar-descricao') }}" method="post">
+            <form action="{{ route('atualizar-descricao') }}" method="post" class="formDesc">
                 @csrf
-                <button onclick="return showTipoNovo()"><img class="botoes-editar" src="{{ asset('img/tabelas/editar.png') }}" alt=""></button>
+                <label class="form-label">Descrição do restaurante</label>
+                <br>
+                <button onclick="return showTipoNovo()" style="border: none;"><img class="botoes-editar" src="{{ asset('img/tabelas/editar.png') }}" alt=""></button>
                 <input type="submit" id="enviar" value="Enviar" hidden>
                 <br>
 
-                <label class="form-label">Descrição do restaurante</label>
-                <textarea class="form-control form form-custom" name="descricao" id="descricao" style="resize: none;" name="descricao" cols="40" rows="9" readonly>{{ $info->descricaoRestaurante }}</textarea>
+                
+                <textarea class="form-control form form-custom scroll" name="descricao" id="descricao" style="resize: none;" name="descricao" cols="40" rows="9" readonly>{{ $info->descricaoRestaurante }}</textarea>
             </form>
         </div>
     </div>

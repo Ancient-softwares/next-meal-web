@@ -63,6 +63,18 @@
   background-color: #ff2f48;
 }
 
+input{
+  width: 15vh;
+  color: white;
+  background-color: #f50000;
+  border: none;
+}
+
+input:hover{
+  color: white;
+  background-color: #ff2f48;
+}
+
 h1{
   font-size: 1.5em!important;
 }
@@ -70,6 +82,14 @@ h1{
 
 h3{
   font-size: 1rem!important;
+}
+
+.formDesc{
+  height: 37vh;
+}
+
+textarea.form-control{
+  height: 100%!important;
 }
 
 ::-webkit-scrollbar{

@@ -131,11 +131,14 @@ h1{
   .clientes-h3{
     font-size: 1.50rem;
   }
+  .clientes-h3{
+    font-size: 1.3rem;
+  }
 }
 
 @media (max-width:780px){
   .txtreserva{
-    font-size: 1em!important;
+    font-size: 0.8em!important;
   }
   .numero{
     font-size: 2em;
@@ -144,7 +147,7 @@ h1{
     font-size: 1rem;
   }
   .h6{
-    font-size: 0.2em!important;
+    font-size: 0.7em!important;
   }
 }
 

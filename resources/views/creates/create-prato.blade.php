@@ -65,7 +65,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Foto do Prato</label>
-                            <input type="file" name="fotoPrato" class="form-control">
+                            <input type="file" name="fotoPrato" class="form-control foto">
                         </div>
                     </div>
                 </div>

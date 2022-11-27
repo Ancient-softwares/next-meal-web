@@ -14,6 +14,7 @@
 
 <h1>Restaurantes cadastrados</h1>
 
+<div class="scroll2">
 <table class="table table-hover">
     <thead>
         <tr>
@@ -28,23 +29,23 @@
             <th scope="col">Data de cadastro</th>
         </tr>
     </thead>
-    <div>
-    <tbody class="scroll2">
-        @foreach ($restaurantes as $restaurante)
-        <tr>
-            <th class="th" scope="row">{{ $restaurante->idRestaurante }}</th>
-            <td>{{ $restaurante->nomeRestaurante }}</td>
-            <td>{{ $restaurante->telRestaurante }}</td>
-            <td>{{ $restaurante->emailRestaurante}}</td>
-            <td>{{ $restaurante->cepRestaurante}}</td>
-            <td>{{ $restaurante->ruaRestaurante}}</td>
-            <td>{{ $restaurante->bairroRestaurante}}</td>
-            <td>{{ $restaurante->cidadeRestaurante}}</td>
-            <td>{{ $restaurante->created_at }}</td>
-        </tr>
-        @endforeach
-    </tbody>
+        <tbody>
+            @foreach ($restaurantes as $restaurante)
+            <tr>
+                <th>{{ $restaurante->idRestaurante }}</th>
+                <td>{{ $restaurante->nomeRestaurante }}</td>
+                <td>{{ $restaurante->telRestaurante }}</td>
+                <td>{{ $restaurante->emailRestaurante}}</td>
+                <td>{{ $restaurante->cepRestaurante}}</td>
+                <td>{{ $restaurante->ruaRestaurante}}</td>
+                <td>{{ $restaurante->bairroRestaurante}}</td>
+                <td>{{ $restaurante->cidadeRestaurante}}</td>
+                <td>{{ $restaurante->created_at }}</td>
+            </tr>
+            @endforeach
+        </tbody>    
 </table>
-{{ $restaurantes->links() }}
+
 </div>
+{{ $restaurantes->links() }}
 @endsection

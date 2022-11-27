@@ -26,7 +26,7 @@
         <tbody>
             @foreach ($tipos as $tipo)
             <tr>
-                <th scope="row">{{ $tipo->tipoRestaurante }}</th>
+                <th scope="row"  class="th">{{ $tipo->tipoRestaurante }}</th>
                 <td>
                     <a ><img class="botoes-editar" src="{{ asset('img/tabelas/editar.png') }}" alt=""></a>
                     <a value="{{ $tipo->idTipoRestaurante }}" data-bs-toggle="modal" data-bs-target="#excluir{{ $tipo->idTipoRestaurante }}"><img class="botoes-excluir" src="{{ asset('img/tabelas/excluir.png') }}" alt=""></a>
@@ -57,8 +57,8 @@
                 </form>
             </div>
             @endforeach
-            {{ $tipos->links() }}
         </tbody>
     </table>
+            {{ $tipos->links() }}
 </div>
 @endsection
