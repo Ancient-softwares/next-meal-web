@@ -17,7 +17,6 @@
 <div class="container-cont">
     @if($errors->any())
 
-
     <div class="alert alert-danger" role="alert">
         {{ $errors->first() }}
     </div>

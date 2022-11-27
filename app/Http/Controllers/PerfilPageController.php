@@ -113,9 +113,14 @@ class PerfilPageController extends Controller
             return redirect()->back();
         }
 
+        $validated = $request->validate([
+            'descricao' => 'required'
+        ]);
+
         $this->restaurante->where('emailRestaurante', $login)->update([
             'descricaoRestaurante' => $request->descricao
         ]);
+        
 
         return redirect()->back();
     }

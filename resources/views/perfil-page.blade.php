@@ -12,7 +12,15 @@
 
 @section('conteudo')
 
+
+
 <div class="container-perfil">
+    @if($errors->any())
+        <div class="alert alert-danger" role="alert">
+            {{ $errors->first() }}
+        </div>
+    @endif
+
     <h1 class="txt-Perfil">Perfil</h1>
     <hr>
     <div class="row">
