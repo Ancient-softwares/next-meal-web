@@ -132,3 +132,30 @@ h1{
     font-size: 1.50rem;
   }
 }
+
+@media (max-width:780px){
+  .txtreserva{
+    font-size: 1em!important;
+  }
+  .numero{
+    font-size: 2em;
+  }
+  .clientes-h3{
+    font-size: 1rem;
+  }
+  .h6{
+    font-size: 0.2em!important;
+  }
+}
+
+@media (max-width:614px){
+  .txtreserva{
+    font-size: 0.8em!important;
+  }
+  .numero{
+    font-size: 1.8em;
+  }
+  .clientes-h3{
+    font-size: 0.8rem;
+  }
+}

@@ -4,7 +4,6 @@
 
 @section('css')
 <link href="{{ asset('css/editsRotasCrud/index.css') }}" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="{{ asset('css/grafico.css') }}">
 <link rel="stylesheet" href="{{ asset('css/menu.css') }}">
 @endsection
 
@@ -91,8 +90,8 @@
                     @foreach($fieis as $f)
                     <tr>
                         <td><img src="{{ asset('img/perfil.png') }}" alt=""></td>
-                        <td colspan="2">{{$f->nomeCliente}}</td>
-                        <td>Reservas: {{$f->totalReservas}}</td>
+                        <td colspan="2"><h6 class="h6">{{$f->nomeCliente}}</h6></td>
+                        <td><h6 class="h6">Reservas: {{$f->totalReservas}}</h6></td>
                     </tr>
                     @endforeach
                 </tbody>
