@@ -13,7 +13,6 @@
 <div class="container-cont">
 
 <h1>Restaurantes cadastrados</h1>
-<br>
 
 <table class="table table-hover">
     <thead>
@@ -29,10 +28,11 @@
             <th scope="col">Data de cadastro</th>
         </tr>
     </thead>
-    <tbody>
+    <div>
+    <tbody class="scroll2">
         @foreach ($restaurantes as $restaurante)
         <tr>
-            <th scope="row">{{ $restaurante->idRestaurante }}</th>
+            <th class="th" scope="row">{{ $restaurante->idRestaurante }}</th>
             <td>{{ $restaurante->nomeRestaurante }}</td>
             <td>{{ $restaurante->telRestaurante }}</td>
             <td>{{ $restaurante->emailRestaurante}}</td>
@@ -43,8 +43,8 @@
             <td>{{ $restaurante->created_at }}</td>
         </tr>
         @endforeach
-        {{ $restaurantes->links() }}
     </tbody>
 </table>
+{{ $restaurantes->links() }}
 </div>
 @endsection

@@ -38,8 +38,8 @@
             <td>{{ $cliente->cidadeRestaurante}}</td>
         </tr>
         @endforeach
-        {{ $clientes->links() }}
     </tbody>
     </table>
+        {{ $clientes->links() }}
 </div>
 @endsection

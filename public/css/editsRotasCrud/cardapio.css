@@ -1,250 +1,308 @@
-.container-cont{
+.container-cont {
     margin-right: auto;
     margin-left: auto;
     width: 90%;
 }
 
-table{
-    background-color: #F4F4F4!important;
-    width: 100%!important;
+table {
+    background-color: #F4F4F4 !important;
+    width: 100% !important;
     margin: 1em;
 }
 
-.container{
+.container {
     width: 100vh;
 }
 
-a .botoes-editar{
+a .botoes-editar {
     width: 2.5vh;
     height: 100%;
 }
 
-a .botoes-excluir{
+a .botoes-excluir {
     cursor: pointer;
     width: 2.5vh;
     height: 100%;
 }
 
-.btn-editar-excluir{
+.btn-editar-excluir {
     flex-direction: row;
     justify-content: center;
 }
 
-td .img2{
+td .img2 {
     margin-left: 20px;
 }
 
-li{
+li {
     list-style: none;
 }
 
-.menu-prato a{
+.menu-prato a {
     margin: 2em;
 }
 
-.card-footer{
-    padding-right: 0!important;
-    padding-left: 0!important;
+.card-footer {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
     text-align: center;
     justify-content: space-between;
     align-items: center;
     display: flex;
 }
 
-.card-footer button{
+.card-footer button {
     color: white;
-    background-color: #f50000!important;
+    background-color: #f50000 !important;
     width: 50%;
     height: 3vh;
-    font-size: 1.8vh!important;
+    font-size: 1.8vh !important;
     margin-left: 0.8em;
 }
 
-.card-footer .editar-excluir{
+.card-footer .editar-excluir {
     margin-right: 0.8em;
 }
 
-.card-footer button:hover{
+.card-footer button:hover {
     color: white;
-    background-color: #FF4F4E!important;
+    background-color: #FF4F4E !important;
 }
 
-.card-footer button:focus{
+.card-footer button:focus {
     color: white;
 }
 
-.modal-footer button{
+.modal-footer button {
     color: white;
-    background-color: #f50000!important;
-    font-size: 0.7vw!important;
+    background-color: #f50000 !important;
+    font-size: 0.7vw !important;
 }
 
-.modal-footer button:hover{
+.modal-footer button:hover {
     color: white;
-    background-color: #FF4F4E!important;
+    background-color: #FF4F4E !important;
 }
 
-.card-deck{
-    margin-left: auto!important;
-    margin-right: auto!important;
-    height: 65vh!important;
-    width: 100%!important;
+.card-deck {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    height: 65vh !important;
+    width: 100% !important;
 }
 
-.card p{
+.card p {
     font-size: 0.8em;
-    padding-left: 1em!important;
+    padding-left: 1em !important;
     margin-bottom: 5%;
 }
 
-.btn-cadastro{
-    margin-left: auto!important;
-    margin-right: auto!important;
-    width: 100%!important;
+.btn-cadastro {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
     margin-bottom: 1em;
 }
 
-.btn-cadastro a{
+.btn-cadastro a {
     color: white;
     background-color: #f50000;
 }
 
-.btn-cadastro a:hover{
+.btn-cadastro a:hover {
     color: white;
     background-color: #ff2f48;
 }
 
-.card-deck .card{
-    width: 100%!important;
-    margin-left: 0!important;
+.card-deck .card {
+    width: 100% !important;
+    margin-left: 0 !important;
 }
 
-.card-body{
+.card-body {
     height: 10vh;
-    padding: 1rem!important;
+    padding: 1rem !important;
 }
 
-h5{
-   font-size: max(10px, 1.1vw)!important;  /* viewport unit(width) */
+h5 {
+    font-size: max(10px, 1.1vw) !important;
+    /* viewport unit(width) */
 }
 
 .table {
-    margin-left: auto!important;
-    margin-right: auto!important;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
-.card .card-img-top{
+.card .card-img-top {
     height: 20vh;
     width: 100%;
 }
 
-.mais-informacoes{
-    padding: 0!important;
-    font-size: 15px!important;
+.mais-informacoes {
+    padding: 0 !important;
+    font-size: 15px !important;
 }
 
 
-.col{
-    padding-left: 0!important;
-    height: 40vh!important;
-    width: 100%!important;
+.col {
+    padding-left: 0 !important;
+    height: 40vh !important;
+    width: 100% !important;
     margin-top: 2em;
 }
 
 .scroll {
     width: 100vh;
     max-height: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
-.modal-body h3{
+.table-sm{
+    height: 65%;
+    border-radius: 1em;
+}
+
+.modal-body h3 {
     text-align: center;
 }
 
-.modal-body img{
+.modal-body img {
     border-radius: 60vh;
     width: 100%;
     height: 100%;
 }
 
-.ftprato{
+.ftprato {
     margin-right: auto;
     margin-left: auto;
     width: 20vh;
     height: 20vh;
 }
 
-.ingredientes{
+.ingredientes {
     font-weight: 100;
 }
 
-.card-img-top{
-    
-    margin-right: auto!important;
-    margin-left: auto!important;
+.card-img-top {
+
+    margin-right: auto !important;
+    margin-left: auto !important;
 }
 
-.card-dash{
+.card-dash {
     text-align: center;
-    background-color: #F4F4F4!important;
-    border-radius: 2em!important;
+    background-color: #F4F4F4 !important;
+    border-radius: 2em !important;
+    height: 100%;
+    width: 20%;
+}
+
+.colDash {
+    height: 100% !important;
+}
+
+.cardDash p {
+    font-size: 2em;
+
+}
+
+.cardDash {
     height: 100%;
 }
 
-.colDash{
-    height: 100%!important;
+.card-body{
+    text-align: center;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    display: grid;
 }
 
-.cardDash p{
-    font-size: 2em;
-}
-
-.rowDash{
-    height: 20vh!important;
+.rowDash {
+    height: 20vh !important;
     margin-bottom: 1em;
 }
 
-.row2{
-    height: 40vh!important;
+.row2 {
+    height: 40vh !important;
 }
 
-.style-reservas{
-    height: 80vh;
+.style-reservas {
+    height: 75vh;
 }
 
-@media screen and (max-width:1440px){
-    .card-footer button{    
-         font-size: 1.5vh!important;
+::-webkit-scrollbar {
+    background-color: #ff9494;
+    width: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #f50000;
+    border-radius: 5px;
+}
+
+/* ADMIN */
+.colDash{
+    margin: 0!important;
+}
+
+.rowDash1{
+    height: 35%!important;
+}
+
+.rowDash2{
+    height: 50%!important;
+}
+
+.card-title{
+    margin-bottom: 0em!important;
+}
+
+h1{
+    font-size: 1.5em!important;
+}
+
+
+@media screen and (max-width:1440px) {
+    .card-footer button {
+        font-size: 1.5vh !important;
     }
 }
 
-@media (max-width:1320px){
-    a .botoes-excluir{
+@media (max-width:1320px) {
+    a .botoes-excluir {
         width: 2vh;
         height: 100%;
     }
-    a .botoes-editar{
+
+    a .botoes-editar {
         width: 2vh;
         height: 100%;
     }
-    .card-footer button{
-        font-size: 1.2vh!important;
+
+    .card-footer button {
+        font-size: 1.2vh !important;
         height: 2vh;
     }
 
 }
 
-@media (max-width:1104px){
-    a .botoes-excluir{
+@media (max-width:1104px) {
+    a .botoes-excluir {
         width: 1.5vh;
         height: 100%;
     }
-    a .botoes-editar{
+
+    a .botoes-editar {
         width: 1.5vh;
         height: 100%;
     }
-    .card-footer button{
-        font-size: 1vh!important;
+
+    .card-footer button {
+        font-size: 1vh !important;
         height: 2vh;
     }
 }

@@ -1,54 +1,69 @@
-form{
+form {
     align-items: center;
 }
-.form-conteudo
-{
+
+.form-conteudo {
     flex-direction: column;
     flex-wrap: wrap;
 }
 
-.container-cadastro{
+.container-cadastro {
     padding: 2em;
 }
 
-form{
+form {
     width: 100%;
 }
-.TitleForm{
+
+.TitleForm {
     font-size: 1.2em;
 }
-.TitleRegisterMesa{
+
+.TitleRegisterMesa {
     font-size: 1.8em;
 
 }
 
-.container-form{
+.container-form {
     background-color: #F4F4F4;
     padding: 20px;
     border-radius: 2em;
     text-align: center;
 }
 
-.text-center{
+.text-center {
     margin-right: auto;
     margin-left: auto;
 }
+
 .scroll {
     max-height: 88vh;
     overflow-y: scroll;
 }
 
-.btn{
-    color: #f50000!important;
-    border-color: #f50000!important;
+.btn {
+    color: #f50000 !important;
+    border-color: #f50000 !important;
 }
 
-.btn:hover{
-    background-color: #ff2f48!important;
-    color: white!important;
-    border-color: #ff2f48!important;
+.btn:hover {
+    background-color: #ff2f48 !important;
+    color: white !important;
+    border-color: #ff2f48 !important;
 }
 
-h1{
-    font-size: 1.5rem!important;
+h1 {
+    font-size: 1.5rem !important;
+}
+
+::-webkit-scrollbar {
+    background-color: #ff9494;
+    width: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #f50000;
+    border-radius: 5px;
 }
