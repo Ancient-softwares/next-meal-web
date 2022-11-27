@@ -26,7 +26,7 @@ class DashboardController extends Controller
             ->select('tbcliente.nomeCliente', DB::raw('count(tbreserva.idCliente) as totalReservas'))
             ->join('tbcliente', 'tbreserva.idCliente', '=', 'tbcliente.idCliente')
             ->where('tbreserva.idRestaurante', '=', Session::get('idRestaurante'))
-            ->where('tbreserva.idStatusReserva', '=', 1)
+            ->where('tbreserva.idStatusReserva', '=', 4)
             ->groupBy('tbcliente.nomeCliente')
             ->orderBy('totalReservas', 'desc')
             ->limit(3)
@@ -38,7 +38,7 @@ class DashboardController extends Controller
         $graficoMes = $this->getGraphReservasMes();
         $graficoValor = $this->getGraphReservasValor();
 
-        $reservas = ReservaModel::where('idRestaurante', Session::get('idRestaurante'))->where('idStatusReserva', 1)->get()->count();
+        $reservas = ReservaModel::where('idRestaurante', Session::get('idRestaurante'))->where('idStatusReserva', 4)->get()->count();
         $clientesRecentes = ReservaModel::all()->max();
         return view('index', compact('reservas', 'clientesRecentes', 'fieis', 'graficoMes', 'graficoValor', 'recentes'));   
     }
@@ -108,7 +108,7 @@ class DashboardController extends Controller
             ->select(DB::raw('COUNT(idReserva) AS total'))
             ->where(DB::raw('MONTH(dataReserva)'), '=', $mes)
             ->where('tbreserva.idRestaurante', '=', Session::get('idRestaurante'))
-            ->where('idStatusReserva', '=', "1")
+            ->where('idStatusReserva', 4)
             ->first()->total;
 
             return $query;

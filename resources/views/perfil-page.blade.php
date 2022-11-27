@@ -4,6 +4,7 @@
 
 @section('css')
 <link href="{{ asset('css/editsRotasCrud/perfil.css') }}" rel="stylesheet" type="text/css">
+
 @endsection
 
 <!-- ICONE -->
@@ -18,13 +19,10 @@
         <div class="col-sm-6">
             <div class="cardzinho">
                 <div class="FundoFoto">
-        
                     <div class="fotoPerfil">
                         <img class="foto-perfil" src="img/fotosPerfil/{{ $info->fotoRestaurante ?? 'user.png' }}">
                     </div>
-            
                 </div>
-            
                 <div class="info">
                     <h1>{{ $info->nomeRestaurante }}</h1>
                     <h3>{{ $info->ruaRestaurante ?? 'Endereço' }}</h3>
@@ -38,12 +36,46 @@
             </div>
         </div>
         <div class="col-sm-6 scroll">
-            {{ $info->descricaoRestaurante }}
+            <form action="{{ route('atualizar-descricao') }}" method="post">
+                @csrf
+                <button onclick="return showTipoNovo()"><img class="botoes-editar" src="{{ asset('img/tabelas/editar.png') }}" alt=""></button>
+                <input type="submit" id="enviar" value="Enviar" hidden>
+                <br>
+
+                <label class="form-label">Descrição do restaurante</label>
+                <textarea class="form-control form form-custom" name="descricao" id="descricao" style="resize: none;" name="descricao" cols="40" rows="9" readonly>{{ $info->descricaoRestaurante }}</textarea>
+            </form>
         </div>
     </div>
 
     
     
 </div>
+
+
+<script>
+    function showTipoNovo() {
+        var enviar = document.getElementById('enviar');
+        let hidden = enviar.getAttribute("hidden");
+
+        var descricao = document.getElementById('descricao');
+
+        console.log(enviar);
+        console.log(hidden);
+
+        if(hidden) {
+            enviar.removeAttribute("hidden");
+            descricao.removeAttribute("readonly");
+        } 
+        else {
+            enviar.setAttribute("hidden", "hidden");
+            descricao.setAttribute("readonly", "readonly");
+
+        }
+
+        return false;
+    }
+    
+</script>
 
 @endsection

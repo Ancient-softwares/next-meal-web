@@ -102,7 +102,21 @@ class PerfilPageController extends Controller
         if($cadastro) {
             return redirect()->route('perfil-page');
         }
+    }
 
+    public function atualizarDescricao(Request $request) {
+        $login = Session::get('login');
+        if(!isset($login)) {
+            return redirect()->route('login');
+        }
+        else if($login == "admin") {
+            return redirect()->back();
+        }
 
+        $this->restaurante->where('emailRestaurante', $login)->update([
+            'descricaoRestaurante' => $request->descricao
+        ]);
+
+        return redirect()->back();
     }
 }

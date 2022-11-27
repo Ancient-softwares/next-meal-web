@@ -45,6 +45,7 @@ Route::get('/index', [DashboardController::class, 'index'])->name('index');
 
 // Perfil do restaurante
 Route::get('/perfil-page', [PerfilPageController::class, 'index'])->name('perfil-page');
+Route::post('/atualizar-descricao', [PerfilPageController::class, 'atualizarDescricao'])->name('atualizar-descricao');
 Route::get('/editar-perfil', [PerfilPageController::class, 'editarPerfil'])->name('editar-perfil');
 Route::post('/editar-perfil', [PerfilPageController::class, 'editou'])->name('editou');
 

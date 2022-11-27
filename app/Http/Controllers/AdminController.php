@@ -150,10 +150,10 @@ class AdminController extends Controller
     {
         $reservas = DB::table('tbreserva')
             ->select(DB::raw('COUNT(idReserva) AS total'))
-            ->where(DB::raw('MONTH(created_at)'), '=', $mes)
+            ->where(DB::raw('MONTH(dataReserva)'), '=', $mes)
             ->first()->total;
 
-            return $reservas;
+        return $reservas;
     }
 
     private function getClientespMes($mes)

@@ -33,9 +33,10 @@
   margin: 5vh;
   box-sizing: border-box;
 }
-.Botao-Editar{
-  width: 150px;
-  height: 60px;
+
+.botoes-editar{
+  width: 30px;
+  height: 30px;
   border-radius: 1em;
 }
 .a-edit-button{
