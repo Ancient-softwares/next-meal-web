@@ -2,7 +2,7 @@
     margin-right: auto;
     margin-left: auto;
     width: 90%;
-    height: 86%;
+    height: 100%;
 }
 
 .global {
@@ -10,8 +10,8 @@
     height: 90%;
 }
 
-.main {
-    height: 86%;
+main {
+    height: 88vh;
 }
 
 .card-reserva {
@@ -29,10 +29,6 @@
     font-size: 0.7rem;
 }
 
-.card {
-    height: 100%;
-}
-
 .reserva {
     margin-left: auto !important;
     margin-right: auto !important;
@@ -48,10 +44,10 @@
 
 .reservados .card {
     border-color: #ff9494 !important;
+    height: 100%;
 }
 
 .aceitar-reserva .card {
-    margin-right: 1em;
     border-color: #ff9494 !important;
 }
 
@@ -104,7 +100,6 @@ h2 {
 .row {
     width: 100% !important;
     margin-left: 0px !important;
-    height: 100%;
 }
 
 
@@ -115,16 +110,12 @@ h2 {
 
 .scroll {
     width: 100% !important;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 100%;
 }
 
 .reservados {
-    height: 46%;
-}
-
-.card-group .card {
-    height: 25vh;
+    height: 45%;
 }
 
 .card-group{
@@ -144,18 +135,17 @@ h2 {
     width: 100%;
 }
 
+/* RESOLUÇÕES BAIXAS DO RESERVAS ACEITAS*/
 
-@media (max-width: 955px) {
-    .card {
-        height: 37vh !important;
+@media (max-width: 1400px){
+    .botoes a{
+        font-size: 78%;
     }
 }
 
-/* RESOLUÇÕES BAIXAS DO RESERVAS ACEITAS*/
-
 @media (max-width: 1280px) {
-    .aceitar-reserva .card {
-        height: 28vh !important;
+    .aceitar-reserva .card-group {
+        height: 50vh !important;
     }
 
     .reservados .row {
@@ -168,62 +158,36 @@ h2 {
 }
 
 @media (max-width: 1152px) {
-    .aceitar-reserva .card {
-        height: 30vh !important;
-    }
-
-    .reservados .col {
+    .reservados .row {
         height: 30vh;
     }
 }
 
 @media (max-width: 1024px) {
-    .aceitar-reserva .card {
-        height: 32vh !important;
+    .aceitar-reserva .card-group {
+        height: 54vh !important;
     }
 
-    .reservados .col {
+    .reservados .row {
         height: 32vh;
     }
 }
 
-@media (max-width:1008px){
-    .reservados .col {
-        height: 34vh!important;
-    }
-}
-
-@media (max-width: 960px) {
-    .reservados .col {
-        height: 36vh !important;
-    }
-}
-
 @media (max-width: 911px) {
-    .reservados .col {
+    .reservados .row {
         height: 38vh !important;
     }
 }
 
 @media (max-width: 880px) {
-    .reservados .col {
+    .reservados .row {
         height: 40vh !important;
     }
 }
 
 @media (max-width: 800px) {
-    .aceitar-reserva .card {
-        height: 50vh !important;
-    }
-
-    .reservados .col {
+    .reservados .row {
         height: 42vh !important;
-    }
-}
-
-@media (max-width: 790px) {
-    .aceitar-reserva .card {
-        height: 40vh !important;
     }
 }
 
@@ -233,6 +197,7 @@ h2 {
     .global {
         height: 88% !important;
     }
+
 }
 
 @media(max-height:870px) {
@@ -261,8 +226,37 @@ h2 {
 
 @media(max-height: 680px) {
     .global {
-        height: 60% !important;
+        height: 73vh !important;
     }
+    .card-group .card-group{
+        height: 100vh!important;
+    }
+}
+
+@media(max-height: 570px){
+    .global{
+        height: 68vh!important;
+    }
+}
+
+
+.reservados .card-group{
+    margin-bottom: 1em;
+}
+
+.aceitar-reserva .card-group{
+    margin-right: 1em;
+}
+
+::-webkit-scrollbar{
+    background-color:#ff9494;
+    width: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: #f50000;
+    border-radius: 5px;
 }
 
 /* MEDIA CARD ACEITAS */
@@ -280,10 +274,96 @@ h2 {
 
 @media (max-width: 1410px) {
     .reservados .row {
-        height: 75% !important;
+        height: 32vh !important;
     }
 
     .reservados .col {
         height: 100%;
     }
 }
+
+@media (max-width: 1200px){
+    .reservados .row{
+        height: 36vh!important;
+    }
+}
+
+@media (max-width: 1070px){
+    .reservados .row{
+        height: 48vh!important;
+    }
+    .botoes a{
+        font-size: 75%!important;
+    }
+}
+
+@media (max-width:968px){
+    .reservados .row {
+        height: 52vh!important;
+    }
+    .botoes a{
+        padding: 0.5em;
+    }
+}
+
+@media (max-width:968px){
+    .reservados .row {
+        height: 45vh!important;
+    }
+    .botoes a{
+        padding: 0.5em;
+    }
+    .card-body{
+        padding: 0.8em!important;
+    }
+}
+
+@media(max-width: 856px){
+    .reservados .row {
+        height: 48vh!important;
+    }
+}
+
+@media(max-width: 856px){
+    .reservados .row {
+        height: 54vh!important;
+    }
+}
+
+@media (max-width: 864px){
+    .card-body{
+        padding: 0.5em!important;
+    }
+}
+
+/* RESOLUÇÕES BAIXAS DO RESERVAS ACEITAS*/
+
+
+@media (max-width: 765px){
+    .reservados .card-group{
+        height: 35vh;
+    }
+}
+
+@media (max-width: 950px){
+    .aceitar-reserva .card-group {
+        height: 39vh;
+    }
+    .reservados .card-group{
+        height: 30vh;
+    }
+    .botoes a{
+        font-size: 65%!important;
+    }
+}
+
+@media (max-width: 766px){
+    .reservados .row{
+        height: 30vh!important;
+    }
+    .aceitar-reserva .card-group {
+        height: 40vh !important;
+    }
+}
+
+
