@@ -681,6 +681,11 @@ class ReservadoidaController extends Controller
 
             if ($cliente->token == $token) {
                 $reservas = $this->reservas->where('idCliente', '=', $request->idCliente)->get();
+                $reservas = ReservaModel::select('tbreserva.*', 'tbrestaurante.nomeRestaurante')
+                    ->join('tbrestaurante', 'tbreserva.idRestaurante', '=', 'tbrestaurante.idRestaurante')
+                    ->where('idCliente', '=', $request->idCliente)
+                    ->orderBy('dataReserva', 'desc')
+                    ->get();
 
                 foreach ($reservas as $reserva) {
                     $reserva->restaurante = $this->restaurantes->where('idRestaurante', '=', $reserva->idRestaurante)->first()->nomeRestaurante;
@@ -701,7 +706,6 @@ class ReservadoidaController extends Controller
                     unset($reserva->created_at);
                     unset($reserva->updated_at);
                 }
-
 
                 return response()->json([
                     'message' => 'Reservas encontradas com sucesso!',
