@@ -37,6 +37,7 @@ Route::post('/getPratosByRestaurante', [AppController::class, 'getPratosByRestau
 Route::post('/getAvaliacoesByRestaurante', [AppController::class, 'getAvaliacoesByRestaurante'])->name('getAvaliacoesByRestaurante');
 Route::post('/postAvaliacao', [AppController::class, 'postAvaliacao'])->name('postAvaliacao');
 Route::post('/filterByMealsOrIngredients', [AppController::class, 'filterByMealsOrIngredients'])->name('filterByMealsOrIngredients');
+Route::post('/filterByMealsOrIngredientsByCategory', [AppController::class, 'filterByMealsOrIngredientsByCategory'])->name('filterByMealsOrIngredientsByCategory');
 Route::post('/checkRatingPermission', [AppController::class, 'checkRatingPermission'])->name('checkRatingPermission');
 Route::post('/checkCapacity', [ReservadoidaController::class, 'checkCapacity'])->name('checkCapacity');
 Route::post('/getRestaurantesMaisReservados', [AppController::class, 'getRestaurantesMaisReservados'])->name('getRestaurantesMaisReservados');

@@ -566,14 +566,14 @@ class AppController extends Controller
         try {
             $email = $request->emailCliente;
             $nome = $request->nomeCliente;
-            $telefone = $request->telefone;
+            $telefone = $request->telefoneCliente;
             $telefone = preg_replace('/[^A-Za-z0-9\-]/', '', $telefone);
             $telefone = str_replace('-', '', $telefone);
 
-            $cep = $request->cep;
+            $cep = $request->cepCliente;
             $cep = str_replace('-', '', $cep);
 
-            $cpf = $request->cpf;
+            $cpf = $request->cpfCliente;
             $cpf = str_replace('-', '', $cpf);
             $cpf = str_replace('.', '', $cpf);
             $cpf = str_replace('/', '', $cpf);
@@ -989,6 +989,75 @@ class AppController extends Controller
                 unset($table->$key);
             }
         }
+
+
+        return response()->json($table);
+    }
+
+    public function filterByMealsOrIngredientsByCategory(Request $request)
+    {
+        $input = strtolower($request->input);
+
+        $input = trim($input);
+
+        $table = RestauranteModel::select(
+            'tbrestaurante.idRestaurante',
+            'tbrestaurante.nomeRestaurante',
+            'tbrestaurante.telRestaurante',
+            'tbrestaurante.emailRestaurante',
+            'tbrestaurante.ruaRestaurante',
+            'tbrestaurante.cepRestaurante',
+            'tbrestaurante.ruaRestaurante',
+            'tbrestaurante.bairroRestaurante',
+            'tbrestaurante.cidadeRestaurante',
+            'tbrestaurante.estadoRestaurante',
+            'tbrestaurante.horarioAberturaRestaurante',
+            'tbrestaurante.horarioFechamentoRestaurante',
+            'tbrestaurante.capacidadeRestaurante',
+            'tbrestaurante.nomeRestaurante',
+            'tbrestaurante.descricaoRestaurante',
+            'tbtiporestaurante.tipoRestaurante',
+            'tbavaliacao.notaAvaliacao',
+            'tbavaliacao.descAvaliacao',
+        )
+            ->leftJoin('tbtiporestaurante', 'tbtiporestaurante.idTipoRestaurante', '=', 'tbrestaurante.idTipoRestaurante')
+            ->leftJoin('tbavaliacao', 'tbavaliacao.idRestaurante', '=', 'tbrestaurante.idRestaurante')
+            ->leftJoin('tbprato', 'tbprato.idRestaurante', '=', 'tbrestaurante.idRestaurante')
+            ->leftJoin('tbtipoprato', 'tbtipoprato.idTipoPrato', '=', 'tbprato.idTipoPrato')
+            ->where(trim(strtolower('tbprato.nomePrato')), 'LIKE', '%' . $input . '%')
+            ->orWhere(trim(strtolower('tbprato.ingredientesPrato')), 'LIKE', '%' . $input . '%')
+            ->orWhere(trim(strtolower('tbrestaurante.nomeRestaurante')), 'LIKE', '%' . $input . '%')
+            ->orWhere(trim(strtolower('tbtiporestaurante.tipoRestaurante')), 'LIKE', '%' . $input . '%')
+            ->orWhere(trim(strtolower('tbtipoprato.tipoPrato')), 'LIKE', '%' . $input . '%')
+            ->get();
+
+        // gets the average of the rating
+        $table->map(function ($item) {
+            $item->notaAvaliacao = DB::table('tbavaliacao')
+                ->where('idRestaurante', $item->idRestaurante)
+                ->avg('notaAvaliacao');
+            return $item;
+        });
+
+        // deletes duplicates
+        $table = $table->unique('idRestaurante');
+
+        // converts the average rating to a float
+        $table->map(function ($item) {
+            $item->notaAvaliacao = (float) $item->notaAvaliacao;
+            return $item;
+        });
+
+        if (gettype($table) == 'object') {
+            foreach ($table as $key) {
+                unset($table->$key);
+            }
+        }
+
+        // deletes the restaurants that do not have the category
+        $table = $table->filter(function ($item) use ($request) {
+            return $item->tipoRestaurante == $request->tipoRestaurante;
+        });
 
 
         return response()->json($table);
