@@ -46,7 +46,7 @@
                 <a href="{{ route('admin') }}">
                     <i class='bx'>
                         <div class="icone">
-                            <img src="{{ asset('img/sidebar/verificacao-de-lista.png') }}" alt="">
+                            <img src="{{ asset('img/sidebar/estatisticas.png') }}" alt="">
                         </div>
                     </i>
                     <span class="link_name">Dados</span>
@@ -57,7 +57,7 @@
                 <a href="{{ route('pagrestaurante') }}">
                     <i class='bx'>
                         <div class="icone">
-                            <img src="{{ asset('img/sidebar/casa.png') }}" alt="">
+                            <img src="{{ asset('img/sidebar/restaurante.png') }}" alt="">
                         </div>
                     </i>
                     <span class="link_name">Restaurantes</span>
