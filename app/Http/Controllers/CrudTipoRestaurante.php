@@ -77,7 +77,15 @@ class CrudTipoRestaurante extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'tipo' => 'required'
+        ]);
+
+        TipoRestauranteModel::where('idTipoRestaurante', $id)->update([
+            'tipoRestaurante' => $request->tipo
+        ]);
+
+        return redirect()->back();
     }
 
     /**

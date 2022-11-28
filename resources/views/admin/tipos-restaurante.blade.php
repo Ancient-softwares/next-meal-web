@@ -11,7 +11,12 @@
 
 @section('conteudo')
 <div class="container-cont">
+    @if($errors->any())
 
+    <div class="alert alert-danger" role="alert">
+        {{ $errors->first() }}
+    </div>
+    @endif
     <h1>Tipos de restaurante cadastrados</h1>
     <br>
     
@@ -28,11 +33,36 @@
             <tr>
                 <th scope="row"  class="th">{{ $tipo->tipoRestaurante }}</th>
                 <td>
-                    <a ><img class="botoes-editar" src="{{ asset('img/tabelas/editar.png') }}" alt=""></a>
+                    <a value="{{ $tipo->idTipoRestaurante }}" data-bs-toggle="modal" data-bs-target="#editar{{ $tipo->idTipoRestaurante }}"><img class="botoes-editar" src="{{ asset('img/tabelas/editar.png') }}" alt=""></a>
                     <a value="{{ $tipo->idTipoRestaurante }}" data-bs-toggle="modal" data-bs-target="#excluir{{ $tipo->idTipoRestaurante }}"><img class="botoes-excluir" src="{{ asset('img/tabelas/excluir.png') }}" alt=""></a>
                 </td>
 
             </tr>
+
+            {{-- MODAL DE EDITAR --}}
+            <div class="modal fade" id="editar{{ $tipo->idTipoRestaurante }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <form method="POST" action="{{ route('tipo-restaurante.update', $tipo->idTipoRestaurante) }}">
+                    @csrf
+                    @method('PUT')
+
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header modal-custom">
+                            <h5 class="modal-title" id="exampleModalLabel">Editar o tipo {{ $tipo->tipoRestaurante }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body modal-custom">
+                            <label>Nome do tipo de restaurante: </label>
+                            <input class="form-control" name="tipo" type="text" value="{{ $tipo->tipoRestaurante }}" aria-label="default input example">
+                        </div>
+                        <div class="modal-footer modal-custom">
+                            <button type="button" class="btn btn-secondary btn btn-custom-excluir" data-bs-dismiss="modal">Fechar</button>
+                            <input type="submit" class="btn btn-outline-success" value="Editar">
+                        </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
             
             {{-- MODAL DE DELETE --}}
             <div class="modal fade" id="excluir{{ $tipo->idTipoRestaurante }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
