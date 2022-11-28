@@ -22,13 +22,13 @@ table {
 }
 
 a .botoes-editar {
-    width: 3vh;
+    width: 2.5vh;
     height: 100%;
 }
 
 a .botoes-excluir {
     cursor: pointer;
-    width: 3vh;
+    width: 2.5vh;
     height: 100%;
 }
 
@@ -297,6 +297,18 @@ tr .th{
     font-weight: 400!important;
 }
 
+/* ADMIN PAGINAÇÃO */
+.page-item.active .page-link{
+    background-color: #ff2f48!important;
+    border-color: #f50000!important;
+    color: white!important;
+}
+
+.page-link{
+    color: #ff2f48!important;
+    margin-top: 0.3em;
+}
+
 @media screen and (max-width:1440px) {
     .card-footer button {
         font-size: 1.8vh !important;
@@ -305,12 +317,12 @@ tr .th{
 
 @media (max-width:1320px) {
     a .botoes-excluir {
-        width: 3.5vh;
+        width: 2.5vh;
         height: 100%;
     }
 
     a .botoes-editar {
-        width: 3.5vh;
+        width: 2.5vh;
         height: 100%;
     }
 
@@ -327,14 +339,26 @@ tr .th{
     }
 }
 
+@media(max-width: 1220px){
+    a .botoes-excluir {
+        width: 2vh;
+        height: 100%;
+    }
+
+    a .botoes-editar {
+        width: 2vh;
+        height: 100%;
+    }
+}
+
 @media (max-width:1104px) {
     a .botoes-excluir {
-        width: 2.5vh;
+        width: 1.8vh;
         height: 90%;
     }
 
     a .botoes-editar {
-        width: 2.5vh;
+        width: 1.8vh;
         height: 90%;
     }
 

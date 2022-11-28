@@ -16,9 +16,9 @@
 
 <div class="container-perfil">
     @if($errors->any())
-        <div class="alert alert-danger" role="alert">
-            {{ $errors->first() }}
-        </div>
+    <div class="alert alert-danger" role="alert">
+        {{ $errors->first() }}
+    </div>
     @endif
 
     <h1 class="txt-Perfil">Perfil</h1>
@@ -27,8 +27,11 @@
         <div class="col-sm-6">
             <div class="cardzinho">
                 <div class="FundoFoto">
-                    <div class="fotoPerfil">
-                        <img class="foto-perfil" src="img/fotosPerfil/{{ $info->fotoRestaurante ?? 'user.png' }}">
+                    <div class="fotos">
+                            <img class="foto-perfil" src="img/fotosPerfil/{{ $info->fotoRestaurante ?? 'user.png' }}">
+                        <div class="foto-next">
+                            <img class="foto-next" src="{{ asset('img/next-ancient.png') }}">
+                        </div>
                     </div>
                 </div>
                 <div class="info">
@@ -52,14 +55,14 @@
                 <input type="submit" id="enviar" value="Enviar" hidden>
                 <br>
 
-                
+
                 <textarea class="form-control form form-custom scroll" name="descricao" id="descricao" style="resize: none;" name="descricao" cols="40" rows="9" readonly>{{ $info->descricaoRestaurante }}</textarea>
             </form>
         </div>
     </div>
 
-    
-    
+
+
 </div>
 
 
@@ -73,11 +76,10 @@
         console.log(enviar);
         console.log(hidden);
 
-        if(hidden) {
+        if (hidden) {
             enviar.removeAttribute("hidden");
             descricao.removeAttribute("readonly");
-        } 
-        else {
+        } else {
             enviar.setAttribute("hidden", "hidden");
             descricao.setAttribute("readonly", "readonly");
 
@@ -85,7 +87,6 @@
 
         return false;
     }
-    
 </script>
 
 @endsection
