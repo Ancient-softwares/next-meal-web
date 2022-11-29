@@ -133,8 +133,8 @@
                                 Tem certeza que deseja deletar o Prato?
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                <button type="submit" class="btn btn-outline-danger">Deletar</button>
+                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fechar</button>
+                                <button type="submit" class="btn btn-light">Deletar</button>
                             </div>
                         </div>
                     </div>

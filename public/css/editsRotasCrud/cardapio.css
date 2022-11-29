@@ -22,13 +22,14 @@ table {
 }
 
 a .botoes-editar {
-    width: 2.5vh;
+    margin-right: 5px;
+    width: 3vh;
     height: 100%;
 }
 
 a .botoes-excluir {
     cursor: pointer;
-    width: 2.5vh;
+    width: 3vh;
     height: 100%;
 }
 
@@ -69,6 +70,7 @@ li {
 
 .card-footer .editar-excluir {
     margin-right: 0.8em;
+    display: flex;
 }
 
 .card-footer button:hover {
@@ -243,6 +245,16 @@ h5 {
     height: 100%!important;
 }
 
+.btn-light{
+    background-color: #f50000 !important;
+    font-size: 0.7vw !important;
+    color: white!important;
+}
+
+.btn-light:hover{
+    background-color: #ff2f48!important;
+}
+
 ::-webkit-scrollbar {
     background-color: #ff9494;
     width: 5px;
@@ -283,10 +295,6 @@ p{
     margin-bottom: 0rem!important;
 }
 
-.cardDash{
-    padding-bottom: 2em!important;
-}
-
 .scroll2 {
     max-height: 80%;
     overflow-y: auto;
@@ -295,6 +303,20 @@ p{
 
 tr .th{
     font-weight: 400!important;
+}
+
+.edit-excluir-tipo {
+    color: white!important;
+    background-color: #f50000 !important;
+    font-size: 0.7vw !important;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.edit-excluir-tipo:hover {
+    color: white!important;
+    background-color: #ff2f48 !important;
+    font-size: 0.7vw !important;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
 /* ADMIN PAGINAÇÃO */
@@ -317,12 +339,12 @@ tr .th{
 
 @media (max-width:1320px) {
     a .botoes-excluir {
-        width: 2.5vh;
+        width: 2.8vh;
         height: 100%;
     }
 
     a .botoes-editar {
-        width: 2.5vh;
+        width: 2.8vh;
         height: 100%;
     }
 
@@ -341,24 +363,24 @@ tr .th{
 
 @media(max-width: 1220px){
     a .botoes-excluir {
-        width: 2vh;
+        width: 2.6vh;
         height: 100%;
     }
 
     a .botoes-editar {
-        width: 2vh;
+        width: 2.6vh;
         height: 100%;
     }
 }
 
 @media (max-width:1104px) {
     a .botoes-excluir {
-        width: 1.8vh;
+        width: 2.4vh;
         height: 90%;
     }
 
     a .botoes-editar {
-        width: 1.8vh;
+        width: 2.4vh;
         height: 90%;
     }
 
@@ -370,12 +392,12 @@ tr .th{
 
 @media(max-width: 865px){
     a .botoes-excluir {
-        width: 2vh;
+        width: 2.2vh;
         height: 90%;
     }
 
     a .botoes-editar {
-        width: 2vh;
+        width: 2.2vh;
         height: 90%;
     }
 }

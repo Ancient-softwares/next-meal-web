@@ -56,8 +56,8 @@
                             <input class="form-control" name="tipo" type="text" value="{{ $tipo->tipoRestaurante }}" aria-label="default input example">
                         </div>
                         <div class="modal-footer modal-custom">
-                            <button type="button" class="btn btn-secondary btn btn-custom-excluir" data-bs-dismiss="modal">Fechar</button>
-                            <input type="submit" class="btn btn-outline-success" value="Editar">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fechar</button>
+                            <input type="submit" class="btn btn-light" value="Editar">
                         </div>
                         </div>
                     </div>
@@ -79,8 +79,8 @@
                             Tem certeza que deseja deletar o tipo?
                         </div>
                         <div class="modal-footer modal-custom">
-                            <button type="button" class="btn btn-secondary btn btn-custom-excluir" data-bs-dismiss="modal">Fechar</button>
-                            <input type="submit" class="btn btn-danger" value="Excluir">
+                            <button type="button" class="btn btn-light edit-excluir-tipo" data-bs-dismiss="modal">Fechar</button>
+                            <input type="submit" class="btn btn-light edit-excluir-tipo" value="Excluir">
                         </div>
                         </div>
                     </div>
