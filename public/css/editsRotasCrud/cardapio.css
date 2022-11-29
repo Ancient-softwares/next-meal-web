@@ -319,6 +319,14 @@ tr .th{
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
+.grafh1{
+    padding-left: 1em!important;
+}
+
+.colDash{
+    padding-right: 0!important;
+}
+
 /* ADMIN PAGINAÇÃO */
 .page-item.active .page-link{
     background-color: #ff2f48!important;

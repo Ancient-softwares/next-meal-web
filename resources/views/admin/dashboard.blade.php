@@ -26,7 +26,7 @@
                     <h5 class="card-title">Quantidade de clientes</h5>
                 </div>
             </div>
-            <div class="col colDash">
+            <div class="col colDash grafh1">
                 <canvas id="myChart" class="grafico"></canvas>
                 <canvas id="myChart" class="grafico"></canvas>
                 <script>
