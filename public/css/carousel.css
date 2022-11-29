@@ -13,6 +13,7 @@
 .mySlides img{
     width: 100%;
    height: 35em;
+   border-radius: 15px;
 }
 
 /* Next & previous buttons */

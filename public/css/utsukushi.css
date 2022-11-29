@@ -485,6 +485,7 @@ button[type=submit]:hover {
 .boxIMG {
     margin-top: 2em;
     margin-bottom: 2em;
+    border-radius: 15px;
 }
 
 .input-group{
