@@ -24,19 +24,19 @@
     <div class="reserva">
         <h1>Reservas</h1>
     </div>
+    <div class="global">
+        <div class="aceitar-reserva">
+            
 
     <div class="title">
         <h2>Pendentes</h2>
-        <h2>Aceitas</h2>
     </div>
-    <div class="global">
-        <div class="aceitar-reserva">
             <div class="scroll">
                 <div class="row row-cols-1 row-cols-md-3 g-4">
                     @foreach($reservas as $r)
                     @if($r->idStatusReserva == 3)
                     <div class="card-group">
-                        <div class="card">
+                        <div class="card" style="padding: 0; margin-right: 0.2em; margin-left: 0.2em;">
                             <img src="{{ asset('img/perfil.png') }}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $clientes->where('idCliente',
@@ -62,15 +62,18 @@
                 </div>
             </div>
         </div>
-
+                                    
         <div class="flex">
+            <div class="title-aceitas">
+                <h2>Aceitas</h2>
+            </div>
             <div class="reservados scroll">
-                <div class="row row-cols-1 row-cols-md-4 g-4">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
                     @foreach($reservas as $r)
                     @if($r->idStatusReserva == 1 )
 
                     <div class="col" style="padding: 0; ">
-                        <div class="card" style="padding: 0; margin-right: 0.5em; margin-left: 0.5em;">
+                        <div class="card" style="padding: 0; margin-right: 0.2em; margin-left: 0.2em;">
                             <img src="{{ asset('img/perfil.png') }}" class="card-img-top" alt="...">
                             <div class="card-body" style="padding-top: 6px;">
                                 <h5 class="card-title">{{ $clientes->where('idCliente',
@@ -97,11 +100,11 @@
 
                 <div class="scroll">
 
-                    <div class="row row-cols-1 row-cols-md-4 g-4">
+                    <div class="row row-cols-1 row-cols-md-3 g-4">
                         @foreach($reservas as $r)
                         @if($r->idStatusReserva == 4)
 
-                        <div class="col" style="padding-right: 0.5em; padding-left: 0.5em;">
+                        <div class="col" style="padding-right: 0.2em; padding-left: 0.2em;">
                             <div class="card">
                                 <img src="{{ asset('img/perfil.png') }}" class="card-img-top" alt="...">
                                 <div class="card-body">
