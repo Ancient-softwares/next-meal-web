@@ -4,11 +4,15 @@
   padding-left: 1em;
   padding-top: 0.1em;
   background: #ff2f48;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
 }
 
 .info {
   background:white;
   padding: 10px;
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
 }
 .cardzinho {
   width: 100%;
@@ -32,6 +36,7 @@
   padding: 2.5em;
   margin: 5vh;
   box-sizing: border-box;
+  border-radius: 2em;
 }
 
 .botoes-editar{
