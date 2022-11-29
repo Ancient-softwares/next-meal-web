@@ -42,8 +42,14 @@ class AvaliacaoController extends Controller
             ->where('tbavaliacao.idRestaurante', '=', $info->idRestaurante)
             ->get();
 
+        $media = DB::table('tbavaliacao')
+        ->select('tbavaliacao.notaAvaliacao')
+        ->where('tbavaliacao.idRestaurante', '=', $info->idRestaurante)
+         ->avg('notaAvaliacao');
 
-            return view('avaliacao', compact('info', 'login', 'avaliacoes'));
+         $media = (float) $media;
+
+            return view('avaliacao', compact('info', 'login', 'avaliacoes', 'media'));
     }
 
     /**

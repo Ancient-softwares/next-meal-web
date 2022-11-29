@@ -18,7 +18,11 @@
 @section('conteudo')
 
 <div class="container-avaliacao">
-    <h4>Avaliacões</h4>
+    <h4>Avaliacões. Sua média de avaliações no App é de
+    {{ $media }}
+    <img width="20" height="20" src="{{asset('img/estrela.png')}}" alt="">
+
+    </h4>
     <!-- <div class="card-avalicao">
         <div class="conteudo-avaliacao">
             <div class="img-perfil">
