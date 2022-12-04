@@ -109,7 +109,7 @@ h2 {
 }
 
 .reservados .row {
-    height: 20vh;
+    height: 24vh;
 }
 
 .scroll {
@@ -275,6 +275,12 @@ h2 {
 
     .reservados .col {
         height: 100%;
+    }
+}
+
+@media (max-width: 1235px) {
+    .reservados .row {
+        height: 34vh !important;
     }
 }
 
